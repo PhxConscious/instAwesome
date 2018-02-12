@@ -24,6 +24,7 @@ class SignUpForm extends Component {
         //     user_token: firebase.auth().currentUser.uid,
         // }))
         // .then(() => console.log('this works')))
+        )
     }
 
     handleEmailTextChange = (event) => {
