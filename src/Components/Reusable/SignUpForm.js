@@ -7,24 +7,34 @@ class SignUpForm extends Component {
         super(props);
         this.state = {
             email: '',
-            password: ''
+            password: '',
+            verifyPassword: '',
+            firstName: '',
+            lastName: '',
+            userPhone: '',
         };
     }
 
     onButtonPress() {
-        const {email, password} = this.state;
+        const {email, password, verifyPassword, firstName, lastName, userPhone} = this.state;
 
         if (email === '' || password === '') {
             return alert('Must fill in all fields')
+        } else if (password !== verifyPassword) {
+            return alert('Passwords do not match');
+        } else if (password.length < 6) {
+            return alert('password must be at least 6 characters long')
         }
         return (
             firebase.auth().createUserWithEmailAndPassword(email, password)
-        // .then(() => axios.post('http://localhost:3000/users/new', {
-        //     email: email,
-        //     user_token: firebase.auth().currentUser.uid,
-        // }))
-        // .then(() => console.log('this works')))
-        )
+            .then(() => axios.post('http://localhost:3000/users/new', {
+                email: email,
+                user_token: firebase.auth().currentUser.uid,
+                first_name: firstName,
+                last_name: lastName,
+                user_phone: userPhone
+            }))
+            .then(() => alert('this works')))
     }
 
     handleEmailTextChange = (event) => {
@@ -35,9 +45,55 @@ class SignUpForm extends Component {
         this.setState({password: event.target.value})
     };
 
+    handleVerifyPassTextChange = (event) => {
+        this.setState({verifyPassword: event.target.value})
+    };
+
+    handleFirstNameTextChange = (event) => {
+        this.setState({firstName: event.target.value})
+    };
+
+    handleLastNameTextChange = (event) => {
+        this.setState({lastName: event.target.value})
+    };
+
+    handleUserPhoneTextChange = (event) => {
+        this.setState({userPhone: event.target.value})
+    };
+
     render() {
         return (
             <form className="basicForm" action="#">
+                <div className="mdl-textfield mdl-js-textfield">
+                    <input
+                        className="mdl-textfield__input"
+                        type="text"
+                        onChange={this.handleFirstNameTextChange}
+                        value={this.state.firstName}>
+                    </input>
+                    <label className="mdl-textfield__label">First Name</label>
+                </div>
+                <br/>
+                <div className="mdl-textfield mdl-js-textfield">
+                    <input
+                        className="mdl-textfield__input"
+                        type="text"
+                        onChange={this.handleLastNameTextChange}
+                        value={this.state.lastName}>
+                    </input>
+                    <label className="mdl-textfield__label">Last Name</label>
+                </div>
+                <br/>
+                <div className="mdl-textfield mdl-js-textfield">
+                    <input
+                        className="mdl-textfield__input"
+                        type="text"
+                        onChange={this.handleUserPhoneTextChange}
+                        value={this.state.userPhone}>
+                    </input>
+                    <label className="mdl-textfield__label">Phone Number</label>
+                </div>
+                <br/>
                 <div className="mdl-textfield mdl-js-textfield">
                     <input
                         className="mdl-textfield__input"
@@ -56,6 +112,16 @@ class SignUpForm extends Component {
                         value={this.state.password}>
                     </input>
                     <label className="mdl-textfield__label">Password</label>
+                </div>
+                <br/>
+                <div className="mdl-textfield mdl-js-textfield">
+                    <input
+                        className="mdl-textfield__input"
+                        type="password"
+                        onChange={this.handleVerifyPassTextChange}
+                        value={this.state.verifyPassword}>
+                    </input>
+                    <label className="mdl-textfield__label">Verify Password</label>
                 </div>
                 <br/>
                 <button
