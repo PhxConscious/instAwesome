@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import './App.css';
+
 import SignUpForm from "./Components/Reusable/SignUpForm";
 import Checkout from './Components/Reusable/Checkout';
+import LoginForm from './Components/Reusable/LoginForm'
 
 class App extends Component {
   render() {
@@ -13,6 +15,8 @@ class App extends Component {
                 description={'Only the Book'}
                 amount={1}
             />
+            <br/>
+            <LoginForm/>
         </div>);
   }
 }

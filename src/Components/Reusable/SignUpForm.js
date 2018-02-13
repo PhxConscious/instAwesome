@@ -18,13 +18,13 @@ class SignUpForm extends Component {
     onButtonPress() {
         const {email, password, verifyPassword, firstName, lastName, userPhone} = this.state;
 
-        // if (email === '' || password === '') {
-        //     return alert('Must fill in all fields')
-        // } else if (password !== verifyPassword) {
-        //     return alert('Passwords do not match');
-        // } else if (password.length < 6) {
-        //     return alert('password must be at least 6 characters long')
-        // }
+        if (email === '' || password === '') {
+            return alert('Must fill in all fields')
+        } else if (password !== verifyPassword) {
+            return alert('Passwords do not match');
+        } else if (password.length < 6) {
+            return alert('password must be at least 6 characters long')
+        }
         return (
             firebase.auth().createUserWithEmailAndPassword(email, password)
             .then(() => axios.post('http://localhost:3000/users/new', {
@@ -64,6 +64,7 @@ class SignUpForm extends Component {
     render() {
         return (
             <form className="basicForm" action="#">
+                <h2>Sign Up Form</h2>
                 <div className="mdl-textfield mdl-js-textfield">
                     <input
                         className="mdl-textfield__input"
