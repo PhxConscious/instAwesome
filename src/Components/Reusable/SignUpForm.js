@@ -18,23 +18,23 @@ class SignUpForm extends Component {
     onButtonPress() {
         const {email, password, verifyPassword, firstName, lastName, userPhone} = this.state;
 
-        if (email === '' || password === '') {
-            return alert('Must fill in all fields')
-        } else if (password !== verifyPassword) {
-            return alert('Passwords do not match');
-        } else if (password.length < 6) {
-            return alert('password must be at least 6 characters long')
-        }
+        // if (email === '' || password === '') {
+        //     return alert('Must fill in all fields')
+        // } else if (password !== verifyPassword) {
+        //     return alert('Passwords do not match');
+        // } else if (password.length < 6) {
+        //     return alert('password must be at least 6 characters long')
+        // }
         return (
             firebase.auth().createUserWithEmailAndPassword(email, password)
             .then(() => axios.post('http://localhost:3000/users/new', {
-                email: email,
-                user_token: firebase.auth().currentUser.uid,
+                user_email: email,
+                firebase_id: firebase.auth().currentUser.uid,
                 first_name: firstName,
                 last_name: lastName,
                 user_phone: userPhone
             }))
-            .then(() => alert('this works')))
+            .then(() => console.log('this works')))
     }
 
     handleEmailTextChange = (event) => {
