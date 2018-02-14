@@ -15,6 +15,13 @@ class SignUpForm extends Component {
         };
     }
 
+    componentDidMount() {
+        axios.get('http://localhost:3000/users')
+            .then(res => {
+                console.log(res.data);
+            });
+    }
+
     onButtonPress() {
         const {email, password, verifyPassword, firstName, lastName, userPhone} = this.state;
 
@@ -33,9 +40,11 @@ class SignUpForm extends Component {
                 first_name: firstName,
                 last_name: lastName,
                 user_phone: userPhone
-            }))
-            .then(() => console.log('this works')))
-    }
+            })))
+        }
+
+
+
 
     handleEmailTextChange = (event) => {
         this.setState({email: event.target.value})
