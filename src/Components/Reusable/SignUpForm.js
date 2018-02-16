@@ -43,9 +43,6 @@ class SignUpForm extends Component {
             })))
         }
 
-
-
-
     handleEmailTextChange = (event) => {
         this.setState({email: event.target.value})
     };
