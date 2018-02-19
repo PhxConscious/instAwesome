@@ -6,7 +6,9 @@ import SignInForm from './Components/Forms/SignInForm';
 import ContactInfo from './Components/Forms/ContactInfo';
 import CompanyInfo from './Components/Forms/CompanyInfo';
 import ChangePassword from './Components/Forms/ChangePassword';
-import SignUpForm from './Components/Forms/SignUpForm'
+import SignUpForm from './Components/Forms/SignUpForm';
+import RecoverUsername from './Components/Forms/RecoverUsername';
+import RecoverPassword from './Components/Forms/RecoverPassword';
 
 export const initGA = () => {
     console.log('GA INIT');
@@ -28,6 +30,8 @@ class App extends Component {
   render() {
     return (
         <div className="App">
+            <RecoverPassword/>
+            <RecoverUsername/>
             <SignInForm/>
             <SignUpForm/>
             <ContactInfo/>

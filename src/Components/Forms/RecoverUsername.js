@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import firebase from 'firebase';
 
-class RecoverPassword extends Component {
+class RecoverUsername extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -37,10 +37,15 @@ class RecoverPassword extends Component {
                 <form className="basicForm" action="#">
                     <div className='inputCont'>
                         <div className='formTitleCont'>
-                            <p className="formTitle">RECOVER PASSWORD</p>
+                            <p className="formTitle">RECOVER USERNAME</p>
+                        </div>
+                        <div className='recoverUsernameSmallTextCont'>
+                            <p className='recoverUsernameSmallText'>WE'VE SENT A CODE TO YOUR MOBILE PHONE.</p>
+                            <p className='recoverUsernameSmallText'>ENTER THE CODE BELOW TO RECOVER YOUR USERNAME AND
+                                LOGIN.
+                            </p>
                         </div>
                         <div className="formInputCont">
-                            <p className='inputLabel'>USERNAME</p>
                             <input
                                 className="formInput"
                                 type="text"
@@ -48,16 +53,10 @@ class RecoverPassword extends Component {
                                 placeholder=''
                                 value={this.state.email}>
                             </input>
-                            <p className='passwordRequirementText'>WE'LL SEND YOU AN EMAIL WITH PASSWORD RESET
-                                INSTRUCTIONS</p>
                         </div>
                     </div>
                     <div>
                         {this.renderButton()}
-                    </div>
-                    <div className='forgotLinksCont'>
-                        <a className='forgotLinks' href='#'>RECOVER USERNAME </a>
-                        <a className='forgotLinks' href='#'>RETURN TO LOGIN </a>
                     </div>
                 </form>
             </div>
@@ -65,4 +64,4 @@ class RecoverPassword extends Component {
     }
 }
 
-export default RecoverPassword;
+export default RecoverUsername;

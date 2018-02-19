@@ -68,7 +68,6 @@ class ContactInfo extends Component {
                                 value={this.state.contactName}>
                             </input>
                         </div>
-                        <br/>
                         <div className="formInputCont">
                             <div>
                                 <p className='inputLabel'>CONTACT NUMBER</p>
@@ -81,7 +80,6 @@ class ContactInfo extends Component {
                                 value={this.state.contactNumber}>
                             </input>
                         </div>
-                        <br/>
                         <div className="formInputCont">
                             <div>
                                 <p className='inputLabel'>CONTACT EMAIL</p>

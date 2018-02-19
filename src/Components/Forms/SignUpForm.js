@@ -91,7 +91,6 @@ class SignUpForm extends Component {
                             value={this.state.firstName}>
                         </input>
                     </div>
-                    <br/>
                     <div className="formInputCont">
                         <div>
                             <p className='inputLabel'>LAST NAME</p>
@@ -104,7 +103,6 @@ class SignUpForm extends Component {
                             value={this.state.lastName}>
                         </input>
                     </div>
-                    <br/>
                     <div className="formInputCont">
                         <div>
                             <p className='inputLabel'>PHONE NUMBER</p>
@@ -117,7 +115,6 @@ class SignUpForm extends Component {
                             value={this.state.userPhone}>
                         </input>
                     </div>
-                    <br/>
                     <div className="formInputCont">
                         <div>
                             <p className='inputLabel'>EMAIL</p>
@@ -130,7 +127,6 @@ class SignUpForm extends Component {
                             value={this.state.email}>
                         </input>
                     </div>
-                    <br/>
                     <div className="formInputCont">
                         <div>
                             <p className='inputLabel'>PASSWORD</p>
@@ -143,7 +139,6 @@ class SignUpForm extends Component {
                             value={this.state.password}>
                         </input>
                     </div>
-                    <br/>
                     <div className="formInputCont">
                         <div>
                             <p className='inputLabel'>VERIFY PASSWORD</p>
@@ -156,7 +151,6 @@ class SignUpForm extends Component {
                             value={this.state.verifyPassword}>
                         </input>
                     </div>
-                    <br/>
                 </div>
                 <br/>
                 <button

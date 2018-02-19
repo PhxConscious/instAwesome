@@ -68,7 +68,6 @@ class ChangePassword extends Component {
                                 value={this.state.verifyPassword}>
                             </input>
                         </div>
-                        <br/>
                         <div className="formInputCont">
                             <div>
                                 <p className='inputLabel'>CHOOSE NEW PASSWORD</p>
@@ -92,7 +91,6 @@ class ChangePassword extends Component {
                                 <li className='passwordRequirementText'>SYMBOL</li>
                             </ul>
                         </div>
-                        <br/>
                         <div className="formInputCont">
                             <div>
                                 <p className='inputLabel'>CONFIRM NEW PASSWORD</p>

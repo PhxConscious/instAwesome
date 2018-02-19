@@ -62,7 +62,6 @@ class CompanyInfo extends Component {
                                 value={this.state.instagramAccount}>
                             </input>
                         </div>
-                        <br/>
                         <div className="formInputCont">
                             <div>
                                 <p className='inputLabel'>COMPANY NAME</p>

@@ -81,7 +81,6 @@ class LoginForm extends Component {
                                 value={this.state.email}>
                             </input>
                         </div>
-                        <br/>
                         <div className="formInputCont">
                             <div>
                                 <p className='inputLabel'>PASSWORD</p>
@@ -96,7 +95,6 @@ class LoginForm extends Component {
                         </div>
                         <br/>
                     </div>
-                    <br/>
                     <div>
                         {this.renderButton()}
                     </div>
