@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import './App.css';
 import ReactGA from 'react-ga';
 
-import ChangePassword from './Components/Forms/ChangePassword'
+import SignInForm from './Components/Forms/SignInForm'
 
 export const initGA = () => {
     console.log('GA INIT');
@@ -24,7 +24,7 @@ class App extends Component {
   render() {
     return (
         <div className="App">
-            <ChangePassword/>
+            <SignInForm/>
         </div>);
   }
 }
