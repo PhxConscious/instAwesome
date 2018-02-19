@@ -57,6 +57,14 @@
     font-size: 18px;
 }
 
+#signInFormButton{
+    background-color: #48C8D3;
+    width: 30%;
+    border-radius: 10px;
+    color: white;
+    font-size: 18px;
+}
+
 #prog1{
     width: 250px;
     height: 250px;
@@ -94,4 +102,15 @@ li{
     font-size: 10px;
     padding: 0;
     margin: 0;
+}
+
+.forgotLinksCont{
+    margin-top: 10px;
+}
+
+.forgotLinks{
+    color:#9BDD82;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px;
 }

@@ -9,7 +9,7 @@ class LoginForm extends Component {
             password: '',
             error: '',
             loading: false,
-            user_token:''
+            user_token: ''
         };
     }
 
@@ -42,50 +42,70 @@ class LoginForm extends Component {
             return <h4>Loading...</h4>
         }
         return (
-          <button
-              className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
-              onClick={() => this.onButtonPress()}>
-              Submit
-          </button>
+            <button
+                id='signInFormButton'
+                className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
+                onClick={() => this.onButtonPress()}>
+                LOG IN
+            </button>
         );
     }
 
     handleEmailTextChange = (event) => {
         this.setState({email: event.target.value})
+        console.log(this.state.email)
     };
 
     handlePassTextChange = (event) => {
         this.setState({password: event.target.value})
+        console.log(this.state.password)
     };
 
     render() {
         return (
-          <div>
-            <form className="basicForm" action="#">
-              <h2>Login Form</h2>
-                <div className="mdl-textfield mdl-js-textfield">
-                    <input
-                        className="mdl-textfield__input"
-                        type="text"
-                        onChange={this.handleEmailTextChange}
-                        value={this.state.email}>
-                    </input>
-                    <label className="mdl-textfield__label">Email</label>
-                </div>
-                <br/>
-                <div className="mdl-textfield mdl-js-textfield">
-                    <input
-                        className="mdl-textfield__input"
-                        type="password"
-                        onChange={this.handlePassTextChange}
-                        value={this.state.password}>
-                    </input>
-                    <label className="mdl-textfield__label">Password</label>
-                </div>
-                <br/>
-                {this.renderButton()}
-            </form>
-          </div>
+            <div>
+                <form className="basicForm" action="#">
+                    <div className='inputCont'>
+                        <div className='formTitleCont'>
+                            <p className="formTitle">SIGN IN</p>
+                        </div>
+                        <div className="formInputCont">
+                            <div>
+                                <p className='inputLabel'>EMAIL</p>
+                            </div>
+                            <input
+                                className="formInput"
+                                type="text"
+                                onChange={this.handleEmailTextChange}
+                                placeholder='Your Email'
+                                value={this.state.email}>
+                            </input>
+                        </div>
+                        <br/>
+                        <div className="formInputCont">
+                            <div>
+                                <p className='inputLabel'>PASSWORD</p>
+                            </div>
+                            <input
+                                className="formInput"
+                                type="password"
+                                onChange={this.handlePassTextChange}
+                                placeholder='Your Password'
+                                value={this.state.password}>
+                            </input>
+                        </div>
+                        <br/>
+                    </div>
+                    <br/>
+                    <div>
+                        {this.renderButton()}
+                    </div>
+                    <div className='forgotLinksCont'>
+                        <a className='forgotLinks' href='#'>forgot username? </a>
+                        <a className='forgotLinks' href='#'>forgot password? </a>
+                    </div>
+                </form>
+            </div>
         );
     }
 }
