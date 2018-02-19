@@ -27,7 +27,7 @@ class CompanyInfo extends Component {
                 id='formButton'
                 className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
                 onClick={() => this.onButtonPress()}>
-                <div>Update</div>
+                <div>UPDATE</div>
             </button>
         );
     }
@@ -48,11 +48,11 @@ class CompanyInfo extends Component {
                 <form className="basicForm" action="#">
                     <div className='inputCont'>
                         <div className='formTitleCont'>
-                            <p className="formTitle">Company Information</p>
+                            <p className="formTitle">COMPANY INFORMATION</p>
                         </div>
                         <div className="formInputCont">
                             <div>
-                                <p className='inputLabel'>Instagram Account</p>
+                                <p className='inputLabel'>INSTAGRAM ACCOUNT</p>
                             </div>
                             <input
                                 className="formInput"
@@ -65,7 +65,7 @@ class CompanyInfo extends Component {
                         <br/>
                         <div className="formInputCont">
                             <div>
-                                <p className='inputLabel'>Company Name</p>
+                                <p className='inputLabel'>COMPANY NAME</p>
                             </div>
                             <input
                                 className="formInput"

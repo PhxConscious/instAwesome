@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import './App.css';
 import ReactGA from 'react-ga';
 
-import CompanyInfo from './Components/Forms/CompanyInfo'
+import ContactInfo from './Components/Forms/ContactInfo'
 
 export const initGA = () => {
     console.log('GA INIT');
@@ -24,7 +24,7 @@ class App extends Component {
   render() {
     return (
         <div className="App">
-            <CompanyInfo/>
+            <ContactInfo/>
         </div>);
   }
 }
