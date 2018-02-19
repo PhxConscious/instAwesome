@@ -101,8 +101,8 @@ class LoginForm extends Component {
                         {this.renderButton()}
                     </div>
                     <div className='forgotLinksCont'>
-                        <a className='forgotLinks' href='#'>forgot username? </a>
-                        <a className='forgotLinks' href='#'>forgot password? </a>
+                        <a className='forgotLinks' href='#'>FORGOT USERNAME? </a>
+                        <a className='forgotLinks' href='#'>FORGOT PASSWORD? </a>
                     </div>
                 </form>
             </div>

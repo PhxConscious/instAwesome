@@ -113,4 +113,6 @@ li{
     margin-left: auto;
     margin-right: auto;
     padding: 10px;
+    font-size: 10px;
+    text-decoration: none;
 }
