@@ -6,6 +6,7 @@ import SignInForm from './Components/Forms/SignInForm';
 import ContactInfo from './Components/Forms/ContactInfo';
 import CompanyInfo from './Components/Forms/CompanyInfo';
 import ChangePassword from './Components/Forms/ChangePassword';
+import SignUpForm from './Components/Forms/SignUpForm'
 
 export const initGA = () => {
     console.log('GA INIT');
@@ -28,6 +29,7 @@ class App extends Component {
     return (
         <div className="App">
             <SignInForm/>
+            <SignUpForm/>
             <ContactInfo/>
             <CompanyInfo/>
             <ChangePassword/>

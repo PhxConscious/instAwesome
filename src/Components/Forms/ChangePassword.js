@@ -82,12 +82,14 @@ class ChangePassword extends Component {
                             </input>
                         </div>
                         <div className='passwordRequirements'>
-                            <p className='finePrintTop'>MUST BE AT LEAST 7 CHARACTERS LONG, WITH AT LEAST ONE OF EACH:</p>
+                            <p className='finePrintTop'>
+                                MUST BE AT LEAST 7 CHARACTERS LONG, WITH AT LEAST ONE OF EACH:
+                            </p>
                             <ul>
-                                <li className='finePrint'>UPPERCASE CHARACTER</li>
-                                <li className='finePrint'>LOWERCASE CHARACTER</li>
-                                <li className='finePrint'>NUMBER 0-9</li>
-                                <li className='finePrint'>SYMBOL</li>
+                                <li className='passwordRequirementText'>UPPERCASE CHARACTER</li>
+                                <li className='passwordRequirementText'>LOWERCASE CHARACTER</li>
+                                <li className='passwordRequirementText'>NUMBER 0-9</li>
+                                <li className='passwordRequirementText'>SYMBOL</li>
                             </ul>
                         </div>
                         <br/>
