@@ -2,10 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5dcbd94a-9853-46c1-a5fe-46ff5bc17eff" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" afterPath="$PROJECT_DIR$/src/App.js" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Forms/CompanyInfo.js" afterPath="$PROJECT_DIR$/src/Components/Forms/CompanyInfo.js" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Forms/ContactInfo.js" afterPath="$PROJECT_DIR$/src/Components/Forms/ContactInfo.js" />
       <change beforePath="$PROJECT_DIR$/src/Styles/FormsStyles.css" afterPath="$PROJECT_DIR$/src/Styles/FormsStyles.css" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -64,7 +60,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ContactInfo.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ContactInfo.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Components/Forms/ContactInfo.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="353">
@@ -86,11 +82,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FormsStyles.css" pinned="false" current-in-tab="false">
+      <file leaf-file-name="FormsStyles.css" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Styles/FormsStyles.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="3" column="14" lean-forward="false" selection-start-line="3" selection-start-column="14" selection-end-line="3" selection-end-column="14" />
+            <state relative-caret-position="510">
+              <caret line="43" column="20" lean-forward="false" selection-start-line="43" selection-start-column="20" selection-end-line="43" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -117,8 +113,8 @@
         <option value="$PROJECT_DIR$/public/index.html" />
         <option value="$PROJECT_DIR$/src/Components/Forms/CompanyInfo.js" />
         <option value="$PROJECT_DIR$/src/App.js" />
-        <option value="$PROJECT_DIR$/src/Styles/FormsStyles.css" />
         <option value="$PROJECT_DIR$/src/Components/Forms/ContactInfo.js" />
+        <option value="$PROJECT_DIR$/src/Styles/FormsStyles.css" />
       </list>
     </option>
   </component>
@@ -260,7 +256,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="37251000" />
+    <option name="totallyTimeSpent" value="37523000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
@@ -629,14 +625,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Styles/FormsStyles.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="14" lean-forward="false" selection-start-line="3" selection-start-column="14" selection-end-line="3" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Components/Forms/ContactInfo.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="353">
@@ -644,6 +632,14 @@
           <folding>
             <element signature="e#0#39#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Styles/FormsStyles.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="43" column="20" lean-forward="false" selection-start-line="43" selection-start-column="20" selection-end-line="43" selection-end-column="20" />
+          <folding />
         </state>
       </provider>
     </entry>

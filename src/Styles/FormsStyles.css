@@ -15,9 +15,10 @@
 }
 
 .formTitle{
-    font-size: 21px;
+    font-size: 20px;
     text-align: left;
     margin: 0;
+    margin-bottom: 4px;
     font-weight: 400;
     color: #48C8D3;
 }
@@ -40,15 +41,15 @@
 }
 
 .inputLabel{
-    margin-bottom: 2px;
+    margin-bottom: 5px;
     text-align: left;
-    font-size: 21px;
+    font-size: 20px;
     font-weight: 400;
     color: white;
 }
 
 #formButton{
-    background-color: #AFE49C;
+    background-color: #9BDD82;
     width: 30%;
     border-radius: 10px;
     color: white;
