@@ -1,7 +1,7 @@
 
 .basicForm{
     width: 35%;
-    height: 100vh;
+    height: 120vh;
     margin-left: auto;
     margin-right: auto;
     background-color: #075258;
@@ -59,4 +59,38 @@
 #prog1{
     width: 250px;
     height: 250px;
+}
+
+ul{
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 25px;
+    padding: 0;
+    color: #48C8D3;
+}
+
+li{
+    height: 11px;
+}
+
+.passwordRequirements{
+    margin: 0;
+    margin-left: 20px;
+    padding: 0;
+    color: #48C8D3;
+}
+
+.finePrintTop{
+    font-size: 10px;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    height: 11px;
+}
+
+.finePrint{
+    font-size: 10px;
+    padding: 0;
+    margin: 0;
 }
