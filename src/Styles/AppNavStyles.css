@@ -1,0 +1,38 @@
+
+.navBarOuterContainer{
+    height: 40px;
+}
+
+.navBar {
+    background-color: whitesmoke;
+}
+
+.navContentCont {
+    padding-left: 10px;
+    padding-right: 10px;
+
+}
+
+.content {
+    color: #48C8D3
+}
+
+.phxConsciousText {
+    color: black;
+}
+
+.bookLogo {
+    color: silver;
+    width: 10vh;
+    margin-left: 0;
+    padding-left: 0;
+}
+
+.circleIcon {
+    background-color: black;
+    border-radius: 50px;
+}
+
+.learnText {
+    color: silver;
+}

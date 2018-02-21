@@ -34,7 +34,7 @@ class LoginForm extends Component {
             error: '',
             user_token: firebase.auth().currentUser.uid
         });
-        console.log(`this is the user token: ${firebase.auth().currentUser.uid}`)
+        console.log(`${firebase.auth().currentUser.email} has just signed in`)
     }
 
     renderButton() {
@@ -64,7 +64,7 @@ class LoginForm extends Component {
     render() {
         return (
             <div>
-                <form className="basicForm" action="#">
+                <form className='formCont' action="#">
                     <div className='inputCont'>
                         <div className='formTitleCont'>
                             <p className="formTitle">SIGN IN</p>

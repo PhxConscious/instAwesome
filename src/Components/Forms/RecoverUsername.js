@@ -34,7 +34,7 @@ class RecoverUsername extends Component {
     render() {
         return (
             <div>
-                <form className="basicForm" action="#">
+                <form className="formCont" action="#">
                     <div className='inputCont'>
                         <div className='formTitleCont'>
                             <p className="formTitle">RECOVER USERNAME</p>

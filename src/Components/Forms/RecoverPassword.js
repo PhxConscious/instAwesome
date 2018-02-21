@@ -20,27 +20,38 @@ class RecoverPassword extends Component {
             <button
                 id='signInFormButton'
                 className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
-                onClick={() => console.log('button works')}>
+                onClick={() => this.emailPasswordReset()}>
                 RECOVER
             </button>
         );
     }
 
     handleEmailTextChange = (event) => {
-        this.setState({email: event.target.value})
+        this.setState({email: event.target.value});
         console.log(this.state.email)
+    };
+
+    emailPasswordReset = () => {
+        let auth = firebase.auth();
+        let emailAddress = this.state.email;
+
+        auth.sendPasswordResetEmail(emailAddress).then(function () {
+            alert('email sent');
+        }).catch(function (error) {
+            alert(error)
+        });
     };
 
     render() {
         return (
             <div>
-                <form className="basicForm" action="#">
+                <form className="formCont" action="#">
                     <div className='inputCont'>
                         <div className='formTitleCont'>
                             <p className="formTitle">RECOVER PASSWORD</p>
                         </div>
                         <div className="formInputCont">
-                            <p className='inputLabel'>USERNAME</p>
+                            <p className='inputLabel'>EMAIL</p>
                             <input
                                 className="formInput"
                                 type="text"

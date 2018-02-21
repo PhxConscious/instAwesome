@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import '../../Styles/FormsStyles.css';
+import firebase from 'firebase';
 
 class ChangePassword extends Component {
     constructor(props) {
@@ -13,15 +14,52 @@ class ChangePassword extends Component {
         };
     }
 
+    //***************************** Reauth not working ******************************
+    //     reAuthUser() {
+    //         const {verifyPassword} = this.state;
+    //         var user = firebase.auth().currentUser;
+    //         var credential = verifyPassword;
+    //
+    // // Prompt the user to re-provide their sign-in credentials
+    //         user.reauthenticateWithCredential(credential).then(function () {
+    //             alert('user re-authenticated')
+    //         }).catch(function (error) {
+    //             alert(error)
+    //         });
+    //     }
+
+    createNewPassword() {
+        const {newPassword, confirmNewPassword} = this.state;
+        let user = firebase.auth().currentUser;
+        let newerPassword = newPassword;
+
+        if (newPassword === '' || confirmNewPassword === '') {
+            return alert('Must fill in all fields')
+        } else if (newPassword !== confirmNewPassword) {
+            return alert('Passwords do not match');
+        } else if (newPassword.length < 6) {
+            return alert('password must be at least 6 characters long')
+        }
+        return (
+            user.updatePassword(newerPassword).then(function () {
+                alert('password changed');
+            }).catch(function (error) {
+                alert(error)
+            })
+        )
+    }
+
+
     onButtonPress() {
-        // const {instagramAccount, companyName} = this.state;
+        // this.reAuthUser();
+        this.createNewPassword();
         this.setState({error: '', loading: true});
         console.log('button works and displays loading...')
     }
 
     renderButton() {
         if (this.state.loading) {
-            return <p id='prog1' className="mdl-spinner mdl-js-spinner mdl-spinner--single-color is-active"></p>
+            return <p id='loadingText' className="mdl-spinner mdl-js-spinner mdl-spinner--single-color is-active"></p>
         }
         return (
             <button
@@ -51,7 +89,7 @@ class ChangePassword extends Component {
     render() {
         return (
             <div>
-                <form className="basicForm" action="#">
+                <form className="formCont" action="#">
                     <div className='inputCont'>
                         <div className='formTitleCont'>
                             <p className="formTitle">CHANGE PASSWORD</p>

@@ -9,6 +9,7 @@ import ChangePassword from './Components/Forms/ChangePassword';
 import SignUpForm from './Components/Forms/SignUpForm';
 import RecoverUsername from './Components/Forms/RecoverUsername';
 import RecoverPassword from './Components/Forms/RecoverPassword';
+import AppNavbar from './Components/Reusable/AppNav';
 
 export const initGA = () => {
     console.log('GA INIT');
@@ -16,10 +17,9 @@ export const initGA = () => {
 };
 
 export const logPageView = () => {
-    ReactGA.set({page:window.location.pathname})
+    ReactGA.set({page: window.location.pathname})
     ReactGA.pageview(window.location.pathname)
 };
-
 
 
 class App extends Component {
@@ -27,18 +27,20 @@ class App extends Component {
         initGA();
         logPageView();
     }
-  render() {
-    return (
-        <div className="App">
-            <RecoverPassword/>
-            <RecoverUsername/>
-            <SignInForm/>
-            <SignUpForm/>
-            <ContactInfo/>
-            <CompanyInfo/>
-            <ChangePassword/>
-        </div>);
-  }
+
+    render() {
+        return (
+            <div className="App">
+                    <AppNavbar/>
+                    <ChangePassword/>
+                    <SignInForm/>
+                    <RecoverPassword/>
+                    <RecoverUsername/>
+                    <SignUpForm/>
+                    <ContactInfo/>
+                    <CompanyInfo/>
+            </div>);
+    }
 }
 
 export default App;

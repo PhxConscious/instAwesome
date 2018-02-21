@@ -18,7 +18,7 @@ class SignUpForm extends Component {
     componentDidMount() {
         axios.get('http://localhost:3000/users')
             .then(res => {
-                console.log(res.data);
+                console.log(res.data[0]);
             });
     }
 
@@ -74,7 +74,7 @@ class SignUpForm extends Component {
 
     render() {
         return (
-            <form className="basicForm" action="#">
+            <form className="formCont" action="#">
                 <div className='inputCont'>
                     <div className='formTitleCont'>
                         <p className="formTitle">SIGN UP</p>

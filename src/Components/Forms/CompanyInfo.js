@@ -13,7 +13,6 @@ class CompanyInfo extends Component {
     }
 
     onButtonPress() {
-        // const {instagramAccount, companyName} = this.state;
         this.setState({error: '', loading: true});
         console.log('button works and displays loading...')
     }
@@ -45,7 +44,7 @@ class CompanyInfo extends Component {
     render() {
         return (
             <div>
-                <form className="basicForm" action="#">
+                <form className="formCont" action="#">
                     <div className='inputCont'>
                         <div className='formTitleCont'>
                             <p className="formTitle">COMPANY INFORMATION</p>
