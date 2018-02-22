@@ -1,10 +1,9 @@
-.Cont {
+.underwaterBackground {
     min-height: 100%;
     min-width: 100%;
-    background: url('https://i.imgur.com/OuaQYmj.jpg');
+    background-image: url('https://i.imgur.com/OuaQYmj.jpg');
     background-size: cover;
-    /*overflow: hidden;*/
-
+    overflow: hidden;
     position: fixed;
     z-index: -1;
     background-position: center;

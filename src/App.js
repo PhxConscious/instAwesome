@@ -11,6 +11,8 @@ import RecoverUsername from './Components/Forms/RecoverUsername';
 import RecoverPassword from './Components/Forms/RecoverPassword';
 import AppNavbar from './Components/Reusable/AppNav';
 import UnderwaterWrapper from './Components/Reusable/UnderwaterWrapper';
+import BlueAppBG from './Components/Reusable/BlueAppBg';
+import ShadowBox from './Components/Reusable/ShadowBox'
 
 export const initGA = () => {
     console.log('GA INIT');
@@ -32,9 +34,13 @@ class App extends Component {
     render() {
         return (
             <div className="App">
+                {/*<BlueAppBG/>*/}
                 <UnderwaterWrapper/>
                 <AppNavbar/>
+                <ShadowBox>
                 <ChangePassword/>
+                </ShadowBox>
+                <SignUpForm/>
                 <SignInForm/>
                 <RecoverPassword/>
                 <RecoverUsername/>

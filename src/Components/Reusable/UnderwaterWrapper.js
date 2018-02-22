@@ -5,8 +5,8 @@ import '../../Styles/UnderwaterWrapperStyles.css';
 class UnderwaterWrapper extends Component {
     render() {
         return (
-            <div className="Cont">
-                {/*<h1>this</h1>*/}
+            <div className="underwaterBackground">
+                {this.props.children}
             </div>
         )
     }

@@ -36,7 +36,7 @@ class AppNavbar extends Component {
                                 <a className="mdl-navigation__link" href="#">
                                     <button id="demo-menu-lower-right"
                                             className="mdl-button mdl-js-button mdl-button--icon">
-                                        <i class="material-icons accountCircleIcon">account_circle</i>
+                                        <i className="material-icons accountCircleIcon">account_circle</i>
                                     </button>
                                     <ul className="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
                                         htmlFor="demo-menu-lower-right">

@@ -1,11 +1,9 @@
 
 .formCont {
-    width: 35%;
-    height: 160vh;
-    margin-left: auto;
+    width: 95%;
     margin-right: auto;
-    background-color: #075258;
-    margin-top: 20vh;
+    margin-left: auto;
+    height: 0%;
 }
 
 .formTitleCont {
