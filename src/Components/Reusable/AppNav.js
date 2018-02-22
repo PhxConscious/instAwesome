@@ -28,7 +28,9 @@ class AppNavbar extends Component {
                             <a className="mdl-navigation__link" href="">
                                 <span className='learnText'>LEARN</span>
                             </a>
-                            <div className="mdl-layout-spacer content">Logo</div>
+                            <div className="mdl-layout-spacer centerLogoCont">
+                                <img className='centerLogo' src='https://i.imgur.com/qYqmu8v.png'></img>
+                            </div>
                             <nav className="mdl-navigation mdl-layout--large-screen-only content">
                                 <span className='phxConsciousText'>@phxconscious</span>
                                 <a className="mdl-navigation__link" href="#">
@@ -53,7 +55,7 @@ class AppNavbar extends Component {
                         </nav>
                     </div>
                     <main className="mdl-layout__content">
-                        <div className="page-content"></div>
+                        <div className="page-content "></div>
                     </main>
                 </div>
             </div>

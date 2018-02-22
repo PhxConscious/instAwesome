@@ -10,6 +10,7 @@ import SignUpForm from './Components/Forms/SignUpForm';
 import RecoverUsername from './Components/Forms/RecoverUsername';
 import RecoverPassword from './Components/Forms/RecoverPassword';
 import AppNavbar from './Components/Reusable/AppNav';
+import UnderwaterWrapper from './Components/Reusable/UnderwaterWrapper';
 
 export const initGA = () => {
     console.log('GA INIT');
@@ -31,14 +32,15 @@ class App extends Component {
     render() {
         return (
             <div className="App">
-                    <AppNavbar/>
-                    <ChangePassword/>
-                    <SignInForm/>
-                    <RecoverPassword/>
-                    <RecoverUsername/>
-                    <SignUpForm/>
-                    <ContactInfo/>
-                    <CompanyInfo/>
+                <UnderwaterWrapper/>
+                <AppNavbar/>
+                <ChangePassword/>
+                <SignInForm/>
+                <RecoverPassword/>
+                <RecoverUsername/>
+                <SignUpForm/>
+                <ContactInfo/>
+                <CompanyInfo/>
             </div>);
     }
 }
