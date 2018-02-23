@@ -12,7 +12,9 @@ import RecoverPassword from './Components/Forms/RecoverPassword';
 import AppNavbar from './Components/Reusable/AppNav';
 import UnderwaterWrapper from './Components/Reusable/UnderwaterWrapper';
 import BlueAppBG from './Components/Reusable/BlueAppBg';
-import ShadowBox from './Components/Reusable/ShadowBox'
+import ShadowBox from './Components/Reusable/ShadowBox';
+import ConsciousCenter from './Components/Reusable/ConsciousCenter';
+import GreenFormContainer from './Components/Reusable/GreenFormContainer';
 
 export const initGA = () => {
     console.log('GA INIT');
@@ -37,16 +39,29 @@ class App extends Component {
                 {/*<BlueAppBG/>*/}
                 <UnderwaterWrapper/>
                 <AppNavbar/>
+                <GreenFormContainer/>
+                <ConsciousCenter/>
                 <ShadowBox>
-                <ChangePassword/>
+                    <CompanyInfo/>
                 </ShadowBox>
-                <SignUpForm/>
-                <SignInForm/>
-                <RecoverPassword/>
-                <RecoverUsername/>
-                <SignUpForm/>
-                <ContactInfo/>
-                <CompanyInfo/>
+                <ShadowBox>
+                    <SignInForm/>
+                </ShadowBox>
+                <ShadowBox>
+                    <ChangePassword/>
+                </ShadowBox>
+                <ShadowBox>
+                    <SignUpForm/>
+                </ShadowBox>
+                <ShadowBox>
+                    <RecoverPassword/>
+                </ShadowBox>
+                <ShadowBox>
+                    <RecoverUsername/>
+                </ShadowBox>
+                <ShadowBox>
+                    <ContactInfo/>
+                </ShadowBox>
             </div>);
     }
 }

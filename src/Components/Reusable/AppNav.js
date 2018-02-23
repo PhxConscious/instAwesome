@@ -25,14 +25,14 @@ class AppNavbar extends Component {
                     <header className="mdl-layout__header navBar">
                         <div className="mdl-layout__header-row navContentCont">
                             <i className="material-icons bookLogo">import_contacts</i>
-                            <a className="mdl-navigation__link" href="">
+                            <a className="mdl-navigation__link learnTextCont" href="">
                                 <span className='learnText'>LEARN</span>
                             </a>
                             <div className="mdl-layout-spacer centerLogoCont">
                                 <img className='centerLogo' src='https://i.imgur.com/qYqmu8v.png'></img>
                             </div>
                             <nav className="mdl-navigation mdl-layout--large-screen-only content">
-                                <span className='phxConsciousText'>@phxconscious</span>
+                                <span className='phxConsciousText phxConsciousTextCont'>@phxconscious</span>
                                 <a className="mdl-navigation__link" href="#">
                                     <button id="demo-menu-lower-right"
                                             className="mdl-button mdl-js-button mdl-button--icon">
