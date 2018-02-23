@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5dcbd94a-9853-46c1-a5fe-46ff5bc17eff" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/Components/Reusable/LmsContainer.js" afterPath="$PROJECT_DIR$/src/Components/Reusable/LmsContainer.js" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -305,12 +305,12 @@
       <workItem from="1518886726447" duration="14729000" />
       <workItem from="1519064072786" duration="4283000" />
       <workItem from="1519085206050" duration="8737000" />
-      <workItem from="1519234907205" duration="30439000" />
+      <workItem from="1519234907205" duration="30665000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="87587000" />
+    <option name="totallyTimeSpent" value="87813000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1280" height="778" extended-state="6" />
