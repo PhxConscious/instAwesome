@@ -26,9 +26,9 @@ class RecoverUsername extends Component {
         );
     }
 
-    handleEmailTextChange = (event) => {
-        this.setState({email: event.target.value})
-        console.log(this.state.email)
+    handleInputTextChange = e => {
+        this.setState({[e.target.name]: e.target.value});
+        // console.log(`this is the current state ${this.state}`)
     };
 
     render() {
@@ -47,9 +47,10 @@ class RecoverUsername extends Component {
                         </div>
                         <div className="formInputCont">
                             <input
+                                name='email'
                                 className="formInput"
                                 type="text"
-                                onChange={this.handleEmailTextChange}
+                                onChange={this.handleInputTextChange}
                                 placeholder=''
                                 value={this.state.email}>
                             </input>

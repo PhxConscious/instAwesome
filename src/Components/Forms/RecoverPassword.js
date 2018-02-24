@@ -26,9 +26,9 @@ class RecoverPassword extends Component {
         );
     }
 
-    handleEmailTextChange = (event) => {
-        this.setState({email: event.target.value});
-        console.log(this.state.email)
+    handleInputTextChange = e => {
+        this.setState({[e.target.name]: e.target.value});
+        // console.log(`this is the current state ${this.state}`)
     };
 
     emailPasswordReset = () => {
@@ -53,9 +53,10 @@ class RecoverPassword extends Component {
                         <div className="formInputCont">
                             <p className='inputLabel'>EMAIL</p>
                             <input
+                                name='email'
                                 className="formInput"
                                 type="text"
-                                onChange={this.handleEmailTextChange}
+                                onChange={this.handleInputTextChange}
                                 placeholder=''
                                 value={this.state.email}>
                             </input>

@@ -33,19 +33,9 @@ class ContactInfo extends Component {
         );
     }
 
-    handleContactNameTextChange = (event) => {
-        this.setState({contactName: event.target.value});
-        console.log(this.state.contactName)
-    };
-
-    handleContactNumberTextChange = (event) => {
-        this.setState({contactNumber: event.target.value});
-        console.log(this.state.contactNumber)
-    };
-
-    handleContactEmailTextChange = (event) => {
-        this.setState({contactEmail: event.target.value});
-        console.log(this.state.contactEmail)
+    handleInputTextChange = e => {
+        this.setState({[e.target.name]: e.target.value});
+        // console.log(`this is the current state ${this.state}`)
     };
 
     render() {
@@ -61,9 +51,10 @@ class ContactInfo extends Component {
                                 <p className='inputLabel'>CONTACT NAME</p>
                             </div>
                             <input
+                                name='contactName'
                                 className="formInput"
                                 type="text"
-                                onChange={this.handleContactNameTextChange}
+                                onChange={this.handleInputTextChange}
                                 placeholder='Jeremy Chevallier'
                                 value={this.state.contactName}>
                             </input>
@@ -73,9 +64,10 @@ class ContactInfo extends Component {
                                 <p className='inputLabel'>CONTACT NUMBER</p>
                             </div>
                             <input
+                                name='contactNumber'
                                 className="formInput"
                                 type="text"
-                                onChange={this.handleContactNumberTextChange}
+                                onChange={this.handleInputTextChange}
                                 placeholder='480-268-5305'
                                 value={this.state.contactNumber}>
                             </input>
@@ -85,9 +77,10 @@ class ContactInfo extends Component {
                                 <p className='inputLabel'>CONTACT EMAIL</p>
                             </div>
                             <input
+                                name='contactEmail'
                                 className="formInput"
                                 type="text"
-                                onChange={this.handleContactEmailTextChange}
+                                onChange={this.handleInputTextChange}
                                 placeholder='jeremy@phxconscious.com'
                                 value={this.state.contactEmail}>
                             </input>

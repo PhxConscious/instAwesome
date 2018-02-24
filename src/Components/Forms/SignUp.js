@@ -6,12 +6,12 @@ class SignUpForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            email: '',
-            password: '',
-            verifyPassword: '',
             firstName: '',
             lastName: '',
             userPhone: '',
+            email: '',
+            password: '',
+            verifyPassword: ''
         };
     }
 
@@ -42,34 +42,9 @@ class SignUpForm extends Component {
                 })))
     }
 
-    handleEmailTextChange = (event) => {
-        this.setState({email: event.target.value})
-        console.log(this.state.email)
-    };
-
-    handlePassTextChange = (event) => {
-        this.setState({password: event.target.value})
-        console.log(this.state.password)
-    };
-
-    handleVerifyPassTextChange = (event) => {
-        this.setState({verifyPassword: event.target.value})
-        console.log(this.state.verifyPassword)
-    };
-
-    handleFirstNameTextChange = (event) => {
-        this.setState({firstName: event.target.value})
-        console.log(this.state.firstName)
-    };
-
-    handleLastNameTextChange = (event) => {
-        this.setState({lastName: event.target.value})
-        console.log(this.state.lastName)
-    };
-
-    handleUserPhoneTextChange = (event) => {
-        this.setState({userPhone: event.target.value})
-        console.log(this.state.userPhone)
+    handleInputTextChange = e => {
+        this.setState({[e.target.name]: e.target.value});
+        // console.log(`this is the current state ${this.state}`)
     };
 
     render() {
@@ -84,6 +59,7 @@ class SignUpForm extends Component {
                             <p className='inputLabel'>FIRST NAME</p>
                         </div>
                         <input
+                            name='firstName'
                             className="formInput"
                             type="text"
                             onChange={this.handleFirstNameTextChange}
@@ -96,6 +72,7 @@ class SignUpForm extends Component {
                             <p className='inputLabel'>LAST NAME</p>
                         </div>
                         <input
+                            name='lastName'
                             className="formInput"
                             type="text"
                             onChange={this.handleLastNameTextChange}
@@ -108,6 +85,7 @@ class SignUpForm extends Component {
                             <p className='inputLabel'>PHONE NUMBER</p>
                         </div>
                         <input
+                            name='userPhone'
                             className="formInput"
                             type="text"
                             onChange={this.handleUserPhoneTextChange}
@@ -120,6 +98,7 @@ class SignUpForm extends Component {
                             <p className='inputLabel'>EMAIL</p>
                         </div>
                         <input
+                            name='email'
                             className="formInput"
                             type="text"
                             onChange={this.handleEmailTextChange}
@@ -132,6 +111,7 @@ class SignUpForm extends Component {
                             <p className='inputLabel'>PASSWORD</p>
                         </div>
                         <input
+                            name='password'
                             className="formInput"
                             type="password"
                             onChange={this.handlePassTextChange}
@@ -144,6 +124,7 @@ class SignUpForm extends Component {
                             <p className='inputLabel'>VERIFY PASSWORD</p>
                         </div>
                         <input
+                            name='verifyPassword'
                             className="formInput"
                             type="password"
                             onChange={this.handleVerifyPassTextChange}

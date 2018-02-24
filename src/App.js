@@ -15,6 +15,7 @@ import BlueAppBG from './Components/Reusable/BlueAppBg';
 import ShadowBox from './Components/Reusable/ShadowBox';
 import ConsciousCenter from './Components/Reusable/ConsciousCenter';
 import GreenFormContainer from './Components/Reusable/GreenFormContainer';
+import OnTheWeb from './Components/Forms/OnTheWeb';
 
 export const initGA = () => {
     console.log('GA INIT');
@@ -41,6 +42,9 @@ class App extends Component {
                 <AppNavbar/>
                 <GreenFormContainer/>
                 <ConsciousCenter/>
+                <ShadowBox>
+                    <OnTheWeb/>
+                </ShadowBox>
                 <ShadowBox>
                     <CompanyInfo/>
                 </ShadowBox>

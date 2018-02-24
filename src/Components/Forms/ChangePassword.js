@@ -74,19 +74,9 @@ class ChangePassword extends Component {
         );
     }
 
-    handleVerifyPasswordTextChange = (event) => {
-        this.setState({verifyPassword: event.target.value});
-        console.log(this.state.verifyPassword)
-    };
-
-    handleNewPasswordTextChange = (event) => {
-        this.setState({newPassword: event.target.value});
-        console.log(this.state.newPassword)
-    };
-
-    handleConfirmPasswordTextChange = (event) => {
-        this.setState({confirmNewPassword: event.target.value});
-        console.log(this.state.confirmNewPassword)
+    handleInputTextChange = e => {
+        this.setState({[e.target.name]: e.target.value});
+        // console.log(`this is the current state ${this.state}`)
     };
 
     render() {
@@ -102,9 +92,10 @@ class ChangePassword extends Component {
                                 <p className='inputLabel'>VERFIY CURRENT PASSWORD</p>
                             </div>
                             <input
+                                name='verifyPassword'
                                 className="formInput"
                                 type="password"
-                                onChange={this.handleVerifyPasswordTextChange}
+                                onChange={this.handleInputTextChange}
                                 placeholder=''
                                 value={this.state.verifyPassword}>
                             </input>
@@ -114,9 +105,10 @@ class ChangePassword extends Component {
                                 <p className='inputLabel'>CHOOSE NEW PASSWORD</p>
                             </div>
                             <input
+                                name='newPassword'
                                 className="formInput"
                                 type="password"
-                                onChange={this.handleNewPasswordTextChange}
+                                onChange={this.handleInputTextChange}
                                 placeholder=''
                                 value={this.state.newPassword}>
                             </input>
@@ -137,9 +129,10 @@ class ChangePassword extends Component {
                                 <p className='inputLabel'>CONFIRM NEW PASSWORD</p>
                             </div>
                             <input
+                                name='confirmNewPassword'
                                 className="formInput"
                                 type="password"
-                                onChange={this.handleConfirmPasswordTextChange}
+                                onChange={this.handleInputTextChange}
                                 placeholder=''
                                 value={this.state.confirmNewPassword}>
                             </input>

@@ -8,10 +8,10 @@ class LoginForm extends Component {
         this.state = {
             email: '',
             password: '',
+            phone: '',
             error: '',
             loading: false,
-            user_token: '',
-            phone: ''
+            user_token: ''
         };
     }
 
@@ -47,7 +47,7 @@ class LoginForm extends Component {
         if (this.state.phone === '') {
             return this.signInWithEmail()
         }
-         this.signInWithPhone()
+        this.signInWithPhone()
     }
 
     onLoginFail() {
@@ -80,19 +80,9 @@ class LoginForm extends Component {
         );
     }
 
-    handleEmailTextChange = (event) => {
-        this.setState({email: event.target.value})
-        console.log(this.state.email)
-    };
-
-    handlePassTextChange = (event) => {
-        this.setState({password: event.target.value})
-        console.log(this.state.password)
-    };
-
-    handlePhoneTextChange = (event) => {
-        this.setState({phone: event.target.value})
-        console.log(this.state.phone)
+    handleInputTextChange = e => {
+        this.setState({[e.target.name]: e.target.value});
+        // console.log(`this is the current state ${this.state}`)
     };
 
     render() {
@@ -108,9 +98,10 @@ class LoginForm extends Component {
                                 <p className='inputLabel'>EMAIL</p>
                             </div>
                             <input
+                                name='email'
                                 className="formInput"
                                 type="text"
-                                onChange={this.handleEmailTextChange}
+                                onChange={this.handleInputTextChange}
                                 placeholder='Your Email'
                                 value={this.state.email}>
                             </input>
@@ -120,9 +111,10 @@ class LoginForm extends Component {
                                 <p className='inputLabel'>PASSWORD</p>
                             </div>
                             <input
+                                name='password'
                                 className="formInput"
                                 type="password"
-                                onChange={this.handlePassTextChange}
+                                onChange={this.handleInputTextChange}
                                 placeholder='Your Password'
                                 value={this.state.password}>
                             </input>
@@ -133,9 +125,10 @@ class LoginForm extends Component {
                                 <p className='inputLabel'>PHONE NUMBER</p>
                             </div>
                             <input
+                                name='phone'
                                 className="formInput"
                                 type="number"
-                                onChange={this.handlePhoneTextChange}
+                                onChange={this.handleInputTextChange}
                                 placeholder='Phone Number'
                                 value={this.state.phone}>
                             </input>
@@ -146,7 +139,9 @@ class LoginForm extends Component {
                         {this.renderButton()}
                     </div>
                     <div>
-                        <button className='mdl-button mdl-js-button googleButton' onClick={this.signInWithGoogle}>SIGN IN WITH GOOGLE</button>
+                        <button className='mdl-button mdl-js-button googleButton' onClick={this.signInWithGoogle}>SIGN
+                            IN WITH GOOGLE
+                        </button>
                     </div>
                     <div className='forgotLinksCont'>
                         <a className='forgotLinks' href='#'>FORGOT USERNAME? </a>

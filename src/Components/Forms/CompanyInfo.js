@@ -31,14 +31,9 @@ class CompanyInfo extends Component {
         );
     }
 
-    handleInstagramAccountTextChange = (event) => {
-        this.setState({instagramAccount: event.target.value});
-        console.log(this.state.instagramAccount)
-    };
-
-    handleCompanyNameTextChange = (event) => {
-        this.setState({companyName: event.target.value});
-        console.log(this.state.companyName)
+    handleInputTextChange = e => {
+        this.setState({[e.target.name]: e.target.value});
+        // console.log(`this is the current state ${this.state}`)
     };
 
     render() {
@@ -54,9 +49,10 @@ class CompanyInfo extends Component {
                                 <p className='inputLabel'>INSTAGRAM ACCOUNT</p>
                             </div>
                             <input
+                                name='instagramAccount'
                                 className="formInput"
                                 type="text"
-                                onChange={this.handleInstagramAccountTextChange}
+                                onChange={this.handleInputTextChange}
                                 placeholder='@phxconscious'
                                 value={this.state.instagramAccount}>
                             </input>
@@ -66,9 +62,10 @@ class CompanyInfo extends Component {
                                 <p className='inputLabel'>COMPANY NAME</p>
                             </div>
                             <input
+                                name='companyName'
                                 className="formInput"
                                 type="text"
-                                onChange={this.handleCompanyNameTextChange}
+                                onChange={this.handleInputTextChange}
                                 placeholder='Conscious Creative'
                                 value={this.state.companyName}>
                             </input>

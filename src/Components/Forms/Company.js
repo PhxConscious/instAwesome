@@ -32,19 +32,9 @@ class Company extends Component {
         );
     }
 
-    handleNameTextChange = (event) => {
-        this.setState({name: event.target.value});
-        console.log(this.state.name)
-    };
-
-    handleStyleGuideTextChange = (event) => {
-        this.setState({styleGuide: event.target.value});
-        console.log(this.state.styleGuide)
-    };
-
-    handlePrimaryGoalTextChange = (event) => {
-        this.setState({primaryGoal: event.target.value});
-        console.log(this.state.primaryGoal)
+    handleInputTextChange = e => {
+        this.setState({[e.target.name]: e.target.value});
+        // console.log(`this is the current state ${this.state}`)
     };
 
     render() {
@@ -60,9 +50,10 @@ class Company extends Component {
                                 <p className='inputLabel'>NAME</p>
                             </div>
                             <input
+                                name='name'
                                 className="formInput"
                                 type="text"
-                                onChange={this.handleNameTextChange}
+                                onChange={this.handleInputTextChange}
                                 placeholder='Conscious Creative'
                                 value={this.state.name}>
                             </input>
@@ -72,9 +63,10 @@ class Company extends Component {
                                 <p className='inputLabel'>STYLE GUIDE</p>
                             </div>
                             <input
+                                name='styleGuide'
                                 className="formInput"
                                 type="text"
-                                onChange={this.handleStyleGuideTextChange}
+                                onChange={this.handleInputTextChange}
                                 placeholder='https://phxconscious.com'
                                 value={this.state.styleGuide}>
                             </input>
@@ -84,9 +76,10 @@ class Company extends Component {
                                 <p className='inputLabel'>PRIMARY GOAL</p>
                             </div>
                             <input
+                                name='primaryGoal'
                                 className="formInput"
                                 type="text"
-                                onChange={this.handlePrimaryGoalTextChange}
+                                onChange={this.handleInputTextChange}
                                 placeholder='Brand awareness'
                                 value={this.state.primaryGoal}>
                             </input>

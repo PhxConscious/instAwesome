@@ -32,19 +32,9 @@ class ContentCreator extends Component {
         );
     }
 
-    handleFullNameTextChange = (event) => {
-        this.setState({fullName: event.target.value});
-        console.log(this.state.fullName)
-    };
-
-    handlePhoneNumberTextChange = (event) => {
-        this.setState({phoneNumber: event.target.value});
-        console.log(this.state.phoneNumber)
-    };
-
-    handleEmailAddressTextChange = (event) => {
-        this.setState({emailAddress: event.target.value});
-        console.log(this.state.emailAddress)
+    handleInputTextChange = e => {
+        this.setState({[e.target.name]: e.target.value});
+        // console.log(`this is the current state ${this.state}`)
     };
 
     render() {
@@ -60,9 +50,10 @@ class ContentCreator extends Component {
                                 <p className='inputLabel'>FULL NAME</p>
                             </div>
                             <input
+                                name='fullName'
                                 className="formInput"
                                 type="text"
-                                onChange={this.handleFullNameTextChange}
+                                onChange={this.handleInputTextChange}
                                 placeholder='Jeremy Chevallier'
                                 value={this.state.fullName}>
                             </input>
@@ -72,9 +63,10 @@ class ContentCreator extends Component {
                                 <p className='inputLabel'>PHONE NUMBER</p>
                             </div>
                             <input
+                                name='phoneNumber'
                                 className="formInput"
                                 type="text"
-                                onChange={this.handlePhoneNumberTextChange}
+                                onChange={this.handleInputTextChange}
                                 placeholder='480-268-5305'
                                 value={this.state.phoneNumber}>
                             </input>
@@ -84,9 +76,10 @@ class ContentCreator extends Component {
                                 <p className='inputLabel'>EMAIL</p>
                             </div>
                             <input
+                                name='emailAddress'
                                 className="formInput"
                                 type="text"
-                                onChange={this.handleEmailAddressTextChange}
+                                onChange={this.handleInputTextChange}
                                 placeholder='Jeremy@phxconscious.com'
                                 value={this.state.emailAddress}>
                             </input>

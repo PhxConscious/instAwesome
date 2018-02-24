@@ -51,19 +51,9 @@ class OnTheWeb extends Component {
         );
     }
 
-    handleFullNameTextChange = (event) => {
-        this.setState({fullName: event.target.value});
-        console.log(this.state.fullName)
-    };
-
-    handlePhoneNumberTextChange = (event) => {
-        this.setState({phoneNumber: event.target.value});
-        console.log(this.state.phoneNumber)
-    };
-
-    handleEmailAddressTextChange = (event) => {
-        this.setState({emailAddress: event.target.value});
-        console.log(this.state.emailAddress)
+    handleInputTextChange = e => {
+        this.setState({[e.target.name]: e.target.value});
+        // console.log(`this is the current state ${this.state}`)
     };
 
     render() {
@@ -72,42 +62,292 @@ class OnTheWeb extends Component {
                 <form className="formCont" action="#">
                     <div className='inputCont'>
                         <div className='formTitleCont'>
-                            <p className="formTitle">CONTENT CREATOR</p>
+                            <p className="formTitle">ON THE WEB</p>
                         </div>
                         <div className="formInputCont">
                             <div>
-                                <p className='inputLabel'>FULL NAME</p>
+                                <p className='inputLabel'>WEBSITE</p>
                             </div>
                             <input
+                                name='website'
                                 className="formInput"
                                 type="text"
-                                onChange={this.handleFullNameTextChange}
-                                placeholder='Jeremy Chevallier'
-                                value={this.state.fullName}>
+                                onChange={this.handleInputTextChange}
+                                placeholder='https://phxconscious.com'
+                                value={this.state.website}>
                             </input>
                         </div>
                         <div className="formInputCont">
                             <div>
-                                <p className='inputLabel'>PHONE NUMBER</p>
+                                <p className='inputLabel'>GOOGLE SEARCH GOALS</p>
                             </div>
                             <input
+                                name='googleSearchGoals'
                                 className="formInput"
                                 type="text"
-                                onChange={this.handlePhoneNumberTextChange}
-                                placeholder='480-268-5305'
-                                value={this.state.phoneNumber}>
+                                onChange={this.handleInputTextChange}
+                                placeholder="top result for 'conscious creative' and 'creative startup studio'"
+                                value={this.state.googleSearchGoals}>
                             </input>
                         </div>
                         <div className="formInputCont">
                             <div>
-                                <p className='inputLabel'>EMAIL</p>
+                                <p className='inputLabel'>GOOGLE BUSINESS PROFILE</p>
                             </div>
                             <input
+                                name='googleBusinessProfile'
                                 className="formInput"
                                 type="text"
-                                onChange={this.handleEmailAddressTextChange}
-                                placeholder='Jeremy@phxconscious.com'
-                                value={this.state.emailAddress}>
+                                onChange={this.handleInputTextChange}
+                                placeholder='https://google.com/maps/place/...'
+                                value={this.state.googleBusinessProfile}>
+                            </input>
+                        </div>
+                        <div className="formInputCont">
+                            <div>
+                                <p className='inputLabel'>INSTAGRAM USERNAME</p>
+                            </div>
+                            <input
+                                name='instgramUserName'
+                                className="formInput"
+                                type="text"
+                                onChange={this.handleInputTextChange}
+                                placeholder='@phxconscious'
+                                value={this.state.instgramUserName}>
+                            </input>
+                        </div>
+                        <div className="formInputCont">
+                            <div>
+                                <p className='inputLabel'>INSTAGRAM GOALS</p>
+                            </div>
+                            <input
+                                name='instagramGoals'
+                                className="formInput"
+                                type="text"
+                                onChange={this.handleInputTextChange}
+                                placeholder='brand awareness, community recruiting'
+                                value={this.state.instagramGoals}>
+                            </input>
+                        </div>
+                        <div className="formInputCont">
+                            <div>
+                                <p className='inputLabel'>FACEBOOK PAGE URL</p>
+                            </div>
+                            <input
+                                name='facebookPageUrl'
+                                className="formInput"
+                                type="text"
+                                onChange={this.handleInputTextChange}
+                                placeholder='https://facebook.com/phxconscious'
+                                value={this.state.facebookPageUrl}>
+                            </input>
+                        </div>
+                        <div className="formInputCont">
+                            <div>
+                                <p className='inputLabel'>FACEBOOK GOALS</p>
+                            </div>
+                            <input
+                                name='facebookGoals'
+                                className="formInput"
+                                type="text"
+                                onChange={this.handleInputTextChange}
+                                placeholder='messenger funnel into website'
+                                value={this.state.facebookGoals}>
+                            </input>
+                        </div>
+                        <div className="formInputCont">
+                            <div>
+                                <p className='inputLabel'>TWITTER USERNAME</p>
+                            </div>
+                            <input
+                                name='twitterUsername'
+                                className="formInput"
+                                type="text"
+                                onChange={this.handleInputTextChange}
+                                placeholder='@phxconscious'
+                                value={this.state.twitterUsername}>
+                            </input>
+                        </div>
+                        <div className="formInputCont">
+                            <div>
+                                <p className='inputLabel'>TWITTER GOALS</p>
+                            </div>
+                            <input
+                                name='twitterGoals'
+                                className="formInput"
+                                type="text"
+                                onChange={this.handleInputTextChange}
+                                placeholder='brand awareness, community recruiting'
+                                value={this.state.twitterGoals}>
+                            </input>
+                        </div>
+                        <div className="formInputCont">
+                            <div>
+                                <p className='inputLabel'>LINKEDIN PROFILE URL</p>
+                            </div>
+                            <input
+                                name='linkedinProfileUrl'
+                                className="formInput"
+                                type="text"
+                                onChange={this.handleInputTextChange}
+                                placeholder='https://linkedin.com/company/phxconscious/'
+                                value={this.state.linkedinProfileUrl}>
+                            </input>
+                        </div>
+                        <div className="formInputCont">
+                            <div>
+                                <p className='inputLabel'>LINKEDIN GOALS</p>
+                            </div>
+                            <input
+                                name='linkedinGoals'
+                                className="formInput"
+                                type="text"
+                                onChange={this.handleInputTextChange}
+                                placeholder='building credibility, community recruiting, forming partnerships'
+                                value={this.state.linkedinGoals}>
+                            </input>
+                        </div>
+                        <div className="formInputCont">
+                            <div>
+                                <p className='inputLabel'>GOOGLE+ URL</p>
+                            </div>
+                            <input
+                                name='googlePlusUrl'
+                                className="formInput"
+                                type="text"
+                                onChange={this.handleInputTextChange}
+                                placeholder='https://phxconscious.com'
+                                value={this.state.googlePlusUrl}>
+                            </input>
+                        </div>
+                        <div className="formInputCont">
+                            <div>
+                                <p className='inputLabel'>GOOGLE PLUS GOALS</p>
+                            </div>
+                            <input
+                                name='googlePlusGoals'
+                                className="formInput"
+                                type="text"
+                                onChange={this.handleInputTextChange}
+                                placeholder='general brand awareness, SEO'
+                                value={this.state.googlePlusGoals}>
+                            </input>
+                        </div>
+                        <div className="formInputCont">
+                            <div>
+                                <p className='inputLabel'>YOUTUBE URL</p>
+                            </div>
+                            <input
+                                name='youtubeUrl'
+                                className="formInput"
+                                type="text"
+                                onChange={this.handleInputTextChange}
+                                placeholder='https://www.youtube.com/channel/UCxBENO8Q1MdIgMBqEupL7hQ'
+                                value={this.state.youtubeUrl}>
+                            </input>
+                        </div>
+                        <div className="formInputCont">
+                            <div>
+                                <p className='inputLabel'>VIMEO URL</p>
+                            </div>
+                            <input
+                                name='vimeoUrl'
+                                className="formInput"
+                                type="text"
+                                onChange={this.handleInputTextChange}
+                                placeholder='https://vimeo.com/phxconsious'
+                                value={this.state.vimeoUrl}>
+                            </input>
+                        </div>
+                        <div className="formInputCont">
+                            <div>
+                                <p className='inputLabel'>YOUTUBE/VIMEO GOALS</p>
+                            </div>
+                            <input
+                                name='youtubeVimeoGoals'
+                                className="formInput"
+                                type="text"
+                                onChange={this.handleInputTextChange}
+                                placeholder='exposing content, building credibility, recruiting talent'
+                                value={this.state.youtubeVimeoGoals}>
+                            </input>
+                        </div>
+                        <div className="formInputCont">
+                            <div>
+                                <p className='inputLabel'>PINTEREST PROFILE</p>
+                            </div>
+                            <input
+                                name='pinterestProfile'
+                                className="formInput"
+                                type="text"
+                                onChange={this.handleInputTextChange}
+                                placeholder=''
+                                value={this.state.pinterestProfile}>
+                            </input>
+                        </div>
+                        <div className="formInputCont">
+                            <div>
+                                <p className='inputLabel'>PINTEREST GOALS</p>
+                            </div>
+                            <input
+                                name='pinterestGoals'
+                                className="formInput"
+                                type="text"
+                                onChange={this.handleInputTextChange}
+                                placeholder=''
+                                value={this.state.pinterestGoals}>
+                            </input>
+                        </div>
+                        <div className="formInputCont">
+                            <div>
+                                <p className='inputLabel'>YELP BUSINESS PROFILE</p>
+                            </div>
+                            <input
+                                name='yelpBusinessProfile'
+                                className="formInput"
+                                type="text"
+                                onChange={this.handleInputTextChange}
+                                placeholder=''
+                                value={this.state.yelpBusinessProfile}>
+                            </input>
+                        </div>
+                        <div className="formInputCont">
+                            <div>
+                                <p className='inputLabel'>YELP GOALS</p>
+                            </div>
+                            <input
+                                name='yelpGoals'
+                                className="formInput"
+                                type="text"
+                                onChange={this.handleInputTextChange}
+                                placeholder=''
+                                value={this.state.yelpGoals}>
+                            </input>
+                        </div>
+                        <div className="formInputCont">
+                            <div>
+                                <p className='inputLabel'>BETTER BUSINESS BUREAU PROFILE</p>
+                            </div>
+                            <input
+                                name='bbbProfile'
+                                className="formInput"
+                                type="text"
+                                onChange={this.handleInputTextChange}
+                                placeholder=''
+                                value={this.state.bbbProfile}>
+                            </input>
+                        </div>
+                        <div className="formInputCont">
+                            <div>
+                                <p className='inputLabel'>BETTER BUSINESS BUREAU GOALS</p>
+                            </div>
+                            <input
+                                name='bbbGoals'
+                                className="formInput"
+                                type="text"
+                                onChange={this.handleInputTextChange}
+                                placeholder=''
+                                value={this.state.bbbGoals}>
                             </input>
                         </div>
                     </div>
