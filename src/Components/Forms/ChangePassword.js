@@ -59,7 +59,10 @@ class ChangePassword extends Component {
 
     renderButton() {
         if (this.state.loading) {
-            return <p id='loadingText' className="mdl-spinner mdl-js-spinner mdl-spinner--single-color is-active"></p>
+            return (
+            <p id='loadingText' className="mdl-spinner mdl-js-spinner mdl-spinner--single-color is-active"></p>
+
+                )
         }
         return (
             <button

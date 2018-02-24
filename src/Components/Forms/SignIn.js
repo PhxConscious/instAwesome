@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import firebase from 'firebase';
 
 class LoginForm extends Component {
+
     constructor(props) {
         super(props);
         this.state = {
@@ -9,16 +10,44 @@ class LoginForm extends Component {
             password: '',
             error: '',
             loading: false,
-            user_token: ''
+            user_token: '',
+            phone: ''
         };
     }
 
-    onButtonPress() {
+    signInWithEmail() {
         const {email, password} = this.state;
         this.setState({error: '', loading: true});
         firebase.auth().signInWithEmailAndPassword(email, password)
             .then(this.onLoginSuccess.bind(this))
             .catch(this.onLoginFail.bind(this))
+    }
+
+    signInWithPhone() {
+
+    }
+
+    signInWithGoogle() {
+        let provider = new firebase.auth.GoogleAuthProvider();
+        firebase.auth().useDeviceLanguage();
+        firebase.auth().signInWithPopup(provider).then(function (result) {
+            console.log(`${firebase.auth().currentUser.email} has just signed in with Google Auth`)
+        }).catch(function (error) {
+            // Handle Errors here.
+            let errorCode = error.code;
+            let errorMessage = error.message;
+            // The email of the user's account used.
+            let email = error.email;
+            // The firebase.auth.AuthCredential type that was used.
+            let credential = error.credential;
+        });
+    }
+
+    onButtonPress() {
+        if (this.state.phone === '') {
+            return this.signInWithEmail()
+        }
+         this.signInWithPhone()
     }
 
     onLoginFail() {
@@ -61,6 +90,11 @@ class LoginForm extends Component {
         console.log(this.state.password)
     };
 
+    handlePhoneTextChange = (event) => {
+        this.setState({phone: event.target.value})
+        console.log(this.state.phone)
+    };
+
     render() {
         return (
             <div>
@@ -93,10 +127,26 @@ class LoginForm extends Component {
                                 value={this.state.password}>
                             </input>
                         </div>
+                        <p className='or'>OR</p>
+                        <div className="formInputCont">
+                            <div>
+                                <p className='inputLabel'>PHONE NUMBER</p>
+                            </div>
+                            <input
+                                className="formInput"
+                                type="number"
+                                onChange={this.handlePhoneTextChange}
+                                placeholder='Phone Number'
+                                value={this.state.phone}>
+                            </input>
+                        </div>
                         <br/>
                     </div>
                     <div>
                         {this.renderButton()}
+                    </div>
+                    <div>
+                        <button className='mdl-button mdl-js-button googleButton' onClick={this.signInWithGoogle}>SIGN IN WITH GOOGLE</button>
                     </div>
                     <div className='forgotLinksCont'>
                         <a className='forgotLinks' href='#'>FORGOT USERNAME? </a>

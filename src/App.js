@@ -2,11 +2,11 @@ import React, {Component} from 'react';
 import './App.css';
 import ReactGA from 'react-ga';
 
-import SignInForm from './Components/Forms/SignInForm';
+import SignInForm from './Components/Forms/SignIn';
 import ContactInfo from './Components/Forms/ContactInfo';
 import CompanyInfo from './Components/Forms/CompanyInfo';
 import ChangePassword from './Components/Forms/ChangePassword';
-import SignUpForm from './Components/Forms/SignUpForm';
+import SignUpForm from './Components/Forms/SignUp';
 import RecoverUsername from './Components/Forms/RecoverUsername';
 import RecoverPassword from './Components/Forms/RecoverPassword';
 import AppNavbar from './Components/Reusable/AppNav';
