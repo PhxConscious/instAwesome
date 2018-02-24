@@ -4,17 +4,6 @@
     <list default="true" id="5dcbd94a-9853-46c1-a5fe-46ff5bc17eff" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/src/App.js" afterPath="$PROJECT_DIR$/src/App.js" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Forms/ChangePassword.js" afterPath="$PROJECT_DIR$/src/Components/Forms/ChangePassword.js" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Forms/Company.js" afterPath="$PROJECT_DIR$/src/Components/Forms/Company.js" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Forms/CompanyInfo.js" afterPath="$PROJECT_DIR$/src/Components/Forms/CompanyInfo.js" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Forms/ContactInfo.js" afterPath="$PROJECT_DIR$/src/Components/Forms/ContactInfo.js" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Forms/ContentCreator.js" afterPath="$PROJECT_DIR$/src/Components/Forms/ContentCreator.js" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Forms/OnTheWeb.js" afterPath="$PROJECT_DIR$/src/Components/Forms/OnTheWeb.js" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Forms/PrimaryContact.js" afterPath="$PROJECT_DIR$/src/Components/Forms/PrimaryContact.js" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Forms/RecoverPassword.js" afterPath="$PROJECT_DIR$/src/Components/Forms/RecoverPassword.js" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Forms/RecoverUsername.js" afterPath="$PROJECT_DIR$/src/Components/Forms/RecoverUsername.js" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Forms/SignIn.js" afterPath="$PROJECT_DIR$/src/Components/Forms/SignIn.js" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Forms/SignUp.js" afterPath="$PROJECT_DIR$/src/Components/Forms/SignUp.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -28,11 +17,75 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ChangePassword.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="App.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/App.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="556">
+              <caret line="47" column="31" lean-forward="false" selection-start-line="47" selection-start-column="31" selection-end-line="47" selection-end-column="31" />
+              <folding>
+                <element signature="e#0#39#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AppNav.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Components/Reusable/AppNav.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="986">
+              <caret line="58" column="27" lean-forward="false" selection-start-line="50" selection-start-column="19" selection-end-line="58" selection-end-column="27" />
+              <folding>
+                <element signature="e#0#39#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ChangePassword.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Components/Forms/ChangePassword.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="188">
+            <state relative-caret-position="1122">
               <caret line="68" column="30" lean-forward="false" selection-start-line="68" selection-start-column="20" selection-end-line="68" selection-end-column="30" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="374">
+              <caret line="22" column="90" lean-forward="false" selection-start-line="22" selection-start-column="3" selection-end-line="22" selection-end-column="90" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="firebase.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/firebase.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="stripe.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/constants/stripe.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="4" column="34" lean-forward="false" selection-start-line="4" selection-start-column="34" selection-end-line="4" selection-end-column="34" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Checkout.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Components/Reusable/Checkout.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="85">
+              <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -63,7 +116,6 @@
         <option value="$PROJECT_DIR$/build/index.html" />
         <option value="$PROJECT_DIR$/src/index.js" />
         <option value="$PROJECT_DIR$/src/registerServiceWorker.js" />
-        <option value="$PROJECT_DIR$/public/index.html" />
         <option value="$PROJECT_DIR$/src/Components/Forms/RecoverUserame.js" />
         <option value="$PROJECT_DIR$/src/Components/Forms/SignUpForm.js" />
         <option value="$PROJECT_DIR$/src/Styles/UnderwaterWrapperStyles.css" />
@@ -80,12 +132,10 @@
         <option value="$PROJECT_DIR$/src/Styles/LmsContainerStyles.css" />
         <option value="$PROJECT_DIR$/src/Components/Reusable/GreenFormContainer.js" />
         <option value="$PROJECT_DIR$/src/Styles/GreenFormContainerStyles.css" />
-        <option value="$PROJECT_DIR$/src/Components/Reusable/AppNav.js" />
         <option value="$PROJECT_DIR$/src/Styles/AppNavStyles.css" />
         <option value="$PROJECT_DIR$/src/Components/Reusable/LmsContainer.js" />
         <option value="$PROJECT_DIR$/src/Styles/FormsStyles.css" />
         <option value="$PROJECT_DIR$/src/Components/Forms/SignInForm.js" />
-        <option value="$PROJECT_DIR$/src/App.js" />
         <option value="$PROJECT_DIR$/src/Components/Forms/Company.js" />
         <option value="$PROJECT_DIR$/src/Components/Forms/CompanyInfo.js" />
         <option value="$PROJECT_DIR$/src/Components/Forms/ContactInfo.js" />
@@ -97,6 +147,9 @@
         <option value="$PROJECT_DIR$/src/Components/Forms/SignIn.js" />
         <option value="$PROJECT_DIR$/src/Components/Forms/SignUp.js" />
         <option value="$PROJECT_DIR$/src/Components/Forms/ChangePassword.js" />
+        <option value="$PROJECT_DIR$/src/Components/Reusable/AppNav.js" />
+        <option value="$PROJECT_DIR$/public/index.html" />
+        <option value="$PROJECT_DIR$/src/App.js" />
       </list>
     </option>
   </component>
@@ -236,12 +289,12 @@
       <workItem from="1518886726447" duration="14729000" />
       <workItem from="1519064072786" duration="4283000" />
       <workItem from="1519085206050" duration="8737000" />
-      <workItem from="1519234907205" duration="41475000" />
+      <workItem from="1519234907205" duration="42561000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="98623000" />
+    <option name="totallyTimeSpent" value="99709000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
@@ -298,7 +351,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/firebase.json" />
     <entry file="file://$PROJECT_DIR$/src/Components/Reusable/Gradient.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -320,36 +372,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/constants/stripe.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="34" lean-forward="false" selection-start-line="4" selection-start-column="34" selection-end-line="4" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="24" column="78" lean-forward="false" selection-start-line="24" selection-start-column="78" selection-end-line="24" selection-end-column="78" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/Reusable/Checkout.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#25#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -492,7 +519,7 @@
         <state relative-caret-position="323">
           <caret line="19" column="93" lean-forward="false" selection-start-line="19" selection-start-column="93" selection-end-line="19" selection-end-column="93" />
           <folding>
-            <element signature="e#0#38#0" expanded="true" />
+            <element signature="e#0#38#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -510,16 +537,6 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/Reusable/AppNav.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="236">
-          <caret line="34" column="69" lean-forward="false" selection-start-line="34" selection-start-column="69" selection-end-line="34" selection-end-column="69" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -544,16 +561,6 @@
         <state relative-caret-position="102">
           <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/App.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="203">
-          <caret line="45" column="31" lean-forward="false" selection-start-line="45" selection-start-column="31" selection-end-line="45" selection-end-column="31" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -653,11 +660,63 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/Reusable/AppNav.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="986">
+          <caret line="58" column="27" lean-forward="false" selection-start-line="50" selection-start-column="19" selection-end-line="58" selection-end-column="27" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Components/Forms/ChangePassword.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="188">
+        <state relative-caret-position="1122">
           <caret line="68" column="30" lean-forward="false" selection-start-line="68" selection-start-column="20" selection-end-line="68" selection-end-column="30" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="22" column="90" lean-forward="false" selection-start-line="22" selection-start-column="3" selection-end-line="22" selection-end-column="90" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/firebase.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/constants/stripe.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="34" lean-forward="false" selection-start-line="4" selection-start-column="34" selection-end-line="4" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/Reusable/Checkout.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/App.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="556">
+          <caret line="47" column="31" lean-forward="false" selection-start-line="47" selection-start-column="31" selection-end-line="47" selection-end-column="31" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

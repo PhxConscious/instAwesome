@@ -16,6 +16,7 @@ import ShadowBox from './Components/Reusable/ShadowBox';
 import ConsciousCenter from './Components/Reusable/ConsciousCenter';
 import GreenFormContainer from './Components/Reusable/GreenFormContainer';
 import OnTheWeb from './Components/Forms/OnTheWeb';
+import Checkout from "./Components/Reusable/Checkout";
 
 export const initGA = () => {
     console.log('GA INIT');
@@ -44,6 +45,7 @@ class App extends Component {
                 <ConsciousCenter/>
                 <ShadowBox>
                     <OnTheWeb/>
+                    <Checkout/>
                 </ShadowBox>
                 <ShadowBox>
                     <CompanyInfo/>
