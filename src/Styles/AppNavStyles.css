@@ -2,9 +2,12 @@
 .navBarOuterContainer{
     height: 10px;
     margin: 0;
-    margin-bottom: 200px;
+    margin-bottom: 400px;
     padding: 0;
-    background-color: whitesmoke;
+}
+
+.mdl-layout__header-row.navContentCont{
+    width: 100%;
 }
 
 .navBar {
