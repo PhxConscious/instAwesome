@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import LandingPage from './Components/Forms/LandingPage';
+import Layout from './Components/Layout';
 import ReactGA from 'react-ga';
 
 export const initGA = () => {
@@ -21,7 +21,7 @@ class App extends Component {
 
     render() {
       return(
-        <LandingPage />
+        <Layout />
       )
     }
 }
