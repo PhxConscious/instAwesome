@@ -9,13 +9,15 @@ class Header extends React.Component {
   }
   render(){
     return(
-      <header id="headerContainer">
-        <h4 id="title">Temp nav header</h4>
-        <div className="navButton" >
-          <Link to="/learn/dashboard" >LMS Dashboard
-          </Link>
-        </div>
-      </header>
+      <div id="headerEmptyBlock">
+        <header id="headerContainer" onClick={this.onClick}>
+          <h4 id="title">Temp nav header</h4>
+          <div className="navButton" >
+            <Link onClick={this.onClick} to="/learn/dashboard" >LMS Dashboard
+            </Link>
+          </div>
+        </header>
+      </div>
     )
   }
 }

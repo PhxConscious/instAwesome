@@ -6,6 +6,10 @@
   z-index: 1;
 }
 
+#headerEmptyBlock{
+  height: 60px;
+}
+
 #title {
   margin: 0 auto;
   width: 400px;
