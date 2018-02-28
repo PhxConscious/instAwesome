@@ -13,8 +13,8 @@ class LmsCard extends Component {
                 <img src={image} className="LmsImage"/>
               </div>
               <div className="rightSide">
-                <p className={!completed ? "lmsTitle" : "lmsTitle greyText"}>{title}</p>
-                <p className={!completed ? "lmsDescription" : "lmsDescription greyText"}>{description}</p>
+                <p className={completed ? "lmsTitle" : "lmsTitle greyText"} id={active ? "currentCard" : ""}>{title}</p>
+                <p className={completed ? "lmsDescription" : "lmsDescription greyText"} id={active ? "currentCard" : ""}>{description}</p>
               </div>
             </div>
         )
