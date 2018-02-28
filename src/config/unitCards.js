@@ -7,8 +7,8 @@ export default [
     lesson: [
       {
         contentType: "video",
-        title: "test video title 1",
-        description: "test video description"
+        title: "Begin your discovery",
+        description: "watch the damn video"
       }
     ]
   },{
@@ -18,9 +18,9 @@ export default [
     id: "bbbbb",
     lesson: [
       {
-        contentType: "video",
-        title: "test video title 2",
-        description: "test video description"
+        contentType: "multipleChoice",
+        title: "Discover some content",
+        description: "answer the multipleChoice question"
       }
     ]
   },{
@@ -30,9 +30,9 @@ export default [
     id: "ccccc",
     lesson: [
       {
-        contentType: "video",
-        title: "test video title 3",
-        description: "test video description"
+        contentType: "trueFalse",
+        title: "Wheaties are ok",
+        description: "answer the question"
       }
     ]
   },{
@@ -43,8 +43,8 @@ export default [
     lesson: [
       {
         contentType: "video",
-        title: "test video title 4",
-        description: "test video description"
+        title: "careful for the swoosh",
+        description: "watch this video"
       }
     ]
   },{
@@ -54,9 +54,9 @@ export default [
     id: "eeeee",
     lesson: [
       {
-        contentType: "video",
-        title: "test video title 5",
-        description: "test video description"
+        contentType: "multipleChoice",
+        title: "drink this",
+        description: "answer this question"
       }
     ]
   },{
@@ -66,9 +66,9 @@ export default [
     id: "fffff",
     lesson: [
       {
-        contentType: "video",
-        title: "test video title 6",
-        description: "test video description"
+        contentType: "trueFalse",
+        title: "drink more of this",
+        description: "answer some true false questions"
       }
     ]
   }
