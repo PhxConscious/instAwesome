@@ -1,0 +1,61 @@
+.LmsCardContainer{
+  height: 100px;
+  width: 40vw;
+  /*background-color: white;*/
+  border-radius: 10px;
+  margin-top: 20px;
+  margin-left: 20px;
+  /*vertical-align: top;*/
+}
+
+.LmsImage{
+  height: 70px;
+  width: 80%;
+  background-color: black;
+  margin: 15px;
+}
+
+.leftSide{
+  height: 100%;
+  width: 35%;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.rightSide{
+  height: 100%;
+  width: 65%;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.lmsTitle{
+  font-weight: 800;
+  font-size: 1.2em;
+  margin-bottom: 5px;
+  color: #005259;
+}
+
+.lmsDescription{
+  font-size: 1em;
+  line-height: 100%;
+  color: #005259;
+}
+
+#currentCard{
+  background-color: #99DE7E !important;
+  color: #005259 !important;
+}
+
+
+.locked{
+  background-color: #417E83 !important;
+}
+
+.unlocked {
+  background-color: white;
+}
+
+.greyText {
+  color: #A7A7A7;
+}
