@@ -1,5 +1,5 @@
 import React from 'react';
-
+import ReactPlayer from 'react-player'
 
 class LessonContent extends React.Component {
   constructor(props){
@@ -64,7 +64,7 @@ class LessonContent extends React.Component {
 
     render() {
       let { selected, correctAttempt, incorrectAttempt } = this.state;
-      const { contentType, title, description,  id, question, a1, a2, a3, a4, correct   } = this.props.lesson[0];
+      const { contentType, title, description,  id, question, a1, a2, a3, a4, correct, video } = this.props.lesson[0];
       console.log("lesson content", this.props)
       switch(contentType){
 
@@ -73,6 +73,7 @@ class LessonContent extends React.Component {
           return (
             <div>
               <h1>title: {title}</h1>
+              <ReactPlayer url={v} playing />
               <p>description: {description}</p>
             </div>
           )
