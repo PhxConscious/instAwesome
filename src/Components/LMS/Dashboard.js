@@ -76,13 +76,14 @@ class Dashboard extends React.Component {
     })
   }
 
+  // updates state.lesson only when necessary
   componentDidUpdate(prevProps, prevState){
     if(this.state.active !== prevState.active){
           this.getActiveLesson();
     }
-
   }
 
+  // puts the active/selected lesson in state
   getActiveLesson(){
     this.state.tasks.forEach(task => {
       if(task.title === this.state.active){
@@ -104,7 +105,7 @@ class Dashboard extends React.Component {
 
   render() {
     console.log("state:", this.state)
-    let { active, tasks, readyForRender } = this.state;
+    let { active, tasks, readyForRender, currentLesson } = this.state;
 
     let lmsCards = null;
 
@@ -122,14 +123,18 @@ class Dashboard extends React.Component {
       })
     }
 
-
-
+    if (currentLesson) {
+      console.log('lesson', currentLesson, currentLesson[0].title)
+}
     return(
       <div className="background">
         <div id="spacer"></div>
-        {lmsCards}
+        <div className="unitCardsContainer">
+                {lmsCards}
+        </div>
+
         <div className="lessonContentContainer">
-          {}
+          {currentLesson ? currentLesson[0].title : 'nope'}
         </div>
       </div>
     )
