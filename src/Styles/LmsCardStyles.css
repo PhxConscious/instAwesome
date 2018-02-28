@@ -1,11 +1,9 @@
 .LmsCardContainer{
   height: 100px;
-  width: 40vw;
-  /*background-color: white;*/
+  width: 45vw;
   border-radius: 10px;
   margin-top: 20px;
   margin-left: 20px;
-  /*vertical-align: top;*/
 }
 
 .LmsImage{
@@ -29,19 +27,6 @@
   vertical-align: middle;
 }
 
-.lmsTitle{
-  font-weight: 800;
-  font-size: 1.2em;
-  margin-bottom: 5px;
-  color: #005259;
-}
-
-.lmsDescription{
-  font-size: 1em;
-  line-height: 100%;
-  color: #005259;
-}
-
 #currentCard{
   background-color: #99DE7E !important;
   color: #005259 !important;
@@ -58,4 +43,33 @@
 
 .greyText {
   color: #A7A7A7;
+}
+
+.titleCheckboxRow {
+  margin-top: 5px;
+  height: 30px;
+  display: flex;
+  flex-direction: row;
+}
+
+.lmsTitleSpan {
+  width: 88%;
+}
+
+.lmsTitle{
+  font-weight: 800;
+  font-size: 1em;
+  color: #005259;
+}
+
+.lmsCheckboxSpan {
+  width: 12%;
+  display: inline;
+}
+
+.lmsDescription{
+  font-size: 1em;
+  line-height: 100%;
+  color: #005259;
+  margin-right: 5px;
 }

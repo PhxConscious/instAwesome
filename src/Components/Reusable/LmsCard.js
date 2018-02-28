@@ -13,7 +13,10 @@ class LmsCard extends Component {
                 <img src={image} className="LmsImage"/>
               </div>
               <div className="rightSide">
-                <p className={completed ? "lmsTitle" : "lmsTitle greyText"} id={active ? "currentCard" : ""}>{title}</p>
+                <div className="titleCheckboxRow">
+                  <div className="lmsTitleSpan"><p className={completed ? "lmsTitle" : "lmsTitle greyText"} id={active ? "currentCard" : ""}>{title}</p></div>
+                  <div className="lmsCheckboxSpan"><i className="material-icons checkBox">{completed ? "check_box" : "visibility"}</i></div>
+                </div>
                 <p className={completed ? "lmsDescription" : "lmsDescription greyText"} id={active ? "currentCard" : ""}>{description}</p>
               </div>
             </div>
