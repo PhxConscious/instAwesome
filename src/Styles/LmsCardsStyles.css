@@ -1,0 +1,11 @@
+.background {
+  height: 100vh;
+  width: 100vw;
+  background-color: #005259;
+  /*z-index: -1;*/
+}
+
+#spacer {
+  height: 20px;
+  width: 100vw;
+}
