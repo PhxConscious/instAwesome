@@ -43,7 +43,8 @@
 }
 
 #currentCard{
-  background-color: #99DE7E;
+  background-color: #99DE7E !important;
+  color: #005259 !important;
 }
 
 
