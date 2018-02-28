@@ -17,18 +17,32 @@ class Dashboard extends React.Component {
 
   }
 
+  // this must update when a unit is finished (not just
+  // initial rendering) - see if this works
   componentDidMount(){
     this.combineUserDataAndTaskData()
   }
 
   combineUserDataAndTaskData(){
+    // temp data to simulate server
     let tasks = Object.keys(configUserProgess.progress);
-    // let taskObj = {};
+    // taskArr combines server data with local data
     let taskArr = [];
+
+    // find units on react but not in DB. add to tasks arr.
+    // now we can update react and it renders automatically
+    // we must post this to server later
+    configUnitCards.forEach(card => {
+      if(tasks.indexOf(card.id) == -1){
+        tasks.push(card.id)
+      }
+    })
+
+    // match up server data and local data to make one array
+    // of task objecs which include a "completed" value (boolean)
     tasks.forEach(task => {
       configUnitCards.forEach(card => {
         if(card.id === task) {
-          // taskObj[task] = configUserProgess.progress[task]
           let key = card.id;
           taskArr.push({
             task: {
@@ -38,14 +52,16 @@ class Dashboard extends React.Component {
             title: card.title,
             description: card.description,
             image: card.image,
-            active: false
+            active: false,
+            lesson: card.lesson
           })
         }
       })
     })
+
     let activeTask = null;
+    // sets the initial active unit
     for(let i = 0; i < taskArr.length; i++){
-      // console.log(taskArr[i].task.isCompleted)
       if(taskArr[i].task.isCompleted === false && taskArr[i-1].task.isCompleted === true){
         activeTask = taskArr[i].title;
         i = tasks.length;
@@ -60,12 +76,25 @@ class Dashboard extends React.Component {
     })
   }
 
+  componentDidUpdate(prevProps, prevState){
+    if(this.state.active !== prevState.active){
+          this.getActiveLesson();
+    }
+
+  }
+
+  getActiveLesson(){
+    this.state.tasks.forEach(task => {
+      if(task.title === this.state.active){
+        this.setState({
+          ...this.state,
+          currentLesson: task.lesson
+        })
+      }
+    })
+  }
+
   selectCardOnClick(value){
-    // this.state.tasks.forEach(task=>{
-    //   if(task.task.name === value && task.task.isCompleted === true){
-    //     console.log("task", task.task.name, task.task.isCompleted)
-    //   }
-    // })
     this.setState({
       ...this.state,
       active: value
@@ -74,12 +103,11 @@ class Dashboard extends React.Component {
 
 
   render() {
-
+    console.log("state:", this.state)
     let { active, tasks, readyForRender } = this.state;
 
     let lmsCards = null;
 
-    //
     if(readyForRender){
       lmsCards = tasks.map((card, i) => {
         return <LmsCard
@@ -100,6 +128,9 @@ class Dashboard extends React.Component {
       <div className="background">
         <div id="spacer"></div>
         {lmsCards}
+        <div className="lessonContentContainer">
+          {}
+        </div>
       </div>
     )
   }
