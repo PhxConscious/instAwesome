@@ -3,6 +3,8 @@ import configUnitCards from '../../config/unitCards';
 import configUserProgess from '../../config/userProgress';
 import LmsCard from '../Reusable/LmsCard';
 import '../../Styles/LmsCardsStyles.css';
+import LessonContent from './LessonContent';
+
 
 class Dashboard extends React.Component {
   constructor(props){
@@ -134,7 +136,7 @@ class Dashboard extends React.Component {
         </div>
 
         <div className="lessonContentContainer">
-          {currentLesson ? currentLesson[0].title : 'nope'}
+          {currentLesson ? <LessonContent lesson={currentLesson} /> : 'nope'}
         </div>
       </div>
     )
