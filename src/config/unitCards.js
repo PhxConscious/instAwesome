@@ -8,7 +8,8 @@ export default [
       {
         contentType: "video",
         title: "Begin your discovery",
-        description: "watch the damn video"
+        description: "watch the damn video",
+        video: 'https://www.youtube.com/watch?v=i6G53BMgugo'
       }
     ]
   },{
@@ -20,7 +21,15 @@ export default [
       {
         contentType: "multipleChoice",
         title: "Discover some content",
-        description: "answer the multipleChoice question"
+        description: "answer the multipleChoice question",
+        id: "testId",
+        question: "testQuestion",
+        a1: "answer1",
+        a2: "answer2",
+        a3: "answer3",
+        a4: "answer4",
+        handler: "handler",
+        correct: "answer4"
       }
     ]
   },{
