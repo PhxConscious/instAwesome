@@ -16,6 +16,10 @@ class Header extends React.Component {
             <Link onClick={this.onClick} to="/learn/dashboard" >LMS Dashboard
             </Link>
           </div>
+          <div className="navButton" >
+            <Link onClick={this.onClick} to="/" >Landing Page
+            </Link>
+          </div>
         </header>
       </div>
     )
