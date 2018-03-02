@@ -162,7 +162,14 @@ class Dashboard extends React.Component {
     })
   }
 
+  getLengthOfCurrentLessonArray(){
+    if(this.state.currentUnit){
+      return this.state.tasks[this.state.currentUnit].lessons.length;
+    }
+  }
+
   render() {
+    this.getLengthOfCurrentLessonArray()
     let { active, tasks, readyForRender, currentUnit, currentLesson } = this.state;
     let updatedCurrentUnit;
 
@@ -184,8 +191,6 @@ class Dashboard extends React.Component {
     }
 
 
-    console.log('this.state', this.state)
-
     return(
       <div className="background">
         <div id="spacer"></div>
@@ -201,6 +206,7 @@ class Dashboard extends React.Component {
               prevLesson={this.prevLesson}
               currentUnit={currentUnit}
               currentLesson={currentLesson}
+              noOfLessons={this.getLengthOfCurrentLessonArray()}
             /> : 'nope'}
         </div>
       </div>
