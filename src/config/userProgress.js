@@ -4,6 +4,7 @@ export default {
   lastName: "Seph",
   progress: {
     aaaaa: {
+      unitLocked: false,
       unitCompleted: true,
       lessons: [
         {u01l01: true},
@@ -12,6 +13,7 @@ export default {
       ]
     },
     bbbbb: {
+      unitLocked: false,
       unitCompleted: false,
       lessons: [
         {u02l01: true},
@@ -20,6 +22,7 @@ export default {
       ]
     },
     ccccc: {
+      unitLocked: true,
       unitCompleted: false,
       lessons: [
         {u03l01: false},
