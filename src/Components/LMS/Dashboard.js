@@ -18,7 +18,8 @@ class Dashboard extends React.Component {
     }
     this.selectCardOnClick = this.selectCardOnClick.bind(this)
     this.combineUserDataAndTaskData = this.combineUserDataAndTaskData.bind(this);
-
+    this.nextLesson = this.nextLesson.bind(this);
+    this.prevLesson = this.prevLesson.bind(this);
   }
 
   // this must update when a unit is finished (not just
@@ -121,13 +122,10 @@ class Dashboard extends React.Component {
             })
           }
         })
-
       }
     })
     this.forceUpdate();
   }
-
-
 
   selectCardOnClick(value){
     this.setState({
@@ -136,6 +134,25 @@ class Dashboard extends React.Component {
     })
   }
 
+  nextLesson(){
+    let currentLesson = this.state.currentLesson;
+    console.log('currentLesson', currentLesson)
+    let targetLesson = (parseInt(currentLesson) + 1).toString();
+    console.log('targetLesson', targetLesson)
+    this.setState({
+      ...this.state,
+      currentLesson: targetLesson
+    })
+  }
+
+  prevLesson(){
+    let currentLesson = this.state.currentLesson;
+    let targetLesson = (parseInt(currentLesson) - 1).toString();
+    this.setState({
+      ...this.state,
+      currentLesson: targetLesson
+    })
+  }
 
   render() {
     console.log("state:", this.state)
@@ -174,6 +191,8 @@ class Dashboard extends React.Component {
           {currentLesson ? <LessonContent
               currentLesson={currentLesson}
               lesson={configUnitCards[currentUnit].lessons[currentLesson]}
+              nextLesson={this.nextLesson}
+              prevLesson={this.prevLesson}
             /> : 'nope'}
         </div>
       </div>
