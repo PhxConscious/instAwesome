@@ -1,16 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { Redirect } from 'react-router';
 import '../Styles/HeaderStyles.css'
 
 class Header extends React.Component {
-  onClick(){
-    console.log("clicked")
-  }
+
   render(){
     return(
       <div id="headerEmptyBlock">
-        <header id="headerContainer" onClick={this.onClick}>
+        <header id="headerContainer">
           <h4 id="title">Temp nav header</h4>
           <div className="navButton" >
             <Link onClick={this.onClick} to="/learn/dashboard" >LMS Dashboard

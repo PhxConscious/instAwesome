@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactGA from 'react-ga';
 import '../../App.css';
 
 import SignInForm from './SignIn';
@@ -11,7 +10,6 @@ import RecoverUsername from './RecoverUsername';
 import RecoverPassword from './RecoverPassword';
 import AppNavbar from '../Reusable/AppNav';
 import UnderwaterWrapper from '../Reusable/UnderwaterWrapper';
-import BlueAppBG from '../Reusable/BlueAppBg';
 import ShadowBox from '../Reusable/ShadowBox';
 import ConsciousCenter from '../Reusable/ConsciousCenter';
 import GreenFormContainer from '../Reusable/GreenFormContainer';
