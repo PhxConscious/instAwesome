@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import Layout from './Components/Layout';
 import ReactGA from 'react-ga';
+import { Provider } from 'react-redux';
+import Store from './redux/stores'
 
 export const initGA = () => {
     console.log('GA INIT');
@@ -12,6 +14,7 @@ export const logPageView = () => {
     ReactGA.pageview(window.location.pathname)
 };
 
+let store = new Store();
 
 class App extends Component {
     componentDidMount() {
@@ -21,7 +24,10 @@ class App extends Component {
 
     render() {
       return(
-        <Layout />
+        <Provider store={store}>
+          <Layout />
+        </Provider>
+
       )
     }
 }

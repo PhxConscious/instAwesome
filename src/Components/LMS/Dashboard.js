@@ -38,7 +38,7 @@ class Dashboard extends React.Component {
     // now we can update react and it renders automatically
     // we must post this to server later
     configUnitCards.forEach(card => {
-      if(tasks.indexOf(card.id) == -1){
+      if(tasks.indexOf(card.id) === -1){
         tasks.push(card.id)
       }
     })
@@ -129,7 +129,7 @@ class Dashboard extends React.Component {
 
   // sets current unit
   selectCardOnClick(value){
-    let { tasks, active } = this.state;
+    let { tasks } = this.state;
     let index;
     tasks.forEach((task, i) => {
       if(task.title === value && !task.userProgress.isLocked){
@@ -146,7 +146,7 @@ class Dashboard extends React.Component {
 
   nextLesson(){
     let currentLesson = this.state.currentLesson;
-    let targetLesson = (parseInt(currentLesson) + 1).toString();
+    let targetLesson = (parseInt(currentLesson, 10) + 1).toString();
     this.setState({
       ...this.state,
       currentLesson: targetLesson
@@ -155,7 +155,7 @@ class Dashboard extends React.Component {
 
   prevLesson(){
     let currentLesson = this.state.currentLesson;
-    let targetLesson = (parseInt(currentLesson) - 1).toString();
+    let targetLesson = (parseInt(currentLesson, 10) - 1).toString();
     this.setState({
       ...this.state,
       currentLesson: targetLesson
@@ -171,7 +171,6 @@ class Dashboard extends React.Component {
   render() {
     this.getLengthOfCurrentLessonArray()
     let { active, tasks, readyForRender, currentUnit, currentLesson } = this.state;
-    let updatedCurrentUnit;
 
     let lmsCards = null;
 
@@ -186,6 +185,7 @@ class Dashboard extends React.Component {
           active={active === configUnitCards[i].title ? true : false}
           isCompleted={card.userProgress.isCompleted}
           locked={tasks[i].userProgress.isLocked}
+          key={card.id}
         />
       })
     }

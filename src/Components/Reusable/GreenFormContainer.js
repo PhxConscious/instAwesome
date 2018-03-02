@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import GreenFormContainerStyles from '../../Styles/GreenFormContainerStyles.css';
+// import GreenFormContainerStyles from '../../Styles/GreenFormContainerStyles.css';
 import CompanyInfo from '../Forms/CompanyInfo';
 import ChangePassword from '../Forms/ChangePassword';
 import ContactInfo from '../Forms/ContactInfo';

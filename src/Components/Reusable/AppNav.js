@@ -29,11 +29,11 @@ class AppNavbar extends Component {
                                 <span className='learnText'>LEARN</span>
                             </a>
                             <div className="mdl-layout-spacer centerLogoCont">
-                                <img className='centerLogo' src='https://i.imgur.com/qYqmu8v.png'></img>
+                                <img className='centerLogo' src='https://i.imgur.com/qYqmu8v.png' alt="blah"></img>
                             </div>
                             <nav className="mdl-navigation mdl-layout--large-screen-only content">
                                 <span className='phxConsciousText phxConsciousTextCont'>@phxconscious</span>
-                                <a className="mdl-navigation__link" href="#">
+                                <a className="mdl-navigation__link" href="www.google.com">
                                     <button id="demo-menu-lower-right"
                                             className="mdl-button mdl-js-button mdl-button--icon">
                                         <i className="material-icons accountCircleIcon">account_circle</i>

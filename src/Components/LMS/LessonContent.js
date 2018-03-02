@@ -1,7 +1,7 @@
 import React from 'react';
-import MultipleChoice from './MultipleChoice';
-import { VideoContent } from './VideoContent';
-import TrueFalseContent from './TrueFalseContent';
+// import MultipleChoice from './MultipleChoice';
+// import { VideoContent } from './VideoContent';
+// import TrueFalseContent from './TrueFalseContent';
 import CheckTasks from './CheckTasks';
 import LessonHeader from './LessonHeader';
 
@@ -57,7 +57,7 @@ class LessonContent extends React.Component {
 
           case "checkTasks":
             let { lesson, nextLesson, prevLesson, unit, currentUnit, currentLesson, noOfLessons } = this.props;
-            console.log("the noOfLessons", noOfLessons)
+
             return(
               <div>
                 <LessonHeader
@@ -74,7 +74,7 @@ class LessonContent extends React.Component {
               </div>
 
             )
-            break;
+            
 
 
 

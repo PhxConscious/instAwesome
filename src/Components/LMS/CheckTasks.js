@@ -18,7 +18,7 @@ class CheckTasks extends React.Component {
             >prev</button>
           </span>
 
-          <span className={currentLesson == noOfLessons - 1 ? "hidden" : ""}>
+          <span className={parseInt(currentLesson, 10)+1 === parseInt(noOfLessons, 10) ? "hidden" : ""}>
             <button
               onClick={nextLesson}
               value="next"
@@ -27,11 +27,11 @@ class CheckTasks extends React.Component {
 
         </div>
 
-        <div>unit: {parseInt(currentUnit)+1}  current lesson: {parseInt(currentLesson)+1} of {noOfLessons}</div>
+        <div>unit: {parseInt(currentUnit, 10)+1}  current lesson: {parseInt(currentLesson, 10)+1} of {noOfLessons}</div>
 
         {currentLesson === "0" ? "please begin the lesson" : ''}
 
-        {parseInt(currentLesson)+1 === noOfLessons? "You finished the unit" : ''}
+        {parseInt(currentLesson, 10)+1 === noOfLessons? "You finished the unit" : ''}
 
       </div>
     )

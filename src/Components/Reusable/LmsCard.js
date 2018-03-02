@@ -12,7 +12,7 @@ class LmsCard extends Component {
             >
               <div className="lockIcon"><i className="material-icons">{locked ? "lock" : ""}</i></div>
               <div className="leftSide">
-                <img src={image} className="LmsImage"/>
+                <img src={image} className="LmsImage" alt="blah"/>
               </div>
               <div className="rightSide">
                 <div className="titleCheckboxRow">
