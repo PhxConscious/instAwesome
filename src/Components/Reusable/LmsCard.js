@@ -3,9 +3,6 @@ import '../../Styles/LmsCardStyles.css'
 class LmsCard extends Component {
     render() {
       const { image, title, description, active, isCompleted, onClick, value, locked } = this.props;
-      // if(active){
-        console.log(title, 'locked"', locked, "isCompleted", isCompleted)
-      // }
 
         return(
             <div
