@@ -24,7 +24,25 @@ export default [
         title: "testTitle 1-3",
         description: "watch the damn video",
         video: 'https://www.youtube.com/watch?v=i6G53BMgugo'
-      }
+      },{
+        id: "u01l04",
+        contentType: "checkTasks",
+        title: "testTitle1-1",
+        description: "watch the damn video",
+        video: 'https://www.youtube.com/watch?v=i6G53BMgugo'
+      },{
+        id: "u01l05",
+        contentType: "checkTasks",
+        title: "testTitle 1-2",
+        description: "watch the damn video",
+        video: 'https://www.youtube.com/watch?v=i6G53BMgugo'
+      },{
+        id: "u01l06",
+        contentType: "checkTasks",
+        title: "testTitle 1-3",
+        description: "watch the damn video",
+        video: 'https://www.youtube.com/watch?v=i6G53BMgugo'
+      },
       // ,{
       //   contentType: "multipleChoice",
       //   title: "Discover some content",
@@ -81,16 +99,61 @@ export default [
         id: "u03l01",
         contentType: "checkTasks",
         title: "testTitle 3-1",
-        description: "watch the damn video",
+        description: "toggle a switch",
         video: 'https://www.youtube.com/watch?v=i6G53BMgugo'
       },{
         id: "u03l02",
         contentType: "checkTasks",
         title: "testTitle 3-2",
-        description: "watch the damn video",
+        description: "check a box",
         video: 'https://www.youtube.com/watch?v=i6G53BMgugo'
       },{
         id: "u03l03",
+        contentType: "checkTasks",
+        title: "testTitle 3-3",
+        description: "fill in a blank",
+        video: 'https://www.youtube.com/watch?v=i6G53BMgugo'
+      },{
+        id: "u03l04",
+        contentType: "checkTasks",
+        title: "testTitle 3-4",
+        description: "enter a link",
+        video: 'https://www.youtube.com/watch?v=i6G53BMgugo'
+      },{
+        id: "u03l05",
+        contentType: "checkTasks",
+        title: "testTitle 3-5",
+        description: "do this",
+        video: 'https://www.youtube.com/watch?v=i6G53BMgugo'
+      },{
+        id: "u03l06",
+        contentType: "checkTasks",
+        title: "testTitle 3-6",
+        description: "do that",
+        video: 'https://www.youtube.com/watch?v=i6G53BMgugo'
+      },
+    ]
+  },{
+    title: "Protip 4: Discovery",
+    description: "Find your customers on Instagram, see what they're looking at explore how you can start to show up when they want to see you",
+    image: "https://i.imgur.com/EHYS6cp.png",
+    video: 'https://www.youtube.com/watch?v=i6G53BMgugo',
+    id: "ddddd",
+    lessons: [
+      {
+        id: "u04l01",
+        contentType: "checkTasks",
+        title: "testTitle 3-1",
+        description: "watch the damn video",
+        video: 'https://www.youtube.com/watch?v=i6G53BMgugo'
+      },{
+        id: "u04l02",
+        contentType: "checkTasks",
+        title: "testTitle 3-2",
+        description: "watch the damn video",
+        video: 'https://www.youtube.com/watch?v=i6G53BMgugo'
+      },{
+        id: "u04l03",
         contentType: "checkTasks",
         title: "testTitle 3-3",
         description: "watch the damn video",

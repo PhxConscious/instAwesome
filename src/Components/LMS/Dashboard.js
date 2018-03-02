@@ -48,12 +48,12 @@ class Dashboard extends React.Component {
     tasks.forEach(task => {
       configUnitCards.forEach(card => {
         if(card.id === task) {
-          console.log("task", configUserProgess.progress[task].lessons)
           let key = card.id;
           taskArr.push({
             userProgress: {
               name: key,
               isCompleted: configUserProgess.progress[task].unitCompleted,
+              isLocked: configUserProgess.progress[task].unitLocked,
               lessons: configUserProgess.progress[task].lessons
             },
             title: card.title,
@@ -132,15 +132,16 @@ class Dashboard extends React.Component {
     let { tasks, active } = this.state;
     let index;
     tasks.forEach((task, i) => {
-      if(task.title === value){
+      if(task.title === value && !task.userProgress.isLocked){
         index = i.toString();
+        this.setState({
+          ...this.state,
+          active: value,
+          currentUnit: index
+        })
       }
     })
-    this.setState({
-      ...this.state,
-      active: value,
-      currentUnit: index
-    })
+
   }
 
   nextLesson(){
@@ -161,8 +162,16 @@ class Dashboard extends React.Component {
     })
   }
 
+  getLengthOfCurrentLessonArray(){
+    if(this.state.currentUnit){
+      return this.state.tasks[this.state.currentUnit].lessons.length;
+    }
+  }
+
   render() {
+    this.getLengthOfCurrentLessonArray()
     let { active, tasks, readyForRender, currentUnit, currentLesson } = this.state;
+    let updatedCurrentUnit;
 
     let lmsCards = null;
 
@@ -175,16 +184,12 @@ class Dashboard extends React.Component {
           onClick={this.selectCardOnClick}
           value={configUnitCards[i].title}
           active={active === configUnitCards[i].title ? true : false}
-          completed={card.userProgress.isCompleted}
+          isCompleted={card.userProgress.isCompleted}
+          locked={tasks[i].userProgress.isLocked}
         />
       })
     }
 
-
-
-    // if (currentLesson) {
-    //   console.log('lesson', currentLesson, currentLesson[0].title)
-    // }
 
     return(
       <div className="background">
@@ -201,6 +206,7 @@ class Dashboard extends React.Component {
               prevLesson={this.prevLesson}
               currentUnit={currentUnit}
               currentLesson={currentLesson}
+              noOfLessons={this.getLengthOfCurrentLessonArray()}
             /> : 'nope'}
         </div>
       </div>

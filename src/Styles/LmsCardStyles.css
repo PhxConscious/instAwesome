@@ -73,3 +73,10 @@
   color: #005259;
   margin-right: 5px;
 }
+
+.lockIcon{
+  font-size: 15px;
+  position: fixed;
+  margin-left: 22.5vw;
+  margin-top: 38px;
+}
