@@ -54,8 +54,10 @@ class LessonContent extends React.Component {
 
 
           case "checkTasks":
+            let { lesson } = this.props;
+            console.log("the lesson", lesson)
             return(
-              <div>checktasks</div>
+              <div>{lesson.title}</div>
             )
             break;
 

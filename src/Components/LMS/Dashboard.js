@@ -68,11 +68,13 @@ class Dashboard extends React.Component {
 
     // console.log("taskArr", taskArr)
 
-    let activeTask = null;
+    let activeUnitName = null;
     // sets the initial active unit
+    let currentUnit;
     for(let i = 0; i < taskArr.length; i++){
       if(taskArr[i].userProgress.isCompleted === false && taskArr[i-1].userProgress.isCompleted === true){
-        activeTask = taskArr[i].title;
+        activeUnitName = taskArr[i].title;
+        currentUnit = i.toString();
         i = tasks.length;
       }
     }
@@ -81,7 +83,8 @@ class Dashboard extends React.Component {
       ...this.state,
       tasks: taskArr,
       readyForRender: true,
-      active: activeTask
+      active: activeUnitName,
+      currentUnit: currentUnit
     })
   }
 
@@ -136,7 +139,7 @@ class Dashboard extends React.Component {
 
   render() {
     console.log("state:", this.state)
-    let { active, tasks, readyForRender, currentLesson } = this.state;
+    let { active, tasks, readyForRender, currentUnit, currentLesson } = this.state;
 
     let lmsCards = null;
 
@@ -170,7 +173,7 @@ class Dashboard extends React.Component {
         <div className="lessonContentContainer">
           {currentLesson ? <LessonContent
               currentLesson={currentLesson}
-              lesson={configUnitCards}
+              lesson={configUnitCards[currentUnit].lessons[currentLesson]}
             /> : 'nope'}
         </div>
       </div>
