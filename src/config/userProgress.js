@@ -8,7 +8,7 @@ export default {
       lessons: [
         {u01l01: true},
         {u01l02: true},
-        {u01l03: false}
+        {u01l03: true}
       ]
     },
     bbbbb: {
@@ -22,9 +22,9 @@ export default {
     ccccc: {
       unitCompleted: false,
       lessons: [
-        {u03l01: true},
-        {u03l02: true},
-        {u03l03: true}
+        {u03l01: false},
+        {u03l02: false},
+        {u03l03: false}
       ]
     },
     ddddd: {

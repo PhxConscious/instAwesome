@@ -1,5 +1,3 @@
-import config from './index.js'
-
 export default [
   {
     title: "Protip 1: Discovery",
@@ -11,19 +9,19 @@ export default [
       {
         id: "u01l01",
         contentType: "checkTasks",
-        title: "testTitle11",
+        title: "testTitle1-1",
         description: "watch the damn video",
         video: 'https://www.youtube.com/watch?v=i6G53BMgugo'
       },{
         id: "u01l02",
         contentType: "checkTasks",
-        title: "testTitle21",
+        title: "testTitle 1-2",
         description: "watch the damn video",
         video: 'https://www.youtube.com/watch?v=i6G53BMgugo'
       },{
         id: "u01l03",
         contentType: "checkTasks",
-        title: "testTitle31",
+        title: "testTitle 1-3",
         description: "watch the damn video",
         video: 'https://www.youtube.com/watch?v=i6G53BMgugo'
       }
@@ -55,41 +53,51 @@ export default [
       {
         id: "u02l01",
         contentType: "checkTasks",
-        title: "testTitle1",
+        title: "testTitle 2-1",
         description: "watch the damn video",
         video: 'https://www.youtube.com/watch?v=i6G53BMgugo'
       },{
         id: "u02l02",
         contentType: "checkTasks",
-        title: "testTitle2",
+        title: "testTitle 2-2",
         description: "watch the damn video",
         video: 'https://www.youtube.com/watch?v=i6G53BMgugo'
       },{
         id: "u02l03",
         contentType: "checkTasks",
-        title: "testTitle3",
+        title: "testTitle 2-3",
         description: "watch the damn video",
         video: 'https://www.youtube.com/watch?v=i6G53BMgugo'
       },
-      // ,{
-      //   contentType: "multipleChoice",
-      //   title: "Discover some content",
-      //   description: "answer the multipleChoice question",
-      //   id: "testId",
-      //   question: "testQuestion",
-      //   a1: "answer1",
-      //   a2: "answer2",
-      //   a3: "answer3",
-      //   a4: "answer4",
-      //   handler: "handler",
-      //   correct: "answer4"
-      // },{
-      //   contentType: "trueFalse",
-      //   title: "Wheaties are ok",
-      //   description: "answer the question"
-      // }
     ]
-  }
+  },{
+    title: "Protip 3: Discovery",
+    description: "Find your customers on Instagram, see what they're looking at explore how you can start to show up when they want to see you",
+    image: "https://i.imgur.com/EHYS6cp.png",
+    video: 'https://www.youtube.com/watch?v=i6G53BMgugo',
+    id: "ccccc",
+    lessons: [
+      {
+        id: "u03l01",
+        contentType: "checkTasks",
+        title: "testTitle 3-1",
+        description: "watch the damn video",
+        video: 'https://www.youtube.com/watch?v=i6G53BMgugo'
+      },{
+        id: "u03l02",
+        contentType: "checkTasks",
+        title: "testTitle 3-2",
+        description: "watch the damn video",
+        video: 'https://www.youtube.com/watch?v=i6G53BMgugo'
+      },{
+        id: "u03l03",
+        contentType: "checkTasks",
+        title: "testTitle 3-3",
+        description: "watch the damn video",
+        video: 'https://www.youtube.com/watch?v=i6G53BMgugo'
+      }
+    ]
+  },
   // ,{
   //   title: "Protip 2: Content",
   //   description: "What makes amazing content? You might be surprised to learn that it's not exactly what you think.",

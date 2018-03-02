@@ -56,8 +56,8 @@ class LessonContent extends React.Component {
 
 
           case "checkTasks":
-            let { lesson, nextLesson, prevLesson, unit } = this.props;
-            console.log("the lesson", lesson)
+            let { lesson, nextLesson, prevLesson, unit, currentUnit, currentLesson } = this.props;
+            // console.log("the lesson", lesson)
             return(
               <div>
                 <LessonHeader
@@ -67,6 +67,8 @@ class LessonContent extends React.Component {
                   lesson={lesson}
                   nextLesson={nextLesson}
                   prevLesson={prevLesson}
+                  currentUnit={currentUnit}
+                  currentLesson={currentLesson}
                 />
               </div>
 

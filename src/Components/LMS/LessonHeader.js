@@ -19,7 +19,7 @@ class LessonHeader extends React.Component {
           controls={true}
           width="500px"
           height="280px"
-          playing={true}
+          playing={false}
         />
         </div>
         lesson header
