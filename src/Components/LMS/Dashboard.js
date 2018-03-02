@@ -67,7 +67,6 @@ class Dashboard extends React.Component {
       })
     })
 
-    // console.log("taskArr", taskArr)
 
     let activeUnitName = null;
     // sets the initial active unit
@@ -111,10 +110,8 @@ class Dashboard extends React.Component {
             firstIncompleteLesson=lessonKey[0];
           }
         }
-
         // determines what the inital currentLesson will be
         task.lessons.forEach((lesson, index) => {
-
           if (lesson.id === firstIncompleteLesson){
             this.setState({
               ...this.state,
@@ -127,18 +124,28 @@ class Dashboard extends React.Component {
     this.forceUpdate();
   }
 
+
+
+
+  // sets current unit
   selectCardOnClick(value){
+    let { tasks, active } = this.state;
+    let index;
+    tasks.forEach((task, i) => {
+      if(task.title === value){
+        index = i.toString();
+      }
+    })
     this.setState({
       ...this.state,
-      active: value
+      active: value,
+      currentUnit: index
     })
   }
 
   nextLesson(){
     let currentLesson = this.state.currentLesson;
-    console.log('currentLesson', currentLesson)
     let targetLesson = (parseInt(currentLesson) + 1).toString();
-    console.log('targetLesson', targetLesson)
     this.setState({
       ...this.state,
       currentLesson: targetLesson
@@ -192,6 +199,8 @@ class Dashboard extends React.Component {
               lesson={configUnitCards[currentUnit].lessons[currentLesson]}
               nextLesson={this.nextLesson}
               prevLesson={this.prevLesson}
+              currentUnit={currentUnit}
+              currentLesson={currentLesson}
             /> : 'nope'}
         </div>
       </div>
