@@ -54,6 +54,7 @@ class Dashboard extends React.Component {
             userProgress: {
               name: key,
               isCompleted: configUserProgess.progress[task].unitCompleted,
+              isLocked: configUserProgess.progress[task].unitLocked,
               lessons: configUserProgess.progress[task].lessons
             },
             title: card.title,
@@ -132,15 +133,16 @@ class Dashboard extends React.Component {
     let { tasks, active } = this.state;
     let index;
     tasks.forEach((task, i) => {
-      if(task.title === value){
+      if(task.title === value && !task.userProgress.isLocked){
         index = i.toString();
+        this.setState({
+          ...this.state,
+          active: value,
+          currentUnit: index
+        })
       }
     })
-    this.setState({
-      ...this.state,
-      active: value,
-      currentUnit: index
-    })
+
   }
 
   nextLesson(){
@@ -175,16 +177,14 @@ class Dashboard extends React.Component {
           onClick={this.selectCardOnClick}
           value={configUnitCards[i].title}
           active={active === configUnitCards[i].title ? true : false}
-          completed={card.userProgress.isCompleted}
+          completed={!card.userProgress.isCompleted}
+          locked={tasks[currentUnit].userProgress.isLocked}
         />
       })
     }
 
 
-
-    // if (currentLesson) {
-    //   console.log('lesson', currentLesson, currentLesson[0].title)
-    // }
+    console.log('this.state', this.state)
 
     return(
       <div className="background">
