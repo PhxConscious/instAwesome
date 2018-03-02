@@ -73,3 +73,11 @@
   color: #005259;
   margin-right: 5px;
 }
+
+.lockIcon{
+  font-size: 2em;
+  position: fixed;
+  background-color: red;
+  height: 20px;
+  width: 20px;
+}

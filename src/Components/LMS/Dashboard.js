@@ -48,7 +48,6 @@ class Dashboard extends React.Component {
     tasks.forEach(task => {
       configUnitCards.forEach(card => {
         if(card.id === task) {
-          console.log("task", configUserProgess.progress[task].lessons)
           let key = card.id;
           taskArr.push({
             userProgress: {
@@ -165,6 +164,7 @@ class Dashboard extends React.Component {
 
   render() {
     let { active, tasks, readyForRender, currentUnit, currentLesson } = this.state;
+    let updatedCurrentUnit;
 
     let lmsCards = null;
 
@@ -177,8 +177,8 @@ class Dashboard extends React.Component {
           onClick={this.selectCardOnClick}
           value={configUnitCards[i].title}
           active={active === configUnitCards[i].title ? true : false}
-          completed={!card.userProgress.isCompleted}
-          locked={tasks[currentUnit].userProgress.isLocked}
+          isCompleted={card.userProgress.isCompleted}
+          locked={tasks[i].userProgress.isLocked}
         />
       })
     }
