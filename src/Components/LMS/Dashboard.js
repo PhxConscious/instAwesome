@@ -155,7 +155,6 @@ class Dashboard extends React.Component {
   }
 
   render() {
-    console.log("state:", this.state)
     let { active, tasks, readyForRender, currentUnit, currentLesson } = this.state;
 
     let lmsCards = null;
@@ -189,7 +188,7 @@ class Dashboard extends React.Component {
 
         <div className="lessonContentContainer">
           {currentLesson ? <LessonContent
-              currentLesson={currentLesson}
+              unit={configUnitCards[currentUnit]}
               lesson={configUnitCards[currentUnit].lessons[currentLesson]}
               nextLesson={this.nextLesson}
               prevLesson={this.prevLesson}
