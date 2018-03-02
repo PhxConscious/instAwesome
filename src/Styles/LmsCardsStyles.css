@@ -3,9 +3,30 @@
   width: 100vw;
   background-color: #005259;
   /*z-index: -1;*/
+  display: flex;
+  flex-direction: row;
 }
 
 #spacer {
   height: 20px;
-  width: 100vw;
+  width: 0vw;
+}
+
+.unitCardsContainer{
+  display: inline-block;
+  /*width: 500px;*/
+  /*flex-basis: 50%;*/
+  flex: 1;
+  /*flex-grow: 0;
+  flex-shrink: 0;**/
+}
+
+.lessonContentContainer{
+  display: inline-block;
+  /*width: 500px;*/
+  /*flex-basis: 50%;*/
+  background-color: pink;
+  flex: 1;
+  /*flex-grow: 0;
+  flex-shrink: 0;*/
 }
