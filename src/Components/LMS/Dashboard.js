@@ -49,6 +49,19 @@ class Dashboard extends React.Component {
       configUnitCards.forEach(card => {
         if(card.id === task) {
           let key = card.id;
+
+          // this block adds 'lessonIsCompleted' value to each lesson
+          card.lessons.forEach(lesson => {
+            if(configUserProgess.progress[task].lessonz[lesson.id] === undefined){
+              lesson["lessonIsCompleted"] = false;
+            } else {
+              lesson["lessonIsCompleted"] = configUserProgess.progress[task].lessonz[lesson.id]
+            }
+
+          })
+
+
+
           taskArr.push({
             userProgress: {
               name: key,
