@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import firebase from 'firebase';
-
+import {Redirect, Link} from 'react-router-dom';
 import Styles from '../../Styles/FormsStyles.css';
 
 class LoginForm extends Component {
@@ -12,8 +12,8 @@ class LoginForm extends Component {
             password: '',
             phone: '',
             error: '',
-            loading: false,
-            user_token: ''
+            user_token: '',
+            redirect: false
         };
     }
 
@@ -22,16 +22,18 @@ class LoginForm extends Component {
         this.setState({error: '', loading: true});
         firebase.auth().signInWithEmailAndPassword(email, password)
             .then(this.onLoginSuccess.bind(this))
+            .then(() => this.setState({redirect: true}))
             .catch(this.onLoginFail.bind(this))
     }
 
-    signInWithGoogle() {
+    signInWithGoogle(e) {
+        e.preventDefault();
         let provider = new firebase.auth.GoogleAuthProvider();
         firebase.auth().useDeviceLanguage();
         firebase.auth().signInWithPopup(provider).then(function (result) {
             console.log(`${firebase.auth().currentUser.email} has just signed in with Google Auth`)
         }).catch(function (error) {
-            // Handle Errors here.
+            // Handle Errors
             let errorCode = error.code;
             let errorMessage = error.message;
             // The email of the user's account used.
@@ -58,14 +60,14 @@ class LoginForm extends Component {
     }
 
     renderButton() {
-        if (this.state.loading) {
-            return <h4>Loading...</h4>
-        }
         return (
             <button
                 id='signInFormButton'
                 className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
-                onClick={() => this.signInWithEmail()}>
+                onClick={(e) => {
+                    e.preventDefault()
+                    this.signInWithEmail();
+                }}>
                 LOG IN
             </button>
         );
@@ -76,6 +78,13 @@ class LoginForm extends Component {
     };
 
     render() {
+
+        const {redirect} = this.state;
+
+        if (redirect) {
+            return <Redirect to='/learn/dashboard'/>;
+        }
+
         return (
             <div>
                 <form className='formCont' action="#">

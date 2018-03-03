@@ -1,22 +1,24 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import {Switch, Route} from 'react-router-dom';
 import LandingPage from './Forms/LandingPage';
 import Dashboard from './LMS/Dashboard';
 
 
-class Main extends React.Component{
+class Main extends React.Component {
 
-  render(){
-    return(
-      <main>
-        <Switch>
-          <Route exact path="/" render={props => <LandingPage {...props} /> } />
-          <Route exact path="/learn/dashboard" render={props => <Dashboard {...props}/> } />
-        </Switch>
+    render() {
+        return (
+            <main>
+                <Switch>
+                    <Route exact path="/" render={props => <LandingPage {...props} />}/>
+                    <Route exact path="/learn/dashboard" render={props => <Dashboard {...props}/>}/>
+                    <Route exact path="/forgotpassword" render={props => <Dashboard {...props}/>}/>
+                    <Route exact path="/forgotusername" render={props => <Dashboard {...props}/>}/>
+                </Switch>
 
-      </main>
-    )
-  }
+            </main>
+        )
+    }
 }
 
 export default Main;
