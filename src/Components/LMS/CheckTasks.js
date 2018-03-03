@@ -1,14 +1,30 @@
 import React from "react";
 
 class CheckTasks extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      checked: false,
+    }
+  }
 
   render(){
+    let { checked } = this.state;
     let { lesson, nextLesson, prevLesson, currentUnit, currentLesson, noOfLessons } = this.props;
+    console.log("lesson", lesson)
     return(
       <div>
         <div>{lesson.title}</div>
 
         <div>{lesson.description}</div>
+
+        <div>
+          <input
+            type="checkbox"
+            checked={checked}
+            onChange={e => this.setState({checked: !checked})}
+          />
+        </div>
 
         <div>
           <span className={currentLesson === "0" ? "hidden" : ""}>
@@ -22,6 +38,7 @@ class CheckTasks extends React.Component {
             <button
               onClick={nextLesson}
               value="next"
+              disabled={!checked}
             >next</button>
           </span>
 
