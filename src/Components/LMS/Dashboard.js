@@ -71,7 +71,7 @@ class Dashboard extends React.Component {
     let activeUnitName = null;
     // sets the initial active unit
     let currentUnit;
-    for(let i = 0; i < taskArr.length; i++){
+    for(let i = 1; i < taskArr.length; i++){
       if(taskArr[i].userProgress.isCompleted === false && taskArr[i-1].userProgress.isCompleted === true){
         activeUnitName = taskArr[i].title;
         currentUnit = i.toString();
@@ -192,7 +192,7 @@ class Dashboard extends React.Component {
     }
 
     if(readyForRender){
-      console.log("userProgress", tasks[currentUnit].userProgress.lessons[currentLesson])
+      // console.log("userProgress", tasks[currentUnit].userProgress.lessons[currentLesson])
       // TO DO - MAKE THIS CONSOLE GO TO THE CheckTasks COMPONENT AND AFFECT WHETHER THE BUTTON IS DISABLED OR NOT
 
 
@@ -214,7 +214,7 @@ class Dashboard extends React.Component {
                 currentUnit={currentUnit}
                 currentLesson={currentLesson}
                 noOfLessons={this.getLengthOfCurrentLessonArray()}
-              /> : 'nope'}
+              /> : 'Select a unit to begin'}
           </div>
         </div>
       )
