@@ -175,6 +175,7 @@ class Dashboard extends React.Component {
     let lmsCards = null;
 
     if(readyForRender){
+
       lmsCards = tasks.map((card, i) => {
         return <LmsCard
           title={configUnitCards[i].title}
@@ -190,27 +191,35 @@ class Dashboard extends React.Component {
       })
     }
 
+    if(readyForRender){
+      console.log("userProgress", tasks[currentUnit].userProgress.lessons[currentLesson])
+      // TO DO - MAKE THIS CONSOLE GO TO THE CheckTasks COMPONENT AND AFFECT WHETHER THE BUTTON IS DISABLED OR NOT
 
-    return(
-      <div className="background">
-        <div id="spacer"></div>
-        <div className="unitCardsContainer">
-                {lmsCards}
-        </div>
 
-        <div className="lessonContentContainer">
-          {currentLesson ? <LessonContent
-              unit={configUnitCards[currentUnit]}
-              lesson={configUnitCards[currentUnit].lessons[currentLesson]}
-              nextLesson={this.nextLesson}
-              prevLesson={this.prevLesson}
-              currentUnit={currentUnit}
-              currentLesson={currentLesson}
-              noOfLessons={this.getLengthOfCurrentLessonArray()}
-            /> : 'nope'}
+
+
+      return(
+        <div className="background">
+          <div id="spacer"></div>
+          <div className="unitCardsContainer">
+                  {lmsCards}
+          </div>
+
+          <div className="lessonContentContainer">
+            {currentLesson ? <LessonContent
+                unit={configUnitCards[currentUnit]}
+                lesson={configUnitCards[currentUnit].lessons[currentLesson]}
+                nextLesson={this.nextLesson}
+                prevLesson={this.prevLesson}
+                currentUnit={currentUnit}
+                currentLesson={currentLesson}
+                noOfLessons={this.getLengthOfCurrentLessonArray()}
+              /> : 'nope'}
+          </div>
         </div>
-      </div>
-    )
+      )
+    }
+    return <div>loading...</div>
   }
 }
 
