@@ -8,7 +8,7 @@ class LessonHeader extends React.Component {
     return(
       <div>
         <div>
-          {unit.title}
+          <h4>{unit.title}</h4>
         </div>
         <div>
           {unit.description}
@@ -22,7 +22,6 @@ class LessonHeader extends React.Component {
           playing={false}
         />
         </div>
-        lesson header
       </div>
     )
   }
