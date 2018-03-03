@@ -10,7 +10,7 @@ export default class Layout extends React.Component {
       <div>
         <BrowserRouter>
           <div>
-            <Header />
+            {/*<Header />*/}
             <Main />
           </div>
         </BrowserRouter>

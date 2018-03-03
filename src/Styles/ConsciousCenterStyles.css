@@ -1,6 +1,12 @@
-.consciousLogo{
-    height: 200px;
-    width: 43%;
+
+.outerCont{
     padding: 0;
-    margin: 0;
+    width: 40%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.consciousLogo{
+    height: 100%;
+    width: 100%;
 }

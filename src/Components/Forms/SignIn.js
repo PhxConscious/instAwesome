@@ -1,5 +1,7 @@
 import React, {Component} from "react";
 import firebase from 'firebase';
+import {Redirect, Link} from 'react-router-dom';
+import Styles from '../../Styles/FormsStyles.css';
 
 class LoginForm extends Component {
 
@@ -10,8 +12,8 @@ class LoginForm extends Component {
             password: '',
             phone: '',
             error: '',
-            loading: false,
-            user_token: ''
+            user_token: '',
+            redirect: false
         };
     }
 
@@ -20,20 +22,18 @@ class LoginForm extends Component {
         this.setState({error: '', loading: true});
         firebase.auth().signInWithEmailAndPassword(email, password)
             .then(this.onLoginSuccess.bind(this))
+            .then(() => this.setState({redirect: true}))
             .catch(this.onLoginFail.bind(this))
     }
 
-    signInWithPhone() {
-
-    }
-
-    signInWithGoogle() {
+    signInWithGoogle(e) {
+        e.preventDefault();
         let provider = new firebase.auth.GoogleAuthProvider();
         firebase.auth().useDeviceLanguage();
         firebase.auth().signInWithPopup(provider).then(function (result) {
             console.log(`${firebase.auth().currentUser.email} has just signed in with Google Auth`)
         }).catch(function (error) {
-            // Handle Errors here.
+            // Handle Errors
             let errorCode = error.code;
             let errorMessage = error.message;
             // The email of the user's account used.
@@ -43,15 +43,8 @@ class LoginForm extends Component {
         });
     }
 
-    onButtonPress() {
-        if (this.state.phone === '') {
-            return this.signInWithEmail()
-        }
-        this.signInWithPhone()
-    }
-
     onLoginFail() {
-        this.setState({error: 'Authentication Failed', loading: false})
+        this.setState({error: 'Authentication Failed', loading: false});
         console.log(this.state.error)
     }
 
@@ -67,14 +60,14 @@ class LoginForm extends Component {
     }
 
     renderButton() {
-        if (this.state.loading) {
-            return <h4>Loading...</h4>
-        }
         return (
             <button
                 id='signInFormButton'
                 className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
-                onClick={() => this.onButtonPress()}>
+                onClick={(e) => {
+                    e.preventDefault()
+                    this.signInWithEmail();
+                }}>
                 LOG IN
             </button>
         );
@@ -82,10 +75,16 @@ class LoginForm extends Component {
 
     handleInputTextChange = e => {
         this.setState({[e.target.name]: e.target.value});
-        // console.log(`this is the current state ${this.state}`)
     };
 
     render() {
+
+        const {redirect} = this.state;
+
+        if (redirect) {
+            return <Redirect to='/learn/dashboard'/>;
+        }
+
         return (
             <div>
                 <form className='formCont' action="#">
@@ -120,19 +119,6 @@ class LoginForm extends Component {
                             </input>
                         </div>
                         <p className='or'>OR</p>
-                        <div className="formInputCont">
-                            <div>
-                                <p className='inputLabel'>PHONE NUMBER</p>
-                            </div>
-                            <input
-                                name='phone'
-                                className="formInput"
-                                type="number"
-                                onChange={this.handleInputTextChange}
-                                placeholder='Phone Number'
-                                value={this.state.phone}>
-                            </input>
-                        </div>
                         <br/>
                     </div>
                     <div>

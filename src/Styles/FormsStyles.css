@@ -3,7 +3,7 @@
     width: 95%;
     margin-right: auto;
     margin-left: auto;
-    height: 0%;
+
 }
 
 .formTitleCont {
@@ -14,17 +14,18 @@
 }
 
 .formTitle {
-    font-size: 17px;
+    font-size: 19px;
     text-align: left;
     margin: 0;
     margin-bottom: 4px;
     font-weight: 400;
     color: #48C8D3;
+    font-family: 'Asap', sans-serif;
 }
 
 .inputCont {
-    text-align: left;
-    width: 100%;
+    /*text-align: left;*/
+    /*width: 100%;*/
 }
 
 .formInputCont {
@@ -35,7 +36,7 @@
 .or{
     margin-bottom: 5px;
     text-align: center;
-    font-size: 17px;
+    font-size: 19px;
     font-weight: 400;
     color: white;
 }
@@ -51,19 +52,22 @@
 
 .formInput {
     width: 100%;
-    height: 35px;
+    height: 45px;
     padding: 12px 20px;
     box-sizing: border-box;
+    font-family: 'Asap', sans-serif;
     border-radius: 7px;
     font-size: 17px;
+    border:none;
 }
 
 .inputLabel {
     margin-bottom: 5px;
     text-align: left;
-    font-size: 17px;
+    font-size: 19px;
     font-weight: 400;
     color: white;
+    font-family: 'Asap', sans-serif;
 }
 
 #formButton {
@@ -123,7 +127,8 @@ li {
 }
 
 .forgotLinksCont {
-    margin-top: 10px;
+    margin-top: 12px;
+    font-family: 'Asap', sans-serif;
 }
 
 .forgotLinks {
@@ -131,7 +136,7 @@ li {
     margin-left: auto;
     margin-right: auto;
     padding: 10px;
-    font-size: 10px;
+    font-size: 12px;
     text-decoration: none;
 }
 
@@ -144,7 +149,7 @@ li {
 .recoverUsernameSmallText {
     margin-left: 10px;
     color: #48C8D3;
-    font-size: 10px;
+    font-size: 12px;
     margin-top: 0;
     margin-bottom: 0;
     height: 18px;
