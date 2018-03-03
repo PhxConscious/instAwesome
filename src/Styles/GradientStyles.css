@@ -1,0 +1,7 @@
+.gradientStripe{
+    height:7px;
+    background: linear-gradient(to right, #f7d15b, #d63136, #a732ab);
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}

@@ -2,6 +2,8 @@ import React, {Component} from "react";
 import firebase from 'firebase';
 import axios from 'axios';
 
+import Styles from '../../Styles/FormsStyles.css';
+
 class SignUpForm extends Component {
     constructor(props) {
         super(props);

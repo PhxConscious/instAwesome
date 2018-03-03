@@ -48,15 +48,6 @@ class AppNavbar extends Component {
                             </nav>
                         </div>
                     </header>
-                    <div className="mdl-layout__drawer mdl-layout--small-screen-only">
-                        <span className="mdl-layout-title">Title</span>
-                        <nav className="mdl-navigation ">
-                            <a className="mdl-navigation__link" href="">Link</a>
-                        </nav>
-                    </div>
-                    <main className="mdl-layout__content">
-                        <div className="page-content "></div>
-                    </main>
                 </div>
             </div>
         );

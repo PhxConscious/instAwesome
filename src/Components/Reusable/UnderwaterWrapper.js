@@ -6,7 +6,9 @@ class UnderwaterWrapper extends Component {
     render() {
         return (
             <div className="underwaterBackground">
-                {this.props.children}
+                <div className='underWaterInnerCont'>
+                    {this.props.children}
+                </div>
             </div>
         )
     }

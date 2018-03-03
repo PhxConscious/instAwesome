@@ -1,6 +1,8 @@
 import React, {Component} from "react";
 import firebase from 'firebase';
 
+import Styles from '../../Styles/FormsStyles.css';
+
 class LoginForm extends Component {
 
     constructor(props) {
@@ -23,10 +25,6 @@ class LoginForm extends Component {
             .catch(this.onLoginFail.bind(this))
     }
 
-    signInWithPhone() {
-
-    }
-
     signInWithGoogle() {
         let provider = new firebase.auth.GoogleAuthProvider();
         firebase.auth().useDeviceLanguage();
@@ -43,15 +41,8 @@ class LoginForm extends Component {
         });
     }
 
-    onButtonPress() {
-        if (this.state.phone === '') {
-            return this.signInWithEmail()
-        }
-        this.signInWithPhone()
-    }
-
     onLoginFail() {
-        this.setState({error: 'Authentication Failed', loading: false})
+        this.setState({error: 'Authentication Failed', loading: false});
         console.log(this.state.error)
     }
 
@@ -74,7 +65,7 @@ class LoginForm extends Component {
             <button
                 id='signInFormButton'
                 className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
-                onClick={() => this.onButtonPress()}>
+                onClick={() => this.signInWithEmail()}>
                 LOG IN
             </button>
         );
@@ -82,7 +73,6 @@ class LoginForm extends Component {
 
     handleInputTextChange = e => {
         this.setState({[e.target.name]: e.target.value});
-        // console.log(`this is the current state ${this.state}`)
     };
 
     render() {
@@ -120,19 +110,6 @@ class LoginForm extends Component {
                             </input>
                         </div>
                         <p className='or'>OR</p>
-                        <div className="formInputCont">
-                            <div>
-                                <p className='inputLabel'>PHONE NUMBER</p>
-                            </div>
-                            <input
-                                name='phone'
-                                className="formInput"
-                                type="number"
-                                onChange={this.handleInputTextChange}
-                                placeholder='Phone Number'
-                                value={this.state.phone}>
-                            </input>
-                        </div>
                         <br/>
                     </div>
                     <div>
