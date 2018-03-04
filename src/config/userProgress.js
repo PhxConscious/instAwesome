@@ -8,8 +8,8 @@ export default {
           lessonLocked: false,
           lessonCompleted: false,
           questions: {
-            u01q01: false,
-            u01q02: false,
+            u01q01: true,
+            u01q02: true,
             u01q03: false,
             u01q04: false,
             u01q05: false,
@@ -34,40 +34,48 @@ export default {
     bbbbb: {
       unitLocked: false,
       unitCompleted: false,
-      lessons: [
-        {u02q01: false},
-        {u02q02: false},
-      ]
-    },
-    ccccc: {
-      unitLocked: false,
-      unitCompleted: false,
-      lessons: [
-        {u03q01: false},
-        {u03q02: false},
-        {u03q03: false},
-        {u03q04: false},
-        {u03q05: false},
-        {u03q06: false},
-      ]
-    },
-    ddddd: {
-      unitLocked: true,
-      unitCompleted: false,
-      lessons: [
-        {u04l01: false},
-        {u04l02: false},
-        {u04l03: false}
-      ]
-    },
-    eeeee: {
-      unitLocked: true,
-      unitCompleted: false,
-      lessons: [
-        {lOne: false},
-        {lTwo: false},
-        {lThree: false}
-      ]
-    },
+      lessons: {
+        u02l01: {
+          lessonLocked: false,
+          lessonCompleted: false,
+          questions: {
+            u02q01: false,
+            u02q02: false
+          }
+        }
+      }
+    }
+
+    // ,
+    // ccccc: {
+    //   unitLocked: false,
+    //   unitCompleted: false,
+    //   lessons: [
+    //     {u03q01: false},
+    //     {u03q02: false},
+    //     {u03q03: false},
+    //     {u03q04: false},
+    //     {u03q05: false},
+    //     {u03q06: false},
+    //   ]
+    // },
+    // ddddd: {
+    //   unitLocked: true,
+    //   unitCompleted: false,
+    //   lessons: [
+    //     {u04l01: false},
+    //     {u04l02: false},
+    //     {u04l03: false}
+    //   ]
+    // },
+    // eeeee: {
+    //   unitLocked: true,
+    //   unitCompleted: false,
+    //   lessons: [
+    //     {lOne: false},
+    //     {lTwo: false},
+    //     {lThree: false}
+    //   ]
+    // },
   }
 }

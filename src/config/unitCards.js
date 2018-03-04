@@ -23,7 +23,7 @@ export default [
         },{
           id: "u01q03",
           contentType: "checkTasks",
-          title: "Basics",
+          title: "Basics3",
           description: "How to view a story",
         },{
           id: "u01q04",
@@ -108,33 +108,32 @@ export default [
         }]
       }
     ]
+  },{
+    title: "Full Online Analysis Reports",
+    description: "Full Online Analysis Reports yada yada test missing",
+    image: "https://i.imgur.com/EHYS6cp.png",
+    video: 'https://www.youtube.com/watch?v=i6G53BMgugo',
+    id: "bbbbb",
+    lessons: [{
+      title: "Lesson Title 1",
+      description: "Lesson Description 1",
+      video: 'https://www.youtube.com/watch?v=i6G53BMgugo',
+      id: "u02l01",
+      questions: [{
+        id: "u02q01",
+        contentType: "checkTasks",
+        title: "What the report is",
+        description: "Do you feel like you have a good understanding? If not watch it again",
+      },{
+        id: "u02q02",
+        contentType: "checkTasks",
+        title: "How to read the report",
+        description: "wGive us 3 short term (can be accomplished in 3 weeks) milestones",
+      }]
+    }]
   }
 
-  //
   // ,{
-  //   title: "Full Online Analysis Reports",
-  //   description: "Full Online Analysis Reports yada yada test missing",
-  //   image: "https://i.imgur.com/EHYS6cp.png",
-  //   video: 'https://www.youtube.com/watch?v=i6G53BMgugo',
-  //   id: "bbbbb",
-  //   lessons: [{
-  //     title: "Lesson Title 1",
-  //     description: "Lesson Description 1",
-  //     video: 'https://www.youtube.com/watch?v=i6G53BMgugo',
-  //     id: "u02l01",
-  //     questions: [{
-  //       id: "u02q01",
-  //       contentType: "checkTasks",
-  //       title: "What the report is",
-  //       description: "Do you feel like you have a good understanding? If not watch it again",
-  //     },{
-  //       id: "u02q02",
-  //       contentType: "checkTasks",
-  //       title: "How to read the report",
-  //       description: "wGive us 3 short term (can be accomplished in 3 weeks) milestones",
-  //     }]
-  //   }]
-  // },{
   //   title: "Content",
   //   description: "Content... all about good content needs text still",
   //   image: "https://i.imgur.com/EHYS6cp.png",
