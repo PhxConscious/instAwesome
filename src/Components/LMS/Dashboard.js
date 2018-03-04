@@ -17,12 +17,17 @@ class Dashboard extends React.Component {
       tasks: [],
       readyForRender: false,
       currentUnit: '',
+      currentUnitName: '', /* set equal to active for now*/
       currentLesson: '',
+      currentLessonName: '', /*not in yet*/
+      currentQuestion: '', /*not in yet string num*/
     }
     this.selectCardOnClick = this.selectCardOnClick.bind(this)
     this.combineUserDataAndTaskData = this.combineUserDataAndTaskData.bind(this);
     this.nextLesson = this.nextLesson.bind(this);
     this.prevLesson = this.prevLesson.bind(this);
+    this.getActiveLesson = this.getActiveLesson.bind(this);
+    this.getActiveQuestion = this.getActiveQuestion.bind(this);
   }
 
 
@@ -31,8 +36,8 @@ class Dashboard extends React.Component {
   // initial rendering) - see if this works
   componentDidMount(){
     this.combineUserDataAndTaskData()
-    this.props.getLmsContent();
-    this.props.fetchUserProgress();
+    // this.props.getLmsContent();
+    // this.props.fetchUserProgress();
   }
 
   combineUserDataAndTaskData(){
@@ -91,44 +96,147 @@ class Dashboard extends React.Component {
       tasks: taskArr,
       readyForRender: true,
       active: activeUnitName,
-      currentUnit: currentUnit
+      currentUnit: currentUnit,
+      currentUnitName: activeUnitName
     })
   }
 
   // updates state.lesson only when necessary
   componentDidUpdate(prevProps, prevState){
     if(this.state.active !== prevState.active){
-          this.getInitialActiveLesson();
+      console.log("UPDATING", this.state.active)
+          // this.getInitialActiveLesson();
+          this.getActiveLesson();
     }
   }
 
+
+
+
+
   // puts the active/selected lesson in state
   getInitialActiveLesson(){
+    // this.state.tasks.forEach(task => {
+    //
+    //   if(task.title === this.state.active){
+    //     // this block finds the first lesson from userProgress that
+    //     // isn't complete.
+    //
+    //     let lessons = task.userProgress.lessons;
+    //     console.log("LESSONS", lessons)
+    //     let initialCurrentLesson = "0" /* temp solution */
+    //
+    //
+    //     this.setState({
+    //       ...this.state,
+    //       currentLesson: initialCurrentLesson,
+    //       currentLessonName: initialCurrentLesson[0]
+    //     })
+    //
+    //
+    //
+    //
+    //
+    //
+    //     let firstIncompleteLesson = null;
+    //
+    //     let contentLessons = this.state.tasks[parseInt(this.state.currentUnit)].lessons;
+    //
+    //     // set the current lesson - temp - should use lowest unitLocked
+    //
+    //
+    //
+    //     console.log("lessons", lessons[this.state.currentLessonName])
+    //
+    //     for(let i = contentLessons.length - 1; i >= 0; i--){
+    //       let questions = contentLessons[i].questions;
+    //       for(let j = questions.length -1; j >= 0; j--){
+    //         // console.log('question', questions[j])
+    //
+    //       }
+    //     }
+    //     console.log('compare lessons and content', this.state.currentLesson, lessons, contentLessons[0])
+    //
+    //     for(let lesson in lessons){
+    //       // console.log("lesson", lessons[lesson])
+    //     }
+    //     // for(let i = lessonsKeys.length -1; i >= 0; i--){
+    //       // let lessonKey = Object.keys(lessons[i]);
+    //       // console.log("lessonKey", lessonKey)
+    //       // if(lessons[i][lessonKey]===false){
+    //       //   firstIncompleteLesson=lessonKey[0];
+    //       // }
+    //     // }
+    //     // determines what the inital currentLesson will be
+    //     task.lessons.forEach((lesson, index) => {
+    //       console.log("currentLesson", lesson.id, firstIncompleteLesson)
+    //       if (lesson.id === firstIncompleteLesson){
+    //         console.log('inside set currentLesson')
+    //         this.setState({
+    //           ...this.state,
+    //           currentLesson: index.toString()
+    //         })
+    //       }
+    //     })
+    //   }
+    // })
+    // this.forceUpdate();
+  }
+
+
+  getActiveLesson(){
+    // find first incomplete lesson within active unit
+
     this.state.tasks.forEach(task => {
+      let firstIncompleteLesson = null;
+      let firstIncompleteQuestion = null;
+      let i; // lesson index
+      let j; // question index
+      let finalIndexI;
+      let finalIndexJ;
+      
       if(task.title === this.state.active){
 
-        // this block finds the first lesson from userProgress that
-        // isn't complete.
-        let lessons = task.userProgress.lessons;
-        let firstIncompleteLesson = null;
-        for(let i = lessons.length -1; i >= 0; i--){
-          let lessonKey = Object.keys(lessons[i]);
-          if(lessons[i][lessonKey]===false){
-            firstIncompleteLesson=lessonKey[0];
+        let lessonsProgress = configUserProgess.userProgress[task.id].lessons;
+
+        for(i = task.lessons.length - 1; i >=0; i--){
+          let lessonId = task.lessons[i].id;
+
+          if(!lessonsProgress[lessonId].lessonCompleted) {
+            firstIncompleteLesson = task.lessons[i];
+            finalIndexI = i.toString();
           }
+
+          let questions = task.lessons[i].questions;
+
+          // find first incomplete question
+          for(j = questions.length-1; j >=0; j--){
+            if(!lessonsProgress[firstIncompleteLesson.id].questions[questions[j].id]){
+              console.log(questions[j].id)
+              firstIncompleteQuestion = questions[j].title
+              finalIndexJ = j.toString()
+            }
+
+          }
+
+          console.log("firstIncompleteQuestion", firstIncompleteQuestion)
         }
-        // determines what the inital currentLesson will be
-        task.lessons.forEach((lesson, index) => {
-          if (lesson.id === firstIncompleteLesson){
-            this.setState({
-              ...this.state,
-              currentLesson: index.toString()
-            })
-          }
+
+
+        this.setState({
+          ...this.state,
+          active: task.title,
+          currentLesson: finalIndexI,
+          currentLessonName: firstIncompleteLesson.title,
+          currentQuestion: finalIndexJ,
+          currentQuestionName: firstIncompleteQuestion
         })
       }
     })
-    this.forceUpdate();
+  }
+
+  getActiveQuestion(){
+
   }
 
 
@@ -139,7 +247,9 @@ class Dashboard extends React.Component {
     let { tasks } = this.state;
     let index;
     tasks.forEach((task, i) => {
+
       if(task.title === value && !task.userProgress.isLocked){
+        // console.log("why no chang?", task.title, value)
         index = i.toString();
         this.setState({
           ...this.state,
@@ -148,7 +258,6 @@ class Dashboard extends React.Component {
         })
       }
     })
-
   }
 
   nextLesson(){
@@ -205,7 +314,7 @@ class Dashboard extends React.Component {
 
 
 
-
+      console.log('state', this.state)
       return(
         <div className="background">
           <div id="spacer"></div>
@@ -216,7 +325,7 @@ class Dashboard extends React.Component {
           <div className="lessonContentContainer">
             {currentLesson ? <LessonContent
                 unit={configUnitCards[currentUnit]}
-                lesson={configUnitCards[currentUnit].lessons[currentLesson]}
+                lesson={configUnitCards[currentUnit]}
                 nextLesson={this.nextLesson}
                 prevLesson={this.prevLesson}
                 currentUnit={currentUnit}
