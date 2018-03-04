@@ -4,6 +4,9 @@ import configUserProgess from '../../config/userProgress';
 import LmsCard from '../Reusable/LmsCard';
 import '../../Styles/LmsCardsStyles.css';
 import LessonContent from './LessonContent';
+import { connect } from 'react-redux';
+import { getLmsContent } from '../../redux/actions/lmsContent';
+import { getUserProgress } from '../../redux/actions/userProgress';
 
 
 class Dashboard extends React.Component {
@@ -22,10 +25,14 @@ class Dashboard extends React.Component {
     this.prevLesson = this.prevLesson.bind(this);
   }
 
+
+
   // this must update when a unit is finished (not just
   // initial rendering) - see if this works
   componentDidMount(){
     this.combineUserDataAndTaskData()
+    this.props.getLmsContent();
+    this.props.fetchUserProgress();
   }
 
   combineUserDataAndTaskData(){
@@ -169,6 +176,8 @@ class Dashboard extends React.Component {
   }
 
   render() {
+
+    console.log("users", this.props.userProgress)
     this.getLengthOfCurrentLessonArray()
     let { active, tasks, readyForRender, currentUnit, currentLesson } = this.state;
 
@@ -223,4 +232,25 @@ class Dashboard extends React.Component {
   }
 }
 
-export default Dashboard;
+const mapStateToProps = state => ({
+  book: state.lmsContent.book,
+  userProgress: state.userProgress
+});
+
+const mapDispatchToProps = dispatch => {
+    return {
+      getLmsContent : () => {
+        dispatch(getLmsContent())
+      },
+      fetchUserProgress : () => {
+        dispatch(getUserProgress(1))
+      }
+    }
+    // return {
+    //     getExceptions: (formData) => {
+    //         dispatch(actions.getExceptions(formData, '/exceptions'))
+    //     }
+    // }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
