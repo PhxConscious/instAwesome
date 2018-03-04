@@ -37,7 +37,7 @@ class Dashboard extends React.Component {
 
   combineUserDataAndTaskData(){
     // temp data to simulate server
-    let tasks = Object.keys(configUserProgess.progress);
+    let tasks = Object.keys(configUserProgess.userProgress);
     // taskArr combines server data with local data
     let taskArr = [];
 
@@ -59,9 +59,9 @@ class Dashboard extends React.Component {
           taskArr.push({
             userProgress: {
               name: key,
-              isCompleted: configUserProgess.progress[task].unitCompleted,
-              isLocked: configUserProgess.progress[task].unitLocked,
-              lessons: configUserProgess.progress[task].lessons
+              isCompleted: configUserProgess.userProgress[task].unitCompleted,
+              isLocked: configUserProgess.userProgress[task].unitLocked,
+              lessons: configUserProgess.userProgress[task].lessons
             },
             title: card.title,
             description: card.description,
@@ -177,7 +177,6 @@ class Dashboard extends React.Component {
 
   render() {
 
-    console.log("users", this.props.userProgress)
     this.getLengthOfCurrentLessonArray()
     let { active, tasks, readyForRender, currentUnit, currentLesson } = this.state;
 
