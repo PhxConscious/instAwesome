@@ -5,7 +5,9 @@ import LmsCard from '../Reusable/LmsCard';
 import '../../Styles/LmsCardsStyles.css';
 import LessonContent from './LessonContent';
 import { connect } from 'react-redux';
-import * as action from '../../redux/actions/lmsContent';
+import { getLmsContent } from '../../redux/actions/lmsContent';
+import { getUserProgress } from '../../redux/actions/userProgress';
+
 
 class Dashboard extends React.Component {
   constructor(props){
@@ -30,6 +32,7 @@ class Dashboard extends React.Component {
   componentDidMount(){
     this.combineUserDataAndTaskData()
     this.props.getLmsContent();
+    this.props.fetchUserProgress();
   }
 
   combineUserDataAndTaskData(){
@@ -174,7 +177,7 @@ class Dashboard extends React.Component {
 
   render() {
 
-    console.log("book", this.props.book)
+    console.log("users", this.props.userProgress)
     this.getLengthOfCurrentLessonArray()
     let { active, tasks, readyForRender, currentUnit, currentLesson } = this.state;
 
@@ -230,13 +233,17 @@ class Dashboard extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  book: state.lmsContent.book
+  book: state.lmsContent.book,
+  userProgress: state.userProgress
 });
 
 const mapDispatchToProps = dispatch => {
     return {
       getLmsContent : () => {
-        dispatch(action.getLmsContent())
+        dispatch(getLmsContent())
+      },
+      fetchUserProgress : () => {
+        dispatch(getUserProgress(1))
       }
     }
     // return {
