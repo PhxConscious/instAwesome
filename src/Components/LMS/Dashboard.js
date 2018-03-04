@@ -4,7 +4,8 @@ import configUserProgess from '../../config/userProgress';
 import LmsCard from '../Reusable/LmsCard';
 import '../../Styles/LmsCardsStyles.css';
 import LessonContent from './LessonContent';
-
+import { connect } from 'react-redux';
+import * as action from '../../redux/actions/lmsContent';
 
 class Dashboard extends React.Component {
   constructor(props){
@@ -22,10 +23,13 @@ class Dashboard extends React.Component {
     this.prevLesson = this.prevLesson.bind(this);
   }
 
+
+
   // this must update when a unit is finished (not just
   // initial rendering) - see if this works
   componentDidMount(){
     this.combineUserDataAndTaskData()
+    this.props.getLmsContent();
   }
 
   combineUserDataAndTaskData(){
@@ -169,6 +173,8 @@ class Dashboard extends React.Component {
   }
 
   render() {
+
+    console.log("book", this.props.book)
     this.getLengthOfCurrentLessonArray()
     let { active, tasks, readyForRender, currentUnit, currentLesson } = this.state;
 
@@ -223,4 +229,21 @@ class Dashboard extends React.Component {
   }
 }
 
-export default Dashboard;
+const mapStateToProps = state => ({
+  book: state.lmsContent.book
+});
+
+const mapDispatchToProps = dispatch => {
+    return {
+      getLmsContent : () => {
+        dispatch(action.getLmsContent())
+      }
+    }
+    // return {
+    //     getExceptions: (formData) => {
+    //         dispatch(actions.getExceptions(formData, '/exceptions'))
+    //     }
+    // }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
