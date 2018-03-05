@@ -325,6 +325,12 @@ class Dashboard extends React.Component {
     let currentQuestionLocal = currentQuestion;
     let targetQuestion = (parseInt(currentQuestionLocal, 10) + 1).toString();
 
+    this.setState({
+      ...this.state,
+      currentQuestion: targetQuestion,
+      currentQuestionObj: configUnitCards[currentUnit].lessons[currentLesson].questions[targetQuestion]
+    })
+
 
     // the whole task obj in redux
     let taskObjRedux = userProgress.currentUser.user_progress;
@@ -347,20 +353,19 @@ class Dashboard extends React.Component {
     reduxObj["questions"] = curQuest;
 
     // 3. handle if it's the end of a lesson
-    let CQOLength = Object.keys(currentQuestionObj).length
-    console.log("currentLessonObj", currentLessonObj.questions.length, currentQuestionObj, CQOLength)
-
+    if(parseInt(targetQuestion)+1 === currentLessonObj.questions.length){
+      taskObjRedux[currentUnitId].lessons[currentLessonObj.id]["lessonCompleted"]=true;
+      taskObjRedux[currentUnitId].lessons[currentLessonObj.id]["lessonLocked"]=false;
+      // console.log("handleLessonEnd", taskObjRedux)
+    }
     // 4. handle if it's the end of a unit
+    // console.log("handleUnitEnd")
 
     // 5. dispatch updated obj
     this.props.putNextQuestion(1, reduxObj)
 
 
-    this.setState({
-      ...this.state,
-      currentQuestion: targetQuestion,
-      currentQuestionObj: configUnitCards[currentUnit].lessons[currentLesson].questions[targetQuestion]
-    })
+
   }
 
   prevQuestion(){
