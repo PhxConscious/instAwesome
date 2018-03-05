@@ -8,25 +8,33 @@ class CheckTasks extends React.Component {
     this.state = {
       checked: false,
       nextButtonDisabled: false,
+      prevButtonDisabled: false,
     }
     this.isNextQ = this.isNextQ.bind(this);
+    this.isPrevQ = this.isPrevQ.bind(this);
   }
 
   componentWillUpdate(nextProps, nextState){
     if(nextProps.currentQuestion !== this.props.currentQuestion){
-      console.log('updating bc of props')
-      this.isNextQ(nextProps.currentLessonObj, nextProps.currentQuestion)
+      this.isNextQ(nextProps.currentLessonObj, nextProps.currentQuestion);
+      this.isPrevQ(nextProps.currentLessonObj, nextProps.currentQuestion)
     }
   }
 
   isNextQ(obj, i) {
-    console.log(obj, i)
     if(obj.questions.length > parseInt(i,10)+1){
       this.setState({nextButtonDisabled: false})
     } else {
       this.setState({nextButtonDisabled: true})
     }
+  }
 
+  isPrevQ(obj, i) {
+    if(parseInt(i) === 0){
+      this.setState({prevButtonDisabled: true})
+    } else {
+      this.setState({prevButtonDisabled: false})
+    }
   }
 
   render(){
@@ -40,10 +48,6 @@ class CheckTasks extends React.Component {
     let questProg = lessonProg.questions[currentQuestionObj.id]
     console.log("prog", questProg, lessonProg, unitProg)
     console.log("SEE THIS", currentLessonObj.questions.length, parseInt(currentQuestion,10)+1)
-
-
-
-
 
 
     if(currentLessonObj){
@@ -85,6 +89,7 @@ class CheckTasks extends React.Component {
           <button
             onClick={prevQuestion}
             value="nextQuestion"
+            disabled={this.state.prevButtonDisabled}
           >prevQuestion</button>
           <button
             onClick={nextQuestion}

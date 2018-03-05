@@ -68,7 +68,7 @@ class LessonContent extends React.Component {
                   nextLesson={nextLesson}
                   prevLesson={prevLesson}
                   nextQuestion={nextQuestion}
-                  prevQuestion={this.prevQuestion}
+                  prevQuestion={prevQuestion}
                   currentUnit={currentUnit}
                   currentLesson={currentLesson}
                   currentLessonObj={currentLessonObj}
