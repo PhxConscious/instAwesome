@@ -26,6 +26,8 @@ class Dashboard extends React.Component {
       currentQuestionName: '',
       currentQuestionId: '',
       currentQuestionObj: {},
+      book: null,
+      user: null,
     }
     this.selectCardOnClick = this.selectCardOnClick.bind(this)
     this.combineUserDataAndTaskData = this.combineUserDataAndTaskData.bind(this);
@@ -47,23 +49,48 @@ class Dashboard extends React.Component {
     this.getInitialActiveLesson();
   }
 
-  componentWillUpdate(nextProps, nextState){
-    if(nextProps.book !== this.props.book ){
-      this.combineUserDataAndTaskData();
-      console.log("updating", nextProps.book, this.props.book)
+  // componentWillUpdate(nextProps, nextState){
+  //   // if(nextProps.book !== this.props.book ){
+  //   //   this.combineUserDataAndTaskData();
+  //   //   console.log("updating", nextProps.book, this.props.book)
+  //   // }
+  // }
+
+  componentWillReceiveProps(nextProps){
+    if(nextProps !== this.props ){
+
+      // console.log("updating", nextProps, this.props)
+      if(nextProps.book !== this.props.book){
+        this.setState({
+          ...this.state,
+          book: nextProps.book,
+        })
+      }
+      console.log("in componentWillReceiveProps", nextProps.userProgress.currentUser.user_progress, this.props.userProgress.currentUser.user_progress)
+      if(nextProps.userProgress.currentUser.user_progress !== this.props.userProgress.currentUser.user_progress){
+        this.setState({
+          ...this.state,
+          user: nextProps.userProgress
+        })
+        this.combineUserDataAndTaskData(nextProps.userProgress.currentUser.user_progress);
+      }
+
+
     }
   }
 
-  combineUserDataAndTaskData(){
-    // temp data to simulate server
-    let tasks = Object.keys(configUserProgess.userProgress);
+  combineUserDataAndTaskData(userData){
+    let { book } = this.props;
+
+    console.log("combineUserDataAndTaskData", this.props.book, userData)
+    let tasks = Object.keys(userData);
     // taskArr combines server data with local data
     let taskArr = [];
 
     // find units on react but not in DB. add to tasks arr.
     // now we can update react and it renders automatically
     // we must post this to server later
-    this.props.book.forEach(card => {
+    book.forEach(card => {
       if(tasks.indexOf(card.id) === -1){
         tasks.push(card.id)
       }
@@ -72,15 +99,15 @@ class Dashboard extends React.Component {
     // match up server data and local data to make one array
     // of task objecs which include a "completed" value (boolean)
     tasks.forEach(task => {
-      configUnitCards.forEach(card => {
+      book.forEach(card => {
         if(card.id === task) {
           let key = card.id;
           taskArr.push({
             userProgress: {
               name: key,
-              isCompleted: configUserProgess.userProgress[task].unitCompleted,
-              isLocked: configUserProgess.userProgress[task].unitLocked,
-              lessons: configUserProgess.userProgress[task].lessons
+              isCompleted: userData[task].unitCompleted,
+              isLocked: userData[task].unitLocked,
+              lessons: userData[task].lessons
             },
             title: card.title,
             description: card.description,
@@ -117,6 +144,7 @@ class Dashboard extends React.Component {
       currentUnitId: currentUnitId,
     })
   }
+
 
   // updates state.lesson only when necessary
   componentDidUpdate(prevProps, prevState){
@@ -233,7 +261,6 @@ class Dashboard extends React.Component {
           }
         }
 
-        console.log('firstIncompleteQuestion', firstIncompleteQuestion)
         this.setState({
           ...this.state,
           active: task.title,
@@ -357,7 +384,7 @@ class Dashboard extends React.Component {
   }
 
   render() {
-    console.log("props", this.props.book, configUnitCards)
+    // console.log("props", this.props.book, configUnitCards)
     this.getLengthOfCurrentLessonArray()
     let { active, tasks, readyForRender, currentUnit, currentLesson, currentLessonObj, currentQuestion, currentQuestionObj } = this.state;
 
