@@ -10,14 +10,17 @@ class CheckTasks extends React.Component {
 
   render(){
     let { checked } = this.state;
-    let { lesson, nextLesson, prevLesson, currentUnit, currentLesson, noOfLessons } = this.props;
+    let { lesson, nextLesson, prevLesson, currentUnit, currentLesson, noOfLessons, currentLessonObj, currentQuestion, currentQuestionObj, nextQuestion, prevQuestion } = this.props;
+    console.log('lesson', currentQuestionObj)
 
-    if(lesson && lesson.title){
+    if(currentLessonObj && currentLessonObj.title){
       return(
         <div>
-          <h4>{lesson.title}</h4>
+          <h4>{currentLessonObj.title}</h4>
 
-          <div>{lesson.description}</div>
+          <div>lesson: {currentLessonObj.description}</div>
+
+
 
           <div>
             <input
@@ -28,24 +31,38 @@ class CheckTasks extends React.Component {
           </div>
 
           <div>
-            <span className={currentLesson === "0" ? "hidden" : ""}>
+            <span className={currentLesson === "0" ? "" : ""}>
               <button
                 onClick={prevLesson}
                 value="next"
-              >prev</button>
+              >prevLesson</button>
             </span>
 
-            <span className={parseInt(currentLesson, 10)+1 === parseInt(noOfLessons, 10) ? "hidden" : ""}>
+            <span className={parseInt(currentLesson, 10)+1 === parseInt(noOfLessons, 10) ? "" : ""}>
               <button
                 onClick={nextLesson}
                 value="next"
                 disabled={!checked}
-              >next</button>
+              >nextLesson</button>
             </span>
 
           </div>
 
-          <div>unit: {parseInt(currentUnit, 10)+1}  current lesson: {parseInt(currentLesson, 10)+1} of {noOfLessons}</div>
+          <h5>current question: {parseInt(currentQuestion, 10)+1}</h5>
+          <div>question: {currentQuestionObj.title}</div>
+          <button
+            onClick={prevQuestion}
+            value="next"
+            disabled={!checked}
+          >prevQuestion</button>
+          <button
+            onClick={nextQuestion}
+            value="next"
+            disabled={!checked}
+          >nextQuestion</button>
+
+
+        <div>unit: {parseInt(currentUnit, 10)+1}  current lesson: {parseInt(currentLesson, 10)+1} of {noOfLessons}  </div>
 
           {currentLesson === "0" ? "please begin the lesson" : ''}
 
