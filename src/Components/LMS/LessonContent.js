@@ -62,6 +62,7 @@ class LessonContent extends React.Component {
               <div>
                 <LessonHeader
                   unit={unit}
+                  currentLessonObj={currentLessonObj}
                 />
                 <CheckTasks
                   lesson={lesson}
