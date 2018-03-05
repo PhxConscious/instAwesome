@@ -9,8 +9,6 @@ class LessonContent extends React.Component {
 
     render() {
 
-      // const { contentType, title, description, id, question, a1, a2, a3, a4, correct, video } = this.props.lesson;
-      // const { contentType } = this.props;
 
         let contentType = "checkTasks";
         switch(contentType){

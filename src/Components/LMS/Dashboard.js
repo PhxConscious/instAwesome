@@ -125,14 +125,20 @@ class Dashboard extends React.Component {
     // sets the initial active unit
     let currentUnit;
     let currentUnitId;
+    let activeUnitLessons;
     for(let i = 1; i < taskArr.length; i++){
       if(taskArr[i].userProgress.isCompleted === false && taskArr[i-1].userProgress.isCompleted === true){
         activeUnitName = taskArr[i].title;
         currentUnitId = taskArr[i].id;
         currentUnit = i.toString();
         i = tasks.length;
+        // now lets find the active lesson
+        console.log('active lesson', taskArr[i])
       }
     }
+
+
+
 
     this.setState({
       ...this.state,
@@ -142,7 +148,11 @@ class Dashboard extends React.Component {
       currentUnit: currentUnit,
       currentUnitName: activeUnitName,
       currentUnitId: currentUnitId,
-    })
+    });
+
+
+
+
   }
 
 
@@ -297,15 +307,46 @@ class Dashboard extends React.Component {
   }
 
   nextLesson(){
-    let currentLesson = this.state.currentLesson;
+    let { currentUnit, currentUnitId, currentLesson, currentLessonObj, currentQuestion, currentQuestionObj, currentQuestionId} = this.state;
+    let { userProgress, book } = this.props;
+
     let targetLesson = (parseInt(currentLesson, 10) + 1).toString();
-    // console.log("nextLesson", configUnitCards[this.state.currentUnit].lessons[this.state.currentLesson])
-    console.log("lessonindex", currentLesson, targetLesson)
+
+
     this.setState({
       ...this.state,
       currentLesson: targetLesson,
       currentLessonObj: configUnitCards[this.state.currentUnit].lessons[this.state.currentLesson]
     })
+
+    // the whole task obj in redux
+    let taskObjRedux = userProgress.currentUser.user_progress;
+
+    // the current task object in redux
+    let curUnit =  taskObjRedux[currentUnitId];
+
+    // the current lesson from redux
+    let curLesson = curUnit.lessons[currentLessonObj.id];
+
+    // 1. change isCompleted: already finished
+
+    // 2. figure out if there is a nextLesson
+    // can't use this until questions reset to zero after lesson change
+    if(book[currentLesson].lessons.length === parseInt(currentLesson)+1){
+      console.log("this is the last lesson in the unit",book[currentLesson].lessons.length, parseInt(currentLesson)+1)
+    }
+      // if not: handle changeUnit:
+        // unlock the next unit.
+        // advance units
+
+      // if so: advance lesson
+        // unlock next lesson
+        // current lesson is already set to completed
+        // make sure questions go back to 1st question.
+
+    // 3. update redux userProgress object
+
+    // 4. forceUpdate?
   }
 
   prevLesson(){
@@ -349,8 +390,7 @@ class Dashboard extends React.Component {
     curQuest[currentQuestionObj.id] = true;
 
     // 2. put questions obj in taskObjRedux
-    let reduxObj = taskObjRedux[currentUnitId].lessons[currentLessonObj.id]
-    reduxObj["questions"] = curQuest;
+    taskObjRedux[currentUnitId].lessons[currentLessonObj.id]["questions"] = curQuest;
 
     // 3. handle if it's the end of a lesson
     if(parseInt(targetQuestion)+1 === currentLessonObj.questions.length){
@@ -361,8 +401,10 @@ class Dashboard extends React.Component {
     // 4. handle if it's the end of a unit
     // console.log("handleUnitEnd")
 
-    // 5. dispatch updated obj
-    this.props.putNextQuestion(1, reduxObj)
+    // 5. dispatch updated obj - format object for server
+    let dto = {};
+    dto["userProgress"] = taskObjRedux;
+    this.props.putNextQuestion(1, dto)
 
 
 
@@ -408,8 +450,10 @@ class Dashboard extends React.Component {
     // 4. handle if it's the end of a unit
     // console.log("handleUnitEnd")
 
-    // 5. dispatch updated obj
-    this.props.putNextQuestion(1, reduxObj)
+    // 5. dispatch updated obj - format object for server
+    let dto = {};
+    dto["userProgress"] = taskObjRedux;
+    this.props.putNextQuestion(1, dto)
 
 
 
@@ -508,6 +552,7 @@ const mapDispatchToProps = dispatch => {
         dispatch(getUserProgress(1))
       },
       putNextQuestion : (fb_id, data) => {
+        console.log('dispatch', fb_id, data)
         dispatch(nextQuestion(fb_id, data ))
       }
     }
