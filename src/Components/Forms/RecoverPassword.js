@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import firebase from 'firebase';
+import {Link} from 'react-router-dom';
 
 class RecoverPassword extends Component {
     constructor(props) {
@@ -21,7 +22,9 @@ class RecoverPassword extends Component {
                 id='signInFormButton'
                 className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
                 onClick={() => this.emailPasswordReset()}>
-                RECOVER
+                <span className='buttonText'>
+                    RECOVER
+                </span>
             </button>
         );
     }
@@ -68,8 +71,8 @@ class RecoverPassword extends Component {
                         {this.renderButton()}
                     </div>
                     <div className='forgotLinksCont'>
-                        <a className='forgotLinks' href='#'>RECOVER USERNAME </a>
-                        <a className='forgotLinks' href='#'>RETURN TO LOGIN </a>
+                        <Link to='/forgotusername' className='forgotLinks' href='#'>RECOVER USERNAME </Link>
+                        <Link to='/' className='forgotLinks' href='#'>RETURN TO LOGIN </Link>
                     </div>
                 </form>
             </div>

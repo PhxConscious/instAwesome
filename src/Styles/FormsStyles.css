@@ -34,14 +34,17 @@
 }
 
 .or{
-    margin-bottom: 5px;
+    margin: 5px;
+    margin-top: 15px;
     text-align: center;
     font-size: 19px;
+    font-family: 'Asap', sans-serif;
     font-weight: 400;
     color: white;
 }
 
 .googleButton{
+    font-family: 'Asap', sans-serif;
     color: #48C8D3;
 }
 
@@ -70,6 +73,13 @@
     font-family: 'Asap', sans-serif;
 }
 
+.errorMessage{
+    color:red;
+    height: 20px;
+    margin-top: -10px;
+    margin-bottom: 10px;
+}
+
 #formButton {
     background-color: #9BDD82;
     width: 30%;
@@ -88,7 +98,11 @@
     width: 30%;
     border-radius: 10px;
     color: white;
-    font-size: 18px;
+
+}
+
+.buttonText{
+    font-size: large;
 }
 
 ul {
