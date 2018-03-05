@@ -11,74 +11,72 @@ class LoginForm extends Component {
             email: '',
             password: '',
             phone: '',
-            error: '',
+            loginError: '',
             user_token: '',
-            redirect: false
+            redirect: false,
+            OAuthToken: '',
         };
-    }
-
-    signInWithEmail() {
-        const {email, password} = this.state;
-        this.setState({error: '', loading: true});
-        firebase.auth().signInWithEmailAndPassword(email, password)
-            .then(this.onLoginSuccess.bind(this))
-            .then(() => this.setState({redirect: true}))
-            .catch(this.onLoginFail.bind(this))
-    }
-
-    signInWithGoogle(e) {
-        e.preventDefault();
-        let provider = new firebase.auth.GoogleAuthProvider();
-        firebase.auth().useDeviceLanguage();
-        firebase.auth().signInWithPopup(provider).then(function (result) {
-            console.log(`${firebase.auth().currentUser.email} has just signed in with Google Auth`)
-        }).catch(function (error) {
-            // Handle Errors
-            let errorCode = error.code;
-            let errorMessage = error.message;
-            // The email of the user's account used.
-            let email = error.email;
-            // The firebase.auth.AuthCredential type that was used.
-            let credential = error.credential;
-        });
-    }
-
-    onLoginFail() {
-        this.setState({error: 'Authentication Failed', loading: false});
-        console.log(this.state.error)
-    }
-
-    onLoginSuccess() {
-        this.setState({
-            email: '',
-            password: '',
-            loading: false,
-            error: '',
-            user_token: firebase.auth().currentUser.uid
-        });
-        console.log(`${firebase.auth().currentUser.email} has just signed in`)
-    }
-
-    renderButton() {
-        return (
-            <button
-                id='signInFormButton'
-                className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
-                onClick={(e) => {
-                    e.preventDefault()
-                    this.signInWithEmail();
-                }}>
-                LOG IN
-            </button>
-        );
     }
 
     handleInputTextChange = e => {
         this.setState({[e.target.name]: e.target.value});
     };
 
-    render() {
+    signInWithGoogle = (e) => {
+        e.preventDefault();
+        let provider = new firebase.auth.GoogleAuthProvider();
+        firebase.auth().useDeviceLanguage();
+        firebase.auth().signInWithPopup(provider).then(function (result) {
+            console.log(`${firebase.auth().currentUser.email} has just signed in with Google Auth`)
+        }).then(this.onLoginSuccess)
+            .then(() => {
+                if (firebase.auth().currentUser) {
+                    this.setState({redirect: true, email: '', password: ''})
+                }
+            })
+            .catch(this.onLoginFail);
+    };
 
+    onLoginSuccess = () => {
+        this.setState({
+            email: '',
+            password: '',
+            loginError: '',
+            user_token: firebase.auth().currentUser.uid
+        });
+        console.log(`${firebase.auth().currentUser.email} has just signed in`)
+    };
+
+    onLoginFail = () => {
+        this.setState({loginError: 'Authentication Failed'});
+        console.log(`this is the login error: ${this.state.loginError}`);
+    };
+
+    renderButton = () => {
+        return (
+            <button
+                id='signInFormButton'
+                className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
+                onClick={this.onButtonPress}
+                color='orange'>
+                <span className='buttonText'>
+                    LOGIN
+                </span>
+            </button>
+        );
+    };
+
+    onButtonPress = (e) => {
+        e.preventDefault();
+        const {email, password} = this.state;
+        this.setState({error: ''});
+        firebase.auth().signInWithEmailAndPassword(email, password)
+            .then(this.onLoginSuccess)
+            .then(this.setState({redirect: true, email: '', password: ''}))
+            .catch(this.onLoginFail)
+    };
+
+    render() {
         const {redirect} = this.state;
 
         if (redirect) {
@@ -118,20 +116,28 @@ class LoginForm extends Component {
                                 value={this.state.password}>
                             </input>
                         </div>
-                        <p className='or'>OR</p>
-                        <br/>
+                    </div>
+                    <div className='errorMessage'>
+                        {this.state.loginError}
                     </div>
                     <div>
                         {this.renderButton()}
                     </div>
                     <div>
-                        <button className='mdl-button mdl-js-button googleButton' onClick={this.signInWithGoogle}>SIGN
-                            IN WITH GOOGLE
+                        <p className='or'>OR SIGN IN WITH</p>
+                        <button className='mdl-button mdl-js-button googleButton' onClick={this.signInWithGoogle}>
+                            <i className="fab fa-google"> </i>
+                        </button>
+                        <button className='mdl-button mdl-js-button googleButton'>
+                            <i className="fab fa-facebook-f"> </i>
+                        </button>
+                        <button className='mdl-button mdl-js-button googleButton'>
+                            <i className="fab fa-linkedin-in"> </i>
                         </button>
                     </div>
                     <div className='forgotLinksCont'>
-                        <a className='forgotLinks' href='#'>FORGOT USERNAME? </a>
-                        <a className='forgotLinks' href='#'>FORGOT PASSWORD? </a>
+                        <Link to='/forgotusername' className='forgotLinks' href='#'>FORGOT USERNAME? </Link>
+                        <Link to='/forgotpassword' className='forgotLinks' href='#'>FORGOT PASSWORD? </Link>
                     </div>
                 </form>
             </div>
@@ -139,4 +145,4 @@ class LoginForm extends Component {
     }
 }
 
-export default LoginForm;
+export default LoginForm

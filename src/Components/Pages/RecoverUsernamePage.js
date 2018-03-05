@@ -1,15 +1,14 @@
 import React, {Component} from 'react';
 import '../../App.css';
 
-import SignInForm from './SignIn';
 import UnderwaterWrapper from '../Reusable/UnderwaterWrapper';
 import ShadowBox from '../Reusable/ShadowBox';
 import ConsciousCenter from '../Reusable/ConsciousCenter';
-import Checkout from "../Reusable/Checkout";
 import Gradient from "../Reusable/Gradient";
+import RecoverUsername from '../Forms/RecoverUsername';
 
 
-class LandingPage extends Component {
+class RecoverUsernamePage extends Component {
     render() {
         return (
             <div className="App">
@@ -17,7 +16,7 @@ class LandingPage extends Component {
                 <UnderwaterWrapper>
                     <ConsciousCenter/>
                     <ShadowBox>
-                        <SignInForm/>
+                        <RecoverUsername/>
                     </ShadowBox>
                 </UnderwaterWrapper>
                 <Gradient/>
@@ -26,4 +25,4 @@ class LandingPage extends Component {
     }
 }
 
-export default LandingPage;
+export default RecoverUsernamePage;

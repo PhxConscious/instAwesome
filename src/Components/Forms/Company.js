@@ -27,7 +27,9 @@ class Company extends Component {
                 id='formButton'
                 className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
                 onClick={() => this.onButtonPress()}>
-                <div>UPDATE</div>
+                <span className='buttonText'>
+                    UPDATE
+                </span>
             </button>
         );
     }

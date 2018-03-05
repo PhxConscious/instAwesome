@@ -140,7 +140,9 @@ class SignUpForm extends Component {
                     id='signInFormButton'
                     className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
                     onClick={() => this.onButtonPress()}>
-                    Submit
+                    <span className='buttonText'>
+                        UPDATE
+                    </span>
                 </button>
             </form>
         );

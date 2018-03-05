@@ -1,12 +1,11 @@
 
 .outerCont{
     padding: 0;
-    width: 40%;
     margin-left: auto;
     margin-right: auto;
 }
 
 .consciousLogo{
-    height: 100%;
+   height: 30vh;
     width: 100%;
 }

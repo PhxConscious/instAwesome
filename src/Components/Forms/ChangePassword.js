@@ -14,20 +14,6 @@ class ChangePassword extends Component {
         };
     }
 
-    //***************************** Reauth not working ******************************
-    //     reAuthUser() {
-    //         const {verifyPassword} = this.state;
-    //         var user = firebase.auth().currentUser;
-    //         var credential = verifyPassword;
-    //
-    // // Prompt the user to re-provide their sign-in credentials
-    //         user.reauthenticateWithCredential(credential).then(function () {
-    //             alert('user re-authenticated')
-    //         }).catch(function (error) {
-    //             alert(error)
-    //         });
-    //     }
-
     createNewPassword() {
         const {newPassword, confirmNewPassword} = this.state;
         let user = firebase.auth().currentUser;
@@ -60,16 +46,17 @@ class ChangePassword extends Component {
     renderButton() {
         if (this.state.loading) {
             return (
-            <p id='loadingText' className="mdl-spinner mdl-js-spinner mdl-spinner--single-color is-active"></p>
-
-                )
+                <p id='loadingText' className="mdl-spinner mdl-js-spinner mdl-spinner--single-color is-active"></p>
+            )
         }
         return (
             <button
                 id='formButton'
                 className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
                 onClick={() => this.onButtonPress()}>
-                <div>Update</div>
+                <span className='buttonText'>
+                    UPDATE
+                </span>
             </button>
         );
     }

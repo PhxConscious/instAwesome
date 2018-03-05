@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+
 // import firebase from 'firebase';
 
 class RecoverUsername extends Component {
@@ -21,7 +22,9 @@ class RecoverUsername extends Component {
                 id='signInFormButton'
                 className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
                 onClick={() => console.log('button works')}>
-                RECOVER
+                <span className='buttonText'>
+                    RECOVER
+                </span>
             </button>
         );
     }
