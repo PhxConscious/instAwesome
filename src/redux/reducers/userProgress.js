@@ -22,7 +22,7 @@ export default (state = initialState, action) => {
     console.log("fulfilled", action.payload)
       return {
         ...state,
-        currentUser: action.payload.data
+        currentUser: action.payload.data[0]
       }
     case "NEXT_QUESTION_PENDING":
       return {
