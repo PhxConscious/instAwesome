@@ -66,7 +66,7 @@ class Dashboard extends React.Component {
           book: nextProps.book,
         })
       }
-      console.log("in componentWillReceiveProps", nextProps.userProgress.currentUser.user_progress, this.props.userProgress.currentUser.user_progress)
+      // console.log("in componentWillReceiveProps", nextProps.userProgress.currentUser.user_progress, this.props.userProgress.currentUser.user_progress)
       if(nextProps.userProgress.currentUser.user_progress !== this.props.userProgress.currentUser.user_progress){
         this.setState({
           ...this.state,
@@ -82,7 +82,7 @@ class Dashboard extends React.Component {
   combineUserDataAndTaskData(userData){
     let { book } = this.props;
 
-    console.log("combineUserDataAndTaskData", this.props.book, userData)
+    // console.log("combineUserDataAndTaskData", this.props.book, userData)
     let tasks = Object.keys(userData);
     // taskArr combines server data with local data
     let taskArr = [];
@@ -391,7 +391,7 @@ class Dashboard extends React.Component {
   render() {
     // console.log("props", this.props.book, configUnitCards)
     this.getLengthOfCurrentLessonArray()
-    let { active, tasks, readyForRender, currentUnit, currentLesson, currentLessonObj, currentQuestion, currentQuestionObj } = this.state;
+    let { active, tasks, readyForRender, currentUnit, currentUnitName, currentUnitId, currentLesson,  currentLessonObj, currentQuestion, currentQuestionObj } = this.state;
 
     let lmsCards = null;
 
@@ -438,6 +438,7 @@ class Dashboard extends React.Component {
                 nextQuestion={this.nextQuestion}
                 prevQuestion={this.prevQuestion}
                 currentUnit={currentUnit}
+                currentUnitId={currentUnitId}
                 currentLesson={currentLesson}
                 currentLessonObj={currentLessonObj}
                 currentQuestion={currentQuestion}

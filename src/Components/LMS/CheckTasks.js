@@ -7,18 +7,49 @@ class CheckTasks extends React.Component {
     super(props);
     this.state = {
       checked: false,
+      nextButtonDisabled: false,
     }
+    this.isNextQ = this.isNextQ.bind(this);
+  }
+
+  componentWillUpdate(nextProps, nextState){
+    if(nextProps.currentQuestion !== this.props.currentQuestion){
+      console.log('updating bc of props')
+      this.isNextQ(nextProps.currentLessonObj, nextProps.currentQuestion)
+    }
+  }
+
+  isNextQ(obj, i) {
+    console.log(obj, i)
+    if(obj.questions.length > parseInt(i,10)+1){
+      this.setState({nextButtonDisabled: false})
+    } else {
+      this.setState({nextButtonDisabled: true})
+    }
+
   }
 
   render(){
     let { checked } = this.state;
-    let { lesson, nextLesson, prevLesson, currentUnit, currentLesson, noOfLessons, currentLessonObj, currentQuestion, currentQuestionObj, nextQuestion, prevQuestion } = this.props;
-    // console.log('lesson', currentQuestionObj)
+    let { lesson, nextLesson, prevLesson, currentUnit, currentUnitName, currentUnitId, currentLesson, noOfLessons, currentLessonObj, currentQuestion, currentQuestionObj, nextQuestion, prevQuestion, userProgress } = this.props;
 
-    if(currentLessonObj && currentLessonObj.title){
+    let unitProg = userProgress.currentUser.user_progress[currentUnitId];
+
+    let lessonProg = unitProg.lessons[currentLessonObj.id]
+
+    let questProg = lessonProg.questions[currentQuestionObj.id]
+    console.log("prog", questProg, lessonProg, unitProg)
+    console.log("SEE THIS", currentLessonObj.questions.length, parseInt(currentQuestion,10)+1)
+
+
+
+
+
+
+    if(currentLessonObj){
       return(
         <div>
-          <h4>{currentLessonObj.title}</h4>
+          <h6>{currentLessonObj.title}</h6>
 
           <div>lesson: {currentLessonObj.description}</div>
 
@@ -44,7 +75,6 @@ class CheckTasks extends React.Component {
               <button
                 onClick={nextLesson}
                 value="next"
-                disabled={!checked}
               >nextLesson</button>
             </span>
 
@@ -54,13 +84,12 @@ class CheckTasks extends React.Component {
           <div>question: {currentQuestionObj.title}</div>
           <button
             onClick={prevQuestion}
-            value="next"
-            disabled={!checked}
+            value="nextQuestion"
           >prevQuestion</button>
           <button
             onClick={nextQuestion}
-            value="next"
-            disabled={!checked}
+            value="nextQuestion"
+            disabled={this.state.nextButtonDisabled}
           >nextQuestion</button>
 
 
