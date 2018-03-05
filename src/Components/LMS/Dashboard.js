@@ -312,7 +312,13 @@ class Dashboard extends React.Component {
     let reduxObj = taskObjRedux[currentUnitId].lessons[currentLessonObj.id]
     reduxObj["questions"] = curQuest;
 
-    // 3. dispatch updated obj
+    // 3. handle if it's the end of a lesson
+    let CQOLength = Object.keys(currentQuestionObj).length
+    console.log("currentLessonObj", currentLessonObj.questions.length, currentQuestionObj, CQOLength)
+
+    // 4. handle if it's the end of a unit
+
+    // 5. dispatch updated obj
     this.props.putNextQuestion(1, reduxObj)
 
 
@@ -344,7 +350,7 @@ class Dashboard extends React.Component {
   }
 
   render() {
-
+    console.log("props", this.props.book, configUnitCards)
     this.getLengthOfCurrentLessonArray()
     let { active, tasks, readyForRender, currentUnit, currentLesson, currentLessonObj, currentQuestion, currentQuestionObj } = this.state;
 
