@@ -41,10 +41,17 @@ class Dashboard extends React.Component {
   // this must update when a unit is finished (not just
   // initial rendering) - see if this works
   componentDidMount(){
-    this.combineUserDataAndTaskData()
+    // this.combineUserDataAndTaskData()
     this.props.getLmsContent();
     this.props.fetchUserProgress();
     this.getInitialActiveLesson();
+  }
+
+  componentWillUpdate(nextProps, nextState){
+    if(nextProps.book !== this.props.book ){
+      this.combineUserDataAndTaskData();
+      console.log("updating", nextProps.book, this.props.book)
+    }
   }
 
   combineUserDataAndTaskData(){
@@ -56,7 +63,7 @@ class Dashboard extends React.Component {
     // find units on react but not in DB. add to tasks arr.
     // now we can update react and it renders automatically
     // we must post this to server later
-    configUnitCards.forEach(card => {
+    this.props.book.forEach(card => {
       if(tasks.indexOf(card.id) === -1){
         tasks.push(card.id)
       }
