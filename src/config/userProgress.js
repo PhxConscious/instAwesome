@@ -8,25 +8,25 @@ export default {
           lessonLocked: false,
           lessonCompleted: false,
           questions: {
-            u01q01: true,
-            u01q02: true,
-            u01q03: false,
-            u01q04: false,
-            u01q05: false,
-            u01q06: false,
-            u01q07: false,
-            u01q08: false,
-            u01q09: false,
-            u01q10: false,
-            u01q11: false,
-            u01q12: false,
-            u01q13: false,
-            u01q14: false,
-            u01q15: false,
-            u01q16: false,
-            u01q17: false,
-            u01q18: false,
-            u01q19: false,
+            u01l01q01: true,
+            u01l01q02: true,
+            u01l01q03: false,
+            u01l01q04: false,
+            u01l01q05: false,
+            u01l01q06: false,
+            u01l01q07: false,
+          }
+        },
+        u01l02: {
+          lessonLocked: false,
+          lessonCompleted: false,
+          questions: {
+            u01l02q01: false,
+            u01l02q02: false,
+            u01l02q03: false,
+            u01l02q04: false,
+            u01l02q05: false,
+            u01l02q06: false,
           }
         }
       }
@@ -39,8 +39,8 @@ export default {
           lessonLocked: false,
           lessonCompleted: false,
           questions: {
-            u02q01: false,
-            u02q02: false
+            u02l01q01: false,
+            u02l01q02: false
           }
         }
       }
