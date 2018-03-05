@@ -6,7 +6,7 @@ import '../../Styles/LmsCardsStyles.css';
 import LessonContent from './LessonContent';
 import { connect } from 'react-redux';
 import { getLmsContent } from '../../redux/actions/lmsContent';
-import { getUserProgress } from '../../redux/actions/userProgress';
+import { getUserProgress, nextQuestion } from '../../redux/actions/userProgress';
 
 
 class Dashboard extends React.Component {
@@ -40,8 +40,8 @@ class Dashboard extends React.Component {
   // initial rendering) - see if this works
   componentDidMount(){
     this.combineUserDataAndTaskData()
-    // this.props.getLmsContent();
-    // this.props.fetchUserProgress();
+    this.props.getLmsContent();
+    this.props.fetchUserProgress();
   }
 
   combineUserDataAndTaskData(){
@@ -235,10 +235,6 @@ class Dashboard extends React.Component {
     })
   }
 
-
-
-
-
   // sets current unit
   selectCardOnClick(value){
     let { tasks } = this.state;
@@ -281,13 +277,21 @@ class Dashboard extends React.Component {
   }
 
   nextQuestion(){
-    let currentQuestion = this.state.currentQuestion;
-    let targetQuestion = (parseInt(currentQuestion, 10) + 1).toString();
+    let { currentUnit, currentUnitName, currentLesson, currentLessonName, currentQuestion} = this.state;
+    let currentQuestionLocal = currentQuestion;
+    let targetQuestion = (parseInt(currentQuestionLocal, 10) + 1).toString();
     this.setState({
       ...this.state,
       currentQuestion: targetQuestion,
-      currentQuestionObj: configUnitCards[this.state.currentUnit].lessons[this.state.currentLesson].questions[targetQuestion]
+      currentQuestionObj: configUnitCards[currentUnit].lessons[currentLesson].questions[targetQuestion]
     })
+    let taskProgress = this.props.userProgress.currentUser.user_progress
+
+
+
+    console.log('prog', currentUnitName)
+
+    this.props.putNextQuestion(1, configUserProgess)
   }
 
   prevQuestion(){
@@ -386,13 +390,11 @@ const mapDispatchToProps = dispatch => {
       },
       fetchUserProgress : () => {
         dispatch(getUserProgress(1))
+      },
+      putNextQuestion : (fb_id, data) => {
+        dispatch(nextQuestion(fb_id, data ))
       }
     }
-    // return {
-    //     getExceptions: (formData) => {
-    //         dispatch(actions.getExceptions(formData, '/exceptions'))
-    //     }
-    // }
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

@@ -1,4 +1,6 @@
 import React from "react";
+import { connect } from 'react-redux';
+import { nextQuestion } from '../../redux/actions/userProgress';
 
 class CheckTasks extends React.Component {
   constructor(props){
@@ -11,7 +13,7 @@ class CheckTasks extends React.Component {
   render(){
     let { checked } = this.state;
     let { lesson, nextLesson, prevLesson, currentUnit, currentLesson, noOfLessons, currentLessonObj, currentQuestion, currentQuestionObj, nextQuestion, prevQuestion } = this.props;
-    console.log('lesson', currentQuestionObj)
+    // console.log('lesson', currentQuestionObj)
 
     if(currentLessonObj && currentLessonObj.title){
       return(
@@ -74,4 +76,17 @@ class CheckTasks extends React.Component {
     return <div>loadin...</div>
   }
 }
-export default CheckTasks;
+
+const mapStateToProps = state => ({
+  userProgress: state.userProgress
+});
+
+const mapDispatchToProps = dispatch => {
+    return {
+      putNextQuestion : (fb_id, data) => {
+        dispatch(nextQuestion(fb_id, data ))
+      }
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CheckTasks);
