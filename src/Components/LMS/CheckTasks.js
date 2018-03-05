@@ -14,18 +14,37 @@ class CheckTasks extends React.Component {
     }
     this.isNextQ = this.isNextQ.bind(this);
     this.isPrevQ = this.isPrevQ.bind(this);
+    this.isChecked = this.isChecked.bind(this);
+  }
+
+  componentDidMount(){
+    this.isChecked();
   }
 
   componentWillUpdate(nextProps, nextState){
     if(nextProps.currentQuestion !== this.props.currentQuestion){
       this.isNextQ(nextProps.currentLessonObj, nextProps.currentQuestion);
-      this.isPrevQ(nextProps.currentLessonObj, nextProps.currentQuestion)
+      this.isPrevQ(nextProps.currentLessonObj, nextProps.currentQuestion);
+      this.isChecked();
     }
   }
 
-  // isChecked() {
-  //   userProgress.currentUser.user_progress[currentUnitId].lessons[currentLessonObj.id]
-  // }
+  isChecked() {
+    console.log("in isChecked")
+    if(this.props.userProgress.currentUser.user_progress[this.props.currentUnitId].lessons[this.props.currentLessonObj.id].questions[this.props.currentQuestionObj.id]){
+      console.log('check taht shit')
+      this.setState({
+        ...this.state,
+        isChecked: true
+      })
+    } else {
+      console.log('dont check it')
+      this.setState({
+        ...this.state,
+        isChecked: false
+      })
+    }
+  }
 
   isNextQ(obj, i) {
     if(obj.questions.length > parseInt(i,10)+1){
@@ -44,9 +63,10 @@ class CheckTasks extends React.Component {
   }
 
   render(){
-    let { checked, prevButtonDisabled, nextButtonDisabled } = this.state;
+    let { isChecked, prevButtonDisabled, nextButtonDisabled } = this.state;
     let { lesson, nextLesson, prevLesson, currentUnit, currentUnitName, currentUnitId, currentLesson, noOfLessons, currentLessonObj, currentQuestion, currentQuestionObj, nextQuestion, prevQuestion, userProgress } = this.props;
 
+    console.log('checked', this.state.isChecked)
     let unitProg = userProgress.currentUser.user_progress[currentUnitId];
 
     let lessonProg = unitProg.lessons[currentLessonObj.id]
@@ -54,6 +74,8 @@ class CheckTasks extends React.Component {
     let questProg = lessonProg.questions[currentQuestionObj.id]
     // console.log("prog", questProg, lessonProg, unitProg)
     // console.log("SEE THIS", currentLessonObj.questions.length, parseInt(currentQuestion,10)+1)
+
+
 
     let nextQuestClickHandler = () => {
       nextQuestion();
@@ -77,8 +99,8 @@ class CheckTasks extends React.Component {
           <div>
             <input
               type="checkbox"
-              checked={checked}
-              onChange={e => this.setState({isChecked: !checked})}
+              checked={isChecked}
+              onChange={e => this.setState({isChecked: !isChecked})}
             />
           </div>
 

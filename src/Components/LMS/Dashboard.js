@@ -134,12 +134,16 @@ class Dashboard extends React.Component {
         i = tasks.length;
         // now lets find the active lesson
         console.log('active lesson', taskArr[i])
+      } else {
+        activeUnitName = taskArr[0].title;
+        currentUnitId = taskArr[0].id;
+        currentUnit = "0";
       }
     }
 
 
 
-
+    console.log('currentUnitId', currentUnitId)
     this.setState({
       ...this.state,
       tasks: taskArr,
