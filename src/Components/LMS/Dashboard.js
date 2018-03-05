@@ -17,12 +17,21 @@ class Dashboard extends React.Component {
       tasks: [],
       readyForRender: false,
       currentUnit: '',
+      currentUnitName: '', /* set equal to active for now*/
       currentLesson: '',
+      currentLessonName: '', /*not in yet*/
+      currentLessonObj: {},
+      currentQuestion: '', /*not in yet string num*/
+      currentQuestionName: '',
+      currentQuestionObj: {},
     }
     this.selectCardOnClick = this.selectCardOnClick.bind(this)
     this.combineUserDataAndTaskData = this.combineUserDataAndTaskData.bind(this);
     this.nextLesson = this.nextLesson.bind(this);
     this.prevLesson = this.prevLesson.bind(this);
+    this.getActiveLesson = this.getActiveLesson.bind(this);
+    this.nextQuestion = this.nextQuestion.bind(this);
+    this.prevQuestion = this.prevQuestion.bind(this);
   }
 
 
@@ -31,13 +40,13 @@ class Dashboard extends React.Component {
   // initial rendering) - see if this works
   componentDidMount(){
     this.combineUserDataAndTaskData()
-    this.props.getLmsContent();
-    this.props.fetchUserProgress();
+    // this.props.getLmsContent();
+    // this.props.fetchUserProgress();
   }
 
   combineUserDataAndTaskData(){
     // temp data to simulate server
-    let tasks = Object.keys(configUserProgess.progress);
+    let tasks = Object.keys(configUserProgess.userProgress);
     // taskArr combines server data with local data
     let taskArr = [];
 
@@ -59,9 +68,9 @@ class Dashboard extends React.Component {
           taskArr.push({
             userProgress: {
               name: key,
-              isCompleted: configUserProgess.progress[task].unitCompleted,
-              isLocked: configUserProgess.progress[task].unitLocked,
-              lessons: configUserProgess.progress[task].lessons
+              isCompleted: configUserProgess.userProgress[task].unitCompleted,
+              isLocked: configUserProgess.userProgress[task].unitLocked,
+              lessons: configUserProgess.userProgress[task].lessons
             },
             title: card.title,
             description: card.description,
@@ -91,45 +100,141 @@ class Dashboard extends React.Component {
       tasks: taskArr,
       readyForRender: true,
       active: activeUnitName,
-      currentUnit: currentUnit
+      currentUnit: currentUnit,
+      currentUnitName: activeUnitName
     })
   }
 
   // updates state.lesson only when necessary
   componentDidUpdate(prevProps, prevState){
     if(this.state.active !== prevState.active){
-          this.getInitialActiveLesson();
+          // this.getInitialActiveLesson();
+          this.getActiveLesson();
     }
   }
 
+
+
+
+
   // puts the active/selected lesson in state
   getInitialActiveLesson(){
+    // this.state.tasks.forEach(task => {
+    //
+    //   if(task.title === this.state.active){
+    //     // this block finds the first lesson from userProgress that
+    //     // isn't complete.
+    //
+    //     let lessons = task.userProgress.lessons;
+    //     console.log("LESSONS", lessons)
+    //     let initialCurrentLesson = "0" /* temp solution */
+    //
+    //
+    //     this.setState({
+    //       ...this.state,
+    //       currentLesson: initialCurrentLesson,
+    //       currentLessonName: initialCurrentLesson[0]
+    //     })
+    //
+    //
+    //
+    //
+    //
+    //
+    //     let firstIncompleteLesson = null;
+    //
+    //     let contentLessons = this.state.tasks[parseInt(this.state.currentUnit)].lessons;
+    //
+    //     // set the current lesson - temp - should use lowest unitLocked
+    //
+    //
+    //
+    //     console.log("lessons", lessons[this.state.currentLessonName])
+    //
+    //     for(let i = contentLessons.length - 1; i >= 0; i--){
+    //       let questions = contentLessons[i].questions;
+    //       for(let j = questions.length -1; j >= 0; j--){
+    //         // console.log('question', questions[j])
+    //
+    //       }
+    //     }
+    //     console.log('compare lessons and content', this.state.currentLesson, lessons, contentLessons[0])
+    //
+    //     for(let lesson in lessons){
+    //       // console.log("lesson", lessons[lesson])
+    //     }
+    //     // for(let i = lessonsKeys.length -1; i >= 0; i--){
+    //       // let lessonKey = Object.keys(lessons[i]);
+    //       // console.log("lessonKey", lessonKey)
+    //       // if(lessons[i][lessonKey]===false){
+    //       //   firstIncompleteLesson=lessonKey[0];
+    //       // }
+    //     // }
+    //     // determines what the inital currentLesson will be
+    //     task.lessons.forEach((lesson, index) => {
+    //       console.log("currentLesson", lesson.id, firstIncompleteLesson)
+    //       if (lesson.id === firstIncompleteLesson){
+    //         console.log('inside set currentLesson')
+    //         this.setState({
+    //           ...this.state,
+    //           currentLesson: index.toString()
+    //         })
+    //       }
+    //     })
+    //   }
+    // })
+    // this.forceUpdate();
+  }
+
+
+  getActiveLesson(){
+    // find first incomplete lesson within active unit
+
     this.state.tasks.forEach(task => {
+      let firstIncompleteLesson = null;
+      let firstIncompleteQuestion = null;
+      let i; // lesson index
+      let j; // question index
+      let finalIndexI;
+      let finalIndexJ;
+
       if(task.title === this.state.active){
 
-        // this block finds the first lesson from userProgress that
-        // isn't complete.
-        let lessons = task.userProgress.lessons;
-        let firstIncompleteLesson = null;
-        for(let i = lessons.length -1; i >= 0; i--){
-          let lessonKey = Object.keys(lessons[i]);
-          if(lessons[i][lessonKey]===false){
-            firstIncompleteLesson=lessonKey[0];
+        let lessonsProgress = configUserProgess.userProgress[task.id].lessons;
+
+        for(i = task.lessons.length - 1; i >=0; i--){
+          let lessonId = task.lessons[i].id;
+          if(!lessonsProgress[lessonId].lessonCompleted) {
+            firstIncompleteLesson = task.lessons[i];
+            finalIndexI = i.toString();
+          }
+
+          let questions = task.lessons[i].questions;
+
+          // find first incomplete question
+          for(j = questions.length-1; j >=0; j--){
+            if(!lessonsProgress[firstIncompleteLesson.id].questions[questions[j].id]){
+              firstIncompleteQuestion = questions[j]
+              finalIndexJ = j.toString()
+            }
           }
         }
-        // determines what the inital currentLesson will be
-        task.lessons.forEach((lesson, index) => {
-          if (lesson.id === firstIncompleteLesson){
-            this.setState({
-              ...this.state,
-              currentLesson: index.toString()
-            })
-          }
+
+        console.log('firstIncompleteQuestion', firstIncompleteQuestion)
+        this.setState({
+          ...this.state,
+          active: task.title,
+          currentLesson: finalIndexI,
+          currentLessonObj: firstIncompleteLesson,
+          currentLessonName: firstIncompleteLesson.title,
+          currentQuestion: finalIndexJ,
+          currentQuestionName: firstIncompleteQuestion.title,
+          currentQuestionObj: firstIncompleteQuestion
         })
       }
     })
-    this.forceUpdate();
   }
+
 
 
 
@@ -139,7 +244,9 @@ class Dashboard extends React.Component {
     let { tasks } = this.state;
     let index;
     tasks.forEach((task, i) => {
+
       if(task.title === value && !task.userProgress.isLocked){
+        // console.log("why no chang?", task.title, value)
         index = i.toString();
         this.setState({
           ...this.state,
@@ -148,26 +255,54 @@ class Dashboard extends React.Component {
         })
       }
     })
-
   }
 
   nextLesson(){
     let currentLesson = this.state.currentLesson;
     let targetLesson = (parseInt(currentLesson, 10) + 1).toString();
+    // console.log("nextLesson", configUnitCards[this.state.currentUnit].lessons[this.state.currentLesson])
+    console.log("lessonindex", currentLesson, targetLesson)
     this.setState({
       ...this.state,
-      currentLesson: targetLesson
+      currentLesson: targetLesson,
+      currentLessonObj: configUnitCards[this.state.currentUnit].lessons[this.state.currentLesson]
     })
   }
 
   prevLesson(){
     let currentLesson = this.state.currentLesson;
     let targetLesson = (parseInt(currentLesson, 10) - 1).toString();
+    console.log("lessonindex", currentLesson, targetLesson)
     this.setState({
       ...this.state,
-      currentLesson: targetLesson
+      currentLesson: targetLesson,
+      currentLessonObj: configUnitCards[this.state.currentUnit].lessons[this.state.currentLesson]
     })
   }
+
+  nextQuestion(){
+    let currentQuestion = this.state.currentQuestion;
+    let targetQuestion = (parseInt(currentQuestion, 10) + 1).toString();
+    this.setState({
+      ...this.state,
+      currentQuestion: targetQuestion,
+      currentQuestionObj: configUnitCards[this.state.currentUnit].lessons[this.state.currentLesson].questions[targetQuestion]
+    })
+  }
+
+  prevQuestion(){
+    let currentQuestion = this.state.currentQuestion;
+    let targetQuestion = (parseInt(currentQuestion, 10) - 1).toString();
+    this.setState({
+      ...this.state,
+      currentQuestion: targetQuestion,
+      currentQuestionObj: configUnitCards[this.state.currentUnit].lessons[this.state.currentLesson].questions[targetQuestion]
+    })
+  }
+
+
+
+
 
   getLengthOfCurrentLessonArray(){
     if(this.state.currentUnit){
@@ -177,9 +312,8 @@ class Dashboard extends React.Component {
 
   render() {
 
-    console.log("users", this.props.userProgress)
     this.getLengthOfCurrentLessonArray()
-    let { active, tasks, readyForRender, currentUnit, currentLesson } = this.state;
+    let { active, tasks, readyForRender, currentUnit, currentLesson, currentLessonObj, currentQuestion, currentQuestionObj } = this.state;
 
     let lmsCards = null;
 
@@ -206,7 +340,7 @@ class Dashboard extends React.Component {
 
 
 
-
+      // console.log('state', this.state)
       return(
         <div className="background">
           <div id="spacer"></div>
@@ -214,14 +348,22 @@ class Dashboard extends React.Component {
                   {lmsCards}
           </div>
 
+
+
+
           <div className="lessonContentContainer">
             {currentLesson ? <LessonContent
                 unit={configUnitCards[currentUnit]}
-                lesson={configUnitCards[currentUnit].lessons[currentLesson]}
+                lesson={configUnitCards}
                 nextLesson={this.nextLesson}
                 prevLesson={this.prevLesson}
+                nextQuestion={this.nextQuestion}
+                prevQuestion={this.prevQuestion}
                 currentUnit={currentUnit}
                 currentLesson={currentLesson}
+                currentLessonObj={currentLessonObj}
+                currentQuestion={currentQuestion}
+                currentQuestionObj={currentQuestionObj}
                 noOfLessons={this.getLengthOfCurrentLessonArray()}
               /> : 'Select a unit to begin'}
           </div>

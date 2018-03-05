@@ -8,14 +8,14 @@ class LessonHeader extends React.Component {
     return(
       <div>
         <div>
-          <h4>{unit.title}</h4>
+          <h4></h4>
         </div>
         <div>
-          {unit.description}
+
         </div>
         <div>
         <ReactPlayer
-          url={unit.video}
+          
           controls={true}
           width="500px"
           height="280px"
