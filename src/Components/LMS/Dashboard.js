@@ -46,15 +46,8 @@ class Dashboard extends React.Component {
     // this.combineUserDataAndTaskData()
     this.props.getLmsContent();
     this.props.fetchUserProgress();
-    this.getInitialActiveLesson();
   }
 
-  // componentWillUpdate(nextProps, nextState){
-  //   // if(nextProps.book !== this.props.book ){
-  //   //   this.combineUserDataAndTaskData();
-  //   //   console.log("updating", nextProps.book, this.props.book)
-  //   // }
-  // }
 
   componentWillReceiveProps(nextProps){
     if(nextProps !== this.props ){
@@ -141,9 +134,6 @@ class Dashboard extends React.Component {
       }
     }
 
-
-
-    console.log('currentUnitId', currentUnitId)
     this.setState({
       ...this.state,
       tasks: taskArr,
@@ -153,10 +143,6 @@ class Dashboard extends React.Component {
       currentUnitName: activeUnitName,
       currentUnitId: currentUnitId,
     });
-
-
-
-
   }
 
 
@@ -167,80 +153,6 @@ class Dashboard extends React.Component {
           this.getActiveLesson();
     }
   }
-
-
-
-
-
-  // puts the active/selected lesson in state
-  getInitialActiveLesson(){
-    // this.state.tasks.forEach(task => {
-    //
-    //   if(task.title === this.state.active){
-    //     // this block finds the first lesson from userProgress that
-    //     // isn't complete.
-    //
-    //     let lessons = task.userProgress.lessons;
-    //     console.log("LESSONS", lessons)
-    //     let initialCurrentLesson = "0" /* temp solution */
-    //
-    //
-    //     this.setState({
-    //       ...this.state,
-    //       currentLesson: initialCurrentLesson,
-    //       currentLessonName: initialCurrentLesson[0]
-    //     })
-    //
-    //
-    //
-    //
-    //
-    //
-    //     let firstIncompleteLesson = null;
-    //
-    //     let contentLessons = this.state.tasks[parseInt(this.state.currentUnit)].lessons;
-    //
-    //     // set the current lesson - temp - should use lowest unitLocked
-    //
-    //
-    //
-    //     console.log("lessons", lessons[this.state.currentLessonName])
-    //
-    //     for(let i = contentLessons.length - 1; i >= 0; i--){
-    //       let questions = contentLessons[i].questions;
-    //       for(let j = questions.length -1; j >= 0; j--){
-    //         // console.log('question', questions[j])
-    //
-    //       }
-    //     }
-    //     console.log('compare lessons and content', this.state.currentLesson, lessons, contentLessons[0])
-    //
-    //     for(let lesson in lessons){
-    //       // console.log("lesson", lessons[lesson])
-    //     }
-    //     // for(let i = lessonsKeys.length -1; i >= 0; i--){
-    //       // let lessonKey = Object.keys(lessons[i]);
-    //       // console.log("lessonKey", lessonKey)
-    //       // if(lessons[i][lessonKey]===false){
-    //       //   firstIncompleteLesson=lessonKey[0];
-    //       // }
-    //     // }
-    //     // determines what the inital currentLesson will be
-    //     task.lessons.forEach((lesson, index) => {
-    //       console.log("currentLesson", lesson.id, firstIncompleteLesson)
-    //       if (lesson.id === firstIncompleteLesson){
-    //         console.log('inside set currentLesson')
-    //         this.setState({
-    //           ...this.state,
-    //           currentLesson: index.toString()
-    //         })
-    //       }
-    //     })
-    //   }
-    // })
-    // this.forceUpdate();
-  }
-
 
   getActiveLesson(){
     // find first incomplete lesson within active unit
@@ -458,13 +370,6 @@ class Dashboard extends React.Component {
     let dto = {};
     dto["userProgress"] = taskObjRedux;
     this.props.putNextQuestion(1, dto)
-
-
-
-
-
-
-
   }
 
 

@@ -84,7 +84,6 @@ class CheckTasks extends React.Component {
       })
     }
 
-
     if(currentLessonObj){
       return(
         <div>
