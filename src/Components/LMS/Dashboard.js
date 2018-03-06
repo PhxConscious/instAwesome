@@ -507,7 +507,11 @@ class Dashboard extends React.Component {
 
 
 
-      // console.log('state', this.state)
+      console.log('currentLessonObj', currentLessonObj)
+
+/// WHY IS currentLessonObj LOSING LENGTH UPON NEXT BUTTON CLICK??????
+
+
       return(
         <div className="background">
           <div id="spacer"></div>
