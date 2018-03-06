@@ -9,8 +9,6 @@ class LessonContent extends React.Component {
 
     render() {
 
-      // const { contentType, title, description, id, question, a1, a2, a3, a4, correct, video } = this.props.lesson;
-      // const { contentType } = this.props;
 
         let contentType = "checkTasks";
         switch(contentType){
@@ -56,22 +54,24 @@ class LessonContent extends React.Component {
 
 
           case "checkTasks":
-            let { lesson, nextLesson, prevLesson, unit, currentUnit, currentLesson, currentQuestion, currentQuestionObj, currentLessonObj, noOfLessons, nextQuestion, prevQuestion } = this.props;
+            let { lesson, nextLesson, prevLesson, unit, currentUnit, currentUnitName, currentUnitId, currentLesson, currentQuestion, currentQuestionObj, currentLessonObj, noOfLessons, nextQuestion, prevQuestion } = this.props;
             // console.log('lesson', lesson, 'unit', unit, 'curuinit', currentUnit, 'currentLesson', currentLesson, 'noOfLessons', noOfLessons)
             return(
               <div>
                 <LessonHeader
                   unit={unit}
+                  currentLessonObj={currentLessonObj}
                 />
                 <CheckTasks
                   lesson={lesson}
                   nextLesson={nextLesson}
                   prevLesson={prevLesson}
                   nextQuestion={nextQuestion}
-                  prevQuestion={this.prevQuestion}
+                  prevQuestion={prevQuestion}
                   currentUnit={currentUnit}
                   currentLesson={currentLesson}
                   currentLessonObj={currentLessonObj}
+                  currentUnitId={currentUnitId}
                   currentQuestion={currentQuestion}
                   currentQuestionObj={currentQuestionObj}
                   noOfLessons={noOfLessons}

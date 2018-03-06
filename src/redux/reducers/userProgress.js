@@ -5,7 +5,6 @@ let initialState = {
 export default (state = initialState, action) => {
   switch (action.type){
     case "GET_USER_PROGRESS_FULFILLED":
-    console.log('init get', action.payload)
       return {
         ...state,
         currentUser: action.payload.data[0]
@@ -19,7 +18,6 @@ export default (state = initialState, action) => {
         ...state
       }
     case "NEXT_QUESTION_FULFILLED":
-    console.log("fulfilled", action.payload)
       return {
         ...state,
         currentUser: action.payload.data[0]
