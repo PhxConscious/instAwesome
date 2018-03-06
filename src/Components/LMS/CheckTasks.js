@@ -22,7 +22,16 @@ class CheckTasks extends React.Component {
   }
 
   componentWillUpdate(nextProps, nextState){
+    // console.log("nextProps",
+    //  nextProps.currentLessonObj.questions.length,
+    //   this.props.currentLessonObj.questions.length
+    //    )
+
     if(nextProps.currentQuestion !== this.props.currentQuestion){
+
+      // console.log("Insifde next props", nextProps.currentLessonObj.questions, this.props.currentLessonObj.questions)
+
+
       this.isNextQ(nextProps.currentLessonObj, nextProps.currentQuestion);
       this.isPrevQ(nextProps.currentLessonObj, nextProps.currentQuestion);
       this.isChecked();
@@ -44,7 +53,7 @@ class CheckTasks extends React.Component {
   }
 
   isNextQ(obj, i) {
-    console.log('in isNextQ', this.state.nextButtonDisabled, obj, parseInt(i,10)+1)
+    // console.log('in isNextQ', this.state.nextButtonDisabled, obj, parseInt(i,10)+1)
     if(obj.questions.length = parseInt(i,10)+1){
       this.setState({nextButtonDisabled: false})
     } else {
@@ -67,6 +76,7 @@ class CheckTasks extends React.Component {
     let unitProg = userProgress.currentUser.user_progress[currentUnitId];
 
     let lessonProg = unitProg.lessons[currentLessonObj.id]
+
 
     let questProg = lessonProg.questions[currentQuestionObj.id]
 
@@ -118,7 +128,7 @@ class CheckTasks extends React.Component {
           >nextLesson</button>
           <button
             className={!nextButtonDisabled ? "" : "hidden"}
-            onClick={nextQuestClickHandler}
+            onClick={nextQuestion}
             value="nextQuestion"
             disabled={this.state.nextButtonDisabled}
           >nextQuestion</button>

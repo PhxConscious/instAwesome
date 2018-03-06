@@ -21,11 +21,11 @@ class Dashboard extends React.Component {
       currentUnitId: null,
       currentLesson: '',
       currentLessonName: '', /*not in yet*/
-      currentLessonObj: {},
+      currentLessonObj: null,
       currentQuestion: '', /*not in yet string num*/
       currentQuestionName: '',
       currentQuestionId: '',
-      currentQuestionObj: {},
+      currentQuestionObj: null,
       book: null,
       user: null,
     }
@@ -50,16 +50,15 @@ class Dashboard extends React.Component {
 
 
   componentWillReceiveProps(nextProps){
+    if(this.props.book && this.props.book[0] && this.props.book[0].lessons){
+      console.log("before lose questions", this.props.book[0].lessons[0].questions)
+    }
+
     if(nextProps !== this.props ){
 
-      // console.log("updating", nextProps, this.props)
-      if(nextProps.book !== this.props.book){
-        this.setState({
-          ...this.state,
-          book: nextProps.book,
-        })
+      if(nextProps.book[0] && nextProps.book[0].lessons && nextProps.book[0] !== this.props.book[0]){
+console.log("NOW ITS LOSING QUESTIONS", nextProps.book[0].lessons[0].questions)
       }
-      // console.log("in componentWillReceiveProps", nextProps.userProgress.currentUser.user_progress, this.props.userProgress.currentUser.user_progress)
       if(nextProps.userProgress.currentUser.user_progress !== this.props.userProgress.currentUser.user_progress){
         this.setState({
           ...this.state,
@@ -74,9 +73,8 @@ class Dashboard extends React.Component {
 
   combineUserDataAndTaskData(userData){
     let { book } = this.props;
-
-    // console.log("combineUserDataAndTaskData", this.props.book, userData)
     let tasks = Object.keys(userData);
+
     // taskArr combines server data with local data
     let taskArr = [];
 
@@ -126,7 +124,6 @@ class Dashboard extends React.Component {
         currentUnit = i.toString();
         i = tasks.length;
         // now lets find the active lesson
-        console.log('active lesson', taskArr[i])
       } else {
         activeUnitName = taskArr[0].title;
         currentUnitId = taskArr[0].id;
@@ -149,14 +146,12 @@ class Dashboard extends React.Component {
   // updates state.lesson only when necessary
   componentDidUpdate(prevProps, prevState){
     if(this.state.active !== prevState.active){
-          // this.getInitialActiveLesson();
           this.getActiveLesson();
     }
   }
 
   getActiveLesson(){
     // find first incomplete lesson within active unit
-
     this.state.tasks.forEach(task => {
       let firstIncompleteLesson = null;
       let firstIncompleteQuestion = null;
@@ -167,7 +162,8 @@ class Dashboard extends React.Component {
 
       if(task.title === this.state.active){
 
-        let lessonsProgress = configUserProgess.userProgress[task.id].lessons;
+        let lessonsProgress = this.props.userProgress.currentUser.user_progress[task.id].lessons;
+
 
         for(i = task.lessons.length - 1; i >=0; i--){
           let lessonId = task.lessons[i].id;
@@ -186,6 +182,8 @@ class Dashboard extends React.Component {
             }
           }
         }
+
+        console.log('incompletes', firstIncompleteLesson, firstIncompleteQuestion)
 
         this.setState({
           ...this.state,
@@ -223,12 +221,12 @@ class Dashboard extends React.Component {
   }
 
   nextLesson(){
+
     let { currentUnit, currentUnitId, currentLesson, currentLessonObj, currentQuestion, currentQuestionObj, currentQuestionId} = this.state;
     let { userProgress, book } = this.props;
 
     let targetLesson = (parseInt(currentLesson, 10) + 1).toString();
-
-
+    console.log("difference", book, configUnitCards)
     this.setState({
       ...this.state,
       currentLesson: targetLesson,
@@ -268,7 +266,6 @@ class Dashboard extends React.Component {
   prevLesson(){
     let currentLesson = this.state.currentLesson;
     let targetLesson = (parseInt(currentLesson, 10) - 1).toString();
-    console.log("lessonindex", currentLesson, targetLesson)
     this.setState({
       ...this.state,
       currentLesson: targetLesson,
@@ -277,15 +274,16 @@ class Dashboard extends React.Component {
   }
 
   nextQuestion(){
+    this.props.getLmsContent();
     let { currentUnit, currentUnitId, currentLesson, currentLessonObj, currentQuestion, currentQuestionObj, currentQuestionId} = this.state;
-    let { userProgress } = this.props;
-
+    let { userProgress, book } = this.props;
+    console.log("Book1", this.props.book[0].lessons[0].questions)
     let targetQuestion = (parseInt(currentQuestion, 10) + 1).toString();
 
     this.setState({
       ...this.state,
       currentQuestion: targetQuestion,
-      currentQuestionObj: configUnitCards[currentUnit].lessons[currentLesson].questions[targetQuestion]
+      currentQuestionObj: book[currentUnit].lessons[currentLesson].questions[targetQuestion]
     })
 
 
@@ -320,21 +318,21 @@ class Dashboard extends React.Component {
     // 5. dispatch updated obj - format object for server
     let dto = {};
     dto["userProgress"] = taskObjRedux;
+
     this.props.putNextQuestion(1, dto)
-
-
-
+    console.log('dto', dto)
+    // console.log("Book2", this.props.book[0].lessons[0].questions)
   }
 
   prevQuestion(){
     let { currentUnit, currentUnitId, currentLesson, currentLessonObj, currentQuestion, currentQuestionObj, currentQuestionId} = this.state;
-    let { userProgress } = this.props;
+    let { userProgress, book } = this.props;
 
     let targetQuestion = (parseInt(currentQuestion, 10) - 1).toString();
     this.setState({
       ...this.state,
       currentQuestion: targetQuestion,
-      currentQuestionObj: configUnitCards[currentUnit].lessons[currentLesson].questions[targetQuestion]
+      currentQuestionObj: book[currentUnit].lessons[currentLesson].questions[targetQuestion]
     })
 
     // the whole task obj in redux
@@ -383,9 +381,11 @@ class Dashboard extends React.Component {
   }
 
   render() {
-    // console.log("props", this.props.book, configUnitCards)
+
     this.getLengthOfCurrentLessonArray()
     let { active, tasks, readyForRender, currentUnit, currentUnitName, currentUnitId, currentLesson,  currentLessonObj, currentQuestion, currentQuestionObj } = this.state;
+
+    let { userProgress, book } = this.props;
 
     let lmsCards = null;
 
@@ -393,12 +393,12 @@ class Dashboard extends React.Component {
 
       lmsCards = tasks.map((card, i) => {
         return <LmsCard
-          title={configUnitCards[i].title}
-          description={configUnitCards[i].description}
-          image={configUnitCards[i].image}
+          title={book[i].title}
+          description={book[i].description}
+          image={book[i].image}
           onClick={this.selectCardOnClick}
-          value={configUnitCards[i].title}
-          active={active === configUnitCards[i].title ? true : false}
+          value={book[i].title}
+          active={active === book[i].title ? true : false}
           isCompleted={card.userProgress.isCompleted}
           locked={tasks[i].userProgress.isLocked}
           key={card.id}
@@ -407,12 +407,8 @@ class Dashboard extends React.Component {
     }
 
     if(readyForRender){
-      // console.log("userProgress", tasks[currentUnit].userProgress.lessons[currentLesson])
-      // TO DO - MAKE THIS CONSOLE GO TO THE CheckTasks COMPONENT AND AFFECT WHETHER THE BUTTON IS DISABLED OR NOT
 
-
-
-      console.log('currentLessonObj', currentLessonObj)
+      // console.log('book in render', currentLessonObj.questions, this.props.book[0].lessons[0].questions)
 
 /// WHY IS currentLessonObj LOSING LENGTH UPON NEXT BUTTON CLICK??????
 
@@ -429,8 +425,8 @@ class Dashboard extends React.Component {
 
           <div className="lessonContentContainer">
             {currentLesson ? <LessonContent
-                unit={configUnitCards[currentUnit]}
-                lesson={configUnitCards}
+                unit={book[currentUnit]}
+                lesson={book}
                 nextLesson={this.nextLesson}
                 prevLesson={this.prevLesson}
                 nextQuestion={this.nextQuestion}

@@ -18,6 +18,7 @@ export default (state = initialState, action) => {
         ...state
       }
     case "NEXT_QUESTION_FULFILLED":
+    console.log('userPRogReducer ', action.payload.data[0])
       return {
         ...state,
         currentUser: action.payload.data[0]
