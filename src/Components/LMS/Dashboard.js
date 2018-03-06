@@ -51,13 +51,11 @@ class Dashboard extends React.Component {
 
   componentWillReceiveProps(nextProps){
     if(this.props.book && this.props.book[0] && this.props.book[0].lessons){
-      console.log("before lose questions", this.props.book[0].lessons[0].questions)
     }
 
     if(nextProps !== this.props ){
 
       if(nextProps.book[0] && nextProps.book[0].lessons && nextProps.book[0] !== this.props.book[0]){
-console.log("NOW ITS LOSING QUESTIONS", nextProps.book[0].lessons[0].questions)
       }
       if(nextProps.userProgress.currentUser.user_progress !== this.props.userProgress.currentUser.user_progress){
         this.setState({
@@ -183,7 +181,6 @@ console.log("NOW ITS LOSING QUESTIONS", nextProps.book[0].lessons[0].questions)
           }
         }
 
-        console.log('incompletes', firstIncompleteLesson, firstIncompleteQuestion)
 
         this.setState({
           ...this.state,
@@ -209,7 +206,6 @@ console.log("NOW ITS LOSING QUESTIONS", nextProps.book[0].lessons[0].questions)
     tasks.forEach((task, i) => {
 
       if(task.title === value && !task.userProgress.isLocked){
-        // console.log("why no chang?", task.title, value)
         index = i.toString();
         this.setState({
           ...this.state,
@@ -226,7 +222,6 @@ console.log("NOW ITS LOSING QUESTIONS", nextProps.book[0].lessons[0].questions)
     let { userProgress, book } = this.props;
 
     let targetLesson = (parseInt(currentLesson, 10) + 1).toString();
-    console.log("difference", book, configUnitCards)
     this.setState({
       ...this.state,
       currentLesson: targetLesson,
@@ -277,7 +272,6 @@ console.log("NOW ITS LOSING QUESTIONS", nextProps.book[0].lessons[0].questions)
     this.props.getLmsContent();
     let { currentUnit, currentUnitId, currentLesson, currentLessonObj, currentQuestion, currentQuestionObj, currentQuestionId} = this.state;
     let { userProgress, book } = this.props;
-    console.log("Book1", this.props.book[0].lessons[0].questions)
     let targetQuestion = (parseInt(currentQuestion, 10) + 1).toString();
 
     this.setState({
@@ -310,7 +304,6 @@ console.log("NOW ITS LOSING QUESTIONS", nextProps.book[0].lessons[0].questions)
     if(parseInt(targetQuestion)+1 === currentLessonObj.questions.length){
       taskObjRedux[currentUnitId].lessons[currentLessonObj.id]["lessonCompleted"]=true;
       taskObjRedux[currentUnitId].lessons[currentLessonObj.id]["lessonLocked"]=false;
-      // console.log("handleLessonEnd", taskObjRedux)
     }
     // 4. handle if it's the end of a unit
     // console.log("handleUnitEnd")
@@ -320,7 +313,6 @@ console.log("NOW ITS LOSING QUESTIONS", nextProps.book[0].lessons[0].questions)
     dto["userProgress"] = taskObjRedux;
 
     this.props.putNextQuestion(1, dto)
-    console.log('dto', dto)
     // console.log("Book2", this.props.book[0].lessons[0].questions)
   }
 
@@ -461,7 +453,6 @@ const mapDispatchToProps = dispatch => {
         dispatch(getUserProgress(1))
       },
       putNextQuestion : (fb_id, data) => {
-        console.log('dispatch', fb_id, data)
         dispatch(nextQuestion(fb_id, data ))
       }
     }
