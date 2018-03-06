@@ -137,8 +137,7 @@ class SignUpForm extends Component {
                 </div>
                 <br/>
                 <button
-                    id='signInFormButton'
-                    className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                    className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored signInFormButton"
                     onClick={() => this.onButtonPress()}>
                     <span className='buttonText'>
                         UPDATE

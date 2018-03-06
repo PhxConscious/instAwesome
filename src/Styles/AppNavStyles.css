@@ -1,15 +1,4 @@
 
-.navBarOuterContainer{
-    height: 10px;
-    margin: 0;
-    margin-bottom: 400px;
-    padding: 0;
-}
-
-.mdl-layout__header-row.navContentCont{
-    width: 100%;
-}
-
 .navBar {
     background-color: white;
 }
@@ -24,14 +13,14 @@
     color: #48C8D3
 }
 
-.centerLogoCont{
+.centerLogoCont {
     margin-top: 10px;
-    width:50%;
-    height:100%;
+    width: 50%;
+    height: 100%;
 }
 
-.centerLogo{
-    height:100%;
+.centerLogo {
+    height: 100%;
     width: 300px;
 }
 
@@ -48,16 +37,20 @@
     padding-left: 0;
 }
 
+.linkTo {
+    text-decoration: none;
+}
+
 .accountCircleIcon {
-   color: black;
+    color: black;
     font-size: 31px;
 }
 
-.learnTextCont{
+.learnTextCont {
     margin-top: 9px;
 }
 
-.phxConsciousTextCont{
+.phxConsciousTextCont {
     margin-top: 5px;
 }
 

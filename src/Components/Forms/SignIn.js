@@ -55,8 +55,7 @@ class LoginForm extends Component {
     renderButton = () => {
         return (
             <button
-                id='signInFormButton'
-                className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
+                className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect signInFormButton"
                 onClick={this.onButtonPress}
                 color='orange'>
                 <span className='buttonText'>

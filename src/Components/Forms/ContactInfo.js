@@ -25,8 +25,7 @@ class ContactInfo extends Component {
         }
         return (
             <button
-                id='formButton'
-                className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
+                className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect formButton"
                 onClick={() => this.onButtonPress()}>
                 <span className='buttonText'>
                     UPDATE
