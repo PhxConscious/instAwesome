@@ -314,6 +314,7 @@ class Dashboard extends React.Component {
 
     this.props.putNextQuestion(1, dto)
     // console.log("Book2", this.props.book[0].lessons[0].questions)
+    this.props.getLmsContent()
   }
 
   prevQuestion(){
