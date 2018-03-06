@@ -3,7 +3,7 @@
     width: 95%;
     margin-right: auto;
     margin-left: auto;
-
+    margin-bottom: 20px;
 }
 
 .formTitleCont {
@@ -33,7 +33,7 @@
     margin-bottom: 20px;
 }
 
-.or{
+.or {
     margin: 5px;
     margin-top: 15px;
     text-align: center;
@@ -43,12 +43,12 @@
     color: white;
 }
 
-.googleButton{
+.googleButton {
     font-family: 'Asap', sans-serif;
     color: #48C8D3;
 }
 
-.googleButton:hover{
+.googleButton:hover {
     color: #9BDD82;
     background: none;
 }
@@ -61,7 +61,7 @@
     font-family: 'Asap', sans-serif;
     border-radius: 7px;
     font-size: 17px;
-    border:none;
+    border: none;
 }
 
 .inputLabel {
@@ -73,14 +73,14 @@
     font-family: 'Asap', sans-serif;
 }
 
-.errorMessage{
-    color:red;
+.errorMessage {
+    color: red;
     height: 20px;
     margin-top: -10px;
     margin-bottom: 10px;
 }
 
-#formButton {
+.formButton {
     background-color: #9BDD82;
     width: 30%;
     border-radius: 10px;
@@ -93,7 +93,7 @@
     width: 250px;
 }
 
-#signInFormButton {
+.signInFormButton {
     background-color: #48C8D3;
     width: 30%;
     border-radius: 10px;
@@ -101,7 +101,7 @@
 
 }
 
-.buttonText{
+.buttonText {
     font-size: large;
 }
 
@@ -112,6 +112,7 @@ ul {
     margin-left: 25px;
     padding: 0;
     color: #48C8D3;
+    text-align: left;
 }
 
 li {

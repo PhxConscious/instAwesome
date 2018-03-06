@@ -5,8 +5,8 @@ import SignInForm from '../Forms/SignIn';
 import UnderwaterWrapper from '../Reusable/UnderwaterWrapper';
 import ShadowBox from '../Reusable/ShadowBox';
 import ConsciousCenter from '../Reusable/ConsciousCenter';
-import Checkout from "../Reusable/Checkout";
 import Gradient from "../Reusable/Gradient";
+import AppNavbar from '../Reusable/AppNav';
 
 
 class LandingPage extends Component {

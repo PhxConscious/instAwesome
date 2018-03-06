@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import '../../Styles/FormsStyles.css';
 
-class Company extends Component {
+class PrimaryContact extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -24,8 +24,7 @@ class Company extends Component {
         }
         return (
             <button
-                id='formButton'
-                className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
+                className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect formButton"
                 onClick={() => this.onButtonPress()}>
                 <span className='buttonText'>
                     UPDATE
@@ -95,4 +94,4 @@ class Company extends Component {
     }
 }
 
-export default Company;
+export default PrimaryContact;
