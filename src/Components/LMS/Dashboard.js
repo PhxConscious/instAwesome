@@ -147,14 +147,18 @@ class Dashboard extends React.Component {
 
   // updates state.lesson only when necessary
   componentDidUpdate(prevProps, prevState){
-    if(this.state.active !== prevState.active){
-        this.getActiveLesson();
+    let { currentValues } = this.props;
+    if(prevProps.currentValues.tasks !== currentValues.tasks){
+      this.getActiveLesson();
     }
   }
 
   getActiveLesson(){
+    let { currentValues } = this.props;
+    let userProg = this.props.userProgress.currentUser.user_progress;
+
     // find first incomplete lesson within active unit
-    this.state.tasks.forEach(task => {
+    currentValues.tasks.forEach(task => {
       let firstIncompleteLesson = null;
       let firstIncompleteQuestion = null;
       let i; // lesson index
@@ -162,10 +166,9 @@ class Dashboard extends React.Component {
       let finalIndexI;
       let finalIndexJ;
 
-      if(task.title === this.state.active){
+      if(task.title === currentValues.active){
 
-        let lessonsProgress = this.props.userProgress.currentUser.user_progress[task.id].lessons;
-
+        let lessonsProgress = userProg[task.id].lessons;
 
         for(i = task.lessons.length - 1; i >=0; i--){
           let lessonId = task.lessons[i].id;
