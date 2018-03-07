@@ -196,14 +196,14 @@ class Dashboard extends React.Component {
 
   nextLesson(){
 
-    let { currentUnit, currentUnitId, currentLesson, currentLessonObj, currentQuestion, currentQuestionObj, currentQuestionId} = this.state;
+    let { currentUnit, currentUnitId, currentUnitObj, currentLesson, currentLessonObj, currentQuestion, currentQuestionObj, currentQuestionId } = this.props.currentValues;
     let { userProgress, book } = this.props;
 
     let targetLesson = (parseInt(currentLesson, 10) + 1).toString();
 
     //@TODO update currentLessonObj based on targetLesson
     this.props.setCurrentValues("currentLesson", targetLesson);
-    this.props.setCurrentValues("currentLessonObj", configUnitCards[this.state.currentUnit].lessons[this.state.currentLesson]);
+    this.props.setCurrentValues("currentLessonObj", configUnitCards[currentUnit].lessons[currentLesson]);
 
     // this.setState({
     //   ...this.state,
@@ -215,7 +215,7 @@ class Dashboard extends React.Component {
     let taskObjRedux = userProgress.currentUser.user_progress;
 
     // the current task object in redux
-    let curUnit =  taskObjRedux[currentUnitId];
+    let curUnit =  taskObjRedux[currentUnit.id];
 
     // the current lesson from redux
     let curLesson = curUnit.lessons[currentLessonObj.id];
@@ -284,7 +284,7 @@ class Dashboard extends React.Component {
     taskObjRedux[currentUnitObj.id].lessons[currentLessonObj.id]["questions"] = curQuest;
 
     // 3. handle if it's the end of a lesson
-    if(parseInt(targetQuestion)+1 === currentLessonObj.questions.length){
+    if(parseInt(targetQuestion) === currentLessonObj.questions.length){
       taskObjRedux[currentUnitObj.id].lessons[currentLessonObj.id]["lessonCompleted"]=true;
       taskObjRedux[currentUnitObj.id].lessons[currentLessonObj.id]["lessonLocked"]=false;
     }
@@ -322,8 +322,9 @@ class Dashboard extends React.Component {
   }
 
   getLengthOfCurrentLessonArray(){
-    if(this.state.currentUnit){
-      return this.state.tasks[this.state.currentUnit].lessons.length;
+    let { tasks, currentUnit } = this.props.currentValues;
+    if(currentUnit){
+      return tasks[currentUnit].lessons.length;
     }
   }
 

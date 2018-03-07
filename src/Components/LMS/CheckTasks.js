@@ -11,133 +11,102 @@ class CheckTasks extends React.Component {
       isChecked: false,
       test:false,
     }
-    // this.isNextQ = this.isNextQ.bind(this);
-    // this.isPrevQ = this.isPrevQ.bind(this);
-    // this.isChecked = this.isChecked.bind(this);
+    this.isNextQ = this.isNextQ.bind(this);
+    this.isPrevQ = this.isPrevQ.bind(this);
+    this.isChecked = this.isChecked.bind(this);
   }
 
   componentDidMount(){
-    // this.isChecked();
+    if(this.props.currentValues.currentQuestionObj){
+      this.isChecked();
+      this.isNextQ();
+      this.isPrevQ();
+    }
   }
 
-  componentWillUpdate(nextProps, nextState){
-
-    // if(nextProps.currentQuestion !== this.props.currentQuestion){
-    //
-    //   this.isNextQ(nextProps.currentLessonObj, parseInt(nextProps.currentQuestion)-2);
-    //   this.isPrevQ(nextProps.currentLessonObj, parseInt(nextProps.currentQuestion));
-    //
-    // }
+  componentDidUpdate(prevProps, prevState){
+    if(prevProps.currentValues !== this.props.currentValues){
+      this.isChecked();
+      this.isNextQ();
+      this.isPrevQ();
+    }
   }
 
-  // componentWillReceiveProps(prevProps){
-  //   if(prevProps.currentQuestion !== this.props.currentQuestion){
-  //
-  //     this.isNextQ(this.props.currentLessonObj, this.props.currentQuestion);
-  //     this.isPrevQ(this.props.currentLessonObj, this.props.currentQuestion);
-  //
-  //   }
-  //
-  //
-  //
-  //   if(prevProps.currentQuestion !== this.props.currentQuestion){
-  //     this.isChecked();
-  //   }
-  // }
+  isChecked() {
+    let userProg = this.props.userProgress.currentUser.user_progress;
 
-  // isChecked() {
-  //   if(this.props.userProgress.currentUser.user_progress[this.props.currentUnitId].lessons[this.props.currentLessonObj.id].questions[this.props.currentQuestionObj.id]){
-  //     // console.log("isChecked true", this.props.currentQuestionObj.id)
-  //     this.setState({
-  //       ...this.state,
-  //       isChecked: true
-  //     })
-  //   } else {
-  //     // console.log('isChecked false', this.props.currentQuestionObj.id)
-  //     this.setState({
-  //       ...this.state,
-  //       isChecked: false
-  //     })
-  //   }
-  // }
+    let{ currentUnitObj, currentLessonObj, currentQuestionObj } = this.props.currentValues;
+    if(userProg[currentUnitObj.id].lessons[currentLessonObj.id].questions[currentQuestionObj.id]){
+      this.setState({
+        ...this.state,
+        isChecked: true
+      })
+    } else {
+      this.setState({
+        ...this.state,
+        isChecked: false
+      })
+    }
+  }
 
-  isNextQ(obj, i) {
-    let lengthOfQuestArr = this.props.book[this.props.currentUnit].lessons[this.props.currentLesson].questions.length
+  isNextQ() {
+    let { book } = this.props;
+    let { currentUnit, currentLesson, currentQuestion } = this.props.currentValues;
 
-    // console.log("isNext", lengthOfQuestArr, parseInt(i,10)+2)
+    let lengthOfQuestArr = book[currentUnit].lessons[currentLesson].questions.length
 
-    if(lengthOfQuestArr === parseInt(i,10)+1){
-      // console.log("yes the same", parseInt(i,10)+1, lengthOfQuestArr)
+    if(lengthOfQuestArr === parseInt(currentQuestion,10)+1){
       this.setState({
         ...this.state,
         nextButtonHidden: true,
       })
     }
 
-    // if(lengthOfQuestArr !== parseInt(i,10)+1){
-    //   console.log("not the same")
-    //   this.setState({
-    //     ...this.state,
-    //     nextButtonHidden: false,
-    //   })
-    // }
-
-    // if(parseInt(i,10)===0) {
-    //   this.setState({
-    //     ...this.state,
-    //     nextButtonDisabled: false
-    //   })
-    // }
-    // this.forceUpdate();
-  }
-
-  isPrevQ(obj, i) {
-    // console.log("isPrev", i)
-    if(parseInt(i,10) === 1){
+    if(lengthOfQuestArr !== parseInt(currentQuestion,10)+1){
       this.setState({
-        ...this.state,
-        prevButtonDisabled: true
+        // ...this.state,
+        nextButtonHidden: false,
       })
     }
-    // if(parseInt(i,10) !== 1){
-    //   this.setState({
-    //     ...this.state,
-    //     prevButtonDisabled: false
-    //   })
-    // }
+  }
+
+  isPrevQ() {
+    console.log("isPrev", currentQuestion)
+    let { currentQuestion } = this.props.currentValues;
+
+    if(parseInt(currentQuestion,10) === 0){
+      this.setState({
+        ...this.state,
+        prevButtonHidden: true
+      })
+    }
+    if(parseInt(currentQuestion,10) !== 0){
+      this.setState({
+        prevButtonHidden: false
+      })
+    }
   }
 
   render(){
 
 
-    let { isChecked, prevButtonDisabled, nextButtonDisabled, nextButtonHidden } = this.state;
+    let { isChecked, nextButtonHidden, prevButtonHidden } = this.state;
 
     let { lesson, nextLesson, prevLesson, noOfLessons, nextQuestion, prevQuestion, userProgress } = this.props;
 
     let { currentUnit, currentUnitObj, currentLesson, currentLessonObj, currentQuestion, currentQuestionObj } = this.props.currentValues
 
-    // let unitProg = userProgress.currentUser.user_progress[currentUnitId];
-    //
-    // let lessonProg = unitProg.lessons[currentLessonObj.id]
-    //
-    // let questProg = lessonProg.questions[currentQuestionObj.id]
-
     let nextQuestClickHandler = () => {
       nextQuestion();
-      // this.setState({
-        // nextButtonHidden: false
-      // })
+
     }
 
     let prevQuestClickHandler = () => {
       prevQuestion();
-      // this.setState({
-        // prevButtonDisabled: false
-      // })
     }
 
     if(currentLessonObj){
-      // console.log("disabled?", this.state.nextButtonHidden, this.state.prevButtonDisabled)
+
       return(
         <div>
           <div>lesson: {currentLessonObj.description}</div>
@@ -154,9 +123,9 @@ class CheckTasks extends React.Component {
 
 
           <button
+            className={prevButtonHidden ? 'hidden' : ""}
             onClick={prevQuestClickHandler}
             value="nextQuestion"
-            disabled={prevButtonDisabled}
           >prevQuestion</button>
           <button
             onClick={prevLesson}
@@ -168,23 +137,18 @@ class CheckTasks extends React.Component {
             value="next"
           >nextllllllllLesson</button>
           <button
+            className={nextButtonHidden ? 'hidden' : ""}
             onClick={nextQuestion}
             value="nextQuestion"
-            disabled={nextButtonHidden}
+            disabled={!isChecked}
           >nextQuestion</button>
-        <button
-          onClick={()=>this.setState({nextButtonHidden:!this.state.nextButtonHidden})}
-          value="togglenet"
-        >Toggle</button>
 
+        <div>current lesson: {parseInt(currentLesson, 10)+1} of {noOfLessons}</div>
+        <div>progress: {parseInt(currentQuestion, 10)+1} of {currentLessonObj.questions.length}</div>
 
+          {currentQuestion === "0" ? "please begin the lesson" : ''}
 
-
-        <div>unit: {parseInt(currentUnit, 10)+1}  current lesson: {parseInt(currentLesson, 10)+1} of {noOfLessons}  </div>
-
-          {currentLesson === "0" ? "please begin the lesson" : ''}
-
-          {parseInt(currentLesson, 10)+1 === noOfLessons? "You finished the unit" : ''}
+          {parseInt(currentQuestion, 10)+1 === noOfLessons? "You finished the unit" : ''}
 
         </div>
       )
