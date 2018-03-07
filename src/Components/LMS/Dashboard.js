@@ -291,10 +291,6 @@ class Dashboard extends React.Component {
     // 2. put questions obj in taskObjRedux
     taskObjRedux[currentUnitObj.id].lessons[currentLessonObj.id]["questions"] = curQuest;
 
-    // 4. handle if it's the end of a unit
-    // console.log("handleUnitEnd")
-    // or maybe this is in the nextLessonHandler?
-
     // 5. dispatch updated obj - format object for server
     let dto = {};
     dto["userProgress"] = taskObjRedux;

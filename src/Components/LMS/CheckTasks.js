@@ -106,7 +106,19 @@ class CheckTasks extends React.Component {
     let nextQuestClickHandler = () => {
       let lengthOfQuestArr = book[currentUnit].lessons[currentLesson].questions.length
 
-      if(lengthOfQuestArr === parseInt(currentQuestion,10)+1){
+      let lengthOfLessonArr = book[currentUnit].lessons.length
+
+      if(lengthOfQuestArr === parseInt(currentQuestion,10)+1 && lengthOfLessonArr === parseInt(currentLesson,10)+1){
+        console.log("END OF THE UNIT")
+        // this.setState({
+        //   ...this.state,
+        //   openDialog: true,
+        //   dialogTitle: "You finished the Lesson",
+        //   dialogText: "onto the next lesson?",
+        //   dialogButton1: "continue",
+        //   dialogButton2: "stay here"
+        // })
+      } else if (lengthOfQuestArr === parseInt(currentQuestion,10)+1){
         this.setState({
           ...this.state,
           openDialog: true,
