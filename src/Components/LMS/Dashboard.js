@@ -201,7 +201,7 @@ class Dashboard extends React.Component {
 
     let { userProgress, book } = this.props;
 
-    let targetUnit = (parseInt(currentUnit, 10) + 1).toString();
+    let targetUnit = (parseInt(currentUnit, 10) + 1);
 
     // the whole task obj in redux
     let taskObjRedux = userProgress.currentUser.user_progress;
@@ -214,8 +214,17 @@ class Dashboard extends React.Component {
 
     // @TODO mark the current unit as completed
     taskObjRedux[currentUnitObj.id]["unitCompleted"] = true;
-    
+
     // @TODO mark the next unit as unlocked
+    // check to see if there is a next unit
+    // console.log("checking length", targetUnit, book.length)
+    let nextUnitId = currentUnit; // jic there's no next unit
+    if(book.length > targetUnit){
+      nextUnitId = book[targetUnit].id;
+
+      taskObjRedux[nextUnitId]["unitLocked"] = false;
+      // console.log(nextUnitId, taskObjRedux, 'taskObjRedux')
+    }
     // @TODO mark the current lesson as complete
     // @TODO post this progress to the server
     // @TODO set new current unit, lesson, question in redux
