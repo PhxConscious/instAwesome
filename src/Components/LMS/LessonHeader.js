@@ -1,29 +1,44 @@
 import React from 'react';
 import ReactPlayer from 'react-player';
+import { connect } from 'react-redux';
 
 class LessonHeader extends React.Component {
 
-  render(){
-    let { unit, currentLessonObj } = this.props;
-    return(
-      <div>
-        <div>
-          <h4>{currentLessonObj.title}</h4>
-        </div>
-        <div>
 
-        </div>
+  render(){
+    let { currentLessonObj } = this.props.currentValues;
+    if(currentLessonObj){
+      return(
         <div>
-          <ReactPlayer
-            url={currentLessonObj.video}
-            controls={true}
-            width="500px"
-            height="280px"
-            playing={false}
-          />
+          <div>
+            <h4>{currentLessonObj.title}</h4>
+          </div>
+          <div>
+
+          </div>
+          <div>
+            <ReactPlayer
+              url={currentLessonObj.video}
+              controls={true}
+              width="500px"
+              height="280px"
+              playing={false}
+            />
+          </div>
         </div>
-      </div>
-    )
+      )
+    } else {
+      return <div>loading lesson info...</div>
+    }
+
   }
 }
-export default LessonHeader;
+const mapStateToProps = state => ({
+  currentValues: state.currentValues,
+})
+
+// const mapDispatchToProps = dispatch => ({
+//
+// })
+
+export default connect(mapStateToProps, null)(LessonHeader);

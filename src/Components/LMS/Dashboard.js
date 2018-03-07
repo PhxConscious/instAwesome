@@ -7,27 +7,13 @@ import LessonContent from './LessonContent';
 import { connect } from 'react-redux';
 import { getLmsContent } from '../../redux/actions/lmsContent';
 import { getUserProgress, nextQuestion } from '../../redux/actions/userProgress';
-
+import { setCurrentValue } from "../../redux/actions/currentValues"
 
 class Dashboard extends React.Component {
   constructor(props){
     super(props)
     this.state= {
-      active: null,
-      tasks: [],
       readyForRender: false,
-      currentUnit: '',
-      currentUnitName: '', /* set equal to active for now*/
-      currentUnitId: null,
-      currentLesson: '',
-      currentLessonName: '', /*not in yet*/
-      currentLessonObj: null,
-      currentQuestion: '', /*not in yet string num*/
-      currentQuestionName: '',
-      currentQuestionId: '',
-      currentQuestionObj: null,
-      book: null,
-      user: null,
     }
     this.selectCardOnClick = this.selectCardOnClick.bind(this)
     this.combineUserDataAndTaskData = this.combineUserDataAndTaskData.bind(this);
@@ -43,7 +29,6 @@ class Dashboard extends React.Component {
   // this must update when a unit is finished (not just
   // initial rendering) - see if this works
   componentDidMount(){
-    // this.combineUserDataAndTaskData()
     this.props.getLmsContent();
     this.props.fetchUserProgress();
   }
@@ -58,14 +43,8 @@ class Dashboard extends React.Component {
       if(nextProps.book[0] && nextProps.book[0].lessons && nextProps.book[0] !== this.props.book[0]){
       }
       if(nextProps.userProgress.currentUser.user_progress !== this.props.userProgress.currentUser.user_progress){
-        this.setState({
-          ...this.state,
-          user: nextProps.userProgress
-        })
         this.combineUserDataAndTaskData(nextProps.userProgress.currentUser.user_progress);
       }
-
-
     }
   }
 
@@ -96,7 +75,7 @@ class Dashboard extends React.Component {
               name: key,
               isCompleted: userData[task].unitCompleted,
               isLocked: userData[task].unitLocked,
-              lessons: userData[task].lessons
+              // lessons: userData[task].lessons
             },
             title: card.title,
             description: card.description,
@@ -129,28 +108,33 @@ class Dashboard extends React.Component {
       }
     }
 
+    this.props.setCurrentValues("tasks", taskArr);
+    this.props.setCurrentValues("active", activeUnitName);
+    this.props.setCurrentValues("currentUnit", currentUnit);
+    this.props.setCurrentValues("currentUnitName", activeUnitName);
+    this.props.setCurrentValues("currentUnitId", currentUnitId);
+
     this.setState({
       ...this.state,
-      tasks: taskArr,
       readyForRender: true,
-      active: activeUnitName,
-      currentUnit: currentUnit,
-      currentUnitName: activeUnitName,
-      currentUnitId: currentUnitId,
     });
   }
 
 
   // updates state.lesson only when necessary
   componentDidUpdate(prevProps, prevState){
-    if(this.state.active !== prevState.active){
-          this.getActiveLesson();
+    let { currentValues } = this.props;
+    if(prevProps.currentValues.tasks !== currentValues.tasks){
+      this.getActiveLesson();
     }
   }
 
   getActiveLesson(){
+    let { currentValues } = this.props;
+    let userProg = this.props.userProgress.currentUser.user_progress;
+
     // find first incomplete lesson within active unit
-    this.state.tasks.forEach(task => {
+    currentValues.tasks.forEach(task => {
       let firstIncompleteLesson = null;
       let firstIncompleteQuestion = null;
       let i; // lesson index
@@ -158,10 +142,9 @@ class Dashboard extends React.Component {
       let finalIndexI;
       let finalIndexJ;
 
-      if(task.title === this.state.active){
+      if(task.title === currentValues.active){
 
-        let lessonsProgress = this.props.userProgress.currentUser.user_progress[task.id].lessons;
-
+        let lessonsProgress = userProg[task.id].lessons;
 
         for(i = task.lessons.length - 1; i >=0; i--){
           let lessonId = task.lessons[i].id;
@@ -181,37 +164,32 @@ class Dashboard extends React.Component {
           }
         }
 
-
-        this.setState({
-          ...this.state,
-          active: task.title,
-          currentUnitName: task.title,
-          currentUnitId: task.id,
-          currentLesson: finalIndexI,
-          currentLessonObj: firstIncompleteLesson,
-          currentLessonName: firstIncompleteLesson.title,
-          currentQuestion: finalIndexJ,
-          currentQuestionName: firstIncompleteQuestion.title,
-          currentQuestionId: firstIncompleteQuestion.id,
-          currentQuestionObj: firstIncompleteQuestion
-        })
+        this.props.setCurrentValues("active", task.title);
+        this.props.setCurrentValues("currentUnitName", task.title);
+        this.props.setCurrentValues("currentUnitId", task.id);
+        this.props.setCurrentValues("currentUnitObj", task);
+        this.props.setCurrentValues("currentLesson", finalIndexI);
+        this.props.setCurrentValues("currentLessonObj", firstIncompleteLesson);
+        this.props.setCurrentValues("currentLessonName", firstIncompleteLesson.title);
+        this.props.setCurrentValues("currentQuestion", finalIndexJ);
+        this.props.setCurrentValues("currentQuestionName", firstIncompleteQuestion.title);
+        this.props.setCurrentValues("currentQuestionId", firstIncompleteQuestion.id);
+        this.props.setCurrentValues("currentQuestionObj", firstIncompleteQuestion);
       }
     })
   }
 
   // sets current unit
   selectCardOnClick(value){
-    let { tasks } = this.state;
+    let { tasks } = this.props.currentValues;
     let index;
     tasks.forEach((task, i) => {
 
       if(task.title === value && !task.userProgress.isLocked){
         index = i.toString();
-        this.setState({
-          ...this.state,
-          active: value,
-          currentUnit: index
-        })
+        this.props.setCurrentValues("active", value);
+        this.props.setCurrentValues("currentUnit", index);
+        this.props.setCurrentValues("currentUnitObj", task);
       }
     })
   }
@@ -222,11 +200,16 @@ class Dashboard extends React.Component {
     let { userProgress, book } = this.props;
 
     let targetLesson = (parseInt(currentLesson, 10) + 1).toString();
-    this.setState({
-      ...this.state,
-      currentLesson: targetLesson,
-      currentLessonObj: configUnitCards[this.state.currentUnit].lessons[this.state.currentLesson]
-    })
+
+    //@TODO update currentLessonObj based on targetLesson
+    this.props.setCurrentValues("currentLesson", targetLesson);
+    this.props.setCurrentValues("currentLessonObj", configUnitCards[this.state.currentUnit].lessons[this.state.currentLesson]);
+
+    // this.setState({
+    //   ...this.state,
+    //   currentLesson: targetLesson,
+    //   currentLessonObj: configUnitCards[this.state.currentUnit].lessons[this.state.currentLesson]
+    // })
 
     // the whole task obj in redux
     let taskObjRedux = userProgress.currentUser.user_progress;
@@ -261,31 +244,31 @@ class Dashboard extends React.Component {
   prevLesson(){
     let currentLesson = this.state.currentLesson;
     let targetLesson = (parseInt(currentLesson, 10) - 1).toString();
-    this.setState({
-      ...this.state,
-      currentLesson: targetLesson,
-      currentLessonObj: configUnitCards[this.state.currentUnit].lessons[this.state.currentLesson]
-    })
+
+    //@TODO update currentLessonObj based on targetLesson
+    this.props.setCurrentValues("currentLesson", targetLesson);
+    this.props.setCurrentValues("currentLessonObj", configUnitCards[this.state.currentUnit].lessons[this.state.currentLesson]);
+
+    // this.setState({
+    //   ...this.state,
+    //   currentLesson: targetLesson,
+    //   currentLessonObj: configUnitCards[this.state.currentUnit].lessons[this.state.currentLesson]
+    // })
   }
 
   nextQuestion(){
-    this.props.getLmsContent();
-    let { currentUnit, currentUnitId, currentLesson, currentLessonObj, currentQuestion, currentQuestionObj, currentQuestionId} = this.state;
+    let { currentUnit, currentUnitId, currentUnitObj, currentLesson, currentLessonObj, currentQuestion, currentQuestionObj, currentQuestionId} = this.props.currentValues;
     let { userProgress, book } = this.props;
     let targetQuestion = (parseInt(currentQuestion, 10) + 1).toString();
 
-    this.setState({
-      ...this.state,
-      currentQuestion: targetQuestion,
-      currentQuestionObj: book[currentUnit].lessons[currentLesson].questions[targetQuestion]
-    })
-
+    this.props.setCurrentValues("currentQuestion", targetQuestion);
+    this.props.setCurrentValues("currentQuestionObj", book[currentUnit].lessons[currentLesson].questions[targetQuestion]);
 
     // the whole task obj in redux
     let taskObjRedux = userProgress.currentUser.user_progress;
 
     // the current task object in redux
-    let curUnit =  taskObjRedux[currentUnitId];
+    let curUnit =  taskObjRedux[currentUnitObj.id];
 
     // the current lesson from redux
     let curLesson = curUnit.lessons[currentLessonObj.id];
@@ -298,41 +281,37 @@ class Dashboard extends React.Component {
     curQuest[currentQuestionObj.id] = true;
 
     // 2. put questions obj in taskObjRedux
-    taskObjRedux[currentUnitId].lessons[currentLessonObj.id]["questions"] = curQuest;
+    taskObjRedux[currentUnitObj.id].lessons[currentLessonObj.id]["questions"] = curQuest;
 
     // 3. handle if it's the end of a lesson
     if(parseInt(targetQuestion)+1 === currentLessonObj.questions.length){
-      taskObjRedux[currentUnitId].lessons[currentLessonObj.id]["lessonCompleted"]=true;
-      taskObjRedux[currentUnitId].lessons[currentLessonObj.id]["lessonLocked"]=false;
+      taskObjRedux[currentUnitObj.id].lessons[currentLessonObj.id]["lessonCompleted"]=true;
+      taskObjRedux[currentUnitObj.id].lessons[currentLessonObj.id]["lessonLocked"]=false;
     }
     // 4. handle if it's the end of a unit
     // console.log("handleUnitEnd")
+    // or maybe this is in the nextLessonHandler?
 
     // 5. dispatch updated obj - format object for server
     let dto = {};
     dto["userProgress"] = taskObjRedux;
 
     this.props.putNextQuestion(1, dto)
-    // console.log("Book2", this.props.book[0].lessons[0].questions)
-    this.props.getLmsContent()
   }
 
   prevQuestion(){
-    let { currentUnit, currentUnitId, currentLesson, currentLessonObj, currentQuestion, currentQuestionObj, currentQuestionId} = this.state;
+    let { currentUnit, currentUnitId, currentUnitObj, currentLesson, currentLessonObj, currentQuestion, currentQuestionObj, currentQuestionId} = this.props.currentValues;
     let { userProgress, book } = this.props;
-
     let targetQuestion = (parseInt(currentQuestion, 10) - 1).toString();
-    this.setState({
-      ...this.state,
-      currentQuestion: targetQuestion,
-      currentQuestionObj: book[currentUnit].lessons[currentLesson].questions[targetQuestion]
-    })
+
+    this.props.setCurrentValues("currentQuestion", targetQuestion);
+    this.props.setCurrentValues("currentQuestionObj", book[currentUnit].lessons[currentLesson].questions[targetQuestion]);
 
     // the whole task obj in redux
     let taskObjRedux = userProgress.currentUser.user_progress;
 
     // the current task object in redux
-    let curUnit =  taskObjRedux[currentUnitId];
+    let curUnit =  taskObjRedux[currentUnitObj.id];
 
     // the current lesson from redux
     let curLesson = curUnit.lessons[currentLessonObj.id];
@@ -340,32 +319,7 @@ class Dashboard extends React.Component {
     // the current questions from redux
     let curQuest = curLesson.questions
 
-
-    // 1. put new true questionId value in questions obj
-    curQuest[currentQuestionObj.id] = true;
-
-    // 2. put questions obj in taskObjRedux
-    let reduxObj = taskObjRedux[currentUnitId].lessons[currentLessonObj.id]
-    reduxObj["questions"] = curQuest;
-
-    // 3. handle if it's the end of a lesson
-    if(parseInt(targetQuestion)+1 === currentLessonObj.questions.length){
-      taskObjRedux[currentUnitId].lessons[currentLessonObj.id]["lessonCompleted"]=true;
-      taskObjRedux[currentUnitId].lessons[currentLessonObj.id]["lessonLocked"]=false;
-      // console.log("handleLessonEnd", taskObjRedux)
-    }
-    // 4. handle if it's the end of a unit
-    // console.log("handleUnitEnd")
-
-    // 5. dispatch updated obj - format object for server
-    let dto = {};
-    dto["userProgress"] = taskObjRedux;
-    this.props.putNextQuestion(1, dto)
   }
-
-
-
-
 
   getLengthOfCurrentLessonArray(){
     if(this.state.currentUnit){
@@ -376,13 +330,15 @@ class Dashboard extends React.Component {
   render() {
 
     this.getLengthOfCurrentLessonArray()
-    let { active, tasks, readyForRender, currentUnit, currentUnitName, currentUnitId, currentLesson,  currentLessonObj, currentQuestion, currentQuestionObj } = this.state;
+    let { active, tasks, currentUnit, currentUnitName, currentUnitId, currentLesson,  currentLessonObj, currentQuestion, currentQuestionObj } = this.props.currentValues;
+
+
 
     let { userProgress, book } = this.props;
 
     let lmsCards = null;
 
-    if(readyForRender){
+    if(tasks){
 
       lmsCards = tasks.map((card, i) => {
         return <LmsCard
@@ -399,11 +355,7 @@ class Dashboard extends React.Component {
       })
     }
 
-    if(readyForRender){
-
-      // console.log('book in render', currentLessonObj.questions, this.props.book[0].lessons[0].questions)
-
-/// WHY IS currentLessonObj LOSING LENGTH UPON NEXT BUTTON CLICK??????
+    if(this.state.readyForRender){
 
 
       return(
@@ -413,23 +365,12 @@ class Dashboard extends React.Component {
                   {lmsCards}
           </div>
 
-
-
-
           <div className="lessonContentContainer">
             {currentLesson ? <LessonContent
-                unit={book[currentUnit]}
-                lesson={book}
                 nextLesson={this.nextLesson}
                 prevLesson={this.prevLesson}
                 nextQuestion={this.nextQuestion}
                 prevQuestion={this.prevQuestion}
-                currentUnit={currentUnit}
-                currentUnitId={currentUnitId}
-                currentLesson={currentLesson}
-                currentLessonObj={currentLessonObj}
-                currentQuestion={currentQuestion}
-                currentQuestionObj={currentQuestionObj}
                 noOfLessons={this.getLengthOfCurrentLessonArray()}
               /> : 'Select a unit to begin'}
           </div>
@@ -442,7 +383,8 @@ class Dashboard extends React.Component {
 
 const mapStateToProps = state => ({
   book: state.lmsContent.book,
-  userProgress: state.userProgress
+  userProgress: state.userProgress,
+  currentValues: state.currentValues
 });
 
 const mapDispatchToProps = dispatch => {
@@ -455,6 +397,9 @@ const mapDispatchToProps = dispatch => {
       },
       putNextQuestion : (fb_id, data) => {
         dispatch(nextQuestion(fb_id, data ))
+      },
+      setCurrentValues: (key, value) => {
+        dispatch(setCurrentValue(key, value))
       }
     }
 };

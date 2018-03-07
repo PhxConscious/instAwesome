@@ -11,13 +11,13 @@ class CheckTasks extends React.Component {
       isChecked: false,
       test:false,
     }
-    // this.isNextQ = this.isNextQ.bind(this);
-    // this.isPrevQ = this.isPrevQ.bind(this);
-    // this.isChecked = this.isChecked.bind(this);
+    this.isNextQ = this.isNextQ.bind(this);
+    this.isPrevQ = this.isPrevQ.bind(this);
+    this.isChecked = this.isChecked.bind(this);
   }
 
   componentDidMount(){
-    // this.isChecked();
+    this.isChecked();
   }
 
   componentWillUpdate(nextProps, nextState){
@@ -30,36 +30,36 @@ class CheckTasks extends React.Component {
     // }
   }
 
-  // componentWillReceiveProps(prevProps){
-  //   if(prevProps.currentQuestion !== this.props.currentQuestion){
-  //
-  //     this.isNextQ(this.props.currentLessonObj, this.props.currentQuestion);
-  //     this.isPrevQ(this.props.currentLessonObj, this.props.currentQuestion);
-  //
-  //   }
-  //
-  //
-  //
-  //   if(prevProps.currentQuestion !== this.props.currentQuestion){
-  //     this.isChecked();
-  //   }
-  // }
+  componentWillReceiveProps(prevProps){
+    if(prevProps.currentQuestion !== this.props.currentQuestion){
 
-  // isChecked() {
-  //   if(this.props.userProgress.currentUser.user_progress[this.props.currentUnitId].lessons[this.props.currentLessonObj.id].questions[this.props.currentQuestionObj.id]){
-  //     // console.log("isChecked true", this.props.currentQuestionObj.id)
-  //     this.setState({
-  //       ...this.state,
-  //       isChecked: true
-  //     })
-  //   } else {
-  //     // console.log('isChecked false', this.props.currentQuestionObj.id)
-  //     this.setState({
-  //       ...this.state,
-  //       isChecked: false
-  //     })
-  //   }
-  // }
+      this.isNextQ(this.props.currentLessonObj, prevProps.currentQuestion);
+      this.isPrevQ(this.props.currentLessonObj, prevProps.currentQuestion);
+
+    }
+
+
+
+    if(prevProps.currentQuestion !== this.props.currentQuestion){
+      this.isChecked();
+    }
+  }
+
+  isChecked() {
+    if(this.props.userProgress.currentUser.user_progress[this.props.currentUnitId].lessons[this.props.currentLessonObj.id].questions[this.props.currentQuestionObj.id]){
+      console.log("isChecked true", this.props.currentQuestionObj.id)
+      this.setState({
+        ...this.state,
+        isChecked: true
+      })
+    } else {
+      console.log('isChecked false', this.props.currentQuestionObj.id)
+      this.setState({
+        ...this.state,
+        isChecked: false
+      })
+    }
+  }
 
   isNextQ(obj, i) {
     let lengthOfQuestArr = this.props.book[this.props.currentUnit].lessons[this.props.currentLesson].questions.length
@@ -67,20 +67,20 @@ class CheckTasks extends React.Component {
     // console.log("isNext", lengthOfQuestArr, parseInt(i,10)+2)
 
     if(lengthOfQuestArr === parseInt(i,10)+1){
-      // console.log("yes the same", parseInt(i,10)+1, lengthOfQuestArr)
+      console.log("yes the same", parseInt(i,10)+1, lengthOfQuestArr)
       this.setState({
         ...this.state,
         nextButtonHidden: true,
       })
     }
 
-    // if(lengthOfQuestArr !== parseInt(i,10)+1){
-    //   console.log("not the same")
-    //   this.setState({
-    //     ...this.state,
-    //     nextButtonHidden: false,
-    //   })
-    // }
+    if(lengthOfQuestArr !== parseInt(i,10)+1){
+      console.log("not the same")
+      this.setState({
+        ...this.state,
+        nextButtonHidden: false,
+      })
+    }
 
     // if(parseInt(i,10)===0) {
     //   this.setState({
@@ -92,19 +92,19 @@ class CheckTasks extends React.Component {
   }
 
   isPrevQ(obj, i) {
-    // console.log("isPrev", i)
+    console.log("isPrev", i)
     if(parseInt(i,10) === 1){
       this.setState({
         ...this.state,
         prevButtonDisabled: true
       })
     }
-    // if(parseInt(i,10) !== 1){
-    //   this.setState({
-    //     ...this.state,
-    //     prevButtonDisabled: false
-    //   })
-    // }
+    if(parseInt(i,10) !== 1){
+      this.setState({
+        ...this.state,
+        prevButtonDisabled: false
+      })
+    }
   }
 
   render(){
@@ -112,15 +112,14 @@ class CheckTasks extends React.Component {
 
     let { isChecked, prevButtonDisabled, nextButtonDisabled, nextButtonHidden } = this.state;
 
-    let { lesson, nextLesson, prevLesson, noOfLessons, nextQuestion, prevQuestion, userProgress } = this.props;
+    let { lesson, nextLesson, prevLesson, currentUnit, currentUnitName, currentUnitId, currentLesson, noOfLessons, currentLessonObj, currentQuestion, currentQuestionObj, nextQuestion, prevQuestion, userProgress } = this.props;
 
-    let { currentUnit, currentUnitObj, currentLesson, currentLessonObj, currentQuestion, currentQuestionObj } = this.props.currentValues
 
-    // let unitProg = userProgress.currentUser.user_progress[currentUnitId];
-    //
-    // let lessonProg = unitProg.lessons[currentLessonObj.id]
-    //
-    // let questProg = lessonProg.questions[currentQuestionObj.id]
+    let unitProg = userProgress.currentUser.user_progress[currentUnitId];
+
+    let lessonProg = unitProg.lessons[currentLessonObj.id]
+
+    let questProg = lessonProg.questions[currentQuestionObj.id]
 
     let nextQuestClickHandler = () => {
       nextQuestion();
@@ -137,7 +136,7 @@ class CheckTasks extends React.Component {
     }
 
     if(currentLessonObj){
-      // console.log("disabled?", this.state.nextButtonHidden, this.state.prevButtonDisabled)
+      console.log("disabled?", this.state.nextButtonHidden, this.state.prevButtonDisabled)
       return(
         <div>
           <div>lesson: {currentLessonObj.description}</div>
@@ -195,8 +194,7 @@ class CheckTasks extends React.Component {
 
 const mapStateToProps = state => ({
   book: state.lmsContent.book,
-  userProgress: state.userProgress,
-  currentValues: state.currentValues,
+  userProgress: state.userProgress
 });
 
 const mapDispatchToProps = dispatch => {
