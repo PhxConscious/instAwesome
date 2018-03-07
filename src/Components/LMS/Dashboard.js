@@ -7,7 +7,7 @@ import LessonContent from './LessonContent';
 import { connect } from 'react-redux';
 import { getLmsContent } from '../../redux/actions/lmsContent';
 import { getUserProgress, nextQuestion } from '../../redux/actions/userProgress';
-
+import { setCurrentValue } from "../../redux/actions/currentValues"
 
 class Dashboard extends React.Component {
   constructor(props){
@@ -64,8 +64,6 @@ class Dashboard extends React.Component {
         })
         this.combineUserDataAndTaskData(nextProps.userProgress.currentUser.user_progress);
       }
-
-
     }
   }
 
@@ -129,6 +127,12 @@ class Dashboard extends React.Component {
       }
     }
 
+    this.props.setCurrentValues("tasks", taskArr);
+    this.props.setCurrentValues("active", activeUnitName);
+    this.props.setCurrentValues("currentUnit", currentUnit);
+    this.props.setCurrentValues("currentUnitName", activeUnitName)
+    this.props.setCurrentValues("currentUnitId", currentUnitId)
+
     this.setState({
       ...this.state,
       tasks: taskArr,
@@ -144,7 +148,7 @@ class Dashboard extends React.Component {
   // updates state.lesson only when necessary
   componentDidUpdate(prevProps, prevState){
     if(this.state.active !== prevState.active){
-          this.getActiveLesson();
+        this.getActiveLesson();
     }
   }
 
@@ -363,10 +367,6 @@ class Dashboard extends React.Component {
     this.props.putNextQuestion(1, dto)
   }
 
-
-
-
-
   getLengthOfCurrentLessonArray(){
     if(this.state.currentUnit){
       return this.state.tasks[this.state.currentUnit].lessons.length;
@@ -401,10 +401,6 @@ class Dashboard extends React.Component {
 
     if(readyForRender){
 
-      // console.log('book in render', currentLessonObj.questions, this.props.book[0].lessons[0].questions)
-
-/// WHY IS currentLessonObj LOSING LENGTH UPON NEXT BUTTON CLICK??????
-
 
       return(
         <div className="background">
@@ -412,9 +408,6 @@ class Dashboard extends React.Component {
           <div className="unitCardsContainer">
                   {lmsCards}
           </div>
-
-
-
 
           <div className="lessonContentContainer">
             {currentLesson ? <LessonContent
@@ -455,6 +448,9 @@ const mapDispatchToProps = dispatch => {
       },
       putNextQuestion : (fb_id, data) => {
         dispatch(nextQuestion(fb_id, data ))
+      },
+      setCurrentValues: (key, value) => {
+        dispatch(setCurrentValue(key, value))
       }
     }
 };
