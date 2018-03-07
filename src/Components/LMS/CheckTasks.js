@@ -99,7 +99,7 @@ class CheckTasks extends React.Component {
 
     let { isChecked, nextButtonHidden, prevButtonHidden } = this.state;
 
-    let { lesson, nextLesson, prevLesson, noOfLessons, nextQuestion, prevQuestion, userProgress, book } = this.props;
+    let { lesson, nextLesson, prevLesson, noOfLessons, nextQuestion, prevQuestion, nextUnit, userProgress, book } = this.props;
 
     let { currentUnit, currentUnitObj, currentLesson, currentLessonObj, currentQuestion, currentQuestionObj } = this.props.currentValues
 
@@ -110,14 +110,15 @@ class CheckTasks extends React.Component {
 
       if(lengthOfQuestArr === parseInt(currentQuestion,10)+1 && lengthOfLessonArr === parseInt(currentLesson,10)+1){
         console.log("END OF THE UNIT")
-        // this.setState({
-        //   ...this.state,
-        //   openDialog: true,
-        //   dialogTitle: "You finished the Lesson",
-        //   dialogText: "onto the next lesson?",
-        //   dialogButton1: "continue",
-        //   dialogButton2: "stay here"
-        // })
+        nextUnit();
+        this.setState({
+          ...this.state,
+          openDialog: true,
+          dialogTitle: "Congrats! You finished the unit",
+          dialogText: "onto the next unit?",
+          dialogButton1: "continue",
+          dialogButton2: "stay here"
+        })
       } else if (lengthOfQuestArr === parseInt(currentQuestion,10)+1){
         this.setState({
           ...this.state,
@@ -204,6 +205,7 @@ class CheckTasks extends React.Component {
             disabled={!isChecked}
           >nextQuestion</button>
 
+        <div>Unit: {parseInt(currentUnit, 10)+1} of {book.length}</div>
         <div>current lesson: {parseInt(currentLesson, 10)+1} of {noOfLessons}</div>
         <div>progress: {parseInt(currentQuestion, 10)+1} of {currentLessonObj.questions.length}</div>
 

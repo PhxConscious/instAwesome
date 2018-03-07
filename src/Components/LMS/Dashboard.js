@@ -197,10 +197,18 @@ class Dashboard extends React.Component {
 
   nextUnit(){
 
-    @TODO mark the current unit as completed
-    @TODO mark the next unit as unlocked
-    @TODO post this progress to the server
-    @TODO set new current unit, lesson, question in redux
+    let { currentUnit, currentUnitId, currentUnitObj, currentLesson, currentLessonObj, currentQuestion, currentQuestionObj, currentQuestionId } = this.props.currentValues;
+
+    let { userProgress, book } = this.props;
+
+    let targetUnit = (parseInt(currentUnit, 10) + 1).toString();
+
+    // @TODO mark the current unit as completed
+    console.log("nextUnit", currentUnit, book)
+    // @TODO mark the next unit as unlocked
+    // @TODO mark the current lesson as complete
+    // @TODO post this progress to the server
+    // @TODO set new current unit, lesson, question in redux
     // may have to cycle through and find next incomplete
   }
 
