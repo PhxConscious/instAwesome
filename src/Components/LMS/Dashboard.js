@@ -303,7 +303,7 @@ class Dashboard extends React.Component {
 
   nextQuestion(){
     this.props.getLmsContent();
-    let { currentUnit, currentUnitId, currentLesson, currentLessonObj, currentQuestion, currentQuestionObj, currentQuestionId} = this.state;
+    let { currentUnit, currentUnitId, currentUnitObj, currentLesson, currentLessonObj, currentQuestion, currentQuestionObj, currentQuestionId} = this.props.currentValues;
     let { userProgress, book } = this.props;
     let targetQuestion = (parseInt(currentQuestion, 10) + 1).toString();
 
@@ -321,7 +321,7 @@ class Dashboard extends React.Component {
     let taskObjRedux = userProgress.currentUser.user_progress;
 
     // the current task object in redux
-    let curUnit =  taskObjRedux[currentUnitId];
+    let curUnit =  taskObjRedux[currentUnitObj.id];
 
     // the current lesson from redux
     let curLesson = curUnit.lessons[currentLessonObj.id];
@@ -334,12 +334,12 @@ class Dashboard extends React.Component {
     curQuest[currentQuestionObj.id] = true;
 
     // 2. put questions obj in taskObjRedux
-    taskObjRedux[currentUnitId].lessons[currentLessonObj.id]["questions"] = curQuest;
+    taskObjRedux[currentUnitObj.id].lessons[currentLessonObj.id]["questions"] = curQuest;
 
     // 3. handle if it's the end of a lesson
     if(parseInt(targetQuestion)+1 === currentLessonObj.questions.length){
-      taskObjRedux[currentUnitId].lessons[currentLessonObj.id]["lessonCompleted"]=true;
-      taskObjRedux[currentUnitId].lessons[currentLessonObj.id]["lessonLocked"]=false;
+      taskObjRedux[currentUnitObj.id].lessons[currentLessonObj.id]["lessonCompleted"]=true;
+      taskObjRedux[currentUnitObj.id].lessons[currentLessonObj.id]["lessonLocked"]=false;
     }
     // 4. handle if it's the end of a unit
     // console.log("handleUnitEnd")
