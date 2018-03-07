@@ -11,7 +11,7 @@ class CheckTasks extends React.Component {
       isChecked: false,
       test:false,
     }
-    // this.isNextQ = this.isNextQ.bind(this);
+    this.isNextQ = this.isNextQ.bind(this);
     // this.isPrevQ = this.isPrevQ.bind(this);
     this.isChecked = this.isChecked.bind(this);
   }
@@ -19,12 +19,14 @@ class CheckTasks extends React.Component {
   componentDidMount(){
     if(this.props.currentValues.currentQuestionObj){
       this.isChecked();
+      this.isNextQ();
     }
   }
 
   componentDidUpdate(prevProps, prevState){
     if(prevProps.currentValues !== this.props.currentValues){
       this.isChecked();
+      this.isNextQ();
     }
   }
 
@@ -70,34 +72,29 @@ class CheckTasks extends React.Component {
     }
   }
 
-  isNextQ(obj, i) {
-    let lengthOfQuestArr = this.props.book[this.props.currentUnit].lessons[this.props.currentLesson].questions.length
+  isNextQ() {
+    let { book } = this.props;
+    let { currentUnit, currentLesson, currentQuestion } = this.props.currentValues;
 
-    // console.log("isNext", lengthOfQuestArr, parseInt(i,10)+2)
+    let lengthOfQuestArr = book[currentUnit].lessons[currentLesson].questions.length
 
-    if(lengthOfQuestArr === parseInt(i,10)+1){
-      // console.log("yes the same", parseInt(i,10)+1, lengthOfQuestArr)
+    console.log("isNext", lengthOfQuestArr, parseInt(currentQuestion ,10)+1)
+
+    if(lengthOfQuestArr === parseInt(currentQuestion,10)+1){
+      console.log("yes the same", parseInt(currentQuestion,10)+1, lengthOfQuestArr)
       this.setState({
         ...this.state,
         nextButtonHidden: true,
       })
     }
 
-    // if(lengthOfQuestArr !== parseInt(i,10)+1){
-    //   console.log("not the same")
-    //   this.setState({
-    //     ...this.state,
-    //     nextButtonHidden: false,
-    //   })
-    // }
-
-    // if(parseInt(i,10)===0) {
-    //   this.setState({
-    //     ...this.state,
-    //     nextButtonDisabled: false
-    //   })
-    // }
-    // this.forceUpdate();
+    if(lengthOfQuestArr !== parseInt(currentQuestion,10)+1){
+      console.log("not the same", this.state)
+      this.setState({
+        // ...this.state,
+        nextButtonHidden: false,
+      })
+    }
   }
 
   isPrevQ(obj, i) {
@@ -181,10 +178,7 @@ class CheckTasks extends React.Component {
             value="nextQuestion"
             disabled={nextButtonHidden}
           >nextQuestion</button>
-        <button
-          onClick={()=>this.setState({nextButtonHidden:!this.state.nextButtonHidden})}
-          value="togglenet"
-        >Toggle</button>
+
 
 
 
