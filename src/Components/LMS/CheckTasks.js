@@ -11,13 +11,13 @@ class CheckTasks extends React.Component {
       isChecked: false,
       test:false,
     }
-    this.isNextQ = this.isNextQ.bind(this);
-    this.isPrevQ = this.isPrevQ.bind(this);
-    this.isChecked = this.isChecked.bind(this);
+    // this.isNextQ = this.isNextQ.bind(this);
+    // this.isPrevQ = this.isPrevQ.bind(this);
+    // this.isChecked = this.isChecked.bind(this);
   }
 
   componentDidMount(){
-    this.isChecked();
+    // this.isChecked();
   }
 
   componentWillUpdate(nextProps, nextState){
@@ -30,36 +30,36 @@ class CheckTasks extends React.Component {
     // }
   }
 
-  componentWillReceiveProps(prevProps){
-    if(prevProps.currentQuestion !== this.props.currentQuestion){
+  // componentWillReceiveProps(prevProps){
+  //   if(prevProps.currentQuestion !== this.props.currentQuestion){
+  //
+  //     this.isNextQ(this.props.currentLessonObj, this.props.currentQuestion);
+  //     this.isPrevQ(this.props.currentLessonObj, this.props.currentQuestion);
+  //
+  //   }
+  //
+  //
+  //
+  //   if(prevProps.currentQuestion !== this.props.currentQuestion){
+  //     this.isChecked();
+  //   }
+  // }
 
-      this.isNextQ(this.props.currentLessonObj, this.props.currentQuestion);
-      this.isPrevQ(this.props.currentLessonObj, this.props.currentQuestion);
-
-    }
-
-
-
-    if(prevProps.currentQuestion !== this.props.currentQuestion){
-      this.isChecked();
-    }
-  }
-
-  isChecked() {
-    if(this.props.userProgress.currentUser.user_progress[this.props.currentUnitId].lessons[this.props.currentLessonObj.id].questions[this.props.currentQuestionObj.id]){
-      // console.log("isChecked true", this.props.currentQuestionObj.id)
-      this.setState({
-        ...this.state,
-        isChecked: true
-      })
-    } else {
-      // console.log('isChecked false', this.props.currentQuestionObj.id)
-      this.setState({
-        ...this.state,
-        isChecked: false
-      })
-    }
-  }
+  // isChecked() {
+  //   if(this.props.userProgress.currentUser.user_progress[this.props.currentUnitId].lessons[this.props.currentLessonObj.id].questions[this.props.currentQuestionObj.id]){
+  //     // console.log("isChecked true", this.props.currentQuestionObj.id)
+  //     this.setState({
+  //       ...this.state,
+  //       isChecked: true
+  //     })
+  //   } else {
+  //     // console.log('isChecked false', this.props.currentQuestionObj.id)
+  //     this.setState({
+  //       ...this.state,
+  //       isChecked: false
+  //     })
+  //   }
+  // }
 
   isNextQ(obj, i) {
     let lengthOfQuestArr = this.props.book[this.props.currentUnit].lessons[this.props.currentLesson].questions.length
@@ -112,14 +112,15 @@ class CheckTasks extends React.Component {
 
     let { isChecked, prevButtonDisabled, nextButtonDisabled, nextButtonHidden } = this.state;
 
-    let { lesson, nextLesson, prevLesson, currentUnit, currentUnitName, currentUnitId, currentLesson, noOfLessons, currentLessonObj, currentQuestion, currentQuestionObj, nextQuestion, prevQuestion, userProgress } = this.props;
+    let { lesson, nextLesson, prevLesson, noOfLessons, nextQuestion, prevQuestion, userProgress } = this.props;
 
+    let { currentUnit, currentUnitObj, currentLesson, currentLessonObj, currentQuestion, currentQuestionObj } = this.props.currentValues
 
-    let unitProg = userProgress.currentUser.user_progress[currentUnitId];
-
-    let lessonProg = unitProg.lessons[currentLessonObj.id]
-
-    let questProg = lessonProg.questions[currentQuestionObj.id]
+    // let unitProg = userProgress.currentUser.user_progress[currentUnitId];
+    //
+    // let lessonProg = unitProg.lessons[currentLessonObj.id]
+    //
+    // let questProg = lessonProg.questions[currentQuestionObj.id]
 
     let nextQuestClickHandler = () => {
       nextQuestion();
@@ -194,7 +195,8 @@ class CheckTasks extends React.Component {
 
 const mapStateToProps = state => ({
   book: state.lmsContent.book,
-  userProgress: state.userProgress
+  userProgress: state.userProgress,
+  currentValues: state.currentValues,
 });
 
 const mapDispatchToProps = dispatch => {
