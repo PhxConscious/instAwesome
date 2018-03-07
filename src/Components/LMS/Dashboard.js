@@ -13,21 +13,7 @@ class Dashboard extends React.Component {
   constructor(props){
     super(props)
     this.state= {
-      active: null,
-      tasks: [],
       readyForRender: false,
-      currentUnit: '',
-      currentUnitName: '', /* set equal to active for now*/
-      currentUnitId: null,
-      currentLesson: '',
-      currentLessonName: '', /*not in yet*/
-      currentLessonObj: null,
-      currentQuestion: '', /*not in yet string num*/
-      currentQuestionName: '',
-      currentQuestionId: '',
-      currentQuestionObj: null,
-      book: null,
-      user: null,
     }
     this.selectCardOnClick = this.selectCardOnClick.bind(this)
     this.combineUserDataAndTaskData = this.combineUserDataAndTaskData.bind(this);
@@ -43,7 +29,6 @@ class Dashboard extends React.Component {
   // this must update when a unit is finished (not just
   // initial rendering) - see if this works
   componentDidMount(){
-    // this.combineUserDataAndTaskData()
     this.props.getLmsContent();
     this.props.fetchUserProgress();
   }
@@ -58,10 +43,6 @@ class Dashboard extends React.Component {
       if(nextProps.book[0] && nextProps.book[0].lessons && nextProps.book[0] !== this.props.book[0]){
       }
       if(nextProps.userProgress.currentUser.user_progress !== this.props.userProgress.currentUser.user_progress){
-        // this.setState({
-        //   ...this.state,
-        //   user: nextProps.userProgress
-        // })
         this.combineUserDataAndTaskData(nextProps.userProgress.currentUser.user_progress);
       }
     }
@@ -135,12 +116,7 @@ class Dashboard extends React.Component {
 
     this.setState({
       ...this.state,
-      // tasks: taskArr,
       readyForRender: true,
-      // active: activeUnitName,
-      // currentUnit: currentUnit,
-      // currentUnitName: activeUnitName,
-      // currentUnitId: currentUnitId,
     });
   }
 
@@ -199,21 +175,6 @@ class Dashboard extends React.Component {
         this.props.setCurrentValues("currentQuestionName", firstIncompleteQuestion.title);
         this.props.setCurrentValues("currentQuestionId", firstIncompleteQuestion.id);
         this.props.setCurrentValues("currentQuestionObj", firstIncompleteQuestion);
-
-
-        // this.setState({
-        //   ...this.state,
-        //   active: task.title,
-        //   currentUnitName: task.title,
-        //   currentUnitId: task.id,
-        //   currentLesson: finalIndexI,
-        //   currentLessonObj: firstIncompleteLesson,
-        //   currentLessonName: firstIncompleteLesson.title,
-        //   currentQuestion: finalIndexJ,
-        //   currentQuestionName: firstIncompleteQuestion.title,
-        //   currentQuestionId: firstIncompleteQuestion.id,
-        //   currentQuestionObj: firstIncompleteQuestion
-        // })
       }
     })
   }
@@ -229,12 +190,6 @@ class Dashboard extends React.Component {
         this.props.setCurrentValues("active", value);
         this.props.setCurrentValues("currentUnit", index);
         this.props.setCurrentValues("currentUnitObj", task);
-
-        // this.setState({
-        //   ...this.state,
-        //   active: value,
-        //   currentUnit: index
-        // })
       }
     })
   }
@@ -250,11 +205,11 @@ class Dashboard extends React.Component {
     this.props.setCurrentValues("currentLesson", targetLesson);
     this.props.setCurrentValues("currentLessonObj", configUnitCards[this.state.currentUnit].lessons[this.state.currentLesson]);
 
-    this.setState({
-      ...this.state,
-      currentLesson: targetLesson,
-      currentLessonObj: configUnitCards[this.state.currentUnit].lessons[this.state.currentLesson]
-    })
+    // this.setState({
+    //   ...this.state,
+    //   currentLesson: targetLesson,
+    //   currentLessonObj: configUnitCards[this.state.currentUnit].lessons[this.state.currentLesson]
+    // })
 
     // the whole task obj in redux
     let taskObjRedux = userProgress.currentUser.user_progress;
@@ -294,11 +249,11 @@ class Dashboard extends React.Component {
     this.props.setCurrentValues("currentLesson", targetLesson);
     this.props.setCurrentValues("currentLessonObj", configUnitCards[this.state.currentUnit].lessons[this.state.currentLesson]);
 
-    this.setState({
-      ...this.state,
-      currentLesson: targetLesson,
-      currentLessonObj: configUnitCards[this.state.currentUnit].lessons[this.state.currentLesson]
-    })
+    // this.setState({
+    //   ...this.state,
+    //   currentLesson: targetLesson,
+    //   currentLessonObj: configUnitCards[this.state.currentUnit].lessons[this.state.currentLesson]
+    // })
   }
 
   nextQuestion(){
@@ -308,12 +263,6 @@ class Dashboard extends React.Component {
 
     this.props.setCurrentValues("currentQuestion", targetQuestion);
     this.props.setCurrentValues("currentQuestionObj", book[currentUnit].lessons[currentLesson].questions[targetQuestion]);
-
-    // this.setState({
-    //   ...this.state,
-    //   currentQuestion: targetQuestion,
-    //   currentQuestionObj: book[currentUnit].lessons[currentLesson].questions[targetQuestion]
-    // })
 
     // the whole task obj in redux
     let taskObjRedux = userProgress.currentUser.user_progress;
