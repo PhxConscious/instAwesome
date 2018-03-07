@@ -174,6 +174,7 @@ class CheckTasks extends React.Component {
             value="next"
           >nextllllllllLesson</button>
           <button
+            className={nextButtonHidden ? 'hidden' : ""}
             onClick={nextQuestion}
             value="nextQuestion"
             disabled={nextButtonHidden}
