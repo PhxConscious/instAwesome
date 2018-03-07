@@ -447,18 +447,10 @@ class Dashboard extends React.Component {
 
           <div className="lessonContentContainer">
             {currentLesson ? <LessonContent
-                unit={book[currentUnit]}
-                lesson={book}
                 nextLesson={this.nextLesson}
                 prevLesson={this.prevLesson}
                 nextQuestion={this.nextQuestion}
                 prevQuestion={this.prevQuestion}
-                currentUnit={currentUnit}
-                currentUnitId={currentUnitId}
-                currentLesson={currentLesson}
-                currentLessonObj={currentLessonObj}
-                currentQuestion={currentQuestion}
-                currentQuestionObj={currentQuestionObj}
                 noOfLessons={this.getLengthOfCurrentLessonArray()}
               /> : 'Select a unit to begin'}
           </div>
@@ -471,7 +463,8 @@ class Dashboard extends React.Component {
 
 const mapStateToProps = state => ({
   book: state.lmsContent.book,
-  userProgress: state.userProgress
+  userProgress: state.userProgress,
+  currentValues: state.currentValues
 });
 
 const mapDispatchToProps = dispatch => {
