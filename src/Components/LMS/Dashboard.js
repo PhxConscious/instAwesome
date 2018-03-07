@@ -414,13 +414,15 @@ class Dashboard extends React.Component {
   render() {
 
     this.getLengthOfCurrentLessonArray()
-    let { active, tasks, readyForRender, currentUnit, currentUnitName, currentUnitId, currentLesson,  currentLessonObj, currentQuestion, currentQuestionObj } = this.state;
+    let { active, tasks, currentUnit, currentUnitName, currentUnitId, currentLesson,  currentLessonObj, currentQuestion, currentQuestionObj } = this.props.currentValues;
+
+
 
     let { userProgress, book } = this.props;
 
     let lmsCards = null;
 
-    if(readyForRender){
+    if(tasks){
 
       lmsCards = tasks.map((card, i) => {
         return <LmsCard
@@ -437,7 +439,7 @@ class Dashboard extends React.Component {
       })
     }
 
-    if(readyForRender){
+    if(this.state.readyForRender){
 
 
       return(
