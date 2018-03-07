@@ -233,6 +233,9 @@ class Dashboard extends React.Component {
     }
 
     // @TODO POST to userProgress on server
+    let dto = {};
+    dto["userProgress"] = taskObjRedux;
+    this.props.putNextQuestion(1, dto)
 
     // @TODO find the first incomplete question and set that to currentQuestion
 

@@ -55,12 +55,12 @@ class CheckTasks extends React.Component {
 
     let lengthOfQuestArr = book[currentUnit].lessons[currentLesson].questions.length
 
-    if(lengthOfQuestArr === parseInt(currentQuestion,10)+1){
-      this.setState({
-        ...this.state,
-        nextButtonHidden: true,
-      })
-    }
+    // if(lengthOfQuestArr === parseInt(currentQuestion,10)+1){
+    //   this.setState({
+    //     ...this.state,
+    //     nextButtonHidden: true,
+    //   })
+    // }
 
     if(lengthOfQuestArr !== parseInt(currentQuestion,10)+1){
       this.setState({
