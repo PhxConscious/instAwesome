@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { nextQuestion } from '../../redux/actions/userProgress';
 import ReactPlayer from 'react-player';
 import '../../Styles/CheckTasks.css';
+import { Button, Dialog, DialogTitle, DialogActions, DialogContent } from 'react-mdl';
 
 class CheckTasks extends React.Component {
   constructor(props){
@@ -14,6 +15,8 @@ class CheckTasks extends React.Component {
     this.isNextQ = this.isNextQ.bind(this);
     this.isPrevQ = this.isPrevQ.bind(this);
     this.isChecked = this.isChecked.bind(this);
+    this.handleOpenDialog = this.handleOpenDialog.bind(this);
+    this.handleCloseDialog = this.handleCloseDialog.bind(this);
   }
 
   componentDidMount(){
@@ -55,36 +58,40 @@ class CheckTasks extends React.Component {
 
     let lengthOfQuestArr = book[currentUnit].lessons[currentLesson].questions.length
 
-    if(lengthOfQuestArr === parseInt(currentQuestion,10)+1){
-      this.setState({
-        ...this.state,
-        nextButtonHidden: true,
-      })
-    }
-
     if(lengthOfQuestArr !== parseInt(currentQuestion,10)+1){
       this.setState({
         // ...this.state,
-        nextButtonHidden: false,
+        openDialog: false,
       })
     }
   }
 
   isPrevQ() {
-    console.log("isPrev", currentQuestion)
     let { currentQuestion } = this.props.currentValues;
 
-    if(parseInt(currentQuestion,10) === 0){
-      this.setState({
-        ...this.state,
-        prevButtonHidden: true
-      })
-    }
-    if(parseInt(currentQuestion,10) !== 0){
-      this.setState({
-        prevButtonHidden: false
-      })
-    }
+    // if(parseInt(currentQuestion,10) === 0){
+    //   this.setState({
+    //     ...this.state,
+    //     prevButtonHidden: true
+    //   })
+    // }
+    // if(parseInt(currentQuestion,10) !== 0){
+    //   this.setState({
+    //     prevButtonHidden: false
+    //   })
+    // }
+  }
+
+  handleOpenDialog() {
+    this.setState({
+      openDialog: true
+    });
+  }
+
+  handleCloseDialog() {
+    this.setState({
+      openDialog: false
+    });
   }
 
   render(){
@@ -92,17 +99,41 @@ class CheckTasks extends React.Component {
 
     let { isChecked, nextButtonHidden, prevButtonHidden } = this.state;
 
-    let { lesson, nextLesson, prevLesson, noOfLessons, nextQuestion, prevQuestion, userProgress } = this.props;
+    let { lesson, nextLesson, prevLesson, noOfLessons, nextQuestion, prevQuestion, userProgress, book } = this.props;
 
     let { currentUnit, currentUnitObj, currentLesson, currentLessonObj, currentQuestion, currentQuestionObj } = this.props.currentValues
 
     let nextQuestClickHandler = () => {
-      nextQuestion();
+      let lengthOfQuestArr = book[currentUnit].lessons[currentLesson].questions.length
 
+      if(lengthOfQuestArr === parseInt(currentQuestion,10)+1){
+        this.setState({
+          ...this.state,
+          openDialog: true,
+          dialogTitle: "You finished the Lesson",
+          dialogText: "onto the next lesson?",
+          dialogButton1: "continue",
+          dialogButton2: "stay here"
+        })
+      } else {
+        nextQuestion();
+      }
     }
 
     let prevQuestClickHandler = () => {
-      prevQuestion();
+      console.log("prevQuestClickHandler", currentQuestion)
+      if("0" === currentQuestion){
+        this.setState({
+          ...this.state,
+          openDialog: true,
+          dialogTitle: `You're still on lesson ${parseInt(currentLesson)+1}`,
+          dialogText: "go back to previous lesson?",
+          dialogButton1: "go back",
+          dialogButton2: "stay here"
+        })
+      } else {
+        prevQuestion();
+      }
     }
 
     if(currentLessonObj){
@@ -121,6 +152,24 @@ class CheckTasks extends React.Component {
             />
           </div>
 
+          <Dialog open={this.state.openDialog}>
+            <DialogTitle>{this.state.dialogTitle}</DialogTitle>
+            <DialogContent>
+              <p>{this.state.dialogText}</p>
+            </DialogContent>
+            <DialogActions>
+              <Button
+                type='button'
+                onClick={nextLesson}
+              >{this.state.dialogButton1}
+              </Button>
+              <Button
+                type='button'
+                onClick={this.handleCloseDialog}
+              >{this.state.dialogButton2}
+            </Button>
+            </DialogActions>
+          </Dialog>
 
           <button
             className={prevButtonHidden ? 'hidden' : ""}
@@ -138,7 +187,7 @@ class CheckTasks extends React.Component {
           >nextllllllllLesson</button>
           <button
             className={nextButtonHidden ? 'hidden' : ""}
-            onClick={nextQuestion}
+            onClick={nextQuestClickHandler}
             value="nextQuestion"
             disabled={!isChecked}
           >nextQuestion</button>
