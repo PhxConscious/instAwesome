@@ -202,8 +202,18 @@ class Dashboard extends React.Component {
 
     let targetLesson = (parseInt(currentLesson, 10) + 1).toString();
 
+
+    // @TODO mark current lesson isCompleted and POST
+
+    // @TODO mark next lesson as isUnlocked and POST
+
+    // @TODO find the first incomplete question and set that to currentQuestion
+
+    // @TODO advance to next lesson and set as currentLesson & currentLessonObj in redux
     this.props.setCurrentValues("currentLesson", targetLesson);
     this.props.setCurrentValues("currentLessonObj", configUnitCards[currentUnit].lessons[currentLesson]);
+    
+    // @TODO if current lesson the last lesson in unit, make the nextLesson button disabled and congratulate user on finishing.
 
     // the whole task obj in redux
     let taskObjRedux = userProgress.currentUser.user_progress;
@@ -214,25 +224,6 @@ class Dashboard extends React.Component {
     // the current lesson from redux
     let curLesson = curUnit.lessons[currentLessonObj.id];
 
-    // 1. change isCompleted: already finished
-
-    // 2. figure out if there is a nextLesson
-    // can't use this until questions reset to zero after lesson change
-    if(book[currentLesson].lessons.length === parseInt(currentLesson)+1){
-      console.log("this is the last lesson in the unit",book[currentLesson].lessons.length, parseInt(currentLesson)+1)
-    }
-      // if not: handle changeUnit:
-        // unlock the next unit.
-        // advance units
-
-      // if so: advance lesson
-        // unlock next lesson
-        // current lesson is already set to completed
-        // make sure questions go back to 1st question.
-
-    // 3. update redux userProgress object
-
-    // 4. forceUpdate?
   }
 
   prevLesson(){
