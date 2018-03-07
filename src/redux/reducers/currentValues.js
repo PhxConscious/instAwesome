@@ -1,12 +1,12 @@
 export default (state, action) => {
-  console.log("reducer", action.payload)
+  console.log("reducer", action.type, action.payload)
   switch (action.type) {
 
-    case "SET_CURRENT_VALUE_FULFILLED":
-    console.log("fulfilled", action.payload.data)
+    case "SET_CURRENT_VALUE":
+    console.log("fulfilled", action.payload)
       return {
         ...state,
-        values: action.payload.data
+        ...action.payload
       }
     default:
       return {

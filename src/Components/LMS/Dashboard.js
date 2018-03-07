@@ -130,8 +130,8 @@ class Dashboard extends React.Component {
     this.props.setCurrentValues("tasks", taskArr);
     this.props.setCurrentValues("active", activeUnitName);
     this.props.setCurrentValues("currentUnit", currentUnit);
-    this.props.setCurrentValues("currentUnitName", activeUnitName)
-    this.props.setCurrentValues("currentUnitId", currentUnitId)
+    this.props.setCurrentValues("currentUnitName", activeUnitName);
+    this.props.setCurrentValues("currentUnitId", currentUnitId);
 
     this.setState({
       ...this.state,
@@ -185,6 +185,18 @@ class Dashboard extends React.Component {
           }
         }
 
+        this.props.setCurrentValues("active", task.title);
+        this.props.setCurrentValues("currentUnitName", task.title);
+        this.props.setCurrentValues("currentUnitId", task.id);
+        this.props.setCurrentValues("currentUnitObj", task);
+        this.props.setCurrentValues("currentLesson", finalIndexI);
+        this.props.setCurrentValues("currentLessonObj", firstIncompleteLesson);
+        this.props.setCurrentValues("currentLessonName", firstIncompleteLesson.title);
+        this.props.setCurrentValues("currentQuestion", finalIndexJ);
+        this.props.setCurrentValues("currentQuestionName", firstIncompleteQuestion.title);
+        this.props.setCurrentValues("currentQuestionId", firstIncompleteQuestion.id);
+        this.props.setCurrentValues("currentQuestionObj", firstIncompleteQuestion);
+
 
         this.setState({
           ...this.state,
@@ -211,6 +223,11 @@ class Dashboard extends React.Component {
 
       if(task.title === value && !task.userProgress.isLocked){
         index = i.toString();
+        this.props.setCurrentValues("active", value);
+        this.props.setCurrentValues("currentUnit", index);
+
+        ////////// @TODO needs currentUnitObj
+
         this.setState({
           ...this.state,
           active: value,
@@ -226,6 +243,11 @@ class Dashboard extends React.Component {
     let { userProgress, book } = this.props;
 
     let targetLesson = (parseInt(currentLesson, 10) + 1).toString();
+
+    //@TODO update currentLessonObj based on targetLesson
+    this.props.setCurrentValues("currentLesson", targetLesson);
+    this.props.setCurrentValues("currentLessonObj", configUnitCards[this.state.currentUnit].lessons[this.state.currentLesson]);
+
     this.setState({
       ...this.state,
       currentLesson: targetLesson,
@@ -265,6 +287,11 @@ class Dashboard extends React.Component {
   prevLesson(){
     let currentLesson = this.state.currentLesson;
     let targetLesson = (parseInt(currentLesson, 10) - 1).toString();
+
+    //@TODO update currentLessonObj based on targetLesson
+    this.props.setCurrentValues("currentLesson", targetLesson);
+    this.props.setCurrentValues("currentLessonObj", configUnitCards[this.state.currentUnit].lessons[this.state.currentLesson]);
+
     this.setState({
       ...this.state,
       currentLesson: targetLesson,
@@ -277,6 +304,9 @@ class Dashboard extends React.Component {
     let { currentUnit, currentUnitId, currentLesson, currentLessonObj, currentQuestion, currentQuestionObj, currentQuestionId} = this.state;
     let { userProgress, book } = this.props;
     let targetQuestion = (parseInt(currentQuestion, 10) + 1).toString();
+
+    this.props.setCurrentValues("currentQuestion", targetQuestion);
+    this.props.setCurrentValues("currentQuestionObj", book[currentUnit].lessons[currentLesson].questions[targetQuestion]);
 
     this.setState({
       ...this.state,
@@ -326,6 +356,12 @@ class Dashboard extends React.Component {
     let { userProgress, book } = this.props;
 
     let targetQuestion = (parseInt(currentQuestion, 10) - 1).toString();
+
+
+    this.props.setCurrentValues("currentQuestion", targetQuestion);
+    this.props.setCurrentValues("currentQuestionObj", book[currentUnit].lessons[currentLesson].questions[targetQuestion]);
+
+
     this.setState({
       ...this.state,
       currentQuestion: targetQuestion,
