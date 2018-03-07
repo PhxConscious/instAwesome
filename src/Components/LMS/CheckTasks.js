@@ -32,31 +32,6 @@ class CheckTasks extends React.Component {
     }
   }
 
-  componentWillUpdate(nextProps, nextState){
-
-    // if(nextProps.currentQuestion !== this.props.currentQuestion){
-    //
-    //   this.isNextQ(nextProps.currentLessonObj, parseInt(nextProps.currentQuestion)-2);
-    //   this.isPrevQ(nextProps.currentLessonObj, parseInt(nextProps.currentQuestion));
-    //
-    // }
-  }
-
-  // componentWillReceiveProps(prevProps){
-  //   if(prevProps.currentQuestion !== this.props.currentQuestion){
-  //
-  //     this.isNextQ(this.props.currentLessonObj, this.props.currentQuestion);
-  //     this.isPrevQ(this.props.currentLessonObj, this.props.currentQuestion);
-  //
-  //   }
-  //
-  //
-  //
-  //   if(prevProps.currentQuestion !== this.props.currentQuestion){
-  //     this.isChecked();
-  //   }
-  // }
-
   isChecked() {
     let userProg = this.props.userProgress.currentUser.user_progress;
 
@@ -121,28 +96,17 @@ class CheckTasks extends React.Component {
 
     let { currentUnit, currentUnitObj, currentLesson, currentLessonObj, currentQuestion, currentQuestionObj } = this.props.currentValues
 
-    // let unitProg = userProgress.currentUser.user_progress[currentUnitId];
-    //
-    // let lessonProg = unitProg.lessons[currentLessonObj.id]
-    //
-    // let questProg = lessonProg.questions[currentQuestionObj.id]
-
     let nextQuestClickHandler = () => {
       nextQuestion();
-      // this.setState({
-        // nextButtonHidden: false
-      // })
+
     }
 
     let prevQuestClickHandler = () => {
       prevQuestion();
-      // this.setState({
-        // prevButtonDisabled: false
-      // })
     }
 
     if(currentLessonObj){
-      // console.log("disabled?", this.state.nextButtonHidden, this.state.prevButtonDisabled)
+
       return(
         <div>
           <div>lesson: {currentLessonObj.description}</div>
@@ -179,10 +143,6 @@ class CheckTasks extends React.Component {
             value="nextQuestion"
             disabled={nextButtonHidden}
           >nextQuestion</button>
-
-
-
-
 
         <div>unit: {parseInt(currentUnit, 10)+1}  current lesson: {parseInt(currentLesson, 10)+1} of {noOfLessons}  </div>
 
