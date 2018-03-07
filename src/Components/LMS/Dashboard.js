@@ -197,19 +197,13 @@ class Dashboard extends React.Component {
   nextLesson(){
 
     let { currentUnit, currentUnitId, currentUnitObj, currentLesson, currentLessonObj, currentQuestion, currentQuestionObj, currentQuestionId } = this.props.currentValues;
+
     let { userProgress, book } = this.props;
 
     let targetLesson = (parseInt(currentLesson, 10) + 1).toString();
 
-    //@TODO update currentLessonObj based on targetLesson
     this.props.setCurrentValues("currentLesson", targetLesson);
     this.props.setCurrentValues("currentLessonObj", configUnitCards[currentUnit].lessons[currentLesson]);
-
-    // this.setState({
-    //   ...this.state,
-    //   currentLesson: targetLesson,
-    //   currentLessonObj: configUnitCards[this.state.currentUnit].lessons[this.state.currentLesson]
-    // })
 
     // the whole task obj in redux
     let taskObjRedux = userProgress.currentUser.user_progress;
