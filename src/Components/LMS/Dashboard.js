@@ -322,8 +322,9 @@ class Dashboard extends React.Component {
   }
 
   getLengthOfCurrentLessonArray(){
-    if(this.state.currentUnit){
-      return this.state.tasks[this.state.currentUnit].lessons.length;
+    let { tasks, currentUnit } = this.props.currentValues;
+    if(currentUnit){
+      return tasks[currentUnit].lessons.length;
     }
   }
 
