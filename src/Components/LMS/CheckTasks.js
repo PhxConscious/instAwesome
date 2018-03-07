@@ -71,7 +71,6 @@ class CheckTasks extends React.Component {
   }
 
   isPrevQ() {
-    console.log("isPrev", currentQuestion)
     let { currentQuestion } = this.props.currentValues;
 
     if(parseInt(currentQuestion,10) === 0){

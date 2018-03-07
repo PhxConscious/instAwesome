@@ -207,7 +207,7 @@ class Dashboard extends React.Component {
     let taskObjRedux = userProgress.currentUser.user_progress;
 
     // the current task object in redux
-    let curUnit =  taskObjRedux[currentUnit.id];
+    let curUnit =  taskObjRedux[currentUnitObj.id];
 
     // the current lesson from redux
     let curLesson = curUnit.lessons[currentLessonObj.id];
@@ -218,6 +218,19 @@ class Dashboard extends React.Component {
     taskObjRedux[currentUnitObj.id].lessons[currentLessonObj.id]["lessonLocked"]=false;
 
     // @TODO mark next lesson as isUnlocked
+    let nextLessonObj = currentLessonObj; // default value - should update if not last lesson in unit
+    // must check to see if we're at last lesson already
+    if(book[currentUnit].lessons.length === parseInt(currentLesson)+1){
+      console.warn("YOURE AT THE END OF THE UNIT ALREADY")
+    } else {
+      // find next lesson id in book
+      nextLessonObj = book[currentUnit].lessons[parseInt(currentLesson)+1]
+
+      // set that to incomplete and unlocked in taskObjRedux
+      taskObjRedux[currentUnitObj.id].lessons[nextLessonObj.id]["lessonCompleted"]=false;
+
+      taskObjRedux[currentUnitObj.id].lessons[nextLessonObj.id]["lessonLocked"]=false;
+    }
 
     // @TODO POST to userProgress on server
 
