@@ -203,18 +203,6 @@ class Dashboard extends React.Component {
     let targetLesson = (parseInt(currentLesson, 10) + 1).toString();
 
 
-    // @TODO mark current lesson isCompleted and POST
-
-    // @TODO mark next lesson as isUnlocked and POST
-
-    // @TODO find the first incomplete question and set that to currentQuestion
-
-    // @TODO advance to next lesson and set as currentLesson & currentLessonObj in redux
-    this.props.setCurrentValues("currentLesson", targetLesson);
-    this.props.setCurrentValues("currentLessonObj", configUnitCards[currentUnit].lessons[currentLesson]);
-    
-    // @TODO if current lesson the last lesson in unit, make the nextLesson button disabled and congratulate user on finishing.
-
     // the whole task obj in redux
     let taskObjRedux = userProgress.currentUser.user_progress;
 
@@ -223,6 +211,25 @@ class Dashboard extends React.Component {
 
     // the current lesson from redux
     let curLesson = curUnit.lessons[currentLessonObj.id];
+
+
+    // @TODO mark current lesson isCompleted
+    taskObjRedux[currentUnitObj.id].lessons[currentLessonObj.id]["lessonCompleted"]=true;
+    taskObjRedux[currentUnitObj.id].lessons[currentLessonObj.id]["lessonLocked"]=false;
+
+    // @TODO mark next lesson as isUnlocked
+
+    // @TODO POST to userProgress on server
+
+    // @TODO find the first incomplete question and set that to currentQuestion
+
+    // @TODO advance to next lesson and set as currentLesson & currentLessonObj in redux
+    this.props.setCurrentValues("currentLesson", targetLesson);
+    this.props.setCurrentValues("currentLessonObj", configUnitCards[currentUnit].lessons[currentLesson]);
+
+    // @TODO if current lesson the last lesson in unit, make the nextLesson button disabled and congratulate user on finishing.
+
+
 
   }
 
@@ -268,11 +275,14 @@ class Dashboard extends React.Component {
     // 2. put questions obj in taskObjRedux
     taskObjRedux[currentUnitObj.id].lessons[currentLessonObj.id]["questions"] = curQuest;
 
-    // 3. handle if it's the end of a lesson
-    if(parseInt(targetQuestion) === currentLessonObj.questions.length){
-      taskObjRedux[currentUnitObj.id].lessons[currentLessonObj.id]["lessonCompleted"]=true;
-      taskObjRedux[currentUnitObj.id].lessons[currentLessonObj.id]["lessonLocked"]=false;
-    }
+    // @TODO handle this in nextLesson
+    // // 3. handle if it's the end of a lesson
+    // if(parseInt(targetQuestion) === currentLessonObj.questions.length){
+    //   taskObjRedux[currentUnitObj.id].lessons[currentLessonObj.id]["lessonCompleted"]=true;
+    //   taskObjRedux[currentUnitObj.id].lessons[currentLessonObj.id]["lessonLocked"]=false;
+    // }
+
+
     // 4. handle if it's the end of a unit
     // console.log("handleUnitEnd")
     // or maybe this is in the nextLessonHandler?
