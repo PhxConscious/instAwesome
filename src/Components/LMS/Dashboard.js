@@ -220,7 +220,7 @@ class Dashboard extends React.Component {
 
   // sets current unit
   selectCardOnClick(value){
-    let { tasks } = this.state;
+    let { tasks } = this.props.currentValues;
     let index;
     tasks.forEach((task, i) => {
 
@@ -228,8 +228,7 @@ class Dashboard extends React.Component {
         index = i.toString();
         this.props.setCurrentValues("active", value);
         this.props.setCurrentValues("currentUnit", index);
-
-        ////////// @TODO needs currentUnitObj
+        this.props.setCurrentValues("currentUnitObj", task);
 
         this.setState({
           ...this.state,
