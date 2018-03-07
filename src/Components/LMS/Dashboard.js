@@ -22,6 +22,7 @@ class Dashboard extends React.Component {
     this.getActiveLesson = this.getActiveLesson.bind(this);
     this.nextQuestion = this.nextQuestion.bind(this);
     this.prevQuestion = this.prevQuestion.bind(this);
+    this.nextUnit = this.nextUnit.bind(this);
   }
 
 
@@ -193,6 +194,15 @@ class Dashboard extends React.Component {
       }
     })
   }
+
+  nextUnit(){
+
+  }
+
+
+
+
+
 
   nextLesson(){
 
@@ -367,6 +377,7 @@ class Dashboard extends React.Component {
 
           <div className="lessonContentContainer">
             {currentLesson ? <LessonContent
+                nextUnit={this.nextUnit}
                 nextLesson={this.nextLesson}
                 prevLesson={this.prevLesson}
                 nextQuestion={this.nextQuestion}
