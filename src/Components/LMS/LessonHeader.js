@@ -4,9 +4,6 @@ import { connect } from 'react-redux';
 
 class LessonHeader extends React.Component {
 
-  componentWillReceiveProps(nextProps){
-    console.log('nextProps', nextProps.currentValues.currentLessonObj)
-  }
 
   render(){
     let { currentLessonObj } = this.props.currentValues;
