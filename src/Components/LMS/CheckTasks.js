@@ -143,7 +143,8 @@ class CheckTasks extends React.Component {
             disabled={!isChecked}
           >nextQuestion</button>
 
-        <div>unit: {parseInt(currentUnit, 10)+1}  current lesson: {parseInt(currentLesson, 10)+1} of {noOfLessons}  </div>
+        <div>current lesson: {parseInt(currentLesson, 10)+1} of {noOfLessons}</div>
+        <div>progress: {parseInt(currentQuestion, 10)+1} of {currentLessonObj.questions.length}</div>
 
           {currentQuestion === "0" ? "please begin the lesson" : ''}
 
