@@ -90,7 +90,7 @@ class CheckTasks extends React.Component {
   render(){
 
 
-    let { isChecked, prevButtonDisabled, nextButtonDisabled, nextButtonHidden, prevButtonHidden } = this.state;
+    let { isChecked, nextButtonHidden, prevButtonHidden } = this.state;
 
     let { lesson, nextLesson, prevLesson, noOfLessons, nextQuestion, prevQuestion, userProgress } = this.props;
 
@@ -126,7 +126,6 @@ class CheckTasks extends React.Component {
             className={prevButtonHidden ? 'hidden' : ""}
             onClick={prevQuestClickHandler}
             value="nextQuestion"
-            disabled={prevButtonDisabled}
           >prevQuestion</button>
           <button
             onClick={prevLesson}
@@ -141,14 +140,14 @@ class CheckTasks extends React.Component {
             className={nextButtonHidden ? 'hidden' : ""}
             onClick={nextQuestion}
             value="nextQuestion"
-            disabled={nextButtonHidden}
+            disabled={!isChecked}
           >nextQuestion</button>
 
         <div>unit: {parseInt(currentUnit, 10)+1}  current lesson: {parseInt(currentLesson, 10)+1} of {noOfLessons}  </div>
 
-          {currentLesson === "0" ? "please begin the lesson" : ''}
+          {currentQuestion === "0" ? "please begin the lesson" : ''}
 
-          {parseInt(currentLesson, 10)+1 === noOfLessons? "You finished the unit" : ''}
+          {parseInt(currentQuestion, 10)+1 === noOfLessons? "You finished the unit" : ''}
 
         </div>
       )
