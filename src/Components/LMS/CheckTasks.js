@@ -69,17 +69,17 @@ class CheckTasks extends React.Component {
   isPrevQ() {
     let { currentQuestion } = this.props.currentValues;
 
-    if(parseInt(currentQuestion,10) === 0){
-      this.setState({
-        ...this.state,
-        prevButtonHidden: true
-      })
-    }
-    if(parseInt(currentQuestion,10) !== 0){
-      this.setState({
-        prevButtonHidden: false
-      })
-    }
+    // if(parseInt(currentQuestion,10) === 0){
+    //   this.setState({
+    //     ...this.state,
+    //     prevButtonHidden: true
+    //   })
+    // }
+    // if(parseInt(currentQuestion,10) !== 0){
+    //   this.setState({
+    //     prevButtonHidden: false
+    //   })
+    // }
   }
 
   handleOpenDialog() {
@@ -110,6 +110,10 @@ class CheckTasks extends React.Component {
         this.setState({
           ...this.state,
           openDialog: true,
+          dialogTitle: "You finished the Lesson",
+          dialogText: "onto the next lesson?",
+          dialogButton1: "continue",
+          dialogButton2: "stay here"
         })
       } else {
         nextQuestion();
@@ -117,7 +121,19 @@ class CheckTasks extends React.Component {
     }
 
     let prevQuestClickHandler = () => {
-      prevQuestion();
+      console.log("prevQuestClickHandler", currentQuestion)
+      if("0" === currentQuestion){
+        this.setState({
+          ...this.state,
+          openDialog: true,
+          dialogTitle: `You're still on lesson ${parseInt(currentLesson)+1}`,
+          dialogText: "go back to previous lesson?",
+          dialogButton1: "go back",
+          dialogButton2: "stay here"
+        })
+      } else {
+        prevQuestion();
+      }
     }
 
     if(currentLessonObj){
@@ -137,20 +153,20 @@ class CheckTasks extends React.Component {
           </div>
 
           <Dialog open={this.state.openDialog}>
-            <DialogTitle>Allow data collection?</DialogTitle>
+            <DialogTitle>{this.state.dialogTitle}</DialogTitle>
             <DialogContent>
-              <p>Allowing us to collect data will let us get you the information you want faster.</p>
+              <p>{this.state.dialogText}</p>
             </DialogContent>
             <DialogActions>
               <Button
                 type='button'
                 onClick={nextLesson}
-              >Go To Next Lesson
+              >{this.state.dialogButton1}
               </Button>
               <Button
                 type='button'
                 onClick={this.handleCloseDialog}
-              >Stay Here
+              >{this.state.dialogButton2}
             </Button>
             </DialogActions>
           </Dialog>
