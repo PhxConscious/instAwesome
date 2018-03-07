@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { nextQuestion } from '../../redux/actions/userProgress';
 import ReactPlayer from 'react-player';
 import '../../Styles/CheckTasks.css';
+import { Button, Dialog, DialogTitle, DialogActions, DialogContent } from 'react-mdl';
 
 class CheckTasks extends React.Component {
   constructor(props){
@@ -14,6 +15,8 @@ class CheckTasks extends React.Component {
     this.isNextQ = this.isNextQ.bind(this);
     this.isPrevQ = this.isPrevQ.bind(this);
     this.isChecked = this.isChecked.bind(this);
+    this.handleOpenDialog = this.handleOpenDialog.bind(this);
+    this.handleCloseDialog = this.handleCloseDialog.bind(this);
   }
 
   componentDidMount(){
@@ -55,17 +58,10 @@ class CheckTasks extends React.Component {
 
     let lengthOfQuestArr = book[currentUnit].lessons[currentLesson].questions.length
 
-    // if(lengthOfQuestArr === parseInt(currentQuestion,10)+1){
-    //   this.setState({
-    //     ...this.state,
-    //     nextButtonHidden: true,
-    //   })
-    // }
-
     if(lengthOfQuestArr !== parseInt(currentQuestion,10)+1){
       this.setState({
         // ...this.state,
-        nextButtonHidden: false,
+        openDialog: false,
       })
     }
   }
@@ -86,18 +82,38 @@ class CheckTasks extends React.Component {
     }
   }
 
+  handleOpenDialog() {
+    this.setState({
+      openDialog: true
+    });
+  }
+
+  handleCloseDialog() {
+    this.setState({
+      openDialog: false
+    });
+  }
+
   render(){
 
 
     let { isChecked, nextButtonHidden, prevButtonHidden } = this.state;
 
-    let { lesson, nextLesson, prevLesson, noOfLessons, nextQuestion, prevQuestion, userProgress } = this.props;
+    let { lesson, nextLesson, prevLesson, noOfLessons, nextQuestion, prevQuestion, userProgress, book } = this.props;
 
     let { currentUnit, currentUnitObj, currentLesson, currentLessonObj, currentQuestion, currentQuestionObj } = this.props.currentValues
 
     let nextQuestClickHandler = () => {
-      nextQuestion();
+      let lengthOfQuestArr = book[currentUnit].lessons[currentLesson].questions.length
 
+      if(lengthOfQuestArr === parseInt(currentQuestion,10)+1){
+        this.setState({
+          ...this.state,
+          openDialog: true,
+        })
+      } else {
+        nextQuestion();
+      }
     }
 
     let prevQuestClickHandler = () => {
@@ -120,6 +136,24 @@ class CheckTasks extends React.Component {
             />
           </div>
 
+          <Dialog open={this.state.openDialog}>
+            <DialogTitle>Allow data collection?</DialogTitle>
+            <DialogContent>
+              <p>Allowing us to collect data will let us get you the information you want faster.</p>
+            </DialogContent>
+            <DialogActions>
+              <Button
+                type='button'
+                onClick={nextLesson}
+              >Go To Next Lesson
+              </Button>
+              <Button
+                type='button'
+                onClick={this.handleCloseDialog}
+              >Stay Here
+            </Button>
+            </DialogActions>
+          </Dialog>
 
           <button
             className={prevButtonHidden ? 'hidden' : ""}
@@ -137,7 +171,7 @@ class CheckTasks extends React.Component {
           >nextllllllllLesson</button>
           <button
             className={nextButtonHidden ? 'hidden' : ""}
-            onClick={nextQuestion}
+            onClick={nextQuestClickHandler}
             value="nextQuestion"
             disabled={!isChecked}
           >nextQuestion</button>
