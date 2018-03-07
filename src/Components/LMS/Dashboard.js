@@ -203,8 +203,18 @@ class Dashboard extends React.Component {
 
     let targetUnit = (parseInt(currentUnit, 10) + 1).toString();
 
+    // the whole task obj in redux
+    let taskObjRedux = userProgress.currentUser.user_progress;
+
+    // the current task object in redux
+    let curUnit =  taskObjRedux[currentUnitObj.id];
+
+    // the current lesson from redux
+    let curLesson = curUnit.lessons[currentLessonObj.id];
+
     // @TODO mark the current unit as completed
-    console.log("nextUnit", currentUnit, book)
+    taskObjRedux[currentUnitObj.id]["unitCompleted"] = true;
+    
     // @TODO mark the next unit as unlocked
     // @TODO mark the current lesson as complete
     // @TODO post this progress to the server
