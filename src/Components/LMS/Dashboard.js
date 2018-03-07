@@ -291,14 +291,6 @@ class Dashboard extends React.Component {
     // 2. put questions obj in taskObjRedux
     taskObjRedux[currentUnitObj.id].lessons[currentLessonObj.id]["questions"] = curQuest;
 
-    // @TODO handle this in nextLesson
-    // // 3. handle if it's the end of a lesson
-    // if(parseInt(targetQuestion) === currentLessonObj.questions.length){
-    //   taskObjRedux[currentUnitObj.id].lessons[currentLessonObj.id]["lessonCompleted"]=true;
-    //   taskObjRedux[currentUnitObj.id].lessons[currentLessonObj.id]["lessonLocked"]=false;
-    // }
-
-
     // 4. handle if it's the end of a unit
     // console.log("handleUnitEnd")
     // or maybe this is in the nextLessonHandler?
