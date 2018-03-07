@@ -351,27 +351,18 @@ class Dashboard extends React.Component {
   }
 
   prevQuestion(){
-    let { currentUnit, currentUnitId, currentLesson, currentLessonObj, currentQuestion, currentQuestionObj, currentQuestionId} = this.state;
+    let { currentUnit, currentUnitId, currentUnitObj, currentLesson, currentLessonObj, currentQuestion, currentQuestionObj, currentQuestionId} = this.props.currentValues;
     let { userProgress, book } = this.props;
-
     let targetQuestion = (parseInt(currentQuestion, 10) - 1).toString();
-
 
     this.props.setCurrentValues("currentQuestion", targetQuestion);
     this.props.setCurrentValues("currentQuestionObj", book[currentUnit].lessons[currentLesson].questions[targetQuestion]);
-
-
-    this.setState({
-      ...this.state,
-      currentQuestion: targetQuestion,
-      currentQuestionObj: book[currentUnit].lessons[currentLesson].questions[targetQuestion]
-    })
 
     // the whole task obj in redux
     let taskObjRedux = userProgress.currentUser.user_progress;
 
     // the current task object in redux
-    let curUnit =  taskObjRedux[currentUnitId];
+    let curUnit =  taskObjRedux[currentUnitObj.id];
 
     // the current lesson from redux
     let curLesson = curUnit.lessons[currentLessonObj.id];
@@ -379,27 +370,6 @@ class Dashboard extends React.Component {
     // the current questions from redux
     let curQuest = curLesson.questions
 
-
-    // 1. put new true questionId value in questions obj
-    curQuest[currentQuestionObj.id] = true;
-
-    // 2. put questions obj in taskObjRedux
-    let reduxObj = taskObjRedux[currentUnitId].lessons[currentLessonObj.id]
-    reduxObj["questions"] = curQuest;
-
-    // 3. handle if it's the end of a lesson
-    if(parseInt(targetQuestion)+1 === currentLessonObj.questions.length){
-      taskObjRedux[currentUnitId].lessons[currentLessonObj.id]["lessonCompleted"]=true;
-      taskObjRedux[currentUnitId].lessons[currentLessonObj.id]["lessonLocked"]=false;
-      // console.log("handleLessonEnd", taskObjRedux)
-    }
-    // 4. handle if it's the end of a unit
-    // console.log("handleUnitEnd")
-
-    // 5. dispatch updated obj - format object for server
-    let dto = {};
-    dto["userProgress"] = taskObjRedux;
-    this.props.putNextQuestion(1, dto)
   }
 
   getLengthOfCurrentLessonArray(){
