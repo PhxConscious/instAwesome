@@ -12,7 +12,7 @@ class CheckTasks extends React.Component {
       test:false,
     }
     this.isNextQ = this.isNextQ.bind(this);
-    // this.isPrevQ = this.isPrevQ.bind(this);
+    this.isPrevQ = this.isPrevQ.bind(this);
     this.isChecked = this.isChecked.bind(this);
   }
 
@@ -20,6 +20,7 @@ class CheckTasks extends React.Component {
     if(this.props.currentValues.currentQuestionObj){
       this.isChecked();
       this.isNextQ();
+      this.isPrevQ();
     }
   }
 
@@ -27,6 +28,7 @@ class CheckTasks extends React.Component {
     if(prevProps.currentValues !== this.props.currentValues){
       this.isChecked();
       this.isNextQ();
+      this.isPrevQ();
     }
   }
 
@@ -78,10 +80,7 @@ class CheckTasks extends React.Component {
 
     let lengthOfQuestArr = book[currentUnit].lessons[currentLesson].questions.length
 
-    console.log("isNext", lengthOfQuestArr, parseInt(currentQuestion ,10)+1)
-
     if(lengthOfQuestArr === parseInt(currentQuestion,10)+1){
-      console.log("yes the same", parseInt(currentQuestion,10)+1, lengthOfQuestArr)
       this.setState({
         ...this.state,
         nextButtonHidden: true,
@@ -89,7 +88,6 @@ class CheckTasks extends React.Component {
     }
 
     if(lengthOfQuestArr !== parseInt(currentQuestion,10)+1){
-      console.log("not the same", this.state)
       this.setState({
         // ...this.state,
         nextButtonHidden: false,
@@ -97,26 +95,27 @@ class CheckTasks extends React.Component {
     }
   }
 
-  isPrevQ(obj, i) {
-    // console.log("isPrev", i)
-    if(parseInt(i,10) === 1){
+  isPrevQ() {
+    console.log("isPrev", currentQuestion)
+    let { currentQuestion } = this.props.currentValues;
+
+    if(parseInt(currentQuestion,10) === 0){
       this.setState({
         ...this.state,
-        prevButtonDisabled: true
+        prevButtonHidden: true
       })
     }
-    // if(parseInt(i,10) !== 1){
-    //   this.setState({
-    //     ...this.state,
-    //     prevButtonDisabled: false
-    //   })
-    // }
+    if(parseInt(currentQuestion,10) !== 0){
+      this.setState({
+        prevButtonHidden: false
+      })
+    }
   }
 
   render(){
 
 
-    let { isChecked, prevButtonDisabled, nextButtonDisabled, nextButtonHidden } = this.state;
+    let { isChecked, prevButtonDisabled, nextButtonDisabled, nextButtonHidden, prevButtonHidden } = this.state;
 
     let { lesson, nextLesson, prevLesson, noOfLessons, nextQuestion, prevQuestion, userProgress } = this.props;
 
@@ -160,6 +159,7 @@ class CheckTasks extends React.Component {
 
 
           <button
+            className={prevButtonHidden ? 'hidden' : ""}
             onClick={prevQuestClickHandler}
             value="nextQuestion"
             disabled={prevButtonDisabled}
