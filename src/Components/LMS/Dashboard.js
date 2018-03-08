@@ -21,6 +21,7 @@ class Dashboard extends React.Component {
     this.prevLesson = this.prevLesson.bind(this);
     this.getActiveUnit = this.getActiveUnit.bind(this);
     this.getActiveLesson = this.getActiveLesson.bind(this);
+    this.getActiveLessonTemp = this.getActiveLessonTemp.bind(this);
     this.getActiveQuestion = this.getActiveQuestion.bind(this);
     this.nextQuestion = this.nextQuestion.bind(this);
     this.prevQuestion = this.prevQuestion.bind(this);
@@ -129,7 +130,7 @@ class Dashboard extends React.Component {
   componentDidUpdate(prevProps, prevState){
     let { currentValues } = this.props;
     if(prevProps.currentValues.tasks !== currentValues.tasks){
-      this.getActiveLesson();
+      this.getActiveLessonTemp();
       this.getActiveUnit();
     }
   }
@@ -171,10 +172,10 @@ class Dashboard extends React.Component {
   }
 
   // cycle through to find first incomplete lesson
-  getActiveLesson(){
+  getActiveLessonTemp(){
     // 1. interate through lessons in the current unit
     // 2. set the first lesson where isComplete != true to currentActiveLessonObj and currentActiveLesson
-    console.log("getActiveLesson")
+    console.log("getActiveLessonTemp")
     let { currentValues } = this.props;
     let userProg = this.props.userProgress.currentUser.user_progress;
 
