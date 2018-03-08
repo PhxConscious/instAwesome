@@ -130,12 +130,43 @@ class Dashboard extends React.Component {
     let { currentValues } = this.props;
     if(prevProps.currentValues.tasks !== currentValues.tasks){
       this.getActiveLesson();
+      this.getActiveUnit();
     }
   }
 
   // cycle through to find first incomplete unit
   getActiveUnit(){
-    // 1. iterate through all units
+    console.log("getActiveUnit")
+    let { book, userProgress } = this.props;
+    let userProg = this.props.userProgress.currentUser.user_progress;
+
+    // set initial value jic
+    let lastUnlockedUnit = book[0];
+    let finalUnitIndex;
+    // 1. iterate through all units - if no value in userProg, post one.
+    for(let i = 0; i < book.length; i++){
+      let curUnitId = book[i].id;
+      console.log("book i", book[i])
+      // @TODO handle this
+      if(!userProg[curUnitId]){
+        console.log("this unit does not exist in userProgress");
+        // a. post it to userProgress
+        // b. fetch userProgress
+        // c. call getActiveUnit()
+      }
+
+      let curUnitProg = userProg[curUnitId];
+      console.log("curUnitProg", curUnitProg)
+      if(curUnitProg.unitLocked === false){
+        // this is potentially the correct unit
+        lastUnlockedUnit = book[i];
+        finalUnitIndex = i;
+        console.log("lastUnlockedUnit, finalUnitIndex", lastUnlockedUnit, finalUnitIndex)
+      }
+    }
+    console.log("lastUnlockedUnit", lastUnlockedUnit);
+    this.props.setCurrentValues("currentUnitObj", lastUnlockedUnit);
+    this.props.setCurrentValues("currentUnit", finalUnitIndex)
     // 2. set the first unit where isCompleted != true to currentActiveUnitObj & currentActiveUnit
   }
 
@@ -196,7 +227,7 @@ class Dashboard extends React.Component {
   // cycle through to find first question where id !== true
   getActiveQuestion(){
     // 1. iterate through questions in the active lesson
-    // 2. set the first question where id!=true as currentQuestionObj and currentQuestion 
+    // 2. set the first question where id!=true as currentQuestionObj and currentQuestion
   }
 
   // sets current unit
