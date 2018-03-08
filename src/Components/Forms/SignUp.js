@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import firebase from 'firebase';
 import axios from 'axios';
+import {Redirect} from 'react-router-dom';
 
 import Styles from '../../Styles/FormsStyles.css';
 
@@ -13,18 +14,12 @@ class SignUpForm extends Component {
             userPhone: '',
             email: '',
             password: '',
-            verifyPassword: ''
+            verifyPassword: '',
+            redirect: false
         };
     }
 
-    componentDidMount() {
-        axios.get('http://localhost:3000/users')
-            .then(res => {
-                console.log(res.data[0]);
-            });
-    }
-
-    onButtonPress() {
+    onButtonPress = () => {
         const {email, password, verifyPassword, firstName, lastName, userPhone} = this.state;
         if (email === '' || password === '') {
             return alert('Must fill in all fields')
@@ -35,14 +30,17 @@ class SignUpForm extends Component {
         }
         return (
             firebase.auth().createUserWithEmailAndPassword(email, password)
-                .then(() => axios.post('http://localhost:3000/users/new', {
+                .then(() => axios.post('http://localhost:8080/users/new', {
                     user_email: email,
                     firebase_id: firebase.auth().currentUser.uid,
                     first_name: firstName,
                     last_name: lastName,
-                    user_phone: userPhone
-                })))
-    }
+                    user_phone: userPhone,
+                    user_progress: ''
+                }))
+                .then(this.setState({redirect: true}))
+        )
+    };
 
     handleInputTextChange = e => {
         this.setState({[e.target.name]: e.target.value});
@@ -50,6 +48,12 @@ class SignUpForm extends Component {
     };
 
     render() {
+        const {redirect} = this.state;
+
+        if (redirect) {
+            return <Redirect to='/'/>;
+        }
+
         return (
             <form className="formCont" action="#">
                 <div className='inputCont'>
@@ -64,7 +68,7 @@ class SignUpForm extends Component {
                             name='firstName'
                             className="formInput"
                             type="text"
-                            onChange={this.handleFirstNameTextChange}
+                            onChange={this.handleInputTextChange}
                             placeholder=''
                             value={this.state.firstName}>
                         </input>
@@ -77,7 +81,7 @@ class SignUpForm extends Component {
                             name='lastName'
                             className="formInput"
                             type="text"
-                            onChange={this.handleLastNameTextChange}
+                            onChange={this.handleInputTextChange}
                             placeholder=''
                             value={this.state.lastName}>
                         </input>
@@ -90,7 +94,7 @@ class SignUpForm extends Component {
                             name='userPhone'
                             className="formInput"
                             type="text"
-                            onChange={this.handleUserPhoneTextChange}
+                            onChange={this.handleInputTextChange}
                             placeholder=''
                             value={this.state.userPhone}>
                         </input>
@@ -103,7 +107,7 @@ class SignUpForm extends Component {
                             name='email'
                             className="formInput"
                             type="text"
-                            onChange={this.handleEmailTextChange}
+                            onChange={this.handleInputTextChange}
                             placeholder=''
                             value={this.state.email}>
                         </input>
@@ -116,7 +120,7 @@ class SignUpForm extends Component {
                             name='password'
                             className="formInput"
                             type="password"
-                            onChange={this.handlePassTextChange}
+                            onChange={this.handleInputTextChange}
                             placeholder=''
                             value={this.state.password}>
                         </input>
@@ -129,7 +133,7 @@ class SignUpForm extends Component {
                             name='verifyPassword'
                             className="formInput"
                             type="password"
-                            onChange={this.handleVerifyPassTextChange}
+                            onChange={this.handleInputTextChange}
                             placeholder=''
                             value={this.state.verifyPassword}>
                         </input>
@@ -137,10 +141,14 @@ class SignUpForm extends Component {
                 </div>
                 <br/>
                 <button
-                    className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored signInFormButton"
-                    onClick={() => this.onButtonPress()}>
+                    className="mdl-button mdl-js-button mdl-button--raised signInFormButton"
+                    onClick={(e) => {
+                        e.preventDefault();
+                        this.onButtonPress()
+                    }
+                    }>
                     <span className='buttonText'>
-                        UPDATE
+                        Submit
                     </span>
                 </button>
             </form>

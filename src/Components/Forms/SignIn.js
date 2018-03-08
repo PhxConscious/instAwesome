@@ -26,9 +26,11 @@ class LoginForm extends Component {
         e.preventDefault();
         let provider = new firebase.auth.GoogleAuthProvider();
         firebase.auth().useDeviceLanguage();
-        firebase.auth().signInWithPopup(provider).then(function (result) {
-            console.log(`${firebase.auth().currentUser.email} has just signed in with Google Auth`)
-        }).then(this.onLoginSuccess)
+        firebase.auth().signInWithPopup(provider)
+            .then(function (result) {
+                console.log(`${firebase.auth().currentUser.email} has just signed in with Google Auth`)
+            })
+            .then(this.onLoginSuccess)
             .then(() => {
                 if (firebase.auth().currentUser) {
                     this.setState({redirect: true, email: '', password: ''})
@@ -42,7 +44,8 @@ class LoginForm extends Component {
             email: '',
             password: '',
             loginError: '',
-            user_token: firebase.auth().currentUser.uid
+            user_token: firebase.auth().currentUser.uid,
+            redirect: true
         });
         console.log(`${firebase.auth().currentUser.email} has just signed in`)
     };
@@ -71,7 +74,7 @@ class LoginForm extends Component {
         this.setState({error: ''});
         firebase.auth().signInWithEmailAndPassword(email, password)
             .then(this.onLoginSuccess)
-            .then(this.setState({redirect: true, email: '', password: ''}))
+            .then(this.setState({email: '', password: ''}))
             .catch(this.onLoginFail)
     };
 
@@ -79,7 +82,7 @@ class LoginForm extends Component {
         const {redirect} = this.state;
 
         if (redirect) {
-            return <Redirect to='/learn/dashboard'/>;
+            return <Redirect to='/profile'/>;
         }
 
         return (

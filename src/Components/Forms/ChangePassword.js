@@ -35,7 +35,6 @@ class ChangePassword extends Component {
         )
     }
 
-
     onButtonPress() {
         // this.reAuthUser();
         this.createNewPassword();
