@@ -19,7 +19,9 @@ class Dashboard extends React.Component {
     this.combineUserDataAndTaskData = this.combineUserDataAndTaskData.bind(this);
     this.nextLesson = this.nextLesson.bind(this);
     this.prevLesson = this.prevLesson.bind(this);
+    this.getActiveUnit = this.getActiveUnit.bind(this);
     this.getActiveLesson = this.getActiveLesson.bind(this);
+    this.getActiveQuestion = this.getActiveQuestion.bind(this);
     this.nextQuestion = this.nextQuestion.bind(this);
     this.prevQuestion = this.prevQuestion.bind(this);
     this.nextUnit = this.nextUnit.bind(this);
@@ -131,7 +133,16 @@ class Dashboard extends React.Component {
     }
   }
 
+  // cycle through to find first incomplete unit
+  getActiveUnit(){
+    // 1. iterate through all units
+    // 2. set the first unit where isCompleted != true to currentActiveUnitObj & currentActiveUnit
+  }
+
+  // cycle through to find first incomplete lesson
   getActiveLesson(){
+    // 1. interate through lessons in the current unit
+    // 2. set the first lesson where isComplete != true to currentActiveLessonObj and currentActiveLesson
     console.log("getActiveLesson")
     let { currentValues } = this.props;
     let userProg = this.props.userProgress.currentUser.user_progress;
@@ -180,6 +191,12 @@ class Dashboard extends React.Component {
         this.props.setCurrentValues("currentQuestionObj", firstIncompleteQuestion);
       }
     })
+  }
+
+  // cycle through to find first question where id !== true
+  getActiveQuestion(){
+    // 1. iterate through questions in the active lesson
+    // 2. set the first question where id!=true as currentQuestionObj and currentQuestion 
   }
 
   // sets current unit
