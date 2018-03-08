@@ -132,6 +132,7 @@ class Dashboard extends React.Component {
     if(prevProps.currentValues.tasks !== currentValues.tasks){
       this.getActiveLessonTemp();
       this.getActiveUnit();
+      this.getActiveLesson();
     }
   }
 
@@ -172,9 +173,19 @@ class Dashboard extends React.Component {
   }
 
   // cycle through to find first incomplete lesson
-  getActiveLessonTemp(){
+  getActiveLesson(){
     // 1. interate through lessons in the current unit
     // 2. set the first lesson where isComplete != true to currentActiveLessonObj and currentActiveLesson
+  }
+
+  // cycle through to find first question where id !== true
+  getActiveQuestion(){
+    // 1. iterate through questions in the active lesson
+    // 2. set the first question where id!=true as currentQuestionObj and currentQuestion
+  }
+
+  getActiveLessonTemp(){
+
     console.log("getActiveLessonTemp")
     let { currentValues } = this.props;
     let userProg = this.props.userProgress.currentUser.user_progress;
@@ -225,11 +236,7 @@ class Dashboard extends React.Component {
     })
   }
 
-  // cycle through to find first question where id !== true
-  getActiveQuestion(){
-    // 1. iterate through questions in the active lesson
-    // 2. set the first question where id!=true as currentQuestionObj and currentQuestion
-  }
+
 
   // sets current unit
   selectCardOnClick(value){
