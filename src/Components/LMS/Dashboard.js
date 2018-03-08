@@ -186,19 +186,28 @@ class Dashboard extends React.Component {
     // 1. interate through lessons in the current unit
     let lessonArr = currentUnitObj.lessons;
     // console.log("lessonArr", lessonArr)
+    let finalLessonIndex;
+    let lastUnlockedLesson;
     for(let i = 0; i < lessonArr.length; i++){
+
       let curLessonId = lessonArr[i].id;
       // @TODO if no value, POST  lessonId=false
+
       let curLessonObj = userProg[currentUnitObj.id].lessons[curLessonId];
 
-      // check to see if lesson is unlocked and not completed
       if(curLessonObj.lessonCompleted === false && curLessonObj.lessonLocked === false){
-        console.log('curLessonObj', curLessonObj)
+        lastUnlockedLesson = curLessonObj;
+        finalLessonIndex = i;
       }
 
       // [currentUnit].lessons[curLessonId]
     }
+    this.props.setCurrentValues("currentLessonObj", lastUnlockedLesson);
+    this.props.setCurrentValues("currentLesson", finalLessonIndex)
     // 2. set the first lesson where isComplete != true to currentActiveLessonObj and currentActiveLesson
+    setTimeout(()=>{
+      this.getActiveQuestion();
+    }, 500)
   }
 
   // cycle through to find first question where id !== true
@@ -500,8 +509,8 @@ class Dashboard extends React.Component {
       })
     }
 
-    if(this.state.readyForRender){
-
+    // if(this.state.readyForRender){
+    if(false){
 
       return(
         <div className="background">
