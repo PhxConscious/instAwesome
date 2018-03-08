@@ -130,9 +130,9 @@ class Dashboard extends React.Component {
   componentDidUpdate(prevProps, prevState){
     let { currentValues } = this.props;
     if(prevProps.currentValues.tasks !== currentValues.tasks){
-      this.getActiveLessonTemp();
+      // this.getActiveLessonTemp();
       this.getActiveUnit();
-      this.getActiveLesson();
+      // this.getActiveLesson();
     }
   }
 
@@ -148,33 +148,56 @@ class Dashboard extends React.Component {
     // 1. iterate through all units - if no value in userProg, post one.
     for(let i = 0; i < book.length; i++){
       let curUnitId = book[i].id;
-      console.log("book i", book[i])
+
       // @TODO handle this
       if(!userProg[curUnitId]){
-        console.log("this unit does not exist in userProgress");
+        // console.log("this unit does not exist in userProgress");
         // a. post it to userProgress
         // b. fetch userProgress
         // c. call getActiveUnit()
       }
 
       let curUnitProg = userProg[curUnitId];
-      console.log("curUnitProg", curUnitProg)
+
       if(curUnitProg.unitLocked === false){
-        // this is potentially the correct unit
+        // this is potentially the correct unit = save the last one
         lastUnlockedUnit = book[i];
         finalUnitIndex = i;
-        console.log("lastUnlockedUnit, finalUnitIndex", lastUnlockedUnit, finalUnitIndex)
+
       }
     }
-    console.log("lastUnlockedUnit", lastUnlockedUnit);
+
     this.props.setCurrentValues("currentUnitObj", lastUnlockedUnit);
     this.props.setCurrentValues("currentUnit", finalUnitIndex)
     // 2. set the first unit where isCompleted != true to currentActiveUnitObj & currentActiveUnit
+    setTimeout(()=>{
+      this.getActiveLesson();
+    }, 500)
+
+
   }
 
   // cycle through to find first incomplete lesson
   getActiveLesson(){
+    console.log("getActiveLesson")
+    let { book, userProgress, currentValues } = this.props;
+    let userProg = this.props.userProgress.currentUser.user_progress;
+    let { currentUnit, currentUnitObj } = currentValues;
     // 1. interate through lessons in the current unit
+    let lessonArr = currentUnitObj.lessons;
+    // console.log("lessonArr", lessonArr)
+    for(let i = 0; i < lessonArr.length; i++){
+      let curLessonId = lessonArr[i].id;
+      // @TODO if no value, POST  lessonId=false
+      let curLessonObj = userProg[currentUnitObj.id].lessons[curLessonId];
+
+      // check to see if lesson is unlocked and not completed
+      if(curLessonObj.lessonCompleted === false && curLessonObj.lessonLocked === false){
+        console.log('curLessonObj', curLessonObj)
+      }
+
+      // [currentUnit].lessons[curLessonId]
+    }
     // 2. set the first lesson where isComplete != true to currentActiveLessonObj and currentActiveLesson
   }
 
