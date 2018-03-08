@@ -119,10 +119,10 @@ class Dashboard extends React.Component {
     this.props.setCurrentValues("currentUnitName", activeUnitName);
     this.props.setCurrentValues("currentUnitId", currentUnitId);
 
-    this.setState({
-      ...this.state,
-      readyForRender: true,
-    });
+    // this.setState({
+    //   ...this.state,
+    //   readyForRender: true,
+    // });
   }
 
 
@@ -196,7 +196,7 @@ class Dashboard extends React.Component {
       let curLessonObj = userProg[currentUnitObj.id].lessons[curLessonId];
 
       if(curLessonObj.lessonCompleted === false && curLessonObj.lessonLocked === false){
-        lastUnlockedLesson = curLessonObj;
+        lastUnlockedLesson = lessonArr[i];
         finalLessonIndex = i;
       }
 
@@ -212,8 +212,38 @@ class Dashboard extends React.Component {
 
   // cycle through to find first question where id !== true
   getActiveQuestion(){
+    console.log("getActiveQuestion");
+
+    let { book, userProgress, currentValues } = this.props;
+
+    let userProg = this.props.userProgress.currentUser.user_progress;
+
+    let { currentUnit, currentUnitObj, currentLesson, currentLessonObj } = currentValues;
+
+    let questionArr = currentLessonObj.questions;
+    let questionArrProg = userProg[currentUnitObj.id].lessons[currentLessonObj.id].questions;
     // 1. iterate through questions in the active lesson
-    // 2. set the first question where id!=true as currentQuestionObj and currentQuestion
+    console.log("questionArr", questionArr)
+
+    let lastTrueQuestion;
+    let finalQuestionIndex;
+
+
+    for(let i = 0; i < questionArr.length; i++){
+      let currentQuestionId = questionArr[i].id
+      // @TODO post value to server if not present
+
+      // 2. set the first question where id!=true as currentQuestionObj and currentQuestion
+      if(questionArrProg[currentQuestionId]===true){
+        lastTrueQuestion = questionArr[i];
+        finalQuestionIndex = i;
+        // console.log(lastTrueQuestion, finalQuestionIndex)
+      }
+    }
+    this.props.setCurrentValues("currentQuestionObj", lastTrueQuestion);
+    this.props.setCurrentValues("currentQuestion", finalQuestionIndex)
+
+    this.setState({readyForRender: true})
   }
 
   getActiveLessonTemp(){
@@ -509,8 +539,8 @@ class Dashboard extends React.Component {
       })
     }
 
-    // if(this.state.readyForRender){
-    if(false){
+    if(this.state.readyForRender){
+    // if(false){
 
       return(
         <div className="background">
