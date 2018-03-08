@@ -38,6 +38,17 @@ class Dashboard extends React.Component {
   }
 
 
+  // updates state.lesson only when necessary
+  componentDidUpdate(prevProps, prevState){
+    let { currentValues } = this.props;
+    if(prevProps.currentValues.tasks !== currentValues.tasks){
+      // this.getActiveLessonTemp();
+      this.getActiveUnit();
+      // this.getActiveLesson();
+    }
+  }
+
+
   componentWillReceiveProps(nextProps){
     if(this.props.book && this.props.book[0] && this.props.book[0].lessons){
     }
@@ -126,15 +137,7 @@ class Dashboard extends React.Component {
   }
 
 
-  // updates state.lesson only when necessary
-  componentDidUpdate(prevProps, prevState){
-    let { currentValues } = this.props;
-    if(prevProps.currentValues.tasks !== currentValues.tasks){
-      // this.getActiveLessonTemp();
-      this.getActiveUnit();
-      // this.getActiveLesson();
-    }
-  }
+
 
   // cycle through to find first incomplete unit
   getActiveUnit(){
