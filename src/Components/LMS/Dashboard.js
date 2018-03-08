@@ -19,7 +19,10 @@ class Dashboard extends React.Component {
     this.combineUserDataAndTaskData = this.combineUserDataAndTaskData.bind(this);
     this.nextLesson = this.nextLesson.bind(this);
     this.prevLesson = this.prevLesson.bind(this);
+    this.getActiveUnit = this.getActiveUnit.bind(this);
     this.getActiveLesson = this.getActiveLesson.bind(this);
+    this.getActiveLessonTemp = this.getActiveLessonTemp.bind(this);
+    this.getActiveQuestion = this.getActiveQuestion.bind(this);
     this.nextQuestion = this.nextQuestion.bind(this);
     this.prevQuestion = this.prevQuestion.bind(this);
     this.nextUnit = this.nextUnit.bind(this);
@@ -32,6 +35,17 @@ class Dashboard extends React.Component {
   componentDidMount(){
     this.props.getLmsContent();
     this.props.fetchUserProgress();
+  }
+
+
+  // updates state.lesson only when necessary
+  componentDidUpdate(prevProps, prevState){
+    let { currentValues } = this.props;
+    if(prevProps.currentValues.tasks !== currentValues.tasks){
+      // this.getActiveLessonTemp();
+      this.getActiveUnit();
+      // this.getActiveLesson();
+    }
   }
 
 
@@ -116,23 +130,128 @@ class Dashboard extends React.Component {
     this.props.setCurrentValues("currentUnitName", activeUnitName);
     this.props.setCurrentValues("currentUnitId", currentUnitId);
 
-    this.setState({
-      ...this.state,
-      readyForRender: true,
-    });
+    // this.setState({
+    //   ...this.state,
+    //   readyForRender: true,
+    // });
   }
 
 
-  // updates state.lesson only when necessary
-  componentDidUpdate(prevProps, prevState){
-    let { currentValues } = this.props;
-    if(prevProps.currentValues.tasks !== currentValues.tasks){
-      this.getActiveLesson();
+
+
+  // cycle through to find first incomplete unit
+  getActiveUnit(){
+    console.log("getActiveUnit")
+    let { book, userProgress } = this.props;
+    let userProg = this.props.userProgress.currentUser.user_progress;
+
+    // set initial value jic
+    let lastUnlockedUnit = book[0];
+    let finalUnitIndex;
+    // 1. iterate through all units - if no value in userProg, post one.
+    for(let i = 0; i < book.length; i++){
+      let curUnitId = book[i].id;
+
+      // @TODO handle this
+      if(!userProg[curUnitId]){
+        // console.log("this unit does not exist in userProgress");
+        // a. post it to userProgress
+        // b. fetch userProgress
+        // c. call getActiveUnit()
+      }
+
+      let curUnitProg = userProg[curUnitId];
+
+      if(curUnitProg.unitLocked === false){
+        // this is potentially the correct unit = save the last one
+        lastUnlockedUnit = book[i];
+        finalUnitIndex = i;
+
+      }
     }
+
+    this.props.setCurrentValues("currentUnitObj", lastUnlockedUnit);
+    this.props.setCurrentValues("currentUnit", finalUnitIndex)
+    // 2. set the first unit where isCompleted != true to currentActiveUnitObj & currentActiveUnit
+    setTimeout(()=>{
+      this.getActiveLesson();
+    }, 500)
+
+
   }
 
+  // cycle through to find first incomplete lesson
   getActiveLesson(){
     console.log("getActiveLesson")
+    let { book, userProgress, currentValues } = this.props;
+    let userProg = this.props.userProgress.currentUser.user_progress;
+    let { currentUnit, currentUnitObj } = currentValues;
+    // 1. interate through lessons in the current unit
+    let lessonArr = currentUnitObj.lessons;
+    // console.log("lessonArr", lessonArr)
+    let finalLessonIndex;
+    let lastUnlockedLesson;
+    for(let i = 0; i < lessonArr.length; i++){
+
+      let curLessonId = lessonArr[i].id;
+      // @TODO if no value, POST  lessonId=false
+
+      let curLessonObj = userProg[currentUnitObj.id].lessons[curLessonId];
+
+      if(curLessonObj.lessonCompleted === false && curLessonObj.lessonLocked === false){
+        lastUnlockedLesson = lessonArr[i];
+        finalLessonIndex = i;
+      }
+
+      // [currentUnit].lessons[curLessonId]
+    }
+    this.props.setCurrentValues("currentLessonObj", lastUnlockedLesson);
+    this.props.setCurrentValues("currentLesson", finalLessonIndex)
+    // 2. set the first lesson where isComplete != true to currentActiveLessonObj and currentActiveLesson
+    setTimeout(()=>{
+      this.getActiveQuestion();
+    }, 500)
+  }
+
+  // cycle through to find first question where id !== true
+  getActiveQuestion(){
+    console.log("getActiveQuestion");
+
+    let { book, userProgress, currentValues } = this.props;
+
+    let userProg = this.props.userProgress.currentUser.user_progress;
+
+    let { currentUnit, currentUnitObj, currentLesson, currentLessonObj } = currentValues;
+
+    let questionArr = currentLessonObj.questions;
+    let questionArrProg = userProg[currentUnitObj.id].lessons[currentLessonObj.id].questions;
+    // 1. iterate through questions in the active lesson
+    console.log("questionArr", questionArr)
+
+    let lastTrueQuestion;
+    let finalQuestionIndex;
+
+
+    for(let i = 0; i < questionArr.length; i++){
+      let currentQuestionId = questionArr[i].id
+      // @TODO post value to server if not present
+
+      // 2. set the first question where id!=true as currentQuestionObj and currentQuestion
+      if(questionArrProg[currentQuestionId]===true){
+        lastTrueQuestion = questionArr[i];
+        finalQuestionIndex = i;
+        // console.log(lastTrueQuestion, finalQuestionIndex)
+      }
+    }
+    this.props.setCurrentValues("currentQuestionObj", lastTrueQuestion);
+    this.props.setCurrentValues("currentQuestion", finalQuestionIndex)
+
+    this.setState({readyForRender: true})
+  }
+
+  getActiveLessonTemp(){
+
+    console.log("getActiveLessonTemp")
     let { currentValues } = this.props;
     let userProg = this.props.userProgress.currentUser.user_progress;
 
@@ -181,6 +300,8 @@ class Dashboard extends React.Component {
       }
     })
   }
+
+
 
   // sets current unit
   selectCardOnClick(value){
@@ -422,7 +543,7 @@ class Dashboard extends React.Component {
     }
 
     if(this.state.readyForRender){
-
+    // if(false){
 
       return(
         <div className="background">
