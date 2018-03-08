@@ -50,6 +50,7 @@ class Dashboard extends React.Component {
   }
 
   combineUserDataAndTaskData(userData){
+    console.log("combineUserDataAndTaskData")
     let { book } = this.props;
     let tasks = Object.keys(userData);
 
@@ -131,6 +132,7 @@ class Dashboard extends React.Component {
   }
 
   getActiveLesson(){
+    console.log("getActiveLesson")
     let { currentValues } = this.props;
     let userProg = this.props.userProgress.currentUser.user_progress;
 
@@ -224,11 +226,14 @@ class Dashboard extends React.Component {
 
       taskObjRedux[nextUnitId]["unitLocked"] = false;
       // console.log(nextUnitId, taskObjRedux, 'taskObjRedux')
-    }
+
     // @TODO mark the current lesson as complete
+
+
     // @TODO post this progress to the server
     // @TODO set new current unit, lesson, question in redux
     // may have to cycle through and find next incomplete
+    }
   }
 
 
@@ -309,10 +314,14 @@ class Dashboard extends React.Component {
   nextQuestion(){
     let { currentUnit, currentUnitId, currentUnitObj, currentLesson, currentLessonObj, currentQuestion, currentQuestionObj, currentQuestionId} = this.props.currentValues;
     let { userProgress, book } = this.props;
-    let targetQuestion = (parseInt(currentQuestion, 10) + 1).toString();
 
-    this.props.setCurrentValues("currentQuestion", targetQuestion);
-    this.props.setCurrentValues("currentQuestionObj", book[currentUnit].lessons[currentLesson].questions[targetQuestion]);
+
+    let targetQuestion = parseInt(currentQuestion, 10).toString()
+
+
+
+
+
 
     // the whole task obj in redux
     let taskObjRedux = userProgress.currentUser.user_progress;
@@ -331,12 +340,27 @@ class Dashboard extends React.Component {
     curQuest[currentQuestionObj.id] = true;
 
     // 2. put questions obj in taskObjRedux
+    // console.log('questionID', targetQuestion, curQuest, currentQuestionObj)
     taskObjRedux[currentUnitObj.id].lessons[currentLessonObj.id]["questions"] = curQuest;
+
+
+    if(currentLessonObj.questions.length - 1 > parseInt(currentQuestion)+1){
+      console.warn("inside first redux set",currentLessonObj.questions.length - 1, parseInt(currentQuestion)+1, book[currentUnit].lessons[currentLesson].questions[targetQuestion])
+      this.props.setCurrentValues("currentQuestion", targetQuestion);
+      this.props.setCurrentValues("currentQuestionObj", book[currentUnit].lessons[currentLesson].questions[targetQuestion]);
+    // handle if this is the last question of lesson && another lesson exists
+    console.warn("is last lesson?", book[currentUnit].lessons.length, parseInt(currentLesson)+1)
+  } else if (book[currentUnit].lessons.length > parseInt(currentLesson)+1) {
+      console.warn("is last lesson?", book[currentUnit].lessons.length,  parseInt(currentLesson)+1)
+      console.warn("inside second redux set",currentLessonObj.questions.length - 1, parseInt(currentQuestion)+1, currentQuestion, book[currentUnit].lessons[currentLesson].questions[targetQuestion])
+      this.props.setCurrentValues("currentQuestion", "0");
+      this.props.setCurrentValues("currentQuestionObj", book[currentUnit].lessons[parseInt(currentLesson)+1].questions["0"]);
+    }
+
 
     // 5. dispatch updated obj - format object for server
     let dto = {};
     dto["userProgress"] = taskObjRedux;
-
     this.props.putNextQuestion(1, dto)
   }
 
