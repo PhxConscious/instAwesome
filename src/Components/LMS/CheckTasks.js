@@ -15,8 +15,6 @@ class CheckTasks extends React.Component {
     this.isNextQ = this.isNextQ.bind(this);
     this.isPrevQ = this.isPrevQ.bind(this);
     this.isChecked = this.isChecked.bind(this);
-    this.handleOpenDialog = this.handleOpenDialog.bind(this);
-    this.handleCloseDialog = this.handleCloseDialog.bind(this);
   }
 
   componentDidMount(){
@@ -61,7 +59,8 @@ class CheckTasks extends React.Component {
     if(lengthOfQuestArr !== parseInt(currentQuestion,10)+1){
       this.setState({
         // ...this.state,
-        openDialog: false,
+        openLessonDialog: false,
+        openUnitDialog: false,
       })
     }
   }
@@ -82,38 +81,40 @@ class CheckTasks extends React.Component {
     // }
   }
 
-  handleOpenDialog() {
-    this.setState({
-      openDialog: true
-    });
-  }
-
-  handleCloseDialog() {
-    this.setState({
-      openDialog: false
-    });
-  }
 
   render(){
 
 
     let { isChecked, nextButtonHidden, prevButtonHidden } = this.state;
 
-    let { lesson, nextLesson, prevLesson, noOfLessons, nextQuestion, prevQuestion, userProgress, book } = this.props;
+    let { lesson, nextLesson, prevLesson, noOfLessons, nextQuestion, prevQuestion, nextUnit, userProgress, book } = this.props;
 
     let { currentUnit, currentUnitObj, currentLesson, currentLessonObj, currentQuestion, currentQuestionObj } = this.props.currentValues
 
     let nextQuestClickHandler = () => {
       let lengthOfQuestArr = book[currentUnit].lessons[currentLesson].questions.length
 
-      if(lengthOfQuestArr === parseInt(currentQuestion,10)+1){
+      let lengthOfLessonArr = book[currentUnit].lessons.length
+
+      if(lengthOfQuestArr === parseInt(currentQuestion,10)+1 && lengthOfLessonArr === parseInt(currentLesson,10)+1){
+        console.log("END OF THE UNIT")
+        nextUnit();
         this.setState({
           ...this.state,
-          openDialog: true,
-          dialogTitle: "You finished the Lesson",
-          dialogText: "onto the next lesson?",
-          dialogButton1: "continue",
-          dialogButton2: "stay here"
+          openUnitDialog: true,
+          unitDialogTitle: "Congrats! You finished the unit",
+          unitDialogText: "onto the next unit?",
+          unitDialogButton1: "continue",
+          unitDialogButton2: "stay here"
+        })
+      } else if (lengthOfQuestArr === parseInt(currentQuestion,10)+1){
+        this.setState({
+          ...this.state,
+          openLessonDialog: true,
+          lessonDialogTitle: "You finished the Lesson",
+          lessonDialogText: "onto the next lesson?",
+          lessonDialogButton1: "continue",
+          lessonDialogButton2: "stay here"
         })
       } else {
         nextQuestion();
@@ -125,11 +126,11 @@ class CheckTasks extends React.Component {
       if("0" === currentQuestion){
         this.setState({
           ...this.state,
-          openDialog: true,
-          dialogTitle: `You're still on lesson ${parseInt(currentLesson)+1}`,
-          dialogText: "go back to previous lesson?",
-          dialogButton1: "go back",
-          dialogButton2: "stay here"
+          openLessonDialog: true,
+          lessonDialogTitle: `You're still on lesson ${parseInt(currentLesson)+1}`,
+          lessonDialogText: "go back to previous lesson?",
+          lessonDialogButton1: "go back",
+          lessonDialogButton2: "stay here"
         })
       } else {
         prevQuestion();
@@ -152,46 +153,72 @@ class CheckTasks extends React.Component {
             />
           </div>
 
-          <Dialog open={this.state.openDialog}>
-            <DialogTitle>{this.state.dialogTitle}</DialogTitle>
+          <Dialog open={this.state.openLessonDialog}>
+            <DialogTitle>{this.state.lessonDialogTitle}</DialogTitle>
             <DialogContent>
-              <p>{this.state.dialogText}</p>
+              <p>{this.state.lessonDialogText}</p>
             </DialogContent>
             <DialogActions>
               <Button
                 type='button'
                 onClick={nextLesson}
-              >{this.state.dialogButton1}
+              >{this.state.lessonDialogButton1}
               </Button>
               <Button
                 type='button'
-                onClick={this.handleCloseDialog}
-              >{this.state.dialogButton2}
+                onClick={e=>this.setState({openLessonDialog:false})}
+              >{this.state.lessonDialogButton2}
             </Button>
             </DialogActions>
           </Dialog>
 
-          <button
-            className={prevButtonHidden ? 'hidden' : ""}
-            onClick={prevQuestClickHandler}
-            value="nextQuestion"
-          >prevQuestion</button>
-          <button
-            onClick={prevLesson}
-            value="next"
-          >prevvvvvvLesson</button>
+          <Dialog open={this.state.openUnitDialog}>
+            <DialogTitle>{this.state.unitDialogTitle}</DialogTitle>
+            <DialogContent>
+              <p>{this.state.unitDialogText}</p>
+            </DialogContent>
+            <DialogActions>
+              <Button
+                type='button'
+                onClick={nextLesson}
+              >{this.state.unitDialogButton1}
+              </Button>
+              <Button
+                type='button'
+                onClick={e=>this.setState({openUnitDialog:false})}
+              >{this.state.unitDialogButton2}
+            </Button>
+            </DialogActions>
+          </Dialog>
 
-          <button
-            onClick={nextLesson}
-            value="next"
-          >nextllllllllLesson</button>
-          <button
-            className={nextButtonHidden ? 'hidden' : ""}
-            onClick={nextQuestClickHandler}
-            value="nextQuestion"
-            disabled={!isChecked}
-          >nextQuestion</button>
+          <div>
+            <button
+              onClick={prevLesson}
+              value="next"
+            >prevLesson</button>
 
+            <button
+              onClick={nextLesson}
+              value="next"
+            >nextLesson</button>
+          </div>
+          <div>
+            <button
+              className={prevButtonHidden ? 'hidden' : ""}
+              onClick={prevQuestClickHandler}
+              value="nextQuestion"
+            >prevQuestion</button>
+
+            <button
+              className={nextButtonHidden ? 'hidden' : ""}
+              onClick={nextQuestClickHandler}
+              value="nextQuestion"
+              disabled={!isChecked}
+            >nextQuestion</button>
+          </div>
+
+
+        <div>Unit: {parseInt(currentUnit, 10)+1} of {book.length}</div>
         <div>current lesson: {parseInt(currentLesson, 10)+1} of {noOfLessons}</div>
         <div>progress: {parseInt(currentQuestion, 10)+1} of {currentLessonObj.questions.length}</div>
 

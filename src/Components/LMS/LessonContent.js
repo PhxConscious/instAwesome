@@ -14,13 +14,14 @@ class LessonContent extends React.Component {
     switch(contentType) {
 
       case "checkTasks":
-        let { nextLesson, prevLesson, noOfLessons, nextQuestion, prevQuestion } = this.props;
+        let { nextUnit, nextLesson, prevLesson, noOfLessons, nextQuestion, prevQuestion } = this.props;
 
         return(
           <div>
             <LessonHeader
             />
             <CheckTasks
+              nextUnit={nextUnit}
               nextLesson={nextLesson}
               prevLesson={prevLesson}
               nextQuestion={nextQuestion}
