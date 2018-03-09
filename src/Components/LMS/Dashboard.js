@@ -70,7 +70,6 @@ class Dashboard extends React.Component {
 
       }
     }
-    console.log("unit posting", lastUnlockedUnit, finalUnitIndex)
     this.props.setCurrentValues("currentUnitObj", lastUnlockedUnit);
     this.props.setCurrentValues("currentUnit", finalUnitIndex)
     this.props.setCurrentValues("active", lastUnlockedUnit.id);
@@ -308,10 +307,8 @@ class Dashboard extends React.Component {
     // the current questions from redux
     let curQuest = curLesson.questions
 
-    console.log("curQuest1", curQuest)
     // 1. put new true questionId value in questions obj
     curQuest[currentQuestionObj.id] = true;
-    console.log("curQuest2", curQuest, currentQuestionObj.id)
 
     // 2. put questions obj in taskObjRedux
     // console.log('questionID', targetQuestion, curQuest, currentQuestionObj)
@@ -319,13 +316,11 @@ class Dashboard extends React.Component {
 
     // case 1: there are more questions in lesson object
     if(currentLessonObj.questions.length - 1 > parseInt(currentQuestion)){
-      console.log("nextQuestion: not last question")
       this.props.setCurrentValues("currentQuestion", targetQuestion);
       this.props.setCurrentValues("currentQuestionObj", book[currentUnit].lessons[currentLesson].questions[targetQuestion]);
 
     // case 2: this is the last question in the lesson obj
     } else if (book[currentUnit].lessons.length > parseInt(currentLesson)+1) {
-      console.log("nextQuestion: IS the last question")
 
     }
 
@@ -363,7 +358,6 @@ class Dashboard extends React.Component {
   render() {
 
     let { active, currentUnit, currentUnitName, currentUnitId, currentLesson, currentLessonObj, currentQuestion, currentQuestionObj } = this.props.currentValues;
-    console.log("currentLesson", currentLesson)
 
 
     let { userProgress, book } = this.props;
