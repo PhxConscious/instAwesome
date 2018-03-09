@@ -319,8 +319,7 @@ class Dashboard extends React.Component {
     // case 2: this is the last question in the lesson obj
     } else if (book[currentUnit].lessons.length > parseInt(currentLesson)+1) {
       console.log("nextQuestion: IS the last question")
-      this.props.setCurrentValues("currentQuestion", "0");
-      this.props.setCurrentValues("currentQuestionObj", book[currentUnit].lessons[parseInt(currentLesson)+1].questions["0"]);
+
     }
 
 
