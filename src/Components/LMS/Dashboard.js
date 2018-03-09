@@ -281,15 +281,15 @@ class Dashboard extends React.Component {
     let currentLesson = this.state.currentLesson;
     let targetLesson = (parseInt(currentLesson, 10) - 1).toString();
 
-    //@TODO update currentLessonObj based on targetLesson
+    // @TODO update currentLessonObj based on targetLesson
     this.props.setCurrentValues("currentLesson", targetLesson);
+
+    // @TODO update these params
     this.props.setCurrentValues("currentLessonObj", configUnitCards[this.state.currentUnit].lessons[this.state.currentLesson]);
 
-    // this.setState({
-    //   ...this.state,
-    //   currentLesson: targetLesson,
-    //   currentLessonObj: configUnitCards[this.state.currentUnit].lessons[this.state.currentLesson]
-    // })
+    // @TODO handle if there is no previous lesson in unit
+
+    // @TODO get the current question for the previous lesson
   }
 
   nextQuestion(){
