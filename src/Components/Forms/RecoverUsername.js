@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import {Link} from 'react-router-dom';
 
 // import firebase from 'firebase';
 
@@ -30,7 +31,6 @@ class RecoverUsername extends Component {
 
     handleInputTextChange = e => {
         this.setState({[e.target.name]: e.target.value});
-        // console.log(`this is the current state ${this.state}`)
     };
 
     render() {
@@ -62,6 +62,9 @@ class RecoverUsername extends Component {
                         {this.renderButton()}
                     </div>
                 </form>
+                <Link to='/' className='forgotLinks'>
+                    RETURN TO LOGIN
+                </Link>
             </div>
         );
     }

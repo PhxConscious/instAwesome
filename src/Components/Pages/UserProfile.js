@@ -1,14 +1,42 @@
 import React, {Component} from 'react';
 import '../../App.css';
+import firebase from 'firebase';
+import {Redirect} from 'react-router-dom';
 
-import ConsciousCenter from '../Reusable/ConsciousCenter';
 import Gradient from "../Reusable/Gradient";
 import BlueAppBg from "../Reusable/BlueAppBg";
 import GreenFormContainer from "../Reusable/GreenFormContainer";
 import AppNavbar from "../Reusable/AppNav";
+import axios from "axios/index";
+import LandingPage from "./LandingPage";
 
 class UserProfile extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            user: [],
+            redirect: false
+    }
+    }
+
+    componentDidMount() {
+        this.getUser()
+    }
+
+    getUser = () => {
+        if (firebase.auth().currentUser) {
+            axios.get('http://localhost:8080/users/' + firebase.auth().currentUser.uid)
+                .then(res => {
+                    this.setState({user: res.data})
+                });
+        } else{ this.setState({redirect:true})}
+    };
+
     render() {
+        const {redirect} = this.state;
+        if(redirect) {
+            return <Redirect to='/'/>
+        }
         return (
             <div className="App">
                 <AppNavbar/>

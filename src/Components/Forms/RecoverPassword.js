@@ -13,7 +13,7 @@ class RecoverPassword extends Component {
         };
     }
 
-    renderButton() {
+    renderButton = () => {
         if (this.state.loading) {
             return <h4>Loading...</h4>
         }
@@ -26,21 +26,20 @@ class RecoverPassword extends Component {
                 </span>
             </button>
         );
-    }
+    };
 
     handleInputTextChange = e => {
         this.setState({[e.target.name]: e.target.value});
-        // console.log(`this is the current state ${this.state}`)
     };
 
     emailPasswordReset = () => {
-        let auth = firebase.auth();
         let emailAddress = this.state.email;
 
-        auth.sendPasswordResetEmail(emailAddress).then(function () {
-            alert('email sent');
-        }).catch(function (error) {
-            alert(error)
+        firebase.auth().sendPasswordResetEmail(emailAddress)
+            .then(function () {
+                alert('email sent');
+            }).catch(function (error) {
+            alert(error.message)
         });
     };
 
@@ -62,16 +61,21 @@ class RecoverPassword extends Component {
                                 placeholder=''
                                 value={this.state.email}>
                             </input>
-                            <p className='passwordRequirementText'>WE'LL SEND YOU AN EMAIL WITH PASSWORD RESET
-                                INSTRUCTIONS</p>
+                            <p className='passwordRequirementText'>
+                                WE'LL SEND YOU AN EMAIL WITH PASSWORD RESET INSTRUCTIONS
+                            </p>
                         </div>
                     </div>
                     <div>
                         {this.renderButton()}
                     </div>
                     <div className='forgotLinksCont'>
-                        <Link to='/forgotusername' className='forgotLinks' href='#'>RECOVER USERNAME </Link>
-                        <Link to='/' className='forgotLinks' href='#'>RETURN TO LOGIN </Link>
+                        <Link to='/forgotusername' className='forgotLinks'>
+                            RECOVER USERNAME
+                        </Link>
+                        <Link to='/' className='forgotLinks'>
+                            RETURN TO LOGIN
+                        </Link>
                     </div>
                 </form>
             </div>

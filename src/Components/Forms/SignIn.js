@@ -2,6 +2,8 @@ import React, {Component} from "react";
 import firebase from 'firebase';
 import {Redirect, Link} from 'react-router-dom';
 import Styles from '../../Styles/FormsStyles.css';
+import { connect } from 'react-redux';
+import {setCurrentValue} from "../../redux/actions/currentValues";
 
 class LoginForm extends Component {
 
@@ -26,9 +28,11 @@ class LoginForm extends Component {
         e.preventDefault();
         let provider = new firebase.auth.GoogleAuthProvider();
         firebase.auth().useDeviceLanguage();
-        firebase.auth().signInWithPopup(provider).then(function (result) {
-            console.log(`${firebase.auth().currentUser.email} has just signed in with Google Auth`)
-        }).then(this.onLoginSuccess)
+        firebase.auth().signInWithPopup(provider)
+            .then(function (result) {
+                console.log(`${firebase.auth().currentUser.email} has just signed in with Google Auth`)
+            })
+            .then(this.onLoginSuccess)
             .then(() => {
                 if (firebase.auth().currentUser) {
                     this.setState({redirect: true, email: '', password: ''})
@@ -42,7 +46,8 @@ class LoginForm extends Component {
             email: '',
             password: '',
             loginError: '',
-            user_token: firebase.auth().currentUser.uid
+            user_token: firebase.auth().currentUser.uid,
+            redirect: true
         });
         console.log(`${firebase.auth().currentUser.email} has just signed in`)
     };
@@ -70,8 +75,9 @@ class LoginForm extends Component {
         const {email, password} = this.state;
         this.setState({error: ''});
         firebase.auth().signInWithEmailAndPassword(email, password)
+            .then(this.props.setCurrentUserFbId("currentFbId", firebase.auth().currentUser.uid))
             .then(this.onLoginSuccess)
-            .then(this.setState({redirect: true, email: '', password: ''}))
+            .then(this.setState({email: '', password: ''}))
             .catch(this.onLoginFail)
     };
 
@@ -79,7 +85,7 @@ class LoginForm extends Component {
         const {redirect} = this.state;
 
         if (redirect) {
-            return <Redirect to='/learn/dashboard'/>;
+            return <Redirect to='/profile'/>;
         }
 
         return (
@@ -144,4 +150,16 @@ class LoginForm extends Component {
     }
 }
 
-export default LoginForm
+// const mapStateToProps = state => ({
+//     currentValues: state.currentValues
+// });
+
+const mapDispatchToProps = dispatch => {
+    return {
+        setCurrentUserFbId: (key, value) => {
+            dispatch(setCurrentValue(key, value))
+        }
+    }
+};
+
+export default connect(null, mapDispatchToProps)(LoginForm)

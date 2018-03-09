@@ -6,6 +6,7 @@ import Dashboard from './LMS/Dashboard';
 import RecoverUsernamePage from './Pages/RecoverUsernamePage';
 import RecoverPasswordPage from './Pages/RecoverPasswordPage';
 import UserProfile from "./Pages/UserProfile";
+import SignUp from "./Pages/SignUp";
 
 class Main extends React.Component {
 
@@ -18,6 +19,7 @@ class Main extends React.Component {
                     <Route exact path="/forgotpassword" render={props => <RecoverPasswordPage {...props}/>}/>
                     <Route exact path="/forgotusername" render={props => <RecoverUsernamePage {...props}/>}/>
                     <Route exact path="/profile" render={props => <UserProfile {...props}/>}/>
+                    <Route exact path="/signup" render={props => <SignUp {...props}/>}/>
                 </Switch>
             </main>
         )
