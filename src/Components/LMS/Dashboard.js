@@ -18,12 +18,10 @@ class Dashboard extends React.Component {
       startStudyModal: true,
     }
     this.selectCardOnClick = this.selectCardOnClick.bind(this)
-    this.combineUserDataAndTaskData = this.combineUserDataAndTaskData.bind(this);
     this.nextLesson = this.nextLesson.bind(this);
     this.prevLesson = this.prevLesson.bind(this);
     this.getActiveUnit = this.getActiveUnit.bind(this);
     this.getActiveLesson = this.getActiveLesson.bind(this);
-    this.getActiveLessonTemp = this.getActiveLessonTemp.bind(this);
     this.getActiveQuestion = this.getActiveQuestion.bind(this);
     this.nextQuestion = this.nextQuestion.bind(this);
     this.prevQuestion = this.prevQuestion.bind(this);
@@ -32,104 +30,15 @@ class Dashboard extends React.Component {
   }
 
 
-
-  // this must update when a unit is finished (not just
-  // initial rendering) - see if this works
   componentDidMount(){
     this.props.getLmsContent();
     this.props.fetchUserProgress();
-  }
-
-
-
-  componentWillReceiveProps(nextProps){
-    console.log("componentWillReceiveProps")
-    if(this.props.book && this.props.book[0] && this.props.book[0].lessons){
-    }
-
-    if(nextProps !== this.props ){
-
-      if(nextProps.book[0] && nextProps.book[0].lessons && nextProps.book[0] !== this.props.book[0]){
-      }
-      if(nextProps.userProgress.currentUser.user_progress !== this.props.userProgress.currentUser.user_progress){
-        // this.combineUserDataAndTaskData(nextProps.userProgress.currentUser.user_progress);
-      }
-    }
   }
 
   handleStartStudy(){
     this.getActiveUnit();
     this.setState({startStudyModal:false})
   }
-
-  combineUserDataAndTaskData(userData){
-    console.log("combineUserDataAndTaskData")
-    let { book } = this.props;
-    let tasks = Object.keys(userData);
-
-    // taskArr combines server data with local data
-    let taskArr = [];
-
-    // find units on react but not in DB. add to tasks arr.
-    // now we can update react and it renders automatically
-    // we must post this to server later
-    book.forEach(card => {
-      if(tasks.indexOf(card.id) === -1){
-        tasks.push(card.id)
-      }
-    })
-
-    // match up server data and local data to make one array
-    // of task objecs which include a "completed" value (boolean)
-    tasks.forEach(task => {
-      book.forEach(card => {
-        if(card.id === task) {
-          let key = card.id;
-          taskArr.push({
-            userProgress: {
-              name: key,
-              isCompleted: userData[task].unitCompleted,
-              isLocked: userData[task].unitLocked,
-              // lessons: userData[task].lessons
-            },
-            title: card.title,
-            description: card.description,
-            image: card.image,
-            active: false,
-            lessons: card.lessons,
-            id: card.id
-          })
-        }
-      })
-    })
-
-
-    let activeUnitName = null;
-    // sets the initial active unit
-    let currentUnit;
-    let currentUnitId;
-
-    for(let i = 1; i < taskArr.length; i++){
-      if(taskArr[i].userProgress.isCompleted === false && taskArr[i-1].userProgress.isCompleted === true){
-        activeUnitName = taskArr[i].title;
-        currentUnitId = taskArr[i].id;
-        currentUnit = i.toString();
-        i = tasks.length;
-        // now lets find the active lesson
-      } else {
-        activeUnitName = taskArr[0].title;
-        currentUnitId = taskArr[0].id;
-        currentUnit = "0";
-      }
-    }
-
-    this.props.setCurrentValues("tasks", taskArr);
-    this.props.setCurrentValues("active", activeUnitName);
-
-  }
-
-
-
 
   // cycle through to find first incomplete unit
   getActiveUnit(){
@@ -238,66 +147,11 @@ class Dashboard extends React.Component {
       }
     }
 
-    console.log("qobj now ", lastTrueQuestion, finalQuestionIndex)
     this.props.setCurrentValues("currentQuestionObj", lastTrueQuestion);
     this.props.setCurrentValues("currentQuestion", finalQuestionIndex)
 
     this.setState({readyForRender: true})
   }
-
-  getActiveLessonTemp(){
-
-    console.log("getActiveLessonTemp")
-    let { currentValues } = this.props;
-    let userProg = this.props.userProgress.currentUser.user_progress;
-
-    // find first incomplete lesson within active unit
-    currentValues.tasks.forEach(task => {
-      let firstIncompleteLesson = null;
-      let firstIncompleteQuestion = null;
-      let i; // lesson index
-      let j; // question index
-      let finalIndexI;
-      let finalIndexJ;
-
-      if(task.title === currentValues.active){
-
-        let lessonsProgress = userProg[task.id].lessons;
-
-        for(i = task.lessons.length - 1; i >=0; i--){
-          let lessonId = task.lessons[i].id;
-          if(!lessonsProgress[lessonId].lessonCompleted) {
-            firstIncompleteLesson = task.lessons[i];
-            finalIndexI = i.toString();
-          }
-
-          let questions = task.lessons[i].questions;
-
-          // find first incomplete question
-          for(j = questions.length-1; j >=0; j--){
-            if(!lessonsProgress[firstIncompleteLesson.id].questions[questions[j].id]){
-              firstIncompleteQuestion = questions[j]
-              finalIndexJ = j.toString()
-            }
-          }
-        }
-
-        this.props.setCurrentValues("active", task.title);
-        this.props.setCurrentValues("currentUnitName", task.title);
-        this.props.setCurrentValues("currentUnitId", task.id);
-        this.props.setCurrentValues("currentUnitObj", task);
-        this.props.setCurrentValues("currentLesson", finalIndexI);
-        this.props.setCurrentValues("currentLessonObj", firstIncompleteLesson);
-        this.props.setCurrentValues("currentLessonName", firstIncompleteLesson.title);
-        this.props.setCurrentValues("currentQuestion", finalIndexJ);
-        this.props.setCurrentValues("currentQuestionName", firstIncompleteQuestion.title);
-        this.props.setCurrentValues("currentQuestionId", firstIncompleteQuestion.id);
-        this.props.setCurrentValues("currentQuestionObj", firstIncompleteQuestion);
-      }
-    })
-  }
-
-
 
   // sets current unit in LmsCards
   selectCardOnClick(argId){
@@ -355,10 +209,6 @@ class Dashboard extends React.Component {
     // may have to cycle through and find next incomplete
     }
   }
-
-
-
-
 
 
   nextLesson(){
