@@ -115,6 +115,7 @@ class CheckTasks extends React.Component {
           lessonDialogButton1: "continue",
           lessonDialogButton2: "stay here"
         })
+        nextQuestion();
       } else {
         nextQuestion();
       }

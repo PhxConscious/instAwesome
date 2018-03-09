@@ -300,9 +300,8 @@ class Dashboard extends React.Component {
     // update these params
     this.props.setCurrentValues("currentLessonObj", book[currentUnit].lessons[targetLesson]);
 
-
-
-    // @TODO get the current question for the previous lesson
+    // finds the first incomplete question and set that to currentQuestion
+    this.getActiveQuestion(book[currentUnit].lessons[targetLesson].questions)
   }
 
   nextQuestion(){
