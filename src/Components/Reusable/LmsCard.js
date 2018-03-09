@@ -15,7 +15,7 @@ class LmsCard extends Component {
             <div
               className={!userProg[id].unitCompleted ? "LmsCardContainer locked" : "LmsCardContainer unlocked"}
               id={active ? "currentCard" : ""}
-              onClick={e => onClick(title)}
+              onClick={e => onClick(id)}
             >
               <div className="lockIcon"><i className="material-icons">{userProg[id].unitLocked ? "lock" : ""}</i></div>
               <div className="leftSide">

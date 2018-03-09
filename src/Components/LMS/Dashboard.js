@@ -308,17 +308,20 @@ class Dashboard extends React.Component {
 
 
 
-  // sets current unit
-  selectCardOnClick(value){
-    let { tasks } = this.props.currentValues;
-    let index;
-    tasks.forEach((task, i) => {
+  // sets current unit in LmsCards
+  selectCardOnClick(argId){
+    let { book, userProgress } = this.props;
+    let userProg = userProgress.currentUser.user_progress;
 
-      if(task.title === value && !task.userProgress.isLocked){
+    let index;
+    book.forEach((unit, i) => {
+
+      // don't allow click if it's locked
+      if(unit.id === argId && !userProg[unit.id].isLocked){
         index = i.toString();
-        this.props.setCurrentValues("active", value);
+        this.props.setCurrentValues("active", argId);
         this.props.setCurrentValues("currentUnit", index);
-        this.props.setCurrentValues("currentUnitObj", task);
+        this.props.setCurrentValues("currentUnitObj", unit);
       }
     })
   }
