@@ -278,10 +278,13 @@ class Dashboard extends React.Component {
   }
 
   prevLesson(){
-    let currentLesson = this.state.currentLesson;
+    let { currentUnit, currentUnitObj, currentLesson, currentLessonObj } = this.props.currentValues;
+
+    let { book } = this.props;
+
     let targetLesson = (parseInt(currentLesson, 10) - 1).toString();
 
-    // @TODO update currentLessonObj based on targetLesson
+    // update currentLessonObj based on targetLesson
     this.props.setCurrentValues("currentLesson", targetLesson);
 
     // @TODO update these params
