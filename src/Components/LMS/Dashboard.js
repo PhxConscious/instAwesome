@@ -527,6 +527,8 @@ class Dashboard extends React.Component {
 
       lmsCards = tasks.map((card, i) => (
         <LmsCard
+          index={i}
+          id={book[i].id}
           title={book[i].title}
           description={book[i].description}
           image={book[i].image}

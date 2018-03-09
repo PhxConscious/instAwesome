@@ -1,5 +1,7 @@
 import React, {Component} from 'react'
 import '../../Styles/LmsCardStyles.css'
+import { connect } from 'react-redux';
+
 class LmsCard extends Component {
     constructor(props){
       super(props);
@@ -7,12 +9,20 @@ class LmsCard extends Component {
     }
 
     getCurrentCard(){
+      let { active, tasks, currentUnit, currentUnitObj, } = this.props.currentValues;
+
+      let { userProgress, book, id, index } = this.props;
+
+      let userProg = userProgress.currentUser.user_progress;
+
+      console.log("currentCard", index, id)
       // cycle through cards to find which one is current
 
       //set state values for isLocked and isComplete
     }
 
     render() {
+      this.getCurrentCard()
       const { image, title, description, active, isCompleted, onClick, locked } = this.props;
 
         return(
@@ -37,4 +47,10 @@ class LmsCard extends Component {
     }
 }
 
-export default LmsCard
+const mapStateToProps = state => ({
+  book: state.lmsContent.book,
+  userProgress: state.userProgress,
+  currentValues: state.currentValues
+})
+
+export default connect(mapStateToProps, null)(LmsCard);
