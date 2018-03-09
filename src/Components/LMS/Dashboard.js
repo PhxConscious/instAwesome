@@ -96,22 +96,20 @@ class Dashboard extends React.Component {
     let finalLessonIndex;
     let lastUnlockedLesson;
 
-    console.log("optLessonArr", optLessonObj)
     for(let i = 0; i < optLessonObj.lessons.length; i++){
-      console.log("each lesson", optLessonObj.lessons[i])
       let curLessonId = optLessonObj.lessons[i].id;
       // @TODO if no value, POST  lessonId=false
 
       let curLessonObj = userProg[optUnitId].lessons[curLessonId];
-      console.log("curLessonObj", curLessonObj)
       if(curLessonObj.lessonCompleted === false && curLessonObj.lessonLocked === false){
         lastUnlockedLesson = optLessonObj.lessons[i];
         finalLessonIndex = i;
+      } else {
+        lastUnlockedLesson = optLessonObj.lessons[0];
+        finalLessonIndex = 0;
       }
-
-      // [currentUnit].lessons[curLessonId]
     }
-    console.log("finalLessonIndex", finalLessonIndex, " lastUnlockedLesson", lastUnlockedLesson)
+    // console.log("finalLessonIndex", finalLessonIndex, " lastUnlockedLesson", lastUnlockedLesson)
     this.props.setCurrentValues("currentLessonObj", lastUnlockedLesson);
     this.props.setCurrentValues("currentLesson", finalLessonIndex)
     // 2. set the first lesson where isComplete != true to currentActiveLessonObj and currentActiveLesson
