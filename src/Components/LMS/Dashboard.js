@@ -7,13 +7,15 @@ import LessonContent from './LessonContent';
 import { connect } from 'react-redux';
 import { getLmsContent } from '../../redux/actions/lmsContent';
 import { getUserProgress, nextQuestion } from '../../redux/actions/userProgress';
-import { setCurrentValue } from "../../redux/actions/currentValues"
+import { setCurrentValue } from "../../redux/actions/currentValues";
+import { Button, Dialog, DialogTitle, DialogActions, DialogContent } from 'react-mdl';
 
 class Dashboard extends React.Component {
   constructor(props){
     super(props)
     this.state= {
       readyForRender: false,
+      startStudyModal: true,
     }
     this.selectCardOnClick = this.selectCardOnClick.bind(this)
     this.combineUserDataAndTaskData = this.combineUserDataAndTaskData.bind(this);
@@ -26,6 +28,7 @@ class Dashboard extends React.Component {
     this.nextQuestion = this.nextQuestion.bind(this);
     this.prevQuestion = this.prevQuestion.bind(this);
     this.nextUnit = this.nextUnit.bind(this);
+    this.handleStartStudy = this.handleStartStudy.bind(this);
   }
 
 
@@ -39,17 +42,18 @@ class Dashboard extends React.Component {
 
 
   // updates state.lesson only when necessary
-  componentDidUpdate(prevProps, prevState){
-    let { currentValues } = this.props;
-    if(prevProps.currentValues.tasks !== currentValues.tasks){
-      // this.getActiveLessonTemp();
-      this.getActiveUnit();
-      // this.getActiveLesson();
-    }
-  }
+  // componentDidUpdate(prevProps, prevState){
+  //   let { currentValues } = this.props;
+  //   if(prevProps.currentValues.tasks !== currentValues.tasks){
+  //     // this.getActiveLessonTemp();
+  //
+  //     // this.getActiveLesson();
+  //   }
+  // }
 
 
   componentWillReceiveProps(nextProps){
+    console.log("componentWillReceiveProps")
     if(this.props.book && this.props.book[0] && this.props.book[0].lessons){
     }
 
@@ -61,6 +65,11 @@ class Dashboard extends React.Component {
         this.combineUserDataAndTaskData(nextProps.userProgress.currentUser.user_progress);
       }
     }
+  }
+
+  handleStartStudy(){
+    this.getActiveUnit();
+    this.setState({startStudyModal:false})
   }
 
   combineUserDataAndTaskData(userData){
@@ -109,7 +118,7 @@ class Dashboard extends React.Component {
     // sets the initial active unit
     let currentUnit;
     let currentUnitId;
-    let activeUnitLessons;
+
     for(let i = 1; i < taskArr.length; i++){
       if(taskArr[i].userProgress.isCompleted === false && taskArr[i-1].userProgress.isCompleted === true){
         activeUnitName = taskArr[i].title;
@@ -126,9 +135,9 @@ class Dashboard extends React.Component {
 
     this.props.setCurrentValues("tasks", taskArr);
     this.props.setCurrentValues("active", activeUnitName);
-    this.props.setCurrentValues("currentUnit", currentUnit);
-    this.props.setCurrentValues("currentUnitName", activeUnitName);
-    this.props.setCurrentValues("currentUnitId", currentUnitId);
+    // this.props.setCurrentValues("currentUnit", currentUnit);
+    // this.props.setCurrentValues("currentUnitName", activeUnitName);
+    // this.props.setCurrentValues("currentUnitId", currentUnitId);
 
     // this.setState({
     //   ...this.state,
@@ -169,9 +178,10 @@ class Dashboard extends React.Component {
 
       }
     }
-
+    console.log("unit posting", lastUnlockedUnit, finalUnitIndex)
     this.props.setCurrentValues("currentUnitObj", lastUnlockedUnit);
     this.props.setCurrentValues("currentUnit", finalUnitIndex)
+
     // 2. set the first unit where isCompleted != true to currentActiveUnitObj & currentActiveUnit
     setTimeout(()=>{
       this.getActiveLesson();
@@ -243,6 +253,8 @@ class Dashboard extends React.Component {
         // console.log(lastTrueQuestion, finalQuestionIndex)
       }
     }
+
+    console.log("qobj now ", lastTrueQuestion, finalQuestionIndex)
     this.props.setCurrentValues("currentQuestionObj", lastTrueQuestion);
     this.props.setCurrentValues("currentQuestion", finalQuestionIndex)
 
@@ -542,7 +554,7 @@ class Dashboard extends React.Component {
       })
     }
 
-    if(this.state.readyForRender){
+    if(!this.state.startStudyModal && this.state.readyForRender){
     // if(false){
 
       return(
@@ -565,7 +577,19 @@ class Dashboard extends React.Component {
         </div>
       )
     }
-    return <div>loading...</div>
+    return (<div>
+            <Dialog open={true}>
+              <DialogTitle>Start Learning</DialogTitle>
+              <DialogActions>
+                <button
+                  onClick={this.handleStartStudy}
+                >
+                  BEGIN
+                </button>
+              </DialogActions>
+            </Dialog>
+            </div>
+    )
   }
 }
 
@@ -593,3 +617,14 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
+
+
+// <Dialog open={this.state.startStudyModal}>
+//   <DialogTitle>"Start Studying Now"</DialogTitle>
+//   <DialogContent>
+//     <p>hgjhg</p>
+//   </DialogContent>
+//   <DialogActions>
+
+//   </DialogActions>
+// </Dialog>
