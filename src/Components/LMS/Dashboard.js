@@ -178,7 +178,7 @@ class Dashboard extends React.Component {
         this.props.setCurrentValues("currentUnit", index);
         this.props.setCurrentValues("currentUnitObj", unit);
 
-        // @TODO call getActiveLesson
+        // call getActiveLesson to set the correct active lesson/question
         this.getActiveLesson(book[index], unit.id);
       }
     })
@@ -362,7 +362,14 @@ class Dashboard extends React.Component {
   prevQuestion(){
     let { currentUnit, currentUnitId, currentUnitObj, currentLesson, currentLessonObj, currentQuestion, currentQuestionObj, currentQuestionId} = this.props.currentValues;
     let { userProgress, book } = this.props;
-    let targetQuestion = (parseInt(currentQuestion, 10) - 1).toString();
+
+    let targetQuestion = currentQuestion;
+    if(currentQuestion > 0){
+      targetQuestion = (parseInt(currentQuestion, 10) - 1).toString();
+    } else {
+      alert("You are already at the first question in the lesson - select another lesson")
+    }
+
 
     this.props.setCurrentValues("currentQuestion", targetQuestion);
     this.props.setCurrentValues("currentQuestionObj", book[currentUnit].lessons[currentLesson].questions[targetQuestion]);
@@ -378,7 +385,6 @@ class Dashboard extends React.Component {
 
     // the current questions from redux
     let curQuest = curLesson.questions
-
   }
 
 
