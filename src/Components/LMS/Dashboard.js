@@ -151,6 +151,12 @@ class Dashboard extends React.Component {
       }
     }
 
+    // if all questions are true than go to the first question
+    if(finalQuestionIndex === optQuestArr.length-1){
+      lastTrueQuestion = optQuestArr[0];
+      finalQuestionIndex = 0;
+    }
+
     this.props.setCurrentValues("currentQuestionObj", lastTrueQuestion);
     this.props.setCurrentValues("currentQuestion", finalQuestionIndex)
 
@@ -172,7 +178,8 @@ class Dashboard extends React.Component {
         this.props.setCurrentValues("currentUnit", index);
         this.props.setCurrentValues("currentUnitObj", unit);
 
-        // @TODO call getActiveLesson 
+        // @TODO call getActiveLesson
+        this.getActiveLesson(book[index], unit.id);
       }
     })
   }

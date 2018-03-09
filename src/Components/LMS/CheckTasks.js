@@ -106,6 +106,7 @@ class CheckTasks extends React.Component {
           unitDialogButton1: "continue",
           unitDialogButton2: "stay here"
         })
+        nextQuestion();
       } else if (lengthOfQuestArr === parseInt(currentQuestion,10)+1){
         this.setState({
           ...this.state,
