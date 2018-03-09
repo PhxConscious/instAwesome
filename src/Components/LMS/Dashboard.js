@@ -525,19 +525,18 @@ class Dashboard extends React.Component {
 
     if(tasks){
 
-      lmsCards = tasks.map((card, i) => {
-        return <LmsCard
+      lmsCards = tasks.map((card, i) => (
+        <LmsCard
           title={book[i].title}
           description={book[i].description}
           image={book[i].image}
           onClick={this.selectCardOnClick}
-          value={book[i].title}
           active={active === book[i].title ? true : false}
           isCompleted={card.userProgress.isCompleted}
           locked={tasks[i].userProgress.isLocked}
           key={card.id}
         />
-      })
+    ))
     }
 
     if(!this.state.startStudyModal && this.state.readyForRender){
