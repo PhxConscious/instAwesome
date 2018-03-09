@@ -83,25 +83,27 @@ class Dashboard extends React.Component {
   }
 
   // cycle through to find first incomplete lesson
-  getActiveLesson(){
+  getActiveLesson(optLessonArr){
     console.log("getActiveLesson")
     let { book, userProgress, currentValues } = this.props;
     let userProg = this.props.userProgress.currentUser.user_progress;
     let { currentUnit, currentUnitObj } = currentValues;
-    // 1. interate through lessons in the current unit
-    let lessonArr = currentUnitObj.lessons;
-    // console.log("lessonArr", lessonArr)
+
+    // handle optional param
+    if (typeof optLessonArr === 'undefined') { optLessonArr = currentUnitObj.lessons }
+
+    // 1. iterate through lessons in the current unit
     let finalLessonIndex;
     let lastUnlockedLesson;
-    for(let i = 0; i < lessonArr.length; i++){
+    for(let i = 0; i < optLessonArr.length; i++){
 
-      let curLessonId = lessonArr[i].id;
+      let curLessonId = optLessonArr[i].id;
       // @TODO if no value, POST  lessonId=false
 
       let curLessonObj = userProg[currentUnitObj.id].lessons[curLessonId];
 
       if(curLessonObj.lessonCompleted === false && curLessonObj.lessonLocked === false){
-        lastUnlockedLesson = lessonArr[i];
+        lastUnlockedLesson = optLessonArr[i];
         finalLessonIndex = i;
       }
 
@@ -204,12 +206,8 @@ class Dashboard extends React.Component {
       taskObjRedux[nextUnitId]["unitLocked"] = false;
       // console.log(nextUnitId, taskObjRedux, 'taskObjRedux')
 
-    // @TODO mark the current lesson as complete
-
-
-    // @TODO post this progress to the server
     // @TODO set new current unit, lesson, question in redux
-    // may have to cycle through and find next incomplete
+
     }
   }
 
