@@ -7,3 +7,4 @@ export const setCurrentValue = (key, value) => {
     payload: {[key]: value}
   }
 }
+

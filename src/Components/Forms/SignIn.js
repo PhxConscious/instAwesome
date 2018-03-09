@@ -2,6 +2,8 @@ import React, {Component} from "react";
 import firebase from 'firebase';
 import {Redirect, Link} from 'react-router-dom';
 import Styles from '../../Styles/FormsStyles.css';
+import { connect } from 'react-redux';
+import {setCurrentValue} from "../../redux/actions/currentValues";
 
 class LoginForm extends Component {
 
@@ -73,6 +75,7 @@ class LoginForm extends Component {
         const {email, password} = this.state;
         this.setState({error: ''});
         firebase.auth().signInWithEmailAndPassword(email, password)
+            .then(this.props.setCurrentUserFbId("currentFbId", firebase.auth().currentUser.uid))
             .then(this.onLoginSuccess)
             .then(this.setState({email: '', password: ''}))
             .catch(this.onLoginFail)
@@ -147,4 +150,16 @@ class LoginForm extends Component {
     }
 }
 
-export default LoginForm
+// const mapStateToProps = state => ({
+//     currentValues: state.currentValues
+// });
+
+const mapDispatchToProps = dispatch => {
+    return {
+        setCurrentUserFbId: (key, value) => {
+            dispatch(setCurrentValue(key, value))
+        }
+    }
+};
+
+export default connect(null, mapDispatchToProps)(LoginForm)

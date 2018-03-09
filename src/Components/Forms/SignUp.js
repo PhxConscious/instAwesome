@@ -1,9 +1,11 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import firebase from 'firebase';
 import axios from 'axios';
-import {Redirect} from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 import Styles from '../../Styles/FormsStyles.css';
+import { connect } from "react-redux";
+import { nextQuestion } from "../../redux/actions/userProgress";
 
 class SignUpForm extends Component {
     constructor(props) {
@@ -44,11 +46,10 @@ class SignUpForm extends Component {
 
     handleInputTextChange = e => {
         this.setState({[e.target.name]: e.target.value});
-        // console.log(`this is the current state ${this.state}`)
     };
 
     render() {
-        const {redirect} = this.state;
+        const { redirect } = this.state;
 
         if (redirect) {
             return <Redirect to='/'/>;
@@ -156,4 +157,15 @@ class SignUpForm extends Component {
     }
 }
 
-export default SignUpForm;
+const mapStateToProps = state => ({
+    currentValues: state.currentValues
+});
+
+const mapDispatchToProps = dispatch => {
+    return {
+        putNextQuestion : (fb_id, data) => {
+            dispatch(nextQuestion(fb_id, data ))
+        }
+    }
+};
+export default connect(mapStateToProps, mapDispatchToProps)(SignUpForm);
