@@ -289,10 +289,6 @@ class Dashboard extends React.Component {
     let targetQuestion = (parseInt(currentQuestion, 10)+1).toString()
 
 
-
-
-
-
     // the whole task obj in redux
     let taskObjRedux = userProgress.currentUser.user_progress;
 
@@ -314,14 +310,15 @@ class Dashboard extends React.Component {
     // console.log('questionID', targetQuestion, curQuest, currentQuestionObj)
     taskObjRedux[currentUnitObj.id].lessons[currentLessonObj.id]["questions"] = curQuest;
 
-
-    if(currentLessonObj.questions.length - 1 > parseInt(currentQuestion)+1){
+    // case 1: there are more questions in lesson object
+    if(currentLessonObj.questions.length - 1 > parseInt(currentQuestion)){
+      console.log("nextQuestion: not last question")
       this.props.setCurrentValues("currentQuestion", targetQuestion);
       this.props.setCurrentValues("currentQuestionObj", book[currentUnit].lessons[currentLesson].questions[targetQuestion]);
-    // handle if this is the last question of lesson && another lesson exists
 
-  } else if (book[currentUnit].lessons.length > parseInt(currentLesson)+1) {
-
+    // case 2: this is the last question in the lesson obj
+    } else if (book[currentUnit].lessons.length > parseInt(currentLesson)+1) {
+      console.log("nextQuestion: IS the last question")
       this.props.setCurrentValues("currentQuestion", "0");
       this.props.setCurrentValues("currentQuestionObj", book[currentUnit].lessons[parseInt(currentLesson)+1].questions["0"]);
     }
@@ -359,8 +356,8 @@ class Dashboard extends React.Component {
 
   render() {
 
-    let { active, currentUnit, currentUnitName, currentUnitId, currentLesson,  currentLessonObj, currentQuestion, currentQuestionObj } = this.props.currentValues;
-
+    let { active, currentUnit, currentUnitName, currentUnitId, currentLesson, currentLessonObj, currentQuestion, currentQuestionObj } = this.props.currentValues;
+    console.log("currentLesson", currentLesson)
 
 
     let { userProgress, book } = this.props;
@@ -394,7 +391,7 @@ class Dashboard extends React.Component {
           </div>
 
           <div className="lessonContentContainer">
-            {currentLesson ? <LessonContent
+            {this.state.readyForRender ? <LessonContent
                 nextUnit={this.nextUnit}
                 nextLesson={this.nextLesson}
                 prevLesson={this.prevLesson}
