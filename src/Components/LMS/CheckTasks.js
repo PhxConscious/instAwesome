@@ -87,7 +87,7 @@ class CheckTasks extends React.Component {
 
     let { isChecked, nextButtonHidden, prevButtonHidden } = this.state;
 
-    let { lesson, nextLesson, prevLesson, noOfLessons, nextQuestion, prevQuestion, nextUnit, userProgress, book } = this.props;
+    let { lesson, nextLesson, prevLesson, nextQuestion, prevQuestion, nextUnit, userProgress, book } = this.props;
 
     let { currentUnit, currentUnitObj, currentLesson, currentLessonObj, currentQuestion, currentQuestionObj } = this.props.currentValues
 
@@ -219,12 +219,12 @@ class CheckTasks extends React.Component {
 
 
         <div>Unit: {parseInt(currentUnit, 10)+1} of {book.length}</div>
-        <div>current lesson: {parseInt(currentLesson, 10)+1} of {noOfLessons}</div>
+        <div>current lesson: {parseInt(currentLesson, 10)+1} of {book[currentUnit].lessons.length}</div>
         <div>progress: {parseInt(currentQuestion, 10)+1} of {currentLessonObj.questions.length}</div>
 
           {currentQuestion === "0" ? "please begin the lesson" : ''}
 
-          {parseInt(currentQuestion, 10)+1 === noOfLessons? "You finished the unit" : ''}
+          {parseInt(currentQuestion, 10)+1 === book[currentUnit].lessons.length? "You finished the unit" : ''}
 
         </div>
       )
