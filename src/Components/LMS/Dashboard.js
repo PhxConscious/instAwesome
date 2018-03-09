@@ -135,14 +135,7 @@ class Dashboard extends React.Component {
 
     this.props.setCurrentValues("tasks", taskArr);
     this.props.setCurrentValues("active", activeUnitName);
-    // this.props.setCurrentValues("currentUnit", currentUnit);
-    // this.props.setCurrentValues("currentUnitName", activeUnitName);
-    // this.props.setCurrentValues("currentUnitId", currentUnitId);
 
-    // this.setState({
-    //   ...this.state,
-    //   readyForRender: true,
-    // });
   }
 
 
@@ -449,7 +442,7 @@ class Dashboard extends React.Component {
     let { userProgress, book } = this.props;
 
 
-    let targetQuestion = parseInt(currentQuestion, 10).toString()
+    let targetQuestion = (parseInt(currentQuestion, 10)+1).toString()
 
 
 
@@ -468,9 +461,10 @@ class Dashboard extends React.Component {
     // the current questions from redux
     let curQuest = curLesson.questions
 
-
+    console.log("curQuest1", curQuest)
     // 1. put new true questionId value in questions obj
     curQuest[currentQuestionObj.id] = true;
+    console.log("curQuest2", curQuest, currentQuestionObj.id)
 
     // 2. put questions obj in taskObjRedux
     // console.log('questionID', targetQuestion, curQuest, currentQuestionObj)
@@ -478,14 +472,12 @@ class Dashboard extends React.Component {
 
 
     if(currentLessonObj.questions.length - 1 > parseInt(currentQuestion)+1){
-      console.warn("inside first redux set",currentLessonObj.questions.length - 1, parseInt(currentQuestion)+1, book[currentUnit].lessons[currentLesson].questions[targetQuestion])
       this.props.setCurrentValues("currentQuestion", targetQuestion);
       this.props.setCurrentValues("currentQuestionObj", book[currentUnit].lessons[currentLesson].questions[targetQuestion]);
     // handle if this is the last question of lesson && another lesson exists
-    console.warn("is last lesson?", book[currentUnit].lessons.length, parseInt(currentLesson)+1)
+
   } else if (book[currentUnit].lessons.length > parseInt(currentLesson)+1) {
-      console.warn("is last lesson?", book[currentUnit].lessons.length,  parseInt(currentLesson)+1)
-      console.warn("inside second redux set",currentLessonObj.questions.length - 1, parseInt(currentQuestion)+1, currentQuestion, book[currentUnit].lessons[currentLesson].questions[targetQuestion])
+
       this.props.setCurrentValues("currentQuestion", "0");
       this.props.setCurrentValues("currentQuestionObj", book[currentUnit].lessons[parseInt(currentLesson)+1].questions["0"]);
     }
@@ -494,6 +486,7 @@ class Dashboard extends React.Component {
     // 5. dispatch updated obj - format object for server
     let dto = {};
     dto["userProgress"] = taskObjRedux;
+    console.log('dto', dto)
     this.props.putNextQuestion(1, dto)
   }
 
@@ -519,16 +512,9 @@ class Dashboard extends React.Component {
 
   }
 
-  getLengthOfCurrentLessonArray(){
-    let { tasks, currentUnit } = this.props.currentValues;
-    if(currentUnit){
-      return tasks[currentUnit].lessons.length;
-    }
-  }
 
   render() {
 
-    this.getLengthOfCurrentLessonArray()
     let { active, tasks, currentUnit, currentUnitName, currentUnitId, currentLesson,  currentLessonObj, currentQuestion, currentQuestionObj } = this.props.currentValues;
 
 
@@ -571,7 +557,6 @@ class Dashboard extends React.Component {
                 prevLesson={this.prevLesson}
                 nextQuestion={this.nextQuestion}
                 prevQuestion={this.prevQuestion}
-                noOfLessons={this.getLengthOfCurrentLessonArray()}
               /> : 'Select a unit to begin'}
           </div>
         </div>
@@ -617,14 +602,3 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
-
-
-// <Dialog open={this.state.startStudyModal}>
-//   <DialogTitle>"Start Studying Now"</DialogTitle>
-//   <DialogContent>
-//     <p>hgjhg</p>
-//   </DialogContent>
-//   <DialogActions>
-
-//   </DialogActions>
-// </Dialog>
