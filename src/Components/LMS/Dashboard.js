@@ -287,8 +287,8 @@ class Dashboard extends React.Component {
     // update currentLessonObj based on targetLesson
     this.props.setCurrentValues("currentLesson", targetLesson);
 
-    // @TODO update these params
-    this.props.setCurrentValues("currentLessonObj", configUnitCards[this.state.currentUnit].lessons[this.state.currentLesson]);
+    // update these params
+    this.props.setCurrentValues("currentLessonObj", book[currentUnit].lessons[targetLesson]);
 
     // @TODO handle if there is no previous lesson in unit
 
