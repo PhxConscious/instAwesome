@@ -41,16 +41,6 @@ class Dashboard extends React.Component {
   }
 
 
-  // updates state.lesson only when necessary
-  // componentDidUpdate(prevProps, prevState){
-  //   let { currentValues } = this.props;
-  //   if(prevProps.currentValues.tasks !== currentValues.tasks){
-  //     // this.getActiveLessonTemp();
-  //
-  //     // this.getActiveLesson();
-  //   }
-  // }
-
 
   componentWillReceiveProps(nextProps){
     console.log("componentWillReceiveProps")
@@ -62,7 +52,7 @@ class Dashboard extends React.Component {
       if(nextProps.book[0] && nextProps.book[0].lessons && nextProps.book[0] !== this.props.book[0]){
       }
       if(nextProps.userProgress.currentUser.user_progress !== this.props.userProgress.currentUser.user_progress){
-        this.combineUserDataAndTaskData(nextProps.userProgress.currentUser.user_progress);
+        // this.combineUserDataAndTaskData(nextProps.userProgress.currentUser.user_progress);
       }
     }
   }
@@ -174,6 +164,7 @@ class Dashboard extends React.Component {
     console.log("unit posting", lastUnlockedUnit, finalUnitIndex)
     this.props.setCurrentValues("currentUnitObj", lastUnlockedUnit);
     this.props.setCurrentValues("currentUnit", finalUnitIndex)
+    this.props.setCurrentValues("active", lastUnlockedUnit.id);
 
     // 2. set the first unit where isCompleted != true to currentActiveUnitObj & currentActiveUnit
     setTimeout(()=>{
@@ -518,7 +509,7 @@ class Dashboard extends React.Component {
 
   render() {
 
-    let { active, tasks, currentUnit, currentUnitName, currentUnitId, currentLesson,  currentLessonObj, currentQuestion, currentQuestionObj } = this.props.currentValues;
+    let { active, currentUnit, currentUnitName, currentUnitId, currentLesson,  currentLessonObj, currentQuestion, currentQuestionObj } = this.props.currentValues;
 
 
 
@@ -526,9 +517,9 @@ class Dashboard extends React.Component {
 
     let lmsCards = null;
 
-    if(tasks){
+    if(this.state.readyForRender){
 
-      lmsCards = tasks.map((card, i) => (
+      lmsCards = book.map((unit, i) => (
         <LmsCard
           index={i}
           id={book[i].id}
@@ -536,10 +527,8 @@ class Dashboard extends React.Component {
           description={book[i].description}
           image={book[i].image}
           onClick={this.selectCardOnClick}
-          active={active === book[i].title ? true : false}
-          isCompleted={card.userProgress.isCompleted}
-          locked={tasks[i].userProgress.isLocked}
-          key={card.id}
+          active={active === book[i].id ? true : false}
+          key={unit.id}
         />
     ))
     }
