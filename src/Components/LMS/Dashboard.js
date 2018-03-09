@@ -282,7 +282,17 @@ class Dashboard extends React.Component {
 
     let { book } = this.props;
 
-    let targetLesson = (parseInt(currentLesson, 10) - 1).toString();
+    // handle if there is no previous lesson in unit
+    let targetLesson = currentLesson; // default value
+
+    // case 1: there is a previous lesson
+    if(currentLesson > 0){
+      targetLesson = (parseInt(currentLesson, 10) - 1).toString();
+
+    // case 2: there is not a previous lesson
+    } else {
+      alert("You are at the first lesson - select a different unit")
+    }
 
     // update currentLessonObj based on targetLesson
     this.props.setCurrentValues("currentLesson", targetLesson);
@@ -290,7 +300,7 @@ class Dashboard extends React.Component {
     // update these params
     this.props.setCurrentValues("currentLessonObj", book[currentUnit].lessons[targetLesson]);
 
-    // @TODO handle if there is no previous lesson in unit
+
 
     // @TODO get the current question for the previous lesson
   }
