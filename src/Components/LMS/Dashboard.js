@@ -93,20 +93,18 @@ class Dashboard extends React.Component {
     if (typeof optLessonObj === 'undefined') { optLessonObj = currentUnitObj }
     if (typeof optUnitId === 'undefined') { optUnitId = currentUnitObj.id }
     // 1. iterate through lessons in the current unit
-    let finalLessonIndex;
-    let lastUnlockedLesson;
+    let lastUnlockedLesson = optLessonObj.lessons[0];
+    let finalLessonIndex = 0;
 
     for(let i = 0; i < optLessonObj.lessons.length; i++){
       let curLessonId = optLessonObj.lessons[i].id;
       // @TODO if no value, POST  lessonId=false
 
       let curLessonObj = userProg[optUnitId].lessons[curLessonId];
+
       if(curLessonObj.lessonCompleted === false && curLessonObj.lessonLocked === false){
         lastUnlockedLesson = optLessonObj.lessons[i];
         finalLessonIndex = i;
-      } else {
-        lastUnlockedLesson = optLessonObj.lessons[0];
-        finalLessonIndex = 0;
       }
     }
     // console.log("finalLessonIndex", finalLessonIndex, " lastUnlockedLesson", lastUnlockedLesson)
@@ -153,6 +151,12 @@ class Dashboard extends React.Component {
       }
     }
 
+    // if all questions are true than go to the first question
+    if(finalQuestionIndex === optQuestArr.length-1){
+      lastTrueQuestion = optQuestArr[0];
+      finalQuestionIndex = 0;
+    }
+
     this.props.setCurrentValues("currentQuestionObj", lastTrueQuestion);
     this.props.setCurrentValues("currentQuestion", finalQuestionIndex)
 
@@ -173,6 +177,9 @@ class Dashboard extends React.Component {
         this.props.setCurrentValues("active", argId);
         this.props.setCurrentValues("currentUnit", index);
         this.props.setCurrentValues("currentUnitObj", unit);
+
+        // call getActiveLesson to set the correct active lesson/question
+        this.getActiveLesson(book[index], unit.id);
       }
     })
   }
@@ -280,18 +287,30 @@ class Dashboard extends React.Component {
   }
 
   prevLesson(){
-    let currentLesson = this.state.currentLesson;
-    let targetLesson = (parseInt(currentLesson, 10) - 1).toString();
+    let { currentUnit, currentUnitObj, currentLesson, currentLessonObj } = this.props.currentValues;
 
-    //@TODO update currentLessonObj based on targetLesson
+    let { book } = this.props;
+
+    // handle if there is no previous lesson in unit
+    let targetLesson = currentLesson; // default value
+
+    // case 1: there is a previous lesson
+    if(currentLesson > 0){
+      targetLesson = (parseInt(currentLesson, 10) - 1).toString();
+
+    // case 2: there is not a previous lesson
+    } else {
+      alert("You are at the first lesson - select a different unit")
+    }
+
+    // update currentLessonObj based on targetLesson
     this.props.setCurrentValues("currentLesson", targetLesson);
-    this.props.setCurrentValues("currentLessonObj", configUnitCards[this.state.currentUnit].lessons[this.state.currentLesson]);
 
-    // this.setState({
-    //   ...this.state,
-    //   currentLesson: targetLesson,
-    //   currentLessonObj: configUnitCards[this.state.currentUnit].lessons[this.state.currentLesson]
-    // })
+    // update these params
+    this.props.setCurrentValues("currentLessonObj", book[currentUnit].lessons[targetLesson]);
+
+    // finds the first incomplete question and set that to currentQuestion
+    this.getActiveQuestion(book[currentUnit].lessons[targetLesson].questions)
   }
 
   nextQuestion(){
@@ -343,7 +362,14 @@ class Dashboard extends React.Component {
   prevQuestion(){
     let { currentUnit, currentUnitId, currentUnitObj, currentLesson, currentLessonObj, currentQuestion, currentQuestionObj, currentQuestionId} = this.props.currentValues;
     let { userProgress, book } = this.props;
-    let targetQuestion = (parseInt(currentQuestion, 10) - 1).toString();
+
+    let targetQuestion = currentQuestion;
+    if(currentQuestion > 0){
+      targetQuestion = (parseInt(currentQuestion, 10) - 1).toString();
+    } else {
+      alert("You are already at the first question in the lesson - select another lesson")
+    }
+
 
     this.props.setCurrentValues("currentQuestion", targetQuestion);
     this.props.setCurrentValues("currentQuestionObj", book[currentUnit].lessons[currentLesson].questions[targetQuestion]);
@@ -359,7 +385,6 @@ class Dashboard extends React.Component {
 
     // the current questions from redux
     let curQuest = curLesson.questions
-
   }
 
 
