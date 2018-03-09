@@ -118,7 +118,7 @@ class Dashboard extends React.Component {
 
   // cycle through to find first question where id !== true
   getActiveQuestion(optQuestArr){ // uses optional param
-    console.log("getActiveQuestion");
+    console.log("getActiveQuestion", optQuestArr);
 
     let { book, userProgress, currentValues } = this.props;
 
@@ -132,13 +132,15 @@ class Dashboard extends React.Component {
 
     let questionArrProg = userProg[currentUnitObj.id].lessons[currentLessonObj.id].questions;
     // 1. iterate through questions in the active lesson
-    console.log("optQuestArr", optQuestArr)
 
     let lastTrueQuestion;
     let finalQuestionIndex;
-
+    // add default values if no completed questions
+    lastTrueQuestion = optQuestArr[0];
+    finalQuestionIndex = 0;
 
     for(let i = 0; i < optQuestArr.length; i++){
+
       let currentQuestionId = optQuestArr[i].id
       // @TODO post value to server if not present
 
@@ -146,7 +148,6 @@ class Dashboard extends React.Component {
       if(questionArrProg[currentQuestionId]===true){
         lastTrueQuestion = optQuestArr[i];
         finalQuestionIndex = i;
-        // console.log(lastTrueQuestion, finalQuestionIndex)
       }
     }
 
@@ -261,10 +262,10 @@ class Dashboard extends React.Component {
 
     // @TODO advance to next lesson and set as currentLesson & currentLessonObj in redux
     this.props.setCurrentValues("currentLesson", targetLesson);
-    this.props.setCurrentValues("currentLessonObj", configUnitCards[currentUnit].lessons[currentLesson]);
+    this.props.setCurrentValues("currentLessonObj", book[currentUnit].lessons[targetLesson]);
 
     // @TODO find the first incomplete question and set that to currentQuestion
-    this.getActiveQuestion()
+    this.getActiveQuestion(book[currentUnit].lessons[targetLesson].questions)
 
     // @TODO if current lesson the last lesson in unit, make the nextLesson button disabled and congratulate user on finishing.
 
