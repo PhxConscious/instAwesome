@@ -98,7 +98,6 @@ class CheckTasks extends React.Component {
 
       if(lengthOfQuestArr === parseInt(currentQuestion,10)+1 && lengthOfLessonArr === parseInt(currentLesson,10)+1){
         console.log("END OF THE UNIT")
-        nextUnit();
         this.setState({
           ...this.state,
           openUnitDialog: true,
@@ -180,7 +179,7 @@ class CheckTasks extends React.Component {
             <DialogActions>
               <Button
                 type='button'
-                onClick={nextLesson}
+                onClick={nextUnit}
               >{this.state.unitDialogButton1}
               </Button>
               <Button
@@ -222,9 +221,7 @@ class CheckTasks extends React.Component {
         <div>current lesson: {parseInt(currentLesson, 10)+1} of {book[currentUnit].lessons.length}</div>
         <div>progress: {parseInt(currentQuestion, 10)+1} of {currentLessonObj.questions.length}</div>
 
-          {currentQuestion === "0" ? "please begin the lesson" : ''}
-
-          {parseInt(currentQuestion, 10)+1 === book[currentUnit].lessons.length? "You finished the unit" : ''}
+          {currentQuestion === "0" ? "Please begin the lesson" : ''}
 
         </div>
       )
