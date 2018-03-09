@@ -93,20 +93,18 @@ class Dashboard extends React.Component {
     if (typeof optLessonObj === 'undefined') { optLessonObj = currentUnitObj }
     if (typeof optUnitId === 'undefined') { optUnitId = currentUnitObj.id }
     // 1. iterate through lessons in the current unit
-    let finalLessonIndex;
-    let lastUnlockedLesson;
+    let lastUnlockedLesson = optLessonObj.lessons[0];
+    let finalLessonIndex = 0;
 
     for(let i = 0; i < optLessonObj.lessons.length; i++){
       let curLessonId = optLessonObj.lessons[i].id;
       // @TODO if no value, POST  lessonId=false
 
       let curLessonObj = userProg[optUnitId].lessons[curLessonId];
+
       if(curLessonObj.lessonCompleted === false && curLessonObj.lessonLocked === false){
         lastUnlockedLesson = optLessonObj.lessons[i];
         finalLessonIndex = i;
-      } else {
-        lastUnlockedLesson = optLessonObj.lessons[0];
-        finalLessonIndex = 0;
       }
     }
     // console.log("finalLessonIndex", finalLessonIndex, " lastUnlockedLesson", lastUnlockedLesson)
