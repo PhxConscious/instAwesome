@@ -117,7 +117,7 @@ class Dashboard extends React.Component {
   }
 
   // cycle through to find first question where id !== true
-  getActiveQuestion(){
+  getActiveQuestion(optQuestArr){ // uses optional param
     console.log("getActiveQuestion");
 
     let { book, userProgress, currentValues } = this.props;
@@ -126,22 +126,25 @@ class Dashboard extends React.Component {
 
     let { currentUnit, currentUnitObj, currentLesson, currentLessonObj } = currentValues;
 
-    let questionArr = currentLessonObj.questions;
+    // handle optional param
+    if (typeof optQuestArr === 'undefined') { optQuestArr = currentLessonObj.questions }
+
+
     let questionArrProg = userProg[currentUnitObj.id].lessons[currentLessonObj.id].questions;
     // 1. iterate through questions in the active lesson
-    console.log("questionArr", questionArr)
+    console.log("optQuestArr", optQuestArr)
 
     let lastTrueQuestion;
     let finalQuestionIndex;
 
 
-    for(let i = 0; i < questionArr.length; i++){
-      let currentQuestionId = questionArr[i].id
+    for(let i = 0; i < optQuestArr.length; i++){
+      let currentQuestionId = optQuestArr[i].id
       // @TODO post value to server if not present
 
       // 2. set the first question where id!=true as currentQuestionObj and currentQuestion
       if(questionArrProg[currentQuestionId]===true){
-        lastTrueQuestion = questionArr[i];
+        lastTrueQuestion = optQuestArr[i];
         finalQuestionIndex = i;
         // console.log(lastTrueQuestion, finalQuestionIndex)
       }
@@ -213,7 +216,7 @@ class Dashboard extends React.Component {
 
   nextLesson(){
 
-    let { currentUnit, currentUnitId, currentUnitObj, currentLesson, currentLessonObj, currentQuestion, currentQuestionObj, currentQuestionId } = this.props.currentValues;
+    let { currentUnit, currentUnitObj, currentLesson, currentLessonObj, currentQuestion, currentQuestionObj } = this.props.currentValues;
 
     let { userProgress, book } = this.props;
 
@@ -254,11 +257,14 @@ class Dashboard extends React.Component {
     dto["userProgress"] = taskObjRedux;
     this.props.putNextQuestion(1, dto)
 
-    // @TODO find the first incomplete question and set that to currentQuestion
+
 
     // @TODO advance to next lesson and set as currentLesson & currentLessonObj in redux
     this.props.setCurrentValues("currentLesson", targetLesson);
     this.props.setCurrentValues("currentLessonObj", configUnitCards[currentUnit].lessons[currentLesson]);
+
+    // @TODO find the first incomplete question and set that to currentQuestion
+    this.getActiveQuestion()
 
     // @TODO if current lesson the last lesson in unit, make the nextLesson button disabled and congratulate user on finishing.
 
