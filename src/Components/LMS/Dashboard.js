@@ -171,6 +171,8 @@ class Dashboard extends React.Component {
         this.props.setCurrentValues("active", argId);
         this.props.setCurrentValues("currentUnit", index);
         this.props.setCurrentValues("currentUnitObj", unit);
+
+        // @TODO call getActiveLesson 
       }
     })
   }
