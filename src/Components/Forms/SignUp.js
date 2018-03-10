@@ -5,7 +5,7 @@ import { Redirect } from 'react-router-dom';
 import { connect } from "react-redux";
 
 import Styles from '../../Styles/FormsStyles.css';
-import { nextQuestion } from "../../redux/actions/userProgress";
+import { nextQuestion, createNewUser } from "../../redux/actions/userProgress";
 
 class SignUpForm extends Component {
     constructor(props) {
@@ -31,7 +31,21 @@ class SignUpForm extends Component {
             return alert('password must be at least 6 characters long')
         }
         return (
+          // DTO structure:
+          // first_name, last_name, user_email, user_phone, firebase_id
+
+          // @TODO make this post using redux
             firebase.auth().createUserWithEmailAndPassword(email, password)
+
+                // @TODO call action with the correct user object
+                let userObj = {
+
+                }
+
+                this.props.createNewUser(userObj)
+
+                // @TODO create reducer
+
                 .then(() => axios.post('http://localhost:8080/users/new', {
                     user_email: email,
                     firebase_id: firebase.auth().currentUser.uid,
