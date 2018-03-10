@@ -33,11 +33,15 @@ class Dashboard extends React.Component {
 
   componentDidMount(){
     this.props.getLmsContent();
-    this.props.fetchUserProgress();
+    this.props.fetchUserProgress('KaO2uDZiice9B9Mk2xAKgJqLvMj2');
+    this.props.setCurrentValues('currentFbId', 'KaO2uDZiice9B9Mk2xAKgJqLvMj2')
   }
 
   handleStartStudy(){
-    this.getActiveUnit();
+    setTimeout(()=>{
+      this.getActiveUnit();
+    }, 500)
+
     this.setState({startStudyModal:false})
   }
 
@@ -61,9 +65,9 @@ class Dashboard extends React.Component {
         // b. fetch userProgress
         // c. call getActiveUnit()
       }
-
+      console.log("getActiveUnit set", userProg, curUnitId)
       let curUnitProg = userProg[curUnitId];
-
+      console.log("curUnitProg", curUnitProg)
       if(curUnitProg.unitLocked === false){
         // this is potentially the correct unit = save the last one
         lastUnlockedUnit = book[i];
@@ -253,7 +257,7 @@ class Dashboard extends React.Component {
 
   nextLesson(){
 
-    let { currentUnit, currentUnitObj, currentLesson, currentLessonObj, currentQuestion, currentQuestionObj } = this.props.currentValues;
+    let { currentUnit, currentUnitObj, currentLesson, currentLessonObj, currentQuestion, currentQuestionObj, currentFbId } = this.props.currentValues;
 
     let { userProgress, book } = this.props;
 
@@ -298,7 +302,7 @@ class Dashboard extends React.Component {
     let dto = {};
     dto["userProgress"] = taskObjRedux;
     console.log("DTO from next lesson", dto)
-    this.props.putNextQuestion(1, dto)
+    this.props.putNextQuestion(currentFbId, dto)
 
 
     // finds the first incomplete question and set that to currentQuestion
@@ -333,7 +337,7 @@ class Dashboard extends React.Component {
   }
 
   nextQuestion(){
-    let { currentUnit, currentUnitId, currentUnitObj, currentLesson, currentLessonObj, currentQuestion, currentQuestionObj, currentQuestionId} = this.props.currentValues;
+    let { currentUnit, currentUnitId, currentUnitObj, currentLesson, currentLessonObj, currentQuestion, currentQuestionObj, currentQuestionId, currentFbId} = this.props.currentValues;
     let { userProgress, book } = this.props;
 
 
@@ -375,7 +379,7 @@ class Dashboard extends React.Component {
     let dto = {};
     dto["userProgress"] = taskObjRedux;
     console.log('dto', dto)
-    this.props.putNextQuestion(1, dto)
+    this.props.putNextQuestion(currentFbId, dto)
   }
 
   prevQuestion(){
@@ -482,8 +486,8 @@ const mapDispatchToProps = dispatch => {
       getLmsContent : () => {
         dispatch(getLmsContent())
       },
-      fetchUserProgress : () => {
-        dispatch(getUserProgress(1))
+      fetchUserProgress : (fb_id) => {
+        dispatch(getUserProgress(fb_id))
       },
       putNextQuestion : (fb_id, data) => {
         dispatch(nextQuestion(fb_id, data ))
