@@ -14,13 +14,13 @@ export const CheckBox = ({isCheckMarked, checkBox}) => {
 
 
 
-export const LessonIcon = ({lesson, currentValues, userProg, i}) => {
+export const LessonIcon = ({lesson, currentValues, userProg, i, selectLessonOnClick}) => {
 
   const iconClickHandler = (e) => {
     if(!userProg[currentValues.currentUnitObj.id].lessons[lesson.id].lessonLocked){
       console.log("Was clicked", e)
     }
-
+    selectLessonOnClick(i)
   }
 
   return(

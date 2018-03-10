@@ -93,7 +93,7 @@ class CheckTasks extends React.Component {
 
     let { isCheckMarked, nextButtonHidden, prevButtonHidden } = this.state;
 
-    let { lesson, nextLesson, prevLesson, nextQuestion, prevQuestion, nextUnit, userProgress, book, currentValues } = this.props;
+    let { lesson, nextLesson, prevLesson, nextQuestion, prevQuestion, nextUnit, userProgress, book, currentValues, selectLessonOnClick } = this.props;
 
     let { currentUnit, currentUnitObj, currentLesson, currentLessonObj, currentQuestion, currentQuestionObj } = this.props.currentValues;
 
@@ -108,6 +108,7 @@ class CheckTasks extends React.Component {
           lesson={lesson}
           userProg={userProg}
           currentValues={currentValues}
+          selectLessonOnClick={selectLessonOnClick}
         />
       ))
     }

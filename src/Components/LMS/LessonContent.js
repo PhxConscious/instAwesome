@@ -14,7 +14,7 @@ class LessonContent extends React.Component {
     switch(contentType) {
 
       case "checkTasks":
-        let { nextUnit, nextLesson, prevLesson, nextQuestion, prevQuestion } = this.props;
+        let { nextUnit, nextLesson, prevLesson, nextQuestion, prevQuestion, selectLessonOnClick } = this.props;
 
         return(
           <div>
@@ -26,6 +26,7 @@ class LessonContent extends React.Component {
               prevLesson={prevLesson}
               nextQuestion={nextQuestion}
               prevQuestion={prevQuestion}
+              selectLessonOnClick={selectLessonOnClick}
             />
           </div>
         )
