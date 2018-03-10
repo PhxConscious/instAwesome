@@ -1,8 +1,9 @@
 import React from 'react';
+import { Checkbox } from 'react-mdl';
 
-export const Checkbox = ({isCheckMarked, checkBox}) => {
+export default ({isCheckMarked, checkBox}) => {
   return (
-    <input
+    <Checkbox
       type="checkbox"
       checked={isCheckMarked}
       onChange={checkBox}

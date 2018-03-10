@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { nextQuestion } from '../../redux/actions/userProgress';
 import ReactPlayer from 'react-player';
 import '../../Styles/CheckTasks.css';
-import { Checkbox } from './Checkbox';
+import Checkbox from './Checkbox';
 import { Button, Dialog, DialogTitle, DialogActions, DialogContent } from 'react-mdl';
 
 class CheckTasks extends React.Component {
