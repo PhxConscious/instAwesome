@@ -3,7 +3,7 @@ import firebase from 'firebase';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import { connect } from "react-redux";
-
+import starterObj from '../../config/starterUserProgressObject';
 import Styles from '../../Styles/FormsStyles.css';
 import { nextQuestion, createNewUser } from "../../redux/actions/userProgress";
 
@@ -38,21 +38,15 @@ class SignUpForm extends Component {
             firebase.auth().createUserWithEmailAndPassword(email, password)
 
                 // @TODO call action with the correct user object
-                let userObj = {
-
-                }
-
-                this.props.createNewUser(userObj)
 
                 // @TODO create reducer
-
-                .then(() => axios.post('http://localhost:8080/users/new', {
-                    user_email: email,
-                    firebase_id: firebase.auth().currentUser.uid,
-                    first_name: firstName,
-                    last_name: lastName,
-                    user_phone: userPhone,
-                    user_progress: ''
+                .then(this.props.createNewUser({
+                  user_email: email,
+                  firebase_id: firebase.auth().currentUser.uid,
+                  first_name: firstName,
+                  last_name: lastName,
+                  user_phone: userPhone,
+                  user_progress: starterObj
                 }))
                 .then(this.setState({redirect: true}))
         )
@@ -179,6 +173,9 @@ const mapDispatchToProps = dispatch => {
     return {
         putNextQuestion : (fb_id, data) => {
             dispatch(nextQuestion(fb_id, data ))
+        },
+        createNewUser : (userObj) => {
+          dispatch(createNewUser(userObj))
         }
     }
 };
