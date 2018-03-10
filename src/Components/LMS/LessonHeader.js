@@ -13,9 +13,7 @@ class LessonHeader extends React.Component {
           <div>
             <h4>{currentLessonObj.title}</h4>
           </div>
-          <div>
 
-          </div>
           <div>
             <ReactPlayer
               url={currentLessonObj.video}

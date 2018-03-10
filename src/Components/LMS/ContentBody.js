@@ -142,9 +142,7 @@ class CheckTasks extends React.Component {
 
       return(
         <div>
-          <div>lesson: {currentLessonObj.description}</div>
-          <h5>current question: {parseInt(currentQuestion, 10)+1}</h5>
-          <div>question: {currentQuestionObj.title}</div>
+          <div>{currentQuestionObj.title}</div>
 
           <div>
             <input
@@ -220,8 +218,8 @@ class CheckTasks extends React.Component {
 
 
         <div>Unit: {parseInt(currentUnit, 10)+1} of {book.length}</div>
-        <div>current lesson: {parseInt(currentLesson, 10)+1} of {book[currentUnit].lessons.length}</div>
-        <div>progress: {parseInt(currentQuestion, 10)+1} of {currentLessonObj.questions.length}</div>
+        <div>Lesson: {parseInt(currentLesson, 10)+1} of {book[currentUnit].lessons.length}</div>
+        <div>Question: {parseInt(currentQuestion, 10)+1} of {currentLessonObj.questions.length}</div>
 
           {currentQuestion === "0" ? "Please begin the lesson" : ''}
 
