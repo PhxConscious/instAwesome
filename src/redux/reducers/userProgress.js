@@ -27,6 +27,15 @@ export default (state = initialState, action) => {
       return {
         ...state
       }
+    case "CREATE_NEW_USER_FULFILLED":
+      return {
+        ...state,
+        currentUser: action.payload.data[0]
+      }
+    case "CREATE_NEW_USER_PENDING":
+      return {
+        ...state
+      }
     default:
       return state;
   }
