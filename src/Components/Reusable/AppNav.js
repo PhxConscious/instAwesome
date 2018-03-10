@@ -3,9 +3,8 @@ import firebase from 'firebase';
 import {Link, Redirect} from 'react-router-dom';
 
 import '../../Styles/AppNavStyles.css';
-import UserProfile from "../Pages/UserProfile";
-import axios from "axios/index";
-
+import {connect} from "react-redux";
+import {getUserProgress} from "../../redux/actions/userProgress";
 
 class AppNavbar extends Component {
     constructor(props) {
@@ -17,20 +16,8 @@ class AppNavbar extends Component {
     }
 
     componentDidMount() {
-        this.getUser()
+        this.props.fetchUserProgress(this.props.currentValues.currentFbId);
     }
-
-    getUser = () => {
-        if (firebase.auth().currentUser) {
-            axios.get('http://localhost:8080/users/' + firebase.auth().currentUser.uid)
-                .then(res => {
-                    this.setState({email: res.data.user_email})
-                    console.log(res.data)
-                });
-        } else {
-            return null
-        }
-    };
 
     userSignOut = () => {
         if (firebase.auth().currentUser) {
@@ -44,13 +31,9 @@ class AppNavbar extends Component {
         }
     };
 
-    displayEmail = () => {
-        if (firebase.auth().currentUser) {
-            return <p className='learnText'>{firebase.auth().currentUser.email}</p>
-        }
-    };
-
     render() {
+        console.log(this.props.userInfo);
+
         const {redirect} = this.state;
 
         if (redirect) {
@@ -58,19 +41,19 @@ class AppNavbar extends Component {
         }
 
         return (
-            <div className=''>
-                <header className=" mdl-layout__header navBar ">
-                    <div className="mdl-layout__header-row navContentCont">
-                        <i className="material-icons bookLogo">import_contacts</i>
-                        <Link to='/learn/dashboard' className="mdl-navigation__link learnTextCont" href="">
-                            <span className='learnText'>LEARN</span>
-                        </Link>
-                        <div className="mdl-layout-spacer centerLogoCont">
-                            <img className='centerLogo' src='https://i.imgur.com/qYqmu8v.png' alt="blah"/>
+            <header className="mdl-layout__header navBar">
+                <div className="mdl-layout__header-row navContentCont">
+                    <i className="material-icons bookLogo">import_contacts</i>
+                    <Link to='/learn/dashboard' className="mdl-navigation__link learnTextCont" href="">
+                        <span className='learnText'>LEARN</span>
+                    </Link>
+                    <div className="mdl-layout-spacer centerLogoCont">
+                        <img className='centerLogo' src='https://i.imgur.com/qYqmu8v.png' alt="blah"/>
+                    </div>
+                    <nav className="mdl-navigation mdl-layout--large-screen-only content">
+                        <div className='rightSideLogoCont'>
+                            <span className='phxConsciousText phxConsciousTextCont'>{this.props.userInfo.user_email}</span>
                         </div>
-                        <nav className="mdl-navigation mdl-layout--large-screen-only content">
-                            <span className='phxConsciousText phxConsciousTextCont'>{this.state.email}</span>
-
                             <button id="demo-menu-lower-right"
                                     className="mdl-button mdl-js-button mdl-button--icon">
                                 <i className="material-icons accountCircleIcon">account_circle</i>
@@ -83,13 +66,24 @@ class AppNavbar extends Component {
                                 <li className="mdl-menu__item">FEEDBACK</li>
                                 <li onClick={this.userSignOut} className="mdl-menu__item">SIGN OUT</li>
                             </ul>
-
-                        </nav>
-                    </div>
-                </header>
-            </div>
+                    </nav>
+                </div>
+            </header>
         );
     }
 }
 
-export default AppNavbar;
+const mapStateToProps = state => ({
+    currentValues: state.currentValues,
+    userInfo: state.userProgress.currentUser
+});
+
+const mapDispatchToProps = dispatch => {
+    return {
+        fetchUserProgress : (firebaseId) => {
+            dispatch(getUserProgress(firebaseId))
+        },
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AppNavbar)

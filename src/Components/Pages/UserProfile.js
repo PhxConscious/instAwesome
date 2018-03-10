@@ -14,27 +14,17 @@ class UserProfile extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            user: [],
             redirect: false
-    }
+        }
     }
 
     componentDidMount() {
-        this.getUser()
-    }
 
-    getUser = () => {
-        if (firebase.auth().currentUser) {
-            axios.get('http://localhost:8080/users/' + firebase.auth().currentUser.uid)
-                .then(res => {
-                    this.setState({user: res.data})
-                });
-        } else{ this.setState({redirect:true})}
-    };
+    }
 
     render() {
         const {redirect} = this.state;
-        if(redirect) {
+        if (redirect) {
             return <Redirect to='/'/>
         }
         return (
