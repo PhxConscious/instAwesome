@@ -41,6 +41,10 @@
     text-decoration: none;
 }
 
+.rightSideLogoCont{
+    min-width: 170px;
+}
+
 .accountCircleIcon {
     color: black;
     font-size: 31px;

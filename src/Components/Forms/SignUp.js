@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import firebase from 'firebase';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
+import { connect } from "react-redux";
 
 import Styles from '../../Styles/FormsStyles.css';
-import { connect } from "react-redux";
 import { nextQuestion } from "../../redux/actions/userProgress";
 
 class SignUpForm extends Component {
@@ -22,7 +22,7 @@ class SignUpForm extends Component {
     }
 
     onButtonPress = () => {
-        const {email, password, verifyPassword, firstName, lastName, userPhone} = this.state;
+        const { email, password, verifyPassword, firstName, lastName, userPhone } = this.state;
         if (email === '' || password === '') {
             return alert('Must fill in all fields')
         } else if (password !== verifyPassword) {
@@ -168,4 +168,5 @@ const mapDispatchToProps = dispatch => {
         }
     }
 };
+
 export default connect(mapStateToProps, mapDispatchToProps)(SignUpForm);
