@@ -12,13 +12,25 @@ export const CheckBox = ({isCheckMarked, checkBox}) => {
   )
 }
 
-export const LessonIcon = ({lesson, currentValues, userProg, i}) => (
-  <div
-    className="lessonIconContainer"
-  >
+
+
+export const LessonIcon = ({lesson, currentValues, userProg, i}) => {
+
+  const iconClickHandler = (e) => {
+    if(!userProg[currentValues.currentUnitObj.id].lessons[lesson.id].lessonLocked){
+      console.log("Was clicked", e)
+    }
+
+  }
+
+  return(
     <div
-      className={userProg[currentValues.currentUnitObj.id].lessons[lesson.id].lessonLocked ? "red" : "blue"}
-    >unlocked</div>
-    {lesson.id}
-  </div>
-)
+      className="lessonIconContainer"
+      onClick={e => iconClickHandler(e)}
+    >
+      <div
+        className={userProg[currentValues.currentUnitObj.id].lessons[lesson.id].lessonLocked ? "red" : "green"}
+      ></div>
+      {lesson.id}
+    </div>
+)}
