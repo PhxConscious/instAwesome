@@ -196,29 +196,33 @@ class CheckTasks extends React.Component {
           </Dialog>
 
           <div>
-            <button
+            <Button
+              raised accent ripple
               onClick={prevLesson}
               value="next"
-            >prevLesson</button>
+            >prevLesson</Button>
 
-            <button
+            <Button
+              raised accent ripple
               onClick={nextLesson}
               value="next"
-            >nextLesson</button>
+            >nextLesson</Button>
           </div>
           <div>
-            <button
+            <Button
+              raised accent ripple
               className={prevButtonHidden ? 'hidden' : ""}
               onClick={prevQuestClickHandler}
               value="nextQuestion"
-            >prevQuestion</button>
-
-            <button
+            >prevQuestion</Button>
+            <Button
+              raised accent ripple
               className={nextButtonHidden ? 'hidden' : ""}
               onClick={nextQuestClickHandler}
               value="nextQuestion"
               disabled={!isCheckMarked}
-            >nextQuestion</button>
+            >nextQuestion</Button>
+
           </div>
 
 
