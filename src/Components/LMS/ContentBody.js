@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { nextQuestion } from '../../redux/actions/userProgress';
 import ReactPlayer from 'react-player';
 import '../../Styles/CheckTasks.css';
-import Checkbox from './Checkbox';
+import { CheckBox, LessonIcon } from './Checkbox';
 import { Button, Dialog, DialogTitle, DialogActions, DialogContent } from 'react-mdl';
 
 class CheckTasks extends React.Component {
@@ -93,9 +93,25 @@ class CheckTasks extends React.Component {
 
     let { isCheckMarked, nextButtonHidden, prevButtonHidden } = this.state;
 
-    let { lesson, nextLesson, prevLesson, nextQuestion, prevQuestion, nextUnit, userProgress, book } = this.props;
+    let { lesson, nextLesson, prevLesson, nextQuestion, prevQuestion, nextUnit, userProgress, book, currentValues } = this.props;
 
-    let { currentUnit, currentUnitObj, currentLesson, currentLessonObj, currentQuestion, currentQuestionObj } = this.props.currentValues
+    let { currentUnit, currentUnitObj, currentLesson, currentLessonObj, currentQuestion, currentQuestionObj } = this.props.currentValues;
+
+    let userProg = userProgress.currentUser.user_progress;
+
+    let lessonIcons = null;
+    if(currentLessonObj){
+      lessonIcons = currentUnitObj.lessons.map((lesson, i) => (
+        <LessonIcon
+          key={i}
+          i={i}
+          lesson={lesson}
+          userProg={userProg}
+          currentValues={currentValues}
+        />
+      ))
+    }
+
 
     let nextQuestClickHandler = () => {
       let lengthOfQuestArr = book[currentUnit].lessons[currentLesson].questions.length
@@ -143,7 +159,7 @@ class CheckTasks extends React.Component {
         prevQuestion();
       }
     }
-
+    console.log("contentType", currentQuestionObj.contentType)
     if(currentLessonObj){
 
       return(
@@ -151,10 +167,13 @@ class CheckTasks extends React.Component {
           <div>{currentQuestionObj.title}</div>
 
           <div className="inputComponent">
-            <Checkbox
-              checkBox={this.checkBox}
-              isCheckMarked={isCheckMarked}
-            />
+          {
+            currentQuestionObj.contentType === "checkTasks" ? <CheckBox
+                        checkBox={this.checkBox}
+                        isCheckMarked={this.state.isCheckMarked}
+                      /> : "no contentType"
+          }
+
           </div>
 
           <Dialog open={this.state.openLessonDialog}>
@@ -230,6 +249,7 @@ class CheckTasks extends React.Component {
         <div>Lesson: {parseInt(currentLesson, 10)+1} of {book[currentUnit].lessons.length}</div>
         <div>Question: {parseInt(currentQuestion, 10)+1} of {currentLessonObj.questions.length}</div>
 
+        <div>{lessonIcons ? lessonIcons : 'nolessonicons'}</div>
           {currentQuestion === "0" ? "Please begin the lesson" : ''}
 
         </div>
