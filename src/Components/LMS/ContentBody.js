@@ -3,18 +3,20 @@ import { connect } from 'react-redux';
 import { nextQuestion } from '../../redux/actions/userProgress';
 import ReactPlayer from 'react-player';
 import '../../Styles/CheckTasks.css';
+import { CheckBox, LessonIcon } from './Checkbox';
 import { Button, Dialog, DialogTitle, DialogActions, DialogContent } from 'react-mdl';
 
 class CheckTasks extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      isChecked: false,
+      isCheckMarked: false,
       test:false,
     }
     this.isNextQ = this.isNextQ.bind(this);
     this.isPrevQ = this.isPrevQ.bind(this);
     this.isChecked = this.isChecked.bind(this);
+    this.checkBox = this.checkBox.bind(this);
   }
 
   componentDidMount(){
@@ -40,12 +42,12 @@ class CheckTasks extends React.Component {
     if(userProg[currentUnitObj.id].lessons[currentLessonObj.id].questions[currentQuestionObj.id]){
       this.setState({
         ...this.state,
-        isChecked: true
+        isCheckMarked: true
       })
     } else {
       this.setState({
         ...this.state,
-        isChecked: false
+        isCheckMarked: false
       })
     }
   }
@@ -81,15 +83,36 @@ class CheckTasks extends React.Component {
     // }
   }
 
+  checkBox(){
+    this.setState({isCheckMarked: !this.state.isCheckMarked})
+  }
+
 
   render(){
 
 
-    let { isChecked, nextButtonHidden, prevButtonHidden } = this.state;
+    let { isCheckMarked, nextButtonHidden, prevButtonHidden } = this.state;
 
-    let { lesson, nextLesson, prevLesson, nextQuestion, prevQuestion, nextUnit, userProgress, book } = this.props;
+    let { lesson, nextLesson, prevLesson, nextQuestion, prevQuestion, nextUnit, userProgress, book, currentValues, selectLessonOnClick } = this.props;
 
-    let { currentUnit, currentUnitObj, currentLesson, currentLessonObj, currentQuestion, currentQuestionObj } = this.props.currentValues
+    let { currentUnit, currentUnitObj, currentLesson, currentLessonObj, currentQuestion, currentQuestionObj } = this.props.currentValues;
+
+    let userProg = userProgress.currentUser.user_progress;
+
+    let lessonIcons = null;
+    if(currentLessonObj){
+      lessonIcons = currentUnitObj.lessons.map((lesson, i) => (
+        <LessonIcon
+          key={i}
+          i={i}
+          lesson={lesson}
+          userProg={userProg}
+          currentValues={currentValues}
+          selectLessonOnClick={selectLessonOnClick}
+        />
+      ))
+    }
+
 
     let nextQuestClickHandler = () => {
       let lengthOfQuestArr = book[currentUnit].lessons[currentLesson].questions.length
@@ -137,21 +160,21 @@ class CheckTasks extends React.Component {
         prevQuestion();
       }
     }
-
+    console.log("contentType", currentQuestionObj.contentType)
     if(currentLessonObj){
 
       return(
         <div>
-          <div>lesson: {currentLessonObj.description}</div>
-          <h5>current question: {parseInt(currentQuestion, 10)+1}</h5>
-          <div>question: {currentQuestionObj.title}</div>
+          <div>{currentQuestionObj.title}</div>
 
-          <div>
-            <input
-              type="checkbox"
-              checked={isChecked}
-              onChange={e => this.setState({isChecked: !isChecked})}
-            />
+          <div className="inputComponent">
+          {
+            currentQuestionObj.contentType === "checkTasks" ? <CheckBox
+                        checkBox={this.checkBox}
+                        isCheckMarked={this.state.isCheckMarked}
+                      /> : "no contentType"
+          }
+
           </div>
 
           <Dialog open={this.state.openLessonDialog}>
@@ -193,36 +216,41 @@ class CheckTasks extends React.Component {
           </Dialog>
 
           <div>
-            <button
+            <Button
+              raised accent ripple
               onClick={prevLesson}
               value="next"
-            >prevLesson</button>
+            >prevLesson</Button>
 
-            <button
+            <Button
+              raised accent ripple
               onClick={nextLesson}
               value="next"
-            >nextLesson</button>
+            >nextLesson</Button>
           </div>
           <div>
-            <button
+            <Button
+              raised accent ripple
               className={prevButtonHidden ? 'hidden' : ""}
               onClick={prevQuestClickHandler}
               value="nextQuestion"
-            >prevQuestion</button>
-
-            <button
+            >prevQuestion</Button>
+            <Button
+              raised accent ripple
               className={nextButtonHidden ? 'hidden' : ""}
               onClick={nextQuestClickHandler}
               value="nextQuestion"
-              disabled={!isChecked}
-            >nextQuestion</button>
+              disabled={!isCheckMarked}
+            >nextQuestion</Button>
+
           </div>
 
 
         <div>Unit: {parseInt(currentUnit, 10)+1} of {book.length}</div>
-        <div>current lesson: {parseInt(currentLesson, 10)+1} of {book[currentUnit].lessons.length}</div>
-        <div>progress: {parseInt(currentQuestion, 10)+1} of {currentLessonObj.questions.length}</div>
+        <div>Lesson: {parseInt(currentLesson, 10)+1} of {book[currentUnit].lessons.length}</div>
+        <div>Question: {parseInt(currentQuestion, 10)+1} of {currentLessonObj.questions.length}</div>
 
+        <div>{lessonIcons ? lessonIcons : 'nolessonicons'}</div>
           {currentQuestion === "0" ? "Please begin the lesson" : ''}
 
         </div>

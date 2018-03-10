@@ -17,7 +17,8 @@ class Dashboard extends React.Component {
       readyForRender: false,
       startStudyModal: true,
     }
-    this.selectCardOnClick = this.selectCardOnClick.bind(this)
+    this.selectCardOnClick = this.selectCardOnClick.bind(this);
+    this.selectLessonOnClick = this.selectLessonOnClick.bind(this);
     this.nextLesson = this.nextLesson.bind(this);
     this.prevLesson = this.prevLesson.bind(this);
     this.getActiveUnit = this.getActiveUnit.bind(this);
@@ -183,6 +184,24 @@ class Dashboard extends React.Component {
       }
     })
   }
+
+  selectLessonOnClick(lessonIndex){
+    let { book, currentValues } = this.props;
+    let { currentUnit } = currentValues;
+
+    let targetLesson = book[currentUnit].lessons[lessonIndex]
+      console.log("targetLesson", targetLesson)
+
+    this.props.setCurrentValues("currentLesson", lessonIndex);
+    this.props.setCurrentValues("currentLessonObj", targetLesson);
+
+    this.getActiveQuestion(targetLesson.questions)
+  }
+
+
+
+
+
 
   nextUnit(){
 
@@ -430,6 +449,7 @@ class Dashboard extends React.Component {
                 prevLesson={this.prevLesson}
                 nextQuestion={this.nextQuestion}
                 prevQuestion={this.prevQuestion}
+                selectLessonOnClick={this.selectLessonOnClick}
               /> : 'Select a unit to begin'}
           </div>
         </div>
