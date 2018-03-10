@@ -3,18 +3,20 @@ import { connect } from 'react-redux';
 import { nextQuestion } from '../../redux/actions/userProgress';
 import ReactPlayer from 'react-player';
 import '../../Styles/CheckTasks.css';
+import { Checkbox } from './Checkbox';
 import { Button, Dialog, DialogTitle, DialogActions, DialogContent } from 'react-mdl';
 
 class CheckTasks extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      isChecked: false,
+      isCheckMarked: false,
       test:false,
     }
     this.isNextQ = this.isNextQ.bind(this);
     this.isPrevQ = this.isPrevQ.bind(this);
     this.isChecked = this.isChecked.bind(this);
+    this.checkBox = this.checkBox.bind(this);
   }
 
   componentDidMount(){
@@ -40,12 +42,12 @@ class CheckTasks extends React.Component {
     if(userProg[currentUnitObj.id].lessons[currentLessonObj.id].questions[currentQuestionObj.id]){
       this.setState({
         ...this.state,
-        isChecked: true
+        isCheckMarked: true
       })
     } else {
       this.setState({
         ...this.state,
-        isChecked: false
+        isCheckMarked: false
       })
     }
   }
@@ -81,11 +83,15 @@ class CheckTasks extends React.Component {
     // }
   }
 
+  checkBox(){
+    this.setState({isCheckMarked: !this.state.isCheckMarked})
+  }
+
 
   render(){
 
 
-    let { isChecked, nextButtonHidden, prevButtonHidden } = this.state;
+    let { isCheckMarked, nextButtonHidden, prevButtonHidden } = this.state;
 
     let { lesson, nextLesson, prevLesson, nextQuestion, prevQuestion, nextUnit, userProgress, book } = this.props;
 
@@ -144,11 +150,10 @@ class CheckTasks extends React.Component {
         <div>
           <div>{currentQuestionObj.title}</div>
 
-          <div>
-            <input
-              type="checkbox"
-              checked={isChecked}
-              onChange={e => this.setState({isChecked: !isChecked})}
+          <div className="inputComponent">
+            <Checkbox
+              checkBox={this.checkBox}
+              isCheckMarked={isCheckMarked}
             />
           </div>
 
@@ -212,7 +217,7 @@ class CheckTasks extends React.Component {
               className={nextButtonHidden ? 'hidden' : ""}
               onClick={nextQuestClickHandler}
               value="nextQuestion"
-              disabled={!isChecked}
+              disabled={!isCheckMarked}
             >nextQuestion</button>
           </div>
 
