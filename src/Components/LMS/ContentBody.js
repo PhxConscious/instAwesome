@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from 'react-redux';
 import { nextQuestion } from '../../redux/actions/userProgress';
 import ReactPlayer from 'react-player';
-import '../../Styles/CheckTasks.css';
+import '../../Styles/ContentBodyStyles.css';
 import { CheckBox, LessonIcon } from './Checkbox';
 import { Button, Dialog, DialogTitle, DialogActions, DialogContent } from 'react-mdl';
 
@@ -160,7 +160,7 @@ class CheckTasks extends React.Component {
         prevQuestion();
       }
     }
-    console.log("contentType", currentQuestionObj.contentType)
+
     if(currentLessonObj){
 
       return(
