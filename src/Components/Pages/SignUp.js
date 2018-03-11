@@ -10,7 +10,6 @@ class UserProfile extends Component {
     render() {
         return (
             <div className="App">
-                <AppNavbar/>
                 <Gradient/>
                 <BlueAppBg>
                     <SignUpForm/>

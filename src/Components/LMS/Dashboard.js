@@ -33,8 +33,8 @@ class Dashboard extends React.Component {
 
   componentDidMount(){
     this.props.getLmsContent();
-    this.props.fetchUserProgress('KaO2uDZiice9B9Mk2xAKgJqLvMj2');
-    this.props.setCurrentValues('currentFbId', 'KaO2uDZiice9B9Mk2xAKgJqLvMj2')
+    this.props.fetchUserProgress(this.props.currentValues.currentFbId);
+    // this.props.setCurrentValues('currentFbId', this.props.currentValues.currentFbId)
   }
 
   handleStartStudy(){
