@@ -29,7 +29,6 @@ class UserProfile extends Component {
         }
         return (
             <div className="App">
-                <AppNavbar/>
                 <Gradient/>
                 <BlueAppBg>
                     <GreenFormContainer/>
