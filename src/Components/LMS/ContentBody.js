@@ -165,7 +165,9 @@ class CheckTasks extends React.Component {
 
       return(
         <div>
-          <div><h5>{currentQuestionObj.title}</h5></div>
+          <div id="lessonTitleContainer">
+            <h5>{currentQuestionObj.title}</h5>
+          </div>
 
           <div id="inputComponent">
           {
