@@ -250,7 +250,7 @@ class CheckTasks extends React.Component {
         <div>Lesson: {parseInt(currentLesson, 10)+1} of {book[currentUnit].lessons.length}</div>
         <div>Question: {parseInt(currentQuestion, 10)+1} of {currentLessonObj.questions.length}</div>
 
-        <div>{lessonIcons ? lessonIcons : 'nolessonicons'}</div>
+        <div id="lessonIconsContainer">{lessonIcons ? lessonIcons : 'nolessonicons'}</div>
           {currentQuestion === "0" ? "Please begin the lesson" : ''}
 
         </div>

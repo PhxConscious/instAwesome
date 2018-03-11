@@ -1,3 +1,12 @@
 .hidden {
   visibility: hidden;
 }
+
+
+#lessonIconsContainer {
+  margin: 0 auto;
+  width: 50%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
