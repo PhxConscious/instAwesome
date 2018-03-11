@@ -2,13 +2,18 @@
   visibility: hidden;
 }
 
+#inputComponent {
+  float: right;
+  margin-right: 5vw;
+  margin-top: 20px;
+}
 
 #lessonIconsContainer {
   margin: 0 auto;
-  width: 50%;
+  width: 20vw;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 #nextPrevButtonContainer {

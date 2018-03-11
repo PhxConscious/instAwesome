@@ -165,9 +165,9 @@ class CheckTasks extends React.Component {
 
       return(
         <div>
-          <div>{currentQuestionObj.title}</div>
+          <div><h5>{currentQuestionObj.title}</h5></div>
 
-          <div className="inputComponent">
+          <div id="inputComponent">
           {
             currentQuestionObj.contentType === "checkTasks" ? <CheckBox
                         checkBox={this.checkBox}
