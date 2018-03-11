@@ -19,8 +19,9 @@ export const LessonIcon = ({lesson, currentValues, userProg, i, selectLessonOnCl
   const iconClickHandler = (e) => {
     if(!userProg[currentValues.currentUnitObj.id].lessons[lesson.id].lessonLocked){
       console.log("Was clicked", e)
+      selectLessonOnClick(i)
     }
-    selectLessonOnClick(i)
+
   }
 
   return(
