@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from 'react-redux';
 import { nextQuestion } from '../../redux/actions/userProgress';
 import ReactPlayer from 'react-player';
-import '../../Styles/CheckTasks.css';
+import '../../Styles/ContentBodyStyles.css';
 import { CheckBox, LessonIcon } from './Checkbox';
 import { Button, Dialog, DialogTitle, DialogActions, DialogContent } from 'react-mdl';
 
@@ -160,14 +160,16 @@ class CheckTasks extends React.Component {
         prevQuestion();
       }
     }
-    console.log("contentType", currentQuestionObj.contentType)
+
     if(currentLessonObj){
 
       return(
         <div>
-          <div>{currentQuestionObj.title}</div>
+          <div id="lessonTitleContainer">
+            <h5>{currentQuestionObj.title}</h5>
+          </div>
 
-          <div className="inputComponent">
+          <div id="inputComponent">
           {
             currentQuestionObj.contentType === "checkTasks" ? <CheckBox
                         checkBox={this.checkBox}
@@ -215,20 +217,15 @@ class CheckTasks extends React.Component {
             </DialogActions>
           </Dialog>
 
-          <div>
-            <Button
-              raised accent ripple
-              onClick={prevLesson}
-              value="next"
-            >prevLesson</Button>
+          <div>Unit: {parseInt(currentUnit, 10)+1} of {book.length}</div>
+          <div>Lesson: {parseInt(currentLesson, 10)+1} of {book[currentUnit].lessons.length}</div>
+          <div>Question: {parseInt(currentQuestion, 10)+1} of {currentLessonObj.questions.length}</div>
 
-            <Button
-              raised accent ripple
-              onClick={nextLesson}
-              value="next"
-            >nextLesson</Button>
-          </div>
-          <div>
+          <div id="lessonIconsContainer">{lessonIcons ? lessonIcons : 'nolessonicons'}</div>
+
+          {currentQuestion === "0" ? "Please begin the lesson" : ''}
+
+          <div id="nextPrevButtonContainer">
             <Button
               raised accent ripple
               className={prevButtonHidden ? 'hidden' : ""}
@@ -242,17 +239,7 @@ class CheckTasks extends React.Component {
               value="nextQuestion"
               disabled={!isCheckMarked}
             >nextQuestion</Button>
-
           </div>
-
-
-        <div>Unit: {parseInt(currentUnit, 10)+1} of {book.length}</div>
-        <div>Lesson: {parseInt(currentLesson, 10)+1} of {book[currentUnit].lessons.length}</div>
-        <div>Question: {parseInt(currentQuestion, 10)+1} of {currentLessonObj.questions.length}</div>
-
-        <div>{lessonIcons ? lessonIcons : 'nolessonicons'}</div>
-          {currentQuestion === "0" ? "Please begin the lesson" : ''}
-
         </div>
       )
     }

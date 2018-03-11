@@ -1,0 +1,36 @@
+.hidden {
+  visibility: hidden;
+}
+
+#lessonTitleContainer {
+
+}
+
+#lessonTitleContainer h5 {
+  margin: 10px 10px 20px 10px;
+}
+
+#inputComponent {
+  float: right;
+  margin-right: 5vw;
+  margin-top: 20px;
+}
+
+#lessonIconsContainer {
+  margin: 0 auto;
+  width: 20vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+#nextPrevButtonContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#nextPrevButtonContainer Button {
+  display: flex;
+}

@@ -34,7 +34,7 @@ class AppNavbar extends Component {
     render() {
 
         let { userInfo } = this.props;
-        console.log("userInfo", userInfo);
+
         const {redirect} = this.state;
 
         if (redirect) {

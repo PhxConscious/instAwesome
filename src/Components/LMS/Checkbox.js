@@ -5,6 +5,8 @@ import '../../Styles/LmsComponentsStyles.css';
 export const CheckBox = ({isCheckMarked, checkBox}) => {
   return (
     <Checkbox
+      className="checkbox"
+      ripple
       type="checkbox"
       checked={isCheckMarked}
       onChange={checkBox}
@@ -19,8 +21,9 @@ export const LessonIcon = ({lesson, currentValues, userProg, i, selectLessonOnCl
   const iconClickHandler = (e) => {
     if(!userProg[currentValues.currentUnitObj.id].lessons[lesson.id].lessonLocked){
       console.log("Was clicked", e)
+      selectLessonOnClick(i)
     }
-    selectLessonOnClick(i)
+
   }
 
   return(
@@ -29,8 +32,8 @@ export const LessonIcon = ({lesson, currentValues, userProg, i, selectLessonOnCl
       onClick={e => iconClickHandler(e)}
     >
       <div
+        id={currentValues.currentLessonObj.id === lesson.id ? "gold" : ''}
         className={userProg[currentValues.currentUnitObj.id].lessons[lesson.id].lessonLocked ? "red" : "green"}
       ></div>
-      {lesson.id}
     </div>
 )}

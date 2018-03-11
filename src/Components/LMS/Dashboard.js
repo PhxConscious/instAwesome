@@ -209,7 +209,7 @@ class Dashboard extends React.Component {
 
   nextUnit(){
 
-    let { currentUnit, currentUnitId, currentUnitObj, currentLesson, currentLessonObj, currentQuestion, currentQuestionObj, currentQuestionId } = this.props.currentValues;
+    let { currentUnit, currentUnitId, currentUnitObj, currentLesson, currentLessonObj, currentQuestion, currentQuestionObj, currentQuestionId, currentFbId } = this.props.currentValues;
 
     let { userProgress, book } = this.props;
 
@@ -227,6 +227,10 @@ class Dashboard extends React.Component {
     // marks the current unit as completed
     taskObjRedux[currentUnitObj.id]["unitCompleted"] = true;
     taskObjRedux[currentUnitObj.id]["unitLocked"] = false;
+
+    // marks current lesson as completed
+    taskObjRedux[currentUnitObj.id].lessons[currentLessonObj.id]["lessonCompleted"] = true;
+    taskObjRedux[currentUnitObj.id].lessons[currentLessonObj.id]["lessonLocked"] = false;
 
     let nextUnit;
     let nextUnitObj;
@@ -252,6 +256,11 @@ class Dashboard extends React.Component {
       this.props.setCurrentValues("active", nextUnitObj.id)
     }
     this.getActiveLesson(book[nextUnit], nextUnitObj.id);
+    // 5. dispatch updated obj - format object for server
+    let dto = {};
+    dto["userProgress"] = taskObjRedux;
+    console.log('next unit dto', dto)
+    this.props.putNextQuestion(currentFbId, dto)
   }
 
 
@@ -378,7 +387,7 @@ class Dashboard extends React.Component {
     // 5. dispatch updated obj - format object for server
     let dto = {};
     dto["userProgress"] = taskObjRedux;
-    console.log('dto', dto)
+    console.log('next question dto', dto)
     this.props.putNextQuestion(currentFbId, dto)
   }
 
