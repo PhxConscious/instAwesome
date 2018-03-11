@@ -11,11 +11,19 @@ class LmsCard extends Component {
 
       let userProg = userProgress.currentUser.user_progress;
 
+      let clickHandler = () => {
+        if(!userProg[id].unitLocked){
+          onClick(id)
+        } else {
+          alert("Please finish the current unit before continuing to later units")
+        }
+      }
+
         return(
             <div
               className={!userProg[id].unitCompleted ? "LmsCardContainer locked" : "LmsCardContainer unlocked"}
               id={active ? "currentCard" : ""}
-              onClick={e => onClick(id)}
+              onClick={clickHandler}
             >
               <div className="lockIcon"><i className="material-icons">{userProg[id].unitLocked ? "lock" : ""}</i></div>
               <div className="leftSide">
