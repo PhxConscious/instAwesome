@@ -31,23 +31,20 @@ class SignUpForm extends Component {
             return alert('password must be at least 6 characters long')
         }
         return (
-          // DTO structure:
-          // first_name, last_name, user_email, user_phone, firebase_id
 
-          // @TODO make this post using redux
             firebase.auth().createUserWithEmailAndPassword(email, password)
 
-                // @TODO call action with the correct user object
-
-                // @TODO create reducer
-                .then(this.props.createNewUser({
+                // call action with the correct user object
+                .then(user => {
+                  this.props.createNewUser({
                   user_email: email,
                   firebase_id: firebase.auth().currentUser.uid,
                   first_name: firstName,
                   last_name: lastName,
                   user_phone: userPhone,
                   user_progress: starterObj
-                }))
+                  })
+                })
                 .then(this.setState({redirect: true}))
         )
     };
