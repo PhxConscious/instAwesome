@@ -4,6 +4,7 @@ import {Redirect, Link} from 'react-router-dom';
 import Styles from '../../Styles/FormsStyles.css';
 import { connect } from 'react-redux';
 import { setCurrentValue } from "../../redux/actions/currentValues";
+import { getUserProgress } from '../../redux/actions/userProgress';
 
 class LoginForm extends Component {
 
@@ -42,16 +43,21 @@ class LoginForm extends Component {
     };
 
     onLoginSuccess = () => {
+      setTimeout(()=>{
         this.setState({
             email: '',
             password: '',
             loginError: '',
             user_token: firebase.auth().currentUser.uid,
             redirect: true
-        }, this.props.setCurrentUserFbId("currentFbId", firebase.auth().currentUser.uid));
-
+        });
+        console.log("in onLoginSuccess", firebase.auth().currentUser)
+        this.props.setCurrentUserFbId("currentFbId", firebase.auth().currentUser.uid)
+        this.props.fetchUserInfo(firebase.auth().currentUser.uid);
 
         console.log(`${firebase.auth().currentUser.email} has just signed in`)
+      }, 1500)
+
     };
 
     onLoginFail = () => {
@@ -75,6 +81,7 @@ class LoginForm extends Component {
     onButtonPress = (e) => {
         e.preventDefault();
         const {email, password} = this.state;
+        console.log(" current email and password", email, password)
         this.setState({error: ''});
         firebase.auth().signInWithEmailAndPassword(email, password)
             .then(this.onLoginSuccess)
@@ -159,7 +166,10 @@ const mapDispatchToProps = dispatch => {
     return {
         setCurrentUserFbId: (key, value) => {
             dispatch(setCurrentValue(key, value))
-        }
+        },
+        fetchUserInfo : (fb_id) => {
+          dispatch(getUserProgress(fb_id))
+        },
     }
 };
 
