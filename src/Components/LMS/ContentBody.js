@@ -215,19 +215,7 @@ class CheckTasks extends React.Component {
             </DialogActions>
           </Dialog>
 
-          <div>
-            <Button
-              raised accent ripple
-              onClick={prevLesson}
-              value="next"
-            >prevLesson</Button>
 
-            <Button
-              raised accent ripple
-              onClick={nextLesson}
-              value="next"
-            >nextLesson</Button>
-          </div>
           <div>
             <Button
               raised accent ripple
