@@ -3,9 +3,9 @@ import firebase from 'firebase';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import { connect } from "react-redux";
-
+import starterObj from '../../config/starterUserProgressObject';
 import Styles from '../../Styles/FormsStyles.css';
-import { nextQuestion } from "../../redux/actions/userProgress";
+import { nextQuestion, createNewUser } from "../../redux/actions/userProgress";
 
 class SignUpForm extends Component {
     constructor(props) {
@@ -31,14 +31,22 @@ class SignUpForm extends Component {
             return alert('password must be at least 6 characters long')
         }
         return (
+          // DTO structure:
+          // first_name, last_name, user_email, user_phone, firebase_id
+
+          // @TODO make this post using redux
             firebase.auth().createUserWithEmailAndPassword(email, password)
-                .then(() => axios.post('http://localhost:8080/users/new', {
-                    user_email: email,
-                    firebase_id: firebase.auth().currentUser.uid,
-                    first_name: firstName,
-                    last_name: lastName,
-                    user_phone: userPhone,
-                    user_progress: ''
+
+                // @TODO call action with the correct user object
+
+                // @TODO create reducer
+                .then(this.props.createNewUser({
+                  user_email: email,
+                  firebase_id: firebase.auth().currentUser.uid,
+                  first_name: firstName,
+                  last_name: lastName,
+                  user_phone: userPhone,
+                  user_progress: starterObj
                 }))
                 .then(this.setState({redirect: true}))
         )
@@ -165,6 +173,9 @@ const mapDispatchToProps = dispatch => {
     return {
         putNextQuestion : (fb_id, data) => {
             dispatch(nextQuestion(fb_id, data ))
+        },
+        createNewUser : (userObj) => {
+          dispatch(createNewUser(userObj))
         }
     }
 };

@@ -3,7 +3,7 @@ import firebase from 'firebase';
 import {Redirect, Link} from 'react-router-dom';
 import Styles from '../../Styles/FormsStyles.css';
 import { connect } from 'react-redux';
-import {setCurrentValue} from "../../redux/actions/currentValues";
+import { setCurrentValue } from "../../redux/actions/currentValues";
 
 class LoginForm extends Component {
 
@@ -48,7 +48,9 @@ class LoginForm extends Component {
             loginError: '',
             user_token: firebase.auth().currentUser.uid,
             redirect: true
-        });
+        }, this.props.setCurrentUserFbId("currentFbId", firebase.auth().currentUser.uid));
+
+
         console.log(`${firebase.auth().currentUser.email} has just signed in`)
     };
 
@@ -75,7 +77,6 @@ class LoginForm extends Component {
         const {email, password} = this.state;
         this.setState({error: ''});
         firebase.auth().signInWithEmailAndPassword(email, password)
-            .then(this.props.setCurrentUserFbId("currentFbId", firebase.auth().currentUser.uid))
             .then(this.onLoginSuccess)
             .then(this.setState({email: '', password: ''}))
             .catch(this.onLoginFail)

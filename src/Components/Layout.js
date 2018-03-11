@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter } from 'react-router-dom';
 import Main from './Main'
-import Header from './Header';
+import AppNav from './Reusable/AppNav';
 
 export default class Layout extends React.Component {
 
@@ -10,7 +10,7 @@ export default class Layout extends React.Component {
       <div>
         <BrowserRouter>
           <div>
-            {/*<Header />*/}
+            <AppNav />
             <Main />
           </div>
         </BrowserRouter>
