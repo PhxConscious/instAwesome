@@ -215,8 +215,15 @@ class CheckTasks extends React.Component {
             </DialogActions>
           </Dialog>
 
+          <div>Unit: {parseInt(currentUnit, 10)+1} of {book.length}</div>
+          <div>Lesson: {parseInt(currentLesson, 10)+1} of {book[currentUnit].lessons.length}</div>
+          <div>Question: {parseInt(currentQuestion, 10)+1} of {currentLessonObj.questions.length}</div>
 
-          <div>
+          <div id="lessonIconsContainer">{lessonIcons ? lessonIcons : 'nolessonicons'}</div>
+
+          {currentQuestion === "0" ? "Please begin the lesson" : ''}
+
+          <div id="nextPrevButtonContainer">
             <Button
               raised accent ripple
               className={prevButtonHidden ? 'hidden' : ""}
@@ -230,17 +237,7 @@ class CheckTasks extends React.Component {
               value="nextQuestion"
               disabled={!isCheckMarked}
             >nextQuestion</Button>
-
           </div>
-
-
-        <div>Unit: {parseInt(currentUnit, 10)+1} of {book.length}</div>
-        <div>Lesson: {parseInt(currentLesson, 10)+1} of {book[currentUnit].lessons.length}</div>
-        <div>Question: {parseInt(currentQuestion, 10)+1} of {currentLessonObj.questions.length}</div>
-
-        <div id="lessonIconsContainer">{lessonIcons ? lessonIcons : 'nolessonicons'}</div>
-          {currentQuestion === "0" ? "Please begin the lesson" : ''}
-
         </div>
       )
     }
