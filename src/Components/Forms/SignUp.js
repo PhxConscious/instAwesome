@@ -33,7 +33,6 @@ class SignUpForm extends Component {
         return (
 
             firebase.auth().createUserWithEmailAndPassword(email, password)
-
                 // call action with the correct user object
                 .then(user => {
                   this.props.createNewUser({
