@@ -1,8 +1,9 @@
 import React, {Component} from "react";
 import '../../Styles/FormsStyles.css';
 import {connect} from 'react-redux';
-import {updateCompanyInfo} from "../../redux/actions/companyInfo";
+import {addCompanyInfo} from "../../redux/actions/companyInfo";
 import {postUserCompanyJoinInfo} from "../../redux/actions/userCompanyJoin";
+import axios from 'axios';
 
 class Company extends Component {
     componentDidMount() {
@@ -12,13 +13,18 @@ class Company extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: '',
+            form: {
+              company_name: ''
+            },
             styleGuide: '',
             primaryGoal: '',
             error: '',
             loading: false
         };
+        this.addNewCompany = this.addNewCompany.bind(this);
+        this.onButtonPress = this.onButtonPress.bind(this);
     }
+
 
     renderButton() {
         if (this.state.loading) {
@@ -27,7 +33,7 @@ class Company extends Component {
         return (
             <button
                 className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect formButton"
-                onClick={() => this.onButtonPress()}>
+                onClick={(e) => this.onButtonPress(e)}>
                 <span className='buttonText'>
                     UPDATE
                 </span>
@@ -35,29 +41,33 @@ class Company extends Component {
         );
     }
 
-    onButtonPress() {
-        const {name, styleGuide, primaryGoal} = this.state;
-        // if (name === '' || styleGuide === '' || primaryGoal === '') {
-        //     return alert('Must fill in all fields')
-        // }
-        return (() => {
-            this.props.updateCompanyInfo({
-                company_name: name
-                // style_guide: styleGuide,
-                // primary_goal: primaryGoal
-            })
-        })
-            .then(
-                alert('you have successfully completed this form')
-            )
+    addNewCompany() {
+      return new Promise((resolve) => {
+        this.props.postUserCompanyJoinInfo(this.props.userFbId)
+        resolve(axios.get(`http://localhost:8080/usercompanyjoin/${this.props.userFbId}`))
+      })
     }
 
-    handleInputTextChange = e => {
-        this.setState({[e.target.name]: e.target.value});
-    };
+    onButtonPress(e) {
+      e.preventDefault();
+      const {name, styleGuide, primaryGoal} = this.state;
+      // if (name === '' || styleGuide === '' || primaryGoal === '') {
+      //     return alert('Must fill in all fields')
+      // }
+
+      this.addNewCompany()
+        .then(() => this.addNewCompany())
+        .then(companyId => {
+          console.log('companyId', companyId)
+          this.props.createNewCompany(companyId.data[0].company_id, this.state.form)
+        })
+
+    }
+
+
 
     render() {
-        console.log('this is the current user fb id ', this.props.userFbId);
+        // console.log('this is the current user fb id ', this.props.userFbId);
         console.log('this is the current company info ', this.props.companyInfo)
         return (
             <div>
@@ -74,9 +84,9 @@ class Company extends Component {
                                 name='name'
                                 className="formInput"
                                 type="text"
-                                onChange={this.handleInputTextChange}
-                                placeholder='Conscious Creative'
-                                value={this.state.name}>
+                                onChange={e=>this.setState({form:{company_name:e.target.value}})}
+                                placeholder='input company name'
+                                value={this.state.form.company_name}>
                             </input>
                         </div>
                         {/*<div className="formInputCont">*/}
@@ -116,16 +126,17 @@ class Company extends Component {
 
 const mapStateToProps = state => ({
     companyInfo: state.companyInfo,
+    userCompanyJoin: state.userCompanyJoin,
     userFbId: state.currentValues.currentFbId
 });
 
 const mapDispatchToProps = dispatch => {
     return {
-        updateCompanyInfo: (companyObj) => {
-            dispatch(updateCompanyInfo(companyObj))
+        createNewCompany: (companyId, companyObj) => {
+            dispatch(addCompanyInfo(companyId, companyObj))
         },
-        postUserCompanyJoinInfo: () => {
-            dispatch(postUserCompanyJoinInfo)
+        postUserCompanyJoinInfo: (fb_id) => {
+            dispatch(postUserCompanyJoinInfo(fb_id))
         }
     }
 };
