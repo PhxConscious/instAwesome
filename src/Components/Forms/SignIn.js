@@ -51,12 +51,12 @@ class LoginForm extends Component {
             user_token: firebase.auth().currentUser.uid,
             redirect: true
         });
-        console.log("in onLoginSuccess", firebase.auth().currentUser)
+
         this.props.setCurrentUserFbId("currentFbId", firebase.auth().currentUser.uid)
         this.props.fetchUserInfo(firebase.auth().currentUser.uid);
 
         console.log(`${firebase.auth().currentUser.email} has just signed in`)
-      }, 1500)
+      })
 
     };
 
