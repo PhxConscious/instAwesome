@@ -27,7 +27,7 @@ class Company extends Component {
         return (
             <button
                 className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect formButton"
-                onClick={() => this.onButtonPress()}>
+                onClick={(e) => this.onButtonPress(e)}>
                 <span className='buttonText'>
                     UPDATE
                 </span>
@@ -35,21 +35,28 @@ class Company extends Component {
         );
     }
 
-    onButtonPress() {
+    onButtonPress(e) {
+      e.preventDefault();
         const {name, styleGuide, primaryGoal} = this.state;
         // if (name === '' || styleGuide === '' || primaryGoal === '') {
         //     return alert('Must fill in all fields')
         // }
-        return (() => {
-            this.props.updateCompanyInfo({
-                company_name: name
-                // style_guide: styleGuide,
-                // primary_goal: primaryGoal
-            })
-        })
-            .then(
-                alert('you have successfully completed this form')
-            )
+
+        this.props.postUserCompanyJoinInfo(this.props.userFbId)
+        // .then((response) => {
+        //   console.log("already sent postUserCompanyJoinInfo dispatch", response)
+        //   this.props.updateCompanyInfo('testCompanyId', {
+        //       company_name: name
+        //       // style_guide: styleGuide,
+        //       // primary_goal: primaryGoal
+        //   })
+        // })
+
+
+
+            // .then(
+            //     alert('you have successfully completed this form')
+            // )
     }
 
     handleInputTextChange = e => {
@@ -57,7 +64,7 @@ class Company extends Component {
     };
 
     render() {
-        console.log('this is the current user fb id ', this.props.userFbId);
+        // console.log('this is the current user fb id ', this.props.userFbId);
         console.log('this is the current company info ', this.props.companyInfo)
         return (
             <div>
@@ -75,7 +82,7 @@ class Company extends Component {
                                 className="formInput"
                                 type="text"
                                 onChange={this.handleInputTextChange}
-                                placeholder='Conscious Creative'
+                                placeholder='input company name'
                                 value={this.state.name}>
                             </input>
                         </div>
@@ -124,8 +131,8 @@ const mapDispatchToProps = dispatch => {
         updateCompanyInfo: (companyObj) => {
             dispatch(updateCompanyInfo(companyObj))
         },
-        postUserCompanyJoinInfo: () => {
-            dispatch(postUserCompanyJoinInfo)
+        postUserCompanyJoinInfo: (fb_id) => {
+            dispatch(postUserCompanyJoinInfo(fb_id))
         }
     }
 };
