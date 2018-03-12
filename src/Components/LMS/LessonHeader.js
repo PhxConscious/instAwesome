@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactPlayer from 'react-player';
 import { connect } from 'react-redux';
+import '../../Styles/LessonHeaderStyles.css'
 
 class LessonHeader extends React.Component {
 
@@ -9,13 +10,14 @@ class LessonHeader extends React.Component {
     let { currentLessonObj } = this.props.currentValues;
     if(currentLessonObj){
       return(
-        <div>
-          <div>
-            <h4>{currentLessonObj.title}</h4>
+        <div id="LessonHeaderContainer">
+          <div id="titleContainer">
+            <h4 id="title">{currentLessonObj.title}</h4>
           </div>
 
-          <div>
+          <div id="reactPlayerContainer">
             <ReactPlayer
+              id="reactPlayer"
               url={currentLessonObj.video}
               controls={true}
               width="500px"

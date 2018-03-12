@@ -43,7 +43,7 @@ class AppNavbar extends Component {
 
         if(true){
           return (
-              <header className="mdl-layout__header navBar">
+              <header className="">
                   <div className="mdl-layout__header-row navContentCont">
                       <i className="material-icons bookLogo">import_contacts</i>
                       <Link to={userInfo ? '/learn/dashboard' : '/'} className="mdl-navigation__link learnTextCont" href="">

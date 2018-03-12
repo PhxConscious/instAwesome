@@ -1,9 +1,9 @@
 .LmsCardContainer{
+  display: block;
   height: 100px;
-  width: 45vw;
   border-radius: 10px;
-  margin-top: 20px;
-  margin-left: 20px;
+  display: flex;
+  flex-direction: row;
 }
 
 .LmsImage{
@@ -15,15 +15,15 @@
 
 .leftSide{
   height: 100%;
-  width: 35%;
-  display: inline-block;
+  flex: 1;
+  /*display: inline-block;*/
   vertical-align: middle;
 }
 
 .rightSide{
   height: 100%;
-  width: 65%;
-  display: inline-block;
+  flex: 1;
+  /*display: inline-block;*/
   vertical-align: middle;
 }
 
@@ -75,8 +75,7 @@
 }
 
 .lockIcon{
-  font-size: 15px;
-  position: fixed;
-  margin-left: 22.5vw;
-  margin-top: 38px;
+  /*font-size: 15px;
+  margin-left: 22.5vw;*/
+  /*margin-top: 38px;*/
 }
