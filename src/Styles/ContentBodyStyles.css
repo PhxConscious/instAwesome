@@ -11,9 +11,20 @@
 }
 
 #inputComponent {
-  float: right;
-  margin-right: 5vw;
-  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+  /*width: 100%;*/
+  /*background-color: red;*/
+  padding: 0 10px 0 10px;
+}
+
+#inputComponent > * {
+  /*align-self: flex-end;
+  flex:1;*/
+  /*background-color: black;*/
+  /*float: right;*/
+  /*margin-right: 5vw;*/
+  /*margin-top: 20px;*/
 }
 
 #lessonIconsContainer {

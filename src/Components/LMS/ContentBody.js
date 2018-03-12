@@ -4,7 +4,8 @@ import { nextQuestion } from '../../redux/actions/userProgress';
 import ReactPlayer from 'react-player';
 import '../../Styles/ContentBodyStyles.css';
 import { CheckBox, LessonIcon } from './Checkbox';
-import { Button, Dialog, DialogTitle, DialogActions, DialogContent } from 'react-mdl';
+import TextInput from './TextInput';
+import { Button, Dialog, DialogTitle, DialogActions, DialogContent, Textfield } from 'react-mdl';
 
 class CheckTasks extends React.Component {
   constructor(props){
@@ -12,6 +13,7 @@ class CheckTasks extends React.Component {
     this.state = {
       isCheckMarked: false,
       test:false,
+      textArea:'',
     }
     this.isNextQ = this.isNextQ.bind(this);
     this.isPrevQ = this.isPrevQ.bind(this);
@@ -174,8 +176,18 @@ class CheckTasks extends React.Component {
             currentQuestionObj.contentType === "checkTasks" ? <CheckBox
                         checkBox={this.checkBox}
                         isCheckMarked={this.state.isCheckMarked}
-                      /> : "no contentType"
+                      /> : ""
           }
+          {
+            currentQuestionObj.contentType === "textArea" ? <Textfield
+              onChange={e => this.setState({textArea: e.target.value})}
+              value={this.state.textArea}
+              label="Text lines..."
+              rows={3}
+              style={{width: '100%'}}
+            /> : ""
+          }
+
 
           </div>
 
@@ -237,7 +249,7 @@ class CheckTasks extends React.Component {
               className={nextButtonHidden ? 'hidden' : ""}
               onClick={nextQuestClickHandler}
               value="nextQuestion"
-              disabled={!isCheckMarked}
+              disabled={!isCheckMarked && this.state.textArea.length === 0}
             >nextQuestion</Button>
           </div>
         </div>
