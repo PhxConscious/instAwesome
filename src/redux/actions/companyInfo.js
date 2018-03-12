@@ -8,10 +8,10 @@ export const getCompanyInfo = (company_id) => {
     }
 };
 
-export const updateCompanyInfo = (company_Id) => {
-    console.log("Action: insertCompanyInfo");
+export const updateCompanyInfo = (companyId, companyObj) => {
+    console.log("Action: insertCompanyInfo", companyId, companyObj);
     return {
         type: "UPDATE_COMPANY_INFO",
-        payload: axios.put(`http://localhost:8080/company/new/'${company_Id}'`)
+        payload: axios.put(`http://localhost:8080/company/new/'${companyId}'`, companyObj)
     }
 };

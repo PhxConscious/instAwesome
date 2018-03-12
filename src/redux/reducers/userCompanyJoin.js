@@ -1,8 +1,7 @@
-let initialState = {
-    userCompanyJoinInfo: {}
-}
+let initialState = {};
 
 export default (state = initialState, action) => {
+  console.log('reducer userCompanyJoin', action.type, action.payload)
     switch (action.type){
         case "GET_USER_COMPANY_JOIN_INFO_FULFILLED":
             return {
@@ -17,12 +16,16 @@ export default (state = initialState, action) => {
             return {
                 ...state
             }
-        case "UPDATE_USER_COMPANY_INFO_FULFILLED":
+        case "POST_USER_COMPANY_JOIN_INFO_FULFILLED":
             return {
                 ...state,
                 companyInfo: action.payload.data[0]
             }
-        case "UPDATE_USER_COMPANY_INFO_PENDING":
+        case "POST_USER_COMPANY_JOIN_INFO_PENDING":
+            return {
+                ...state
+            }
+        case "POST_USER_COMPANY_JOIN_INFO_REJECTED":
             return {
                 ...state
             }
