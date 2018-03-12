@@ -1,0 +1,24 @@
+.background {
+  height: 100vh;
+  width: 100vw;
+  background-color: #005259;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding-top: 20px;
+}
+
+.unitCardsContainer{
+  display: inline-block;
+  flex-basis: 30vw;
+}
+
+.lessonContentContainer{
+  display: inline-block;
+  flex-basis: 60vw;
+}
+
+#lessonContentComponent {
+  background-color: white;
+  border-radius: 10px;
+}

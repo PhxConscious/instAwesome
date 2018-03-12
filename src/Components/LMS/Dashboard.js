@@ -2,7 +2,7 @@ import React from 'react';
 import configUnitCards from '../../config/unitCards';
 import configUserProgess from '../../config/userProgress';
 import LmsCard from '../Reusable/LmsCard';
-import '../../Styles/LmsCardsStyles.css';
+import '../../Styles/DashboardStyles.css';
 import LessonContent from './LessonContent';
 import { connect } from 'react-redux';
 import { getLmsContent } from '../../redux/actions/lmsContent';
@@ -456,14 +456,18 @@ class Dashboard extends React.Component {
           </div>
 
           <div className="lessonContentContainer">
-            {this.state.readyForRender ? <LessonContent
-                nextUnit={this.nextUnit}
-                nextLesson={this.nextLesson}
-                prevLesson={this.prevLesson}
-                nextQuestion={this.nextQuestion}
-                prevQuestion={this.prevQuestion}
-                selectLessonOnClick={this.selectLessonOnClick}
-              /> : 'Select a unit to begin'}
+            <div id="lessonContentComponent">
+              {this.state.readyForRender ?
+                 <LessonContent
+                  nextUnit={this.nextUnit}
+                  nextLesson={this.nextLesson}
+                  prevLesson={this.prevLesson}
+                  nextQuestion={this.nextQuestion}
+                  prevQuestion={this.prevQuestion}
+                  selectLessonOnClick={this.selectLessonOnClick}
+                /> : 'Select a unit to begin'}
+            </div>
+
           </div>
         </div>
       )

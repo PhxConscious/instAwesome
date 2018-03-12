@@ -1,0 +1,21 @@
+#LessonHeaderContainer {
+
+}
+
+#titleContainer {
+  width: 500px; /*same as reactPlayer*/
+  margin: 0 auto;
+}
+
+#title {
+  margin: 0px 0px 0px 0px;
+}
+
+
+
+#reactPlayerContainer {
+}
+
+#reactPlayer {
+    margin: 0 auto;
+}
