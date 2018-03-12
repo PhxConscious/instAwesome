@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import '../../Styles/FormsStyles.css';
 import {connect} from 'react-redux';
-import {updateCompanyInfo} from "../../redux/actions/companyInfo";
+import {addCompanyInfo} from "../../redux/actions/companyInfo";
 import {postUserCompanyJoinInfo} from "../../redux/actions/userCompanyJoin";
 
 class Company extends Component {
@@ -12,13 +12,18 @@ class Company extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: '',
+            form: {
+              company_name: ''
+            },
             styleGuide: '',
             primaryGoal: '',
             error: '',
             loading: false
         };
+        this.addNewCompany = this.addNewCompany.bind(this);
+        this.onButtonPress = this.onButtonPress.bind(this);
     }
+
 
     renderButton() {
         if (this.state.loading) {
@@ -35,33 +40,32 @@ class Company extends Component {
         );
     }
 
-    onButtonPress(e) {
-      e.preventDefault();
-        const {name, styleGuide, primaryGoal} = this.state;
-        // if (name === '' || styleGuide === '' || primaryGoal === '') {
-        //     return alert('Must fill in all fields')
-        // }
-
+    addNewCompany() {
+      return new Promise((resolve) => {
         this.props.postUserCompanyJoinInfo(this.props.userFbId)
-        // .then((response) => {
-        //   console.log("already sent postUserCompanyJoinInfo dispatch", response)
-        //   this.props.updateCompanyInfo('testCompanyId', {
-        //       company_name: name
-        //       // style_guide: styleGuide,
-        //       // primary_goal: primaryGoal
-        //   })
-        // })
-
-
-
-            // .then(
-            //     alert('you have successfully completed this form')
-            // )
+        setTimeout(()=>{
+          console.log("id", this.props.userCompanyJoin.companyInfo.company_id)
+          resolve(this.props.userCompanyJoin.companyInfo.company_id)
+        }, 1000)
+      })
     }
 
-    handleInputTextChange = e => {
-        this.setState({[e.target.name]: e.target.value});
-    };
+    onButtonPress(e) {
+      e.preventDefault();
+      const {name, styleGuide, primaryGoal} = this.state;
+      // if (name === '' || styleGuide === '' || primaryGoal === '') {
+      //     return alert('Must fill in all fields')
+      // }
+
+      this.addNewCompany()
+        .then(() => this.addNewCompany())
+        .then(companyId => {
+          this.props.createNewCompany(companyId, this.state.form)
+        })
+
+    }
+
+
 
     render() {
         // console.log('this is the current user fb id ', this.props.userFbId);
@@ -81,9 +85,9 @@ class Company extends Component {
                                 name='name'
                                 className="formInput"
                                 type="text"
-                                onChange={this.handleInputTextChange}
+                                onChange={e=>this.setState({form:{company_name:e.target.value}})}
                                 placeholder='input company name'
-                                value={this.state.name}>
+                                value={this.state.form.company_name}>
                             </input>
                         </div>
                         {/*<div className="formInputCont">*/}
@@ -123,13 +127,14 @@ class Company extends Component {
 
 const mapStateToProps = state => ({
     companyInfo: state.companyInfo,
+    userCompanyJoin: state.userCompanyJoin,
     userFbId: state.currentValues.currentFbId
 });
 
 const mapDispatchToProps = dispatch => {
     return {
-        updateCompanyInfo: (companyObj) => {
-            dispatch(updateCompanyInfo(companyObj))
+        createNewCompany: (companyId, companyObj) => {
+            dispatch(addCompanyInfo(companyId, companyObj))
         },
         postUserCompanyJoinInfo: (fb_id) => {
             dispatch(postUserCompanyJoinInfo(fb_id))
