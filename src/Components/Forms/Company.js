@@ -3,6 +3,7 @@ import '../../Styles/FormsStyles.css';
 import {connect} from 'react-redux';
 import {addCompanyInfo} from "../../redux/actions/companyInfo";
 import {postUserCompanyJoinInfo} from "../../redux/actions/userCompanyJoin";
+import axios from 'axios';
 
 class Company extends Component {
     componentDidMount() {
@@ -43,10 +44,7 @@ class Company extends Component {
     addNewCompany() {
       return new Promise((resolve) => {
         this.props.postUserCompanyJoinInfo(this.props.userFbId)
-        setTimeout(()=>{
-          console.log("id", this.props.userCompanyJoin.companyInfo.company_id)
-          resolve(this.props.userCompanyJoin.companyInfo.company_id)
-        }, 1000)
+        resolve(axios.get(`http://localhost:8080/usercompanyjoin/${this.props.userFbId}`))
       })
     }
 
@@ -60,7 +58,8 @@ class Company extends Component {
       this.addNewCompany()
         .then(() => this.addNewCompany())
         .then(companyId => {
-          this.props.createNewCompany(companyId, this.state.form)
+          console.log('companyId', companyId)
+          this.props.createNewCompany(companyId.data[0].company_id, this.state.form)
         })
 
     }
