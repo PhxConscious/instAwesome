@@ -109,13 +109,14 @@ class Dashboard extends React.Component {
         finalLessonIndex = i;
       }
     }
-    // console.log("finalLessonIndex", finalLessonIndex, " lastUnlockedLesson", lastUnlockedLesson)
+
+    // set the first lesson where isComplete != true to currentActiveLessonObj and currentActiveLesson
     this.props.setCurrentValues("currentLessonObj", lastUnlockedLesson);
     this.props.setCurrentValues("currentLesson", finalLessonIndex)
-    // 2. set the first lesson where isComplete != true to currentActiveLessonObj and currentActiveLesson
-    setTimeout(()=>{
-      this.getActiveQuestion();
-    }, 500)
+
+    // now lets get our active question based on our active lesson output
+    this.getActiveQuestion(lastUnlockedLesson.questions);
+
   }
 
   // cycle through to find first question where id !== true
