@@ -9,16 +9,17 @@ import { getUserProgress } from '../../redux/actions/userProgress';
 class LoginForm extends Component {
 
     constructor(props) {
-        super(props);
-        this.state = {
-            email: '',
-            password: '',
-            phone: '',
-            loginError: '',
-            user_token: '',
-            redirect: false,
-            OAuthToken: '',
-        };
+      super(props);
+      this.state = {
+          email: '',
+          password: '',
+          phone: '',
+          loginError: '',
+          user_token: '',
+          redirect: false,
+          OAuthToken: '',
+      };
+      this.pullInUserValues = this.pullInUserValues.bind(this)
     }
 
     handleInputTextChange = e => {
@@ -42,22 +43,24 @@ class LoginForm extends Component {
             .catch(this.onLoginFail);
     };
 
+
+    pullInUserValues(){
+      this.props.setCurrentUserFbId("currentFbId", firebase.auth().currentUser.uid)
+      this.props.fetchUserInfo(firebase.auth().currentUser.uid);
+    }
+
     onLoginSuccess = () => {
-      setTimeout(()=>{
-        this.setState({
-            email: '',
-            password: '',
-            loginError: '',
-            user_token: firebase.auth().currentUser.uid,
-            redirect: true
-        });
+      this.setState({
+          email: '',
+          password: '',
+          loginError: '',
+          user_token: firebase.auth().currentUser.uid,
+          redirect: true
+      });
 
-        this.props.setCurrentUserFbId("currentFbId", firebase.auth().currentUser.uid)
-        this.props.fetchUserInfo(firebase.auth().currentUser.uid);
+      this.pullInUserValues()
 
-        console.log(`${firebase.auth().currentUser.email} has just signed in`)
-      })
-
+      console.log(`${firebase.auth().currentUser.email} has just signed in`)
     };
 
     onLoginFail = () => {
@@ -77,6 +80,8 @@ class LoginForm extends Component {
             </button>
         );
     };
+
+
 
     onButtonPress = (e) => {
         e.preventDefault();
