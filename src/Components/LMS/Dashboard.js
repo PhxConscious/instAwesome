@@ -5,7 +5,6 @@ import LmsCard from '../Reusable/LmsCard';
 import '../../Styles/DashboardStyles.css';
 import LessonContent from './LessonContent';
 import { connect } from 'react-redux';
-import { getLmsContent } from '../../redux/actions/lmsContent';
 import { getUserProgress, nextQuestion } from '../../redux/actions/userProgress';
 import { setCurrentValue } from "../../redux/actions/currentValues";
 import { Button, Dialog, DialogTitle, DialogActions, DialogContent } from 'react-mdl';
@@ -30,11 +29,10 @@ class Dashboard extends React.Component {
 
 
   componentDidMount(){
-    this.props.getLmsContent();
-
+    // @TODO remove timeout
     setTimeout(()=>{
       this.getActiveUnit();
-    }, 1500)
+    }, 1000)
   }
 
 
@@ -473,9 +471,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
     return {
-      getLmsContent : () => {
-        dispatch(getLmsContent())
-      },
       putNextQuestion : (fb_id, data) => {
         dispatch(nextQuestion(fb_id, data ))
       },
