@@ -4,6 +4,8 @@ import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import * as firebase from 'firebase';
+import 'react-mdl/extra/material.css';
+import 'react-mdl/extra/material.js';
 
 var config = {
     apiKey: "AIzaSyBFEdZg8MAuR418IROwh-ypm6D-imqTAGI",
