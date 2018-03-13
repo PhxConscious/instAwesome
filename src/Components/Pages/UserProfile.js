@@ -34,7 +34,7 @@ class UserProfile extends Component {
 
         // user must have company to access anything but the createCompany tab
         let userHasCompany = false;
-        if(companyInfo.companyList && companyInfo.companyList[0] || companyInfo.companyInfo.company_name){
+        if(companyInfo.companyList && companyInfo.companyList[0]){
           userHasCompany = true;
         }
 
@@ -54,7 +54,7 @@ class UserProfile extends Component {
                 <BlueAppBg>
                   <Tabs activeTab={this.state.activeTab} onChange={(tabId) => this.setState({ activeTab: tabId })} ripple>
                     <Tab className={isMaxOneCompany ? "" : "hidden"}>Add Company</Tab>
-                    
+
                     <Tab className={userHasCompany ? "" : "hidden"}>On The Web</Tab>
                     <Tab className={userHasCompany ? "" : "hidden"}>Primary Contact</Tab>
                     <Tab className={userHasCompany ? "" : "hidden"}>Change Password</Tab>
