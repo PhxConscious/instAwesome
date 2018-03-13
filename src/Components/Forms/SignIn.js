@@ -6,6 +6,8 @@ import { connect } from 'react-redux';
 import { setCurrentValue } from "../../redux/actions/currentValues";
 import { getUserProgress } from '../../redux/actions/userProgress';
 import { getCompanyList } from '../../redux/actions/companyInfo';
+import { instanceOf } from 'prop-types';
+import { withCookies, Cookies } from 'react-cookie';
 
 class LoginForm extends Component {
 
@@ -22,6 +24,10 @@ class LoginForm extends Component {
       };
       this.pullInUserValues = this.pullInUserValues.bind(this)
     }
+
+    static propTypes = {
+      cookies: instanceOf(Cookies).isRequired
+    };
 
     handleInputTextChange = e => {
         this.setState({[e.target.name]: e.target.value});
@@ -45,13 +51,10 @@ class LoginForm extends Component {
     };
 
 
-    pullInUserValues(){
-      // return new Promise((resolve) => {
-        this.props.setCurrentUserFbId("currentFbId", firebase.auth().currentUser.uid)
-        this.props.fetchUserInfo(firebase.auth().currentUser.uid);
-        this.props.getCompanyList(firebase.auth().currentUser.uid);
-      // })
-
+    pullInUserValues(fb_id){
+        this.props.setCurrentUserFbId("currentFbId", fb_id)
+        this.props.fetchUserInfo(fb_id);
+        this.props.getCompanyList(fb_id);
     }
 
     onLoginSuccess = () => {
@@ -62,10 +65,12 @@ class LoginForm extends Component {
           user_token: firebase.auth().currentUser.uid,
           redirect: true
       });
+      // set a cookie upon login with fb_id
+      const { cookies } = this.props;
 
-      this.pullInUserValues()
+      cookies.set('hash', firebase.auth().currentUser.uid, { path: '/', maxAge: 1000000 });
 
-      console.log(`${firebase.auth().currentUser.email} has just signed in`)
+      this.pullInUserValues(firebase.auth().currentUser.uid)
     };
 
     onLoginFail = () => {
@@ -100,11 +105,17 @@ class LoginForm extends Component {
     };
 
     render() {
-        const {redirect} = this.state;
+        const { cookies } = this.props;
 
-        if (redirect) {
-            return <Redirect to='/profile'/>;
+        // keeps user logged in
+        let userCookie = cookies.get('hash')
+        if (userCookie) {
+          this.pullInUserValues(userCookie);
+          return (
+            <Redirect to={ '/profile'}/>
+          )
         }
+
 
         return (
             <div>
@@ -188,4 +199,4 @@ const mapDispatchToProps = dispatch => {
     }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginForm)
+export default withCookies(connect(mapStateToProps, mapDispatchToProps)(LoginForm))

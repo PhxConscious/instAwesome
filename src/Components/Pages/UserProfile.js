@@ -54,7 +54,7 @@ class UserProfile extends Component {
                 <BlueAppBg>
                   <Tabs activeTab={this.state.activeTab} onChange={(tabId) => this.setState({ activeTab: tabId })} ripple>
                     <Tab className={isMaxOneCompany ? "" : "hidden"}>Add Company</Tab>
-                    <h5 className={!userHasCompany ? "" : "hidden"}>Step 1: add your company</h5>
+                    
                     <Tab className={userHasCompany ? "" : "hidden"}>On The Web</Tab>
                     <Tab className={userHasCompany ? "" : "hidden"}>Primary Contact</Tab>
                     <Tab className={userHasCompany ? "" : "hidden"}>Change Password</Tab>
