@@ -6,6 +6,8 @@ import { connect } from 'react-redux';
 import { setCurrentValue } from "../../redux/actions/currentValues";
 import { getUserProgress } from '../../redux/actions/userProgress';
 import { getCompanyList } from '../../redux/actions/companyInfo';
+import { instanceOf } from 'prop-types';
+import { withCookies, Cookies } from 'react-cookie';
 
 class LoginForm extends Component {
 
@@ -45,13 +47,12 @@ class LoginForm extends Component {
     };
 
 
-    pullInUserValues(){
+    pullInUserValues(fb_id){
       // return new Promise((resolve) => {
-        this.props.setCurrentUserFbId("currentFbId", firebase.auth().currentUser.uid)
-        this.props.fetchUserInfo(firebase.auth().currentUser.uid);
-        this.props.getCompanyList(firebase.auth().currentUser.uid);
+        this.props.setCurrentUserFbId("currentFbId", fb_id)
+        this.props.fetchUserInfo(fb_id);
+        this.props.getCompanyList(fb_id);
       // })
-
     }
 
     onLoginSuccess = () => {
@@ -63,7 +64,7 @@ class LoginForm extends Component {
           redirect: true
       });
 
-      this.pullInUserValues()
+      this.pullInUserValues(firebase.auth().currentUser.uid)
 
       console.log(`${firebase.auth().currentUser.email} has just signed in`)
     };
