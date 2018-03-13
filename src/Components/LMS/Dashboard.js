@@ -88,27 +88,27 @@ class Dashboard extends React.Component {
   }
 
   // cycle through to find first incomplete lesson
-  getActiveLesson(optLessonObj, optUnitId){
+  getActiveLesson(optUnitObj, optUnitId){
     console.log("getActiveLesson")
     let { book, userProgress, currentValues } = this.props;
     let userProg = this.props.userProgress.currentUser.user_progress;
     let { currentUnit, currentUnitObj } = currentValues;
 
     // handle optional param
-    if (typeof optLessonObj === 'undefined') { optLessonObj = currentUnitObj }
+    if (typeof optUnitObj === 'undefined') { optUnitObj = currentUnitObj }
     if (typeof optUnitId === 'undefined') { optUnitId = currentUnitObj.id }
     // 1. iterate through lessons in the current unit
-    let lastUnlockedLesson = optLessonObj.lessons[0];
+    let lastUnlockedLesson = optUnitObj.lessons[0];
     let finalLessonIndex = 0;
 
-    for(let i = 0; i < optLessonObj.lessons.length; i++){
-      let curLessonId = optLessonObj.lessons[i].id;
+    for(let i = 0; i < optUnitObj.lessons.length; i++){
+      let curLessonId = optUnitObj.lessons[i].id;
       // @TODO if no value, POST  lessonId=false
 
       let curLessonObj = userProg[optUnitId].lessons[curLessonId];
 
       if(curLessonObj.lessonCompleted === false && curLessonObj.lessonLocked === false){
-        lastUnlockedLesson = optLessonObj.lessons[i];
+        lastUnlockedLesson = optUnitObj.lessons[i];
         finalLessonIndex = i;
       }
     }
