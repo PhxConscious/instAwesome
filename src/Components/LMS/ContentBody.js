@@ -244,13 +244,27 @@ class CheckTasks extends React.Component {
               onClick={prevQuestClickHandler}
               value="nextQuestion"
             >prevQuestion</Button>
-            <Button
-              raised accent ripple
-              className={nextButtonHidden ? 'hidden' : ""}
-              onClick={nextQuestClickHandler}
-              value="nextQuestion"
-              disabled={!isCheckMarked && this.state.textArea.length === 0}
-            >nextQuestion</Button>
+
+            {
+              currentQuestionObj.contentType === "checkTasks" ? <Button
+                      raised accent ripple
+                      className={nextButtonHidden ? 'hidden' : ""}
+                      onClick={nextQuestClickHandler}
+                      value="nextQuestion"
+                      disabled={!isCheckMarked}
+                    >nextQuestion</Button> : null
+            }
+            {
+              currentQuestionObj.contentType === "textArea" ? <Button
+                      raised accent ripple
+                      className={nextButtonHidden ? 'hidden' : ""}
+                      onClick={nextQuestClickHandler}
+                      value="nextQuestion"
+                      disabled={this.state.textArea.length === 0}
+                    >nextQuestion</Button> : null
+            }
+
+
           </div>
         </div>
       )
