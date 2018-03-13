@@ -119,8 +119,8 @@ class LoginForm extends Component {
 
         // keeps user logged in
         let userCookie = cookies.get('fb_id')
-        console.log("userCookie", userCookie)
         if (userCookie) {
+          this.pullInUserValues(userCookie);
           return (
             <Redirect to={ '/profile'}/>
           )
