@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import '../../App.css';
 import firebase from 'firebase';
 import {Redirect} from 'react-router-dom';
-
+import {connect} from 'react-redux';
 import Gradient from "../Reusable/Gradient";
 import BlueAppBg from "../Reusable/BlueAppBg";
 import GreenFormContainer from "../Reusable/GreenFormContainer";
@@ -27,26 +27,36 @@ class UserProfile extends Component {
 
     render() {
         const {redirect, activeTab} = this.state;
+        const { companyInfo } = this.props;
         if (redirect) {
             return <Redirect to='/'/>
         }
+
+        let userHasCompany = false;
+        if(companyInfo.companyList && companyInfo.companyList[0]){
+          userHasCompany = true;
+        }
+
+        console.log("companyInfo", this.props.companyInfo, userHasCompany)
+
         return (
             <div className="App">
                 <Gradient/>
                 <BlueAppBg>
                   <Tabs activeTab={this.state.activeTab} onChange={(tabId) => this.setState({ activeTab: tabId })} ripple>
                     <Tab>Company</Tab>
-                    <Tab>On The Web</Tab>
-                    <Tab>Primary Contact</Tab>
-                    <Tab>Change Password</Tab>
+                    <h5 className={!userHasCompany ? "" : "hidden"}>Step 1: add your company</h5>
+                    <Tab className={userHasCompany ? "" : "hidden"}>On The Web</Tab>
+                    <Tab className={userHasCompany ? "" : "hidden"}>Primary Contact</Tab>
+                    <Tab className={userHasCompany ? "" : "hidden"}>Change Password</Tab>
                   </Tabs>
                   <section>
                     <div style={{width: '80%', margin: 'auto',  height:'1000px'}}>
                       <Grid className="demo-grid-ruler">
                           <Cell className={activeTab === 0 ? "" : "hidden"} col={12}><Company/></Cell>
-                          <Cell className={activeTab === 1 ? "" : "hidden"} col={12}><OnTheWeb/></Cell>
-                          <Cell className={activeTab === 2 ? "" : "hidden"} col={12}><PrimaryContact/></Cell>
-                          <Cell className={activeTab === 3 ? "" : "hidden"} col={12}><ChangePassword/></Cell>
+                          <Cell className={activeTab === 1 && userHasCompany ? "" : "hidden"} col={12}><OnTheWeb/></Cell>
+                          <Cell className={activeTab === 2 && userHasCompany ? "" : "hidden"} col={12}><PrimaryContact/></Cell>
+                          <Cell className={activeTab === 3 && userHasCompany ? "" : "hidden"} col={12}><ChangePassword/></Cell>
                       </Grid>
                     </div>
                     <div className="content">Content for the tab: {this.state.activeTab}</div>
@@ -58,4 +68,8 @@ class UserProfile extends Component {
     }
 }
 
-export default UserProfile;
+const mapStateToProps = state => ({
+  companyInfo: state.companyInfo,
+})
+
+export default connect(mapStateToProps, null)(UserProfile);
