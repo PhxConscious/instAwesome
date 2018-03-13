@@ -5,6 +5,7 @@ import Styles from '../../Styles/FormsStyles.css';
 import { connect } from 'react-redux';
 import { setCurrentValue } from "../../redux/actions/currentValues";
 import { getUserProgress } from '../../redux/actions/userProgress';
+import { getCompanyList } from '../../redux/actions/companyInfo';
 
 class LoginForm extends Component {
 
@@ -45,8 +46,12 @@ class LoginForm extends Component {
 
 
     pullInUserValues(){
-      this.props.setCurrentUserFbId("currentFbId", firebase.auth().currentUser.uid)
-      this.props.fetchUserInfo(firebase.auth().currentUser.uid);
+      // return new Promise((resolve) => {
+        this.props.setCurrentUserFbId("currentFbId", firebase.auth().currentUser.uid)
+        this.props.fetchUserInfo(firebase.auth().currentUser.uid);
+        this.props.getCompanyList(firebase.auth().currentUser.uid);
+      // })
+
     }
 
     onLoginSuccess = () => {
@@ -163,9 +168,11 @@ class LoginForm extends Component {
     }
 }
 
-// const mapStateToProps = state => ({
-//     currentValues: state.currentValues
-// });
+const mapStateToProps = state => ({
+    currentValues: state.currentValues,
+    userFbId: state.currentValues.currentFbId,
+    companyInfo: state.companyInfo,
+});
 
 const mapDispatchToProps = dispatch => {
     return {
@@ -175,7 +182,10 @@ const mapDispatchToProps = dispatch => {
         fetchUserInfo : (fb_id) => {
           dispatch(getUserProgress(fb_id))
         },
+        getCompanyList: (fb_id) => {
+          dispatch(getCompanyList(fb_id))
+        },
     }
 };
 
-export default connect(null, mapDispatchToProps)(LoginForm)
+export default connect(mapStateToProps, mapDispatchToProps)(LoginForm)
