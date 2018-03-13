@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import { getUserProgress, nextQuestion } from '../../redux/actions/userProgress';
 import { setCurrentValue } from "../../redux/actions/currentValues";
 import { Button, Dialog, DialogTitle, DialogActions, DialogContent } from 'react-mdl';
+import {Redirect} from 'react-router-dom';
 
 class Dashboard extends React.Component {
   constructor(props){
@@ -30,9 +31,11 @@ class Dashboard extends React.Component {
 
   componentDidMount(){
     // @TODO remove timeout
-    setTimeout(()=>{
-      this.getActiveUnit();
-    }, 1000)
+    if(this.props.currentValues.currentFbId){
+      setTimeout(()=>{
+        this.getActiveUnit();
+      }, 1000)
+    }
   }
 
 
@@ -407,12 +410,16 @@ class Dashboard extends React.Component {
 
   render() {
 
-    let { active, currentUnit, currentUnitName, currentUnitId, currentLesson, currentLessonObj, currentQuestion, currentQuestionObj } = this.props.currentValues;
+    let { active, currentUnit, currentUnitName, currentUnitId, currentLesson, currentLessonObj, currentQuestion, currentQuestionObj, currentFbId } = this.props.currentValues;
 
 
     let { userProgress, book } = this.props;
 
     let lmsCards = null;
+
+    if(!currentFbId){
+      return <Redirect to={ '/'}/>
+    }
 
     if(this.state.readyForRender){
 
