@@ -1,7 +1,7 @@
 let initialState = {};
 
 export default (state = initialState, action) => {
-  console.log('reducer userCompanyJoin', action.type, action.payload)
+  // console.log('reducer userCompanyJoin', action.type, action.payload)
     switch (action.type){
         case "GET_USER_COMPANY_JOIN_INFO_FULFILLED":
             return {
