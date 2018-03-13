@@ -15,7 +15,6 @@ class Dashboard extends React.Component {
     super(props)
     this.state= {
       readyForRender: false,
-      startStudyModal: true,
     }
     this.selectCardOnClick = this.selectCardOnClick.bind(this);
     this.selectLessonOnClick = this.selectLessonOnClick.bind(this);
@@ -27,23 +26,17 @@ class Dashboard extends React.Component {
     this.nextQuestion = this.nextQuestion.bind(this);
     this.prevQuestion = this.prevQuestion.bind(this);
     this.nextUnit = this.nextUnit.bind(this);
-    this.handleStartStudy = this.handleStartStudy.bind(this);
   }
 
 
   componentDidMount(){
     this.props.getLmsContent();
-    this.props.fetchUserProgress(this.props.currentValues.currentFbId);
-    // this.props.setCurrentValues('currentFbId', this.props.currentValues.currentFbId)
-  }
 
-  handleStartStudy(){
     setTimeout(()=>{
       this.getActiveUnit();
-    }, 500)
-
-    this.setState({startStudyModal:false})
+    }, 1500)
   }
+
 
   // cycle through to find first incomplete unit
   getActiveUnit(){
@@ -65,9 +58,9 @@ class Dashboard extends React.Component {
         // b. fetch userProgress
         // c. call getActiveUnit()
       }
-      console.log("getActiveUnit set", userProg, curUnitId)
+      // console.log("getActiveUnit set", userProg, curUnitId)
       let curUnitProg = userProg[curUnitId];
-      console.log("curUnitProg", curUnitProg)
+      // console.log("curUnitProg", curUnitProg)
       if(curUnitProg.unitLocked === false){
         // this is potentially the correct unit = save the last one
         lastUnlockedUnit = book[i];
@@ -199,10 +192,6 @@ class Dashboard extends React.Component {
 
     this.getActiveQuestion(targetLesson.questions)
   }
-
-
-
-
 
 
   nextUnit(){
@@ -443,8 +432,7 @@ class Dashboard extends React.Component {
     ))
     }
 
-    if(!this.state.startStudyModal && this.state.readyForRender){
-    // if(false){
+    if(this.state.readyForRender){
 
       return(
         <div className="background">
@@ -471,16 +459,7 @@ class Dashboard extends React.Component {
       )
     }
     return (<div>
-            <Dialog open={true}>
-              <DialogTitle>Start Learning</DialogTitle>
-              <DialogActions>
-                <button
-                  onClick={this.handleStartStudy}
-                >
-                  BEGIN
-                </button>
-              </DialogActions>
-            </Dialog>
+              ...loading lms
             </div>
     )
   }
@@ -496,9 +475,6 @@ const mapDispatchToProps = dispatch => {
     return {
       getLmsContent : () => {
         dispatch(getLmsContent())
-      },
-      fetchUserProgress : (fb_id) => {
-        dispatch(getUserProgress(fb_id))
       },
       putNextQuestion : (fb_id, data) => {
         dispatch(nextQuestion(fb_id, data ))
