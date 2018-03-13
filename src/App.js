@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import Layout from './Components/Layout';
 import ReactGA from 'react-ga';
 import { Provider } from 'react-redux';
-import Store from './redux/stores'
+import Store from './redux/stores';
+import { CookiesProvider } from 'react-cookie';
 
 export const initGA = () => {
     console.log('GA INIT');
@@ -25,7 +26,9 @@ class App extends Component {
     render() {
       return(
         <Provider store={store}>
-          <Layout />
+          <CookiesProvider>
+            <Layout />
+          </CookiesProvider>
         </Provider>
 
       )
