@@ -6,6 +6,7 @@ import '../../Styles/ContentBodyStyles.css';
 import { CheckBox, LessonIcon } from './Checkbox';
 import TextInput from './TextInput';
 import { Button, Dialog, DialogTitle, DialogActions, DialogContent, Textfield } from 'react-mdl';
+import { updateCompanyInfo } from '../../redux/actions/companyInfo';
 
 class CheckTasks extends React.Component {
   constructor(props){
@@ -14,6 +15,7 @@ class CheckTasks extends React.Component {
       isCheckMarked: false,
       test:false,
       textArea:'',
+      alreadyUpdated: false,
     }
     this.isNextQ = this.isNextQ.bind(this);
     this.isPrevQ = this.isPrevQ.bind(this);
@@ -95,7 +97,7 @@ class CheckTasks extends React.Component {
 
     let { isCheckMarked, nextButtonHidden, prevButtonHidden } = this.state;
 
-    let { lesson, nextLesson, prevLesson, nextQuestion, prevQuestion, nextUnit, userProgress, book, currentValues, selectLessonOnClick } = this.props;
+    let { lesson, nextLesson, prevLesson, nextQuestion, prevQuestion, nextUnit, userProgress, book, currentValues, selectLessonOnClick, companyInfo } = this.props;
 
     let { currentUnit, currentUnitObj, currentLesson, currentLessonObj, currentQuestion, currentQuestionObj } = this.props.currentValues;
 
@@ -115,6 +117,34 @@ class CheckTasks extends React.Component {
       ))
     }
 
+    // get current text values for companyObj
+    if(currentQuestionObj.contentType === "textArea"  && this.state.alreadyUpdated === false){
+
+      let initialValue = companyInfo.companyList[0][currentQuestionObj.columnName];
+
+      if(initialValue === null){
+        initialValue = "add your text here"
+      }
+
+      this.setState({
+        textArea: initialValue,
+        alreadyUpdated: true})
+    }
+
+    let submitTextArea = () => {
+
+      // post current text from state to company db
+      let key = currentQuestionObj.columnName;
+      let value = this.state.textArea;
+      let companyObj = {
+        [key]: value
+      }
+      this.props.putCompanyInfo(companyInfo.companyList[0].company_id, companyObj)
+
+      nextQuestClickHandler()
+
+      this.setState({textArea: '', alreadyUpdated: false})
+    }
 
     let nextQuestClickHandler = () => {
       let lengthOfQuestArr = book[currentUnit].lessons[currentLesson].questions.length
@@ -244,13 +274,27 @@ class CheckTasks extends React.Component {
               onClick={prevQuestClickHandler}
               value="nextQuestion"
             >prevQuestion</Button>
-            <Button
-              raised accent ripple
-              className={nextButtonHidden ? 'hidden' : ""}
-              onClick={nextQuestClickHandler}
-              value="nextQuestion"
-              disabled={!isCheckMarked && this.state.textArea.length === 0}
-            >nextQuestion</Button>
+
+            {
+              currentQuestionObj.contentType === "checkTasks" ? <Button
+                      raised accent ripple
+                      className={nextButtonHidden ? 'hidden' : ""}
+                      onClick={nextQuestClickHandler}
+                      value="nextQuestion"
+                      disabled={!isCheckMarked}
+                    >nextQuestion</Button> : null
+            }
+            {
+              currentQuestionObj.contentType === "textArea" ? <Button
+                      raised accent ripple
+                      className={nextButtonHidden ? 'hidden' : ""}
+                      onClick={submitTextArea}
+                      value="nextQuestion"
+                      disabled={this.state.textArea.length === 0}
+                    >nextQuestion</Button> : null
+            }
+
+
           </div>
         </div>
       )
@@ -263,12 +307,16 @@ const mapStateToProps = state => ({
   book: state.lmsContent.book,
   userProgress: state.userProgress,
   currentValues: state.currentValues,
+  companyInfo: state.companyInfo,
 });
 
 const mapDispatchToProps = dispatch => {
     return {
       putNextQuestion : (fb_id, data) => {
         dispatch(nextQuestion(fb_id, data ))
+      },
+      putCompanyInfo : (companyId, companyObj) => {
+        dispatch(updateCompanyInfo(companyId, companyObj))
       }
     }
 };

@@ -21,7 +21,9 @@ export default (state = initialState, action) => {
         case "UPDATE_COMPANY_INFO_FULFILLED":
             return {
                 ...state,
-                companyInfo: action.payload.data[0]
+                companyInfo: action.payload.data[0],
+                companyList: action.payload.data
+
             }
         case "UPDATE_COMPANY_INFO_PENDING":
             return {
@@ -30,7 +32,8 @@ export default (state = initialState, action) => {
         case "ADD_COMPANY_INFO_FULFILLED":
             return {
                 ...state,
-                companyInfo: action.payload.data[0]
+                companyInfo: action.payload.data[0],
+                companyList: action.payload.data
             }
         case "ADD_COMPANY_INFO_PENDING":
             return {
@@ -43,6 +46,7 @@ export default (state = initialState, action) => {
         case "GET_COMPANY_LIST_FULFILLED":
             return {
                 ...state,
+                companyInfo: action.payload.data[0],
                 companyList: action.payload.data
             }
         case "GET_COMPANY_LIST_PENDING":
