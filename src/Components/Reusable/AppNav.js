@@ -15,10 +15,6 @@ class AppNavbar extends Component {
         }
     }
 
-    componentDidMount() {
-        this.props.fetchUserProgress(this.props.currentValues.currentFbId);
-    }
-
     userSignOut = () => {
         if (firebase.auth().currentUser) {
             firebase.auth().signOut()
@@ -84,12 +80,5 @@ const mapStateToProps = state => ({
     userInfo: state.userProgress.currentUser
 });
 
-const mapDispatchToProps = dispatch => {
-    return {
-        fetchUserProgress : (firebaseId) => {
-            dispatch(getUserProgress(firebaseId))
-        },
-    }
-};
 
-export default connect(mapStateToProps, mapDispatchToProps)(AppNavbar)
+export default connect(mapStateToProps, null)(AppNavbar)
