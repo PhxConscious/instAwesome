@@ -6,6 +6,7 @@ import '../../Styles/ContentBodyStyles.css';
 import { CheckBox, LessonIcon } from './Checkbox';
 import TextInput from './TextInput';
 import { Button, Dialog, DialogTitle, DialogActions, DialogContent, Textfield } from 'react-mdl';
+import { updateCompanyInfo } from '../../redux/actions/companyInfo';
 
 class CheckTasks extends React.Component {
   constructor(props){
@@ -95,7 +96,7 @@ class CheckTasks extends React.Component {
 
     let { isCheckMarked, nextButtonHidden, prevButtonHidden } = this.state;
 
-    let { lesson, nextLesson, prevLesson, nextQuestion, prevQuestion, nextUnit, userProgress, book, currentValues, selectLessonOnClick } = this.props;
+    let { lesson, nextLesson, prevLesson, nextQuestion, prevQuestion, nextUnit, userProgress, book, currentValues, selectLessonOnClick, companyInfo } = this.props;
 
     let { currentUnit, currentUnitObj, currentLesson, currentLessonObj, currentQuestion, currentQuestionObj } = this.props.currentValues;
 
@@ -118,6 +119,13 @@ class CheckTasks extends React.Component {
     let submitTextArea = () => {
       // @TODO
       // 1. post current text from state to company db
+      let key = currentQuestionObj.columnName;
+      let value = this.state.textArea;
+      let companyObj = {
+        [key]: value
+      }
+      this.props.putCompanyInfo(companyInfo.companyList[0].company_id, companyObj)
+
       // 2. invoke nextQuestClickHandler
       // 3. clear text from state
     }
@@ -283,12 +291,16 @@ const mapStateToProps = state => ({
   book: state.lmsContent.book,
   userProgress: state.userProgress,
   currentValues: state.currentValues,
+  companyInfo: state.companyInfo,
 });
 
 const mapDispatchToProps = dispatch => {
     return {
       putNextQuestion : (fb_id, data) => {
         dispatch(nextQuestion(fb_id, data ))
+      },
+      putCompanyInfo : (companyId, companyObj) => {
+        dispatch(updateCompanyInfo(companyId, companyObj))
       }
     }
 };
