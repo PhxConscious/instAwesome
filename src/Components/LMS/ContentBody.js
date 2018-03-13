@@ -15,6 +15,7 @@ class CheckTasks extends React.Component {
       isCheckMarked: false,
       test:false,
       textArea:'',
+      alreadyUpdated: false,
     }
     this.isNextQ = this.isNextQ.bind(this);
     this.isPrevQ = this.isPrevQ.bind(this);
@@ -116,9 +117,16 @@ class CheckTasks extends React.Component {
       ))
     }
 
+    // get current text values for companyObj
+    if(currentQuestionObj.contentType === "textArea"  && this.state.alreadyUpdated === false){
+      this.setState({
+        textArea: companyInfo.companyList[0][currentQuestionObj.columnName],
+        alreadyUpdated: true})
+    }
+
     let submitTextArea = () => {
-      // @TODO
-      // 1. post current text from state to company db
+
+      // post current text from state to company db
       let key = currentQuestionObj.columnName;
       let value = this.state.textArea;
       let companyObj = {
@@ -126,8 +134,9 @@ class CheckTasks extends React.Component {
       }
       this.props.putCompanyInfo(companyInfo.companyList[0].company_id, companyObj)
 
-      // 2. invoke nextQuestClickHandler
-      // 3. clear text from state
+      nextQuestClickHandler()
+
+      this.setState({textArea: '', alreadyUpdated: false})
     }
 
     let nextQuestClickHandler = () => {
