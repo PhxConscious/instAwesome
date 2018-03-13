@@ -75,21 +75,18 @@ class Dashboard extends React.Component {
 
       }
     }
+    // 2. set the first unit where isCompleted != true to currentActiveUnitObj & currentActiveUnit
     this.props.setCurrentValues("currentUnitObj", lastUnlockedUnit);
     this.props.setCurrentValues("currentUnit", finalUnitIndex)
     this.props.setCurrentValues("active", lastUnlockedUnit.id);
 
-    // 2. set the first unit where isCompleted != true to currentActiveUnitObj & currentActiveUnit
-    setTimeout(()=>{
-      this.getActiveLesson();
-    }, 500)
-
-
+    // now that we have a unit, lets get the lesson
+    this.getActiveLesson(lastUnlockedUnit, lastUnlockedUnit.id);
   }
 
   // cycle through to find first incomplete lesson
   getActiveLesson(optUnitObj, optUnitId){
-    console.log("getActiveLesson")
+    console.log("getActiveLesson", optUnitObj, optUnitId)
     let { book, userProgress, currentValues } = this.props;
     let userProg = this.props.userProgress.currentUser.user_progress;
     let { currentUnit, currentUnitObj } = currentValues;
