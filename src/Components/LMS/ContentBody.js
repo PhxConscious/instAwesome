@@ -115,6 +115,12 @@ class CheckTasks extends React.Component {
       ))
     }
 
+    let submitTextArea = () => {
+      // @TODO
+      // 1. post current text from state to company db
+      // 2. invoke nextQuestClickHandler
+      // 3. clear text from state
+    }
 
     let nextQuestClickHandler = () => {
       let lengthOfQuestArr = book[currentUnit].lessons[currentLesson].questions.length
@@ -258,7 +264,7 @@ class CheckTasks extends React.Component {
               currentQuestionObj.contentType === "textArea" ? <Button
                       raised accent ripple
                       className={nextButtonHidden ? 'hidden' : ""}
-                      onClick={nextQuestClickHandler}
+                      onClick={submitTextArea}
                       value="nextQuestion"
                       disabled={this.state.textArea.length === 0}
                     >nextQuestion</Button> : null
