@@ -114,11 +114,21 @@ class LoginForm extends Component {
     };
 
     render() {
-        const {redirect} = this.state;
+        // const {redirect} = this.state;
+        const { cookies } = this.props;
 
-        if (redirect) {
-            return <Redirect to='/profile'/>;
+        // keeps user logged in
+        let userCookie = cookies.get('fb_id')
+        console.log("userCookie", userCookie)
+        if (userCookie) {
+          return (
+            <Redirect to={ '/profile'}/>
+          )
         }
+
+        // if (redirect) {
+        //     return <Redirect to='/profile'/>;
+        // }
 
         return (
             <div>
