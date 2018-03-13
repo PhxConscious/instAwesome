@@ -41,10 +41,14 @@ class Company extends Component {
         );
     }
 
+
     addNewCompany() {
       return new Promise((resolve) => {
         this.props.postUserCompanyJoinInfo(this.props.userFbId)
-        resolve(axios.get(`http://localhost:8080/usercompanyjoin/${this.props.userFbId}`))
+        setTimeout(()=>{
+          resolve(this.props.userCompanyJoin.companyInfo.company_id)
+        }, 1000)
+
       })
     }
 
@@ -56,19 +60,15 @@ class Company extends Component {
       // }
 
       this.addNewCompany()
-        .then(() => this.addNewCompany())
         .then(companyId => {
-          console.log('companyId', companyId)
-          this.props.createNewCompany(companyId.data[0].company_id, this.state.form)
+            this.props.createNewCompany(companyId, this.state.form)
+            alert(`You created company:  ${this.state.form.company_name}`)
         })
-
     }
 
 
 
     render() {
-        // console.log('this is the current user fb id ', this.props.userFbId);
-        console.log('this is the current company info ', this.props.companyInfo)
         return (
             <div>
                 <form className="formCont" action="#">
