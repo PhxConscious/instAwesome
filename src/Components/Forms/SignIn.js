@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { setCurrentValue } from "../../redux/actions/currentValues";
 import { getUserProgress } from '../../redux/actions/userProgress';
 import { getCompanyList } from '../../redux/actions/companyInfo';
+import { getLmsContent } from '../../redux/actions/lmsContent';
 import { instanceOf } from 'prop-types';
 import { withCookies, Cookies } from 'react-cookie';
 
@@ -55,6 +56,7 @@ class LoginForm extends Component {
         this.props.setCurrentUserFbId("currentFbId", fb_id)
         this.props.fetchUserInfo(fb_id);
         this.props.getCompanyList(fb_id);
+        this.props.getLmsContent();
     }
 
     onLoginSuccess = () => {
@@ -195,6 +197,9 @@ const mapDispatchToProps = dispatch => {
         },
         getCompanyList: (fb_id) => {
           dispatch(getCompanyList(fb_id))
+        },
+        getLmsContent : () => {
+          dispatch(getLmsContent())
         },
     }
 };

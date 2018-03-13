@@ -5,17 +5,16 @@ import LmsCard from '../Reusable/LmsCard';
 import '../../Styles/DashboardStyles.css';
 import LessonContent from './LessonContent';
 import { connect } from 'react-redux';
-import { getLmsContent } from '../../redux/actions/lmsContent';
 import { getUserProgress, nextQuestion } from '../../redux/actions/userProgress';
 import { setCurrentValue } from "../../redux/actions/currentValues";
 import { Button, Dialog, DialogTitle, DialogActions, DialogContent } from 'react-mdl';
+import {Redirect} from 'react-router-dom';
 
 class Dashboard extends React.Component {
   constructor(props){
     super(props)
     this.state= {
       readyForRender: false,
-      startStudyModal: true,
     }
     this.selectCardOnClick = this.selectCardOnClick.bind(this);
     this.selectLessonOnClick = this.selectLessonOnClick.bind(this);
@@ -27,23 +26,18 @@ class Dashboard extends React.Component {
     this.nextQuestion = this.nextQuestion.bind(this);
     this.prevQuestion = this.prevQuestion.bind(this);
     this.nextUnit = this.nextUnit.bind(this);
-    this.handleStartStudy = this.handleStartStudy.bind(this);
   }
 
 
   componentDidMount(){
-    this.props.getLmsContent();
-    this.props.fetchUserProgress(this.props.currentValues.currentFbId);
-    // this.props.setCurrentValues('currentFbId', this.props.currentValues.currentFbId)
+    // @TODO remove timeout
+    if(this.props.currentValues.currentFbId){
+      setTimeout(()=>{
+        this.getActiveUnit();
+      }, 1000)
+    }
   }
 
-  handleStartStudy(){
-    setTimeout(()=>{
-      this.getActiveUnit();
-    }, 500)
-
-    this.setState({startStudyModal:false})
-  }
 
   // cycle through to find first incomplete unit
   getActiveUnit(){
@@ -65,9 +59,9 @@ class Dashboard extends React.Component {
         // b. fetch userProgress
         // c. call getActiveUnit()
       }
-      console.log("getActiveUnit set", userProg, curUnitId)
+      // console.log("getActiveUnit set", userProg, curUnitId)
       let curUnitProg = userProg[curUnitId];
-      console.log("curUnitProg", curUnitProg)
+      // console.log("curUnitProg", curUnitProg)
       if(curUnitProg.unitLocked === false){
         // this is potentially the correct unit = save the last one
         lastUnlockedUnit = book[i];
@@ -75,50 +69,48 @@ class Dashboard extends React.Component {
 
       }
     }
+    // 2. set the first unit where isCompleted != true to currentActiveUnitObj & currentActiveUnit
     this.props.setCurrentValues("currentUnitObj", lastUnlockedUnit);
     this.props.setCurrentValues("currentUnit", finalUnitIndex)
     this.props.setCurrentValues("active", lastUnlockedUnit.id);
 
-    // 2. set the first unit where isCompleted != true to currentActiveUnitObj & currentActiveUnit
-    setTimeout(()=>{
-      this.getActiveLesson();
-    }, 500)
-
-
+    // now that we have a unit, lets get the lesson
+    this.getActiveLesson(lastUnlockedUnit, lastUnlockedUnit.id);
   }
 
   // cycle through to find first incomplete lesson
-  getActiveLesson(optLessonObj, optUnitId){
-    console.log("getActiveLesson")
+  getActiveLesson(optUnitObj, optUnitId){
+    console.log("getActiveLesson", optUnitObj, optUnitId)
     let { book, userProgress, currentValues } = this.props;
     let userProg = this.props.userProgress.currentUser.user_progress;
     let { currentUnit, currentUnitObj } = currentValues;
 
     // handle optional param
-    if (typeof optLessonObj === 'undefined') { optLessonObj = currentUnitObj }
+    if (typeof optUnitObj === 'undefined') { optUnitObj = currentUnitObj }
     if (typeof optUnitId === 'undefined') { optUnitId = currentUnitObj.id }
     // 1. iterate through lessons in the current unit
-    let lastUnlockedLesson = optLessonObj.lessons[0];
+    let lastUnlockedLesson = optUnitObj.lessons[0];
     let finalLessonIndex = 0;
 
-    for(let i = 0; i < optLessonObj.lessons.length; i++){
-      let curLessonId = optLessonObj.lessons[i].id;
+    for(let i = 0; i < optUnitObj.lessons.length; i++){
+      let curLessonId = optUnitObj.lessons[i].id;
       // @TODO if no value, POST  lessonId=false
 
       let curLessonObj = userProg[optUnitId].lessons[curLessonId];
 
       if(curLessonObj.lessonCompleted === false && curLessonObj.lessonLocked === false){
-        lastUnlockedLesson = optLessonObj.lessons[i];
+        lastUnlockedLesson = optUnitObj.lessons[i];
         finalLessonIndex = i;
       }
     }
-    // console.log("finalLessonIndex", finalLessonIndex, " lastUnlockedLesson", lastUnlockedLesson)
+
+    // set the first lesson where isComplete != true to currentActiveLessonObj and currentActiveLesson
     this.props.setCurrentValues("currentLessonObj", lastUnlockedLesson);
     this.props.setCurrentValues("currentLesson", finalLessonIndex)
-    // 2. set the first lesson where isComplete != true to currentActiveLessonObj and currentActiveLesson
-    setTimeout(()=>{
-      this.getActiveQuestion();
-    }, 500)
+
+    // now lets get our active question based on our active lesson output
+    this.getActiveQuestion(lastUnlockedLesson.questions);
+
   }
 
   // cycle through to find first question where id !== true
@@ -201,10 +193,6 @@ class Dashboard extends React.Component {
 
     this.getActiveQuestion(targetLesson.questions)
   }
-
-
-
-
 
 
   nextUnit(){
@@ -422,12 +410,16 @@ class Dashboard extends React.Component {
 
   render() {
 
-    let { active, currentUnit, currentUnitName, currentUnitId, currentLesson, currentLessonObj, currentQuestion, currentQuestionObj } = this.props.currentValues;
+    let { active, currentUnit, currentUnitName, currentUnitId, currentLesson, currentLessonObj, currentQuestion, currentQuestionObj, currentFbId } = this.props.currentValues;
 
 
     let { userProgress, book } = this.props;
 
     let lmsCards = null;
+
+    if(!currentFbId){
+      return <Redirect to={ '/'}/>
+    }
 
     if(this.state.readyForRender){
 
@@ -445,8 +437,7 @@ class Dashboard extends React.Component {
     ))
     }
 
-    if(!this.state.startStudyModal && this.state.readyForRender){
-    // if(false){
+    if(this.state.readyForRender){
 
       return(
         <div className="background">
@@ -473,16 +464,7 @@ class Dashboard extends React.Component {
       )
     }
     return (<div>
-            <Dialog open={true}>
-              <DialogTitle>Start Learning</DialogTitle>
-              <DialogActions>
-                <button
-                  onClick={this.handleStartStudy}
-                >
-                  BEGIN
-                </button>
-              </DialogActions>
-            </Dialog>
+              ...loading lms
             </div>
     )
   }
@@ -496,12 +478,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
     return {
-      getLmsContent : () => {
-        dispatch(getLmsContent())
-      },
-      fetchUserProgress : (fb_id) => {
-        dispatch(getUserProgress(fb_id))
-      },
       putNextQuestion : (fb_id, data) => {
         dispatch(nextQuestion(fb_id, data ))
       },
