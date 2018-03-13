@@ -25,6 +25,10 @@ class LoginForm extends Component {
       this.pullInUserValues = this.pullInUserValues.bind(this)
     }
 
+    static propTypes = {
+      cookies: instanceOf(Cookies).isRequired
+    };
+
     handleInputTextChange = e => {
         this.setState({[e.target.name]: e.target.value});
     };
@@ -56,9 +60,9 @@ class LoginForm extends Component {
     }
 
     // @TODO bring cookies into app for persistent login
-    // 1. set a cookie upon login with fb_id
+
     // 2. set a handler on login page that will look for the presence of a cookie
-        // if cookie, populate the user's values and redirect to home page. 
+        // if cookie, populate the user's values and redirect to home page.
 
     onLoginSuccess = () => {
       this.setState({
@@ -68,6 +72,10 @@ class LoginForm extends Component {
           user_token: firebase.auth().currentUser.uid,
           redirect: true
       });
+      // set a cookie upon login with fb_id
+      const { cookies } = this.props;
+
+      cookies.set('fb_id', firebase.auth().currentUser.uid, { path: '/' });
 
       this.pullInUserValues(firebase.auth().currentUser.uid)
 
@@ -194,4 +202,4 @@ const mapDispatchToProps = dispatch => {
     }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginForm)
+export default withCookies(connect(mapStateToProps, mapDispatchToProps)(LoginForm))
