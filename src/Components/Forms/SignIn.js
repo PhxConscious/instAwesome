@@ -52,17 +52,10 @@ class LoginForm extends Component {
 
 
     pullInUserValues(fb_id){
-      // return new Promise((resolve) => {
         this.props.setCurrentUserFbId("currentFbId", fb_id)
         this.props.fetchUserInfo(fb_id);
         this.props.getCompanyList(fb_id);
-      // })
     }
-
-    // @TODO bring cookies into app for persistent login
-
-    // 2. set a handler on login page that will look for the presence of a cookie
-        // if cookie, populate the user's values and redirect to home page.
 
     onLoginSuccess = () => {
       this.setState({
@@ -75,11 +68,9 @@ class LoginForm extends Component {
       // set a cookie upon login with fb_id
       const { cookies } = this.props;
 
-      cookies.set('fb_id', firebase.auth().currentUser.uid, { path: '/' });
+      cookies.set('hash', firebase.auth().currentUser.uid, { path: '/', maxAge: 1000000 });
 
       this.pullInUserValues(firebase.auth().currentUser.uid)
-
-      console.log(`${firebase.auth().currentUser.email} has just signed in`)
     };
 
     onLoginFail = () => {
@@ -114,11 +105,10 @@ class LoginForm extends Component {
     };
 
     render() {
-        // const {redirect} = this.state;
         const { cookies } = this.props;
 
         // keeps user logged in
-        let userCookie = cookies.get('fb_id')
+        let userCookie = cookies.get('hash')
         if (userCookie) {
           this.pullInUserValues(userCookie);
           return (
@@ -126,9 +116,6 @@ class LoginForm extends Component {
           )
         }
 
-        // if (redirect) {
-        //     return <Redirect to='/profile'/>;
-        // }
 
         return (
             <div>
