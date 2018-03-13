@@ -40,6 +40,19 @@ export default (state = initialState, action) => {
             return {
                 ...state
             }
+        case "GET_COMPANY_LIST_FULFILLED":
+            return {
+                ...state,
+                companyList: action.payload.data
+            }
+        case "GET_COMPANY_LIST_PENDING":
+            return {
+                ...state
+            }
+        case "GET_COMPANY_LIST_REJECTED":
+            return {
+                ...state
+              }
         default:
             return state;
     }

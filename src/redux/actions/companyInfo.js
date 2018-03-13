@@ -23,3 +23,11 @@ export const addCompanyInfo = (companyId, companyObj) => {
         payload: axios.post(`http://localhost:8080/company/new/${companyId}`, companyObj)
     }
 };
+
+export const getCompanyList = (firebase_id) => {
+  console.log("getCompanyList", firebase_id)
+  return {
+    type: "GET_COMPANY_LIST",
+    payload: axios.get(`http://localhost:8080/company/list/${firebase_id}`)
+  }
+}
