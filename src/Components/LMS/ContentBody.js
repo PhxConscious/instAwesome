@@ -119,8 +119,15 @@ class CheckTasks extends React.Component {
 
     // get current text values for companyObj
     if(currentQuestionObj.contentType === "textArea"  && this.state.alreadyUpdated === false){
+
+      let initialValue = companyInfo.companyList[0][currentQuestionObj.columnName];
+
+      if(initialValue === null){
+        initialValue = "add your text here"
+      }
+
       this.setState({
-        textArea: companyInfo.companyList[0][currentQuestionObj.columnName],
+        textArea: initialValue,
         alreadyUpdated: true})
     }
 
