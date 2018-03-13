@@ -32,19 +32,28 @@ class UserProfile extends Component {
             return <Redirect to='/'/>
         }
 
+        // user must have company to access anything but the createCompany tab
         let userHasCompany = false;
-        if(companyInfo.companyList && companyInfo.companyList[0]){
+        if(companyInfo.companyList && companyInfo.companyList[0] || companyInfo.companyInfo.company_name){
           userHasCompany = true;
         }
 
-        console.log("companyInfo", this.props.companyInfo, userHasCompany)
+        // don't let users add more companies if they already have one create - for alpha version at least
+        let isMaxOneCompany = true;
+        if(companyInfo.companyList && companyInfo.companyList.length >= 1){
+          isMaxOneCompany = false;
+          // don't let tab default to "createCompany" form
+          this.state.activeTab === 0 ? this.setState({
+            activeTab: 1
+          }) : null;
+        }
 
         return (
             <div className="App">
                 <Gradient/>
                 <BlueAppBg>
                   <Tabs activeTab={this.state.activeTab} onChange={(tabId) => this.setState({ activeTab: tabId })} ripple>
-                    <Tab>Company</Tab>
+                    <Tab className={isMaxOneCompany ? "" : "hidden"}>Add Company</Tab>
                     <h5 className={!userHasCompany ? "" : "hidden"}>Step 1: add your company</h5>
                     <Tab className={userHasCompany ? "" : "hidden"}>On The Web</Tab>
                     <Tab className={userHasCompany ? "" : "hidden"}>Primary Contact</Tab>
