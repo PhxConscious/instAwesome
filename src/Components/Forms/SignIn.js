@@ -55,6 +55,11 @@ class LoginForm extends Component {
       // })
     }
 
+    // @TODO bring cookies into app for persistent login
+    // 1. set a cookie upon login with fb_id
+    // 2. set a handler on login page that will look for the presence of a cookie
+        // if cookie, populate the user's values and redirect to home page. 
+
     onLoginSuccess = () => {
       this.setState({
           email: '',
