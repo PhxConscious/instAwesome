@@ -59,7 +59,7 @@ class UserProfile extends Component {
                     <Tab className={userHasCompany ? "" : "hidden"}>Primary Contact</Tab>
                     <Tab className={userHasCompany ? "" : "hidden"}>Change Password</Tab>
                   </Tabs>
-                  <section>
+                  <section className="tabSection">
                     <div style={{width: '80%', margin: 'auto',  height:'1000px'}}>
                       <Grid className="demo-grid-ruler">
                           <Cell className={activeTab === 0 ? "" : "hidden"} col={12}><Company/></Cell>
