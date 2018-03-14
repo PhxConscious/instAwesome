@@ -1,40 +1,91 @@
 import React, {Component} from "react";
 import '../../Styles/FormsStyles.css';
+import firebase from "firebase";
+import {updateCompanyInfo, getCompanyList} from "../../redux/actions/companyInfo";
+import {getUserProgress} from "../../redux/actions/userProgress";
+import {connect} from "react-redux";
+import {postUserCompanyJoinInfo} from "../../redux/actions/userCompanyJoin";
 
 class OnTheWeb extends Component {
+
+    componentDidMount() {
+
+    }
+
     constructor(props) {
         super(props);
         this.state = {
-            website: '',
-            googleSearchGoals: '',
-            googleBusinessProfile: '',
-            instgramUserName: '',
-            instagramGoals: '',
-            facebookPageUrl: '',
-            facebookGoals: '',
-            twitterUsername: '',
-            twitterGoals: '',
-            linkedinProfileUrl: '',
-            linkedinGoals: '',
-            googlePlusUrl: '',
-            googlePlusGoals: '',
-            youtubeUrl: '',
-            vimeoUrl: '',
-            youtubeVimeoGoals: '',
-            pinterestProfile: '',
-            pinterestGoals: '',
-            yelpBusinessProfile: '',
-            yelpGoals: '',
-            bbbProfile: '',
-            bbbGoals: '',
+            company_content_creator: '',
+            company_brand_id: '',
+            company_primary_goal: '',
+            company_style_guide: '',
+            company_website: '',
+            google_search_goals: '',
+            google_business_profile: '',
+            instagram_username: '',
+            instagram_goals: '',
+            instagram_bio: '',
+            insta_goal1: '',
+            insta_goal2: '',
+            insta_goal3: '',
+            cloudbased_storage_locale: '',
+            facebook_page_url: '',
+            facebook_goals: '',
+            twitter_username: '',
+            twitter_goals: '',
+            linkedin_profile_url: '',
+            linkedin_goals: '',
+            google_plus_url: '',
+            google_plus_goals: '',
+            youtube_url: '',
+            vimeo_url: '',
+            youtube_vimeo_goals: '',
+            pinterest_profile: '',
+            pinterest_goals: '',
+            yelp_business_profile: '',
+            yelp_goals: '',
+            better_business_bureau_profile: '',
+            better_business_bureau_goals: '',
             error: '',
             loading: false
         };
+        this.pullInUserValues = this.pullInUserValues.bind(this);
     }
 
-    onButtonPress() {
+
+    onButtonPress(e) {
+        e.preventDefault();
+        const {
+            company_website,
+            google_search_goals,
+            google_business_profile,
+            instagram_username,
+            instagram_goals,
+            instagram_bio,
+            insta_goal1,
+            insta_goal2,
+            insta_goal3,
+            cloudbased_storage_locale,
+            facebook_page_url,
+            facebook_goals,
+            twitter_username,
+            twitter_goals,
+            linkedin_profile_url,
+            linkedin_goals,
+            google_plus_url,
+            google_plus_goals,
+            youtube_url,
+            vimeo_url,
+            youtube_vimeo_goals,
+            pinterest_profile,
+            pinterest_goals,
+            yelp_business_profile,
+            yelp_goals,
+            better_business_bureau_profile,
+            better_business_bureau_goals,
+        } = this.state;
         this.setState({error: '', loading: true});
-        console.log('button works and displays loading...')
+        this.props.addCompanyInfo(this.props.companyInfo.companyList && this.props.companyInfo.companyList[0].company_id, this.state)
     }
 
     renderButton() {
@@ -44,7 +95,7 @@ class OnTheWeb extends Component {
         return (
             <button
                 className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect formButton"
-                onClick={() => this.onButtonPress()}>
+                onClick={(e) => this.onButtonPress(e)}>
                 <span className='buttonText'>
                     UPDATE
                 </span>
@@ -54,10 +105,17 @@ class OnTheWeb extends Component {
 
     handleInputTextChange = e => {
         this.setState({[e.target.name]: e.target.value});
-        // console.log(`this is the current state ${this.state}`)
     };
 
+    pullInUserValues() {
+        return new Promise((resolve) => {
+            this.props.getCompanyList(this.props.currentValues.currentFbId);
+        })
+
+    }
+
     render() {
+        console.log('THIS IS THE COMPANY INFO', )
         return (
             <div>
                 <form className="formCont" action="#">
@@ -70,12 +128,12 @@ class OnTheWeb extends Component {
                                 <p className='inputLabel'>WEBSITE</p>
                             </div>
                             <input
-                                name='website'
+                                name='company_website'
                                 className="formInput"
                                 type="text"
                                 onChange={this.handleInputTextChange}
                                 placeholder='https://phxconscious.com'
-                                value={this.state.website}>
+                                value={this.state.company_website}>
                             </input>
                         </div>
                         <div className="formInputCont">
@@ -83,12 +141,12 @@ class OnTheWeb extends Component {
                                 <p className='inputLabel'>GOOGLE SEARCH GOALS</p>
                             </div>
                             <input
-                                name='googleSearchGoals'
+                                name='google_search_goals'
                                 className="formInput"
                                 type="text"
                                 onChange={this.handleInputTextChange}
                                 placeholder="top result for 'conscious creative' and 'creative startup studio'"
-                                value={this.state.googleSearchGoals}>
+                                value={this.state.google_search_goals}>
                             </input>
                         </div>
                         <div className="formInputCont">
@@ -96,12 +154,12 @@ class OnTheWeb extends Component {
                                 <p className='inputLabel'>GOOGLE BUSINESS PROFILE</p>
                             </div>
                             <input
-                                name='googleBusinessProfile'
+                                name='google_business_profile'
                                 className="formInput"
                                 type="text"
                                 onChange={this.handleInputTextChange}
                                 placeholder='https://google.com/maps/place/...'
-                                value={this.state.googleBusinessProfile}>
+                                value={this.state.google_business_profile}>
                             </input>
                         </div>
                         <div className="formInputCont">
@@ -109,12 +167,12 @@ class OnTheWeb extends Component {
                                 <p className='inputLabel'>INSTAGRAM USERNAME</p>
                             </div>
                             <input
-                                name='instgramUserName'
+                                name='instagram_username'
                                 className="formInput"
                                 type="text"
                                 onChange={this.handleInputTextChange}
                                 placeholder='@phxconscious'
-                                value={this.state.instgramUserName}>
+                                value={this.state.instagram_username}>
                             </input>
                         </div>
                         <div className="formInputCont">
@@ -122,12 +180,12 @@ class OnTheWeb extends Component {
                                 <p className='inputLabel'>INSTAGRAM GOALS</p>
                             </div>
                             <input
-                                name='instagramGoals'
+                                name='instagram_goals'
                                 className="formInput"
                                 type="text"
                                 onChange={this.handleInputTextChange}
                                 placeholder='brand awareness, community recruiting'
-                                value={this.state.instagramGoals}>
+                                value={this.state.instagram_goals}>
                             </input>
                         </div>
                         <div className="formInputCont">
@@ -135,12 +193,12 @@ class OnTheWeb extends Component {
                                 <p className='inputLabel'>FACEBOOK PAGE URL</p>
                             </div>
                             <input
-                                name='facebookPageUrl'
+                                name='facebook_page_url'
                                 className="formInput"
                                 type="text"
                                 onChange={this.handleInputTextChange}
                                 placeholder='https://facebook.com/phxconscious'
-                                value={this.state.facebookPageUrl}>
+                                value={this.state.facebook_page_url}>
                             </input>
                         </div>
                         <div className="formInputCont">
@@ -148,12 +206,12 @@ class OnTheWeb extends Component {
                                 <p className='inputLabel'>FACEBOOK GOALS</p>
                             </div>
                             <input
-                                name='facebookGoals'
+                                name='facebook_goals'
                                 className="formInput"
                                 type="text"
                                 onChange={this.handleInputTextChange}
                                 placeholder='messenger funnel into website'
-                                value={this.state.facebookGoals}>
+                                value={this.state.facebook_goals}>
                             </input>
                         </div>
                         <div className="formInputCont">
@@ -161,12 +219,12 @@ class OnTheWeb extends Component {
                                 <p className='inputLabel'>TWITTER USERNAME</p>
                             </div>
                             <input
-                                name='twitterUsername'
+                                name='twitter_username'
                                 className="formInput"
                                 type="text"
                                 onChange={this.handleInputTextChange}
                                 placeholder='@phxconscious'
-                                value={this.state.twitterUsername}>
+                                value={this.state.twitter_username}>
                             </input>
                         </div>
                         <div className="formInputCont">
@@ -174,12 +232,12 @@ class OnTheWeb extends Component {
                                 <p className='inputLabel'>TWITTER GOALS</p>
                             </div>
                             <input
-                                name='twitterGoals'
+                                name='twitter_goals'
                                 className="formInput"
                                 type="text"
                                 onChange={this.handleInputTextChange}
                                 placeholder='brand awareness, community recruiting'
-                                value={this.state.twitterGoals}>
+                                value={this.state.twitter_goals}>
                             </input>
                         </div>
                         <div className="formInputCont">
@@ -187,12 +245,12 @@ class OnTheWeb extends Component {
                                 <p className='inputLabel'>LINKEDIN PROFILE URL</p>
                             </div>
                             <input
-                                name='linkedinProfileUrl'
+                                name='linkedin_profile_url'
                                 className="formInput"
                                 type="text"
                                 onChange={this.handleInputTextChange}
                                 placeholder='https://linkedin.com/company/phxconscious/'
-                                value={this.state.linkedinProfileUrl}>
+                                value={this.state.linkedin_profile_url}>
                             </input>
                         </div>
                         <div className="formInputCont">
@@ -200,12 +258,12 @@ class OnTheWeb extends Component {
                                 <p className='inputLabel'>LINKEDIN GOALS</p>
                             </div>
                             <input
-                                name='linkedinGoals'
+                                name='linkedin_goals'
                                 className="formInput"
                                 type="text"
                                 onChange={this.handleInputTextChange}
                                 placeholder='building credibility, community recruiting, forming partnerships'
-                                value={this.state.linkedinGoals}>
+                                value={this.state.linkedin_goals}>
                             </input>
                         </div>
                         <div className="formInputCont">
@@ -213,12 +271,12 @@ class OnTheWeb extends Component {
                                 <p className='inputLabel'>GOOGLE+ URL</p>
                             </div>
                             <input
-                                name='googlePlusUrl'
+                                name='google_plus_url'
                                 className="formInput"
                                 type="text"
                                 onChange={this.handleInputTextChange}
                                 placeholder='https://phxconscious.com'
-                                value={this.state.googlePlusUrl}>
+                                value={this.state.google_plus_url}>
                             </input>
                         </div>
                         <div className="formInputCont">
@@ -226,12 +284,12 @@ class OnTheWeb extends Component {
                                 <p className='inputLabel'>GOOGLE PLUS GOALS</p>
                             </div>
                             <input
-                                name='googlePlusGoals'
+                                name='google_plus_goals'
                                 className="formInput"
                                 type="text"
                                 onChange={this.handleInputTextChange}
                                 placeholder='general brand awareness, SEO'
-                                value={this.state.googlePlusGoals}>
+                                value={this.state.google_plus_goals}>
                             </input>
                         </div>
                         <div className="formInputCont">
@@ -239,12 +297,12 @@ class OnTheWeb extends Component {
                                 <p className='inputLabel'>YOUTUBE URL</p>
                             </div>
                             <input
-                                name='youtubeUrl'
+                                name='youtube_url'
                                 className="formInput"
                                 type="text"
                                 onChange={this.handleInputTextChange}
                                 placeholder='https://www.youtube.com/channel/UCxBENO8Q1MdIgMBqEupL7hQ'
-                                value={this.state.youtubeUrl}>
+                                value={this.state.youtube_url}>
                             </input>
                         </div>
                         <div className="formInputCont">
@@ -252,12 +310,12 @@ class OnTheWeb extends Component {
                                 <p className='inputLabel'>VIMEO URL</p>
                             </div>
                             <input
-                                name='vimeoUrl'
+                                name='vimeo_url'
                                 className="formInput"
                                 type="text"
                                 onChange={this.handleInputTextChange}
                                 placeholder='https://vimeo.com/phxconsious'
-                                value={this.state.vimeoUrl}>
+                                value={this.state.vimeo_url}>
                             </input>
                         </div>
                         <div className="formInputCont">
@@ -265,12 +323,12 @@ class OnTheWeb extends Component {
                                 <p className='inputLabel'>YOUTUBE/VIMEO GOALS</p>
                             </div>
                             <input
-                                name='youtubeVimeoGoals'
+                                name='youtube_vimeo_goals'
                                 className="formInput"
                                 type="text"
                                 onChange={this.handleInputTextChange}
                                 placeholder='exposing content, building credibility, recruiting talent'
-                                value={this.state.youtubeVimeoGoals}>
+                                value={this.state.youtube_vimeo_goals}>
                             </input>
                         </div>
                         <div className="formInputCont">
@@ -278,12 +336,12 @@ class OnTheWeb extends Component {
                                 <p className='inputLabel'>PINTEREST PROFILE</p>
                             </div>
                             <input
-                                name='pinterestProfile'
+                                name='pinterest_profile'
                                 className="formInput"
                                 type="text"
                                 onChange={this.handleInputTextChange}
                                 placeholder=''
-                                value={this.state.pinterestProfile}>
+                                value={this.state.pinterest_profile}>
                             </input>
                         </div>
                         <div className="formInputCont">
@@ -291,12 +349,12 @@ class OnTheWeb extends Component {
                                 <p className='inputLabel'>PINTEREST GOALS</p>
                             </div>
                             <input
-                                name='pinterestGoals'
+                                name='pinterest_goals'
                                 className="formInput"
                                 type="text"
                                 onChange={this.handleInputTextChange}
                                 placeholder=''
-                                value={this.state.pinterestGoals}>
+                                value={this.state.pinterest_goals}>
                             </input>
                         </div>
                         <div className="formInputCont">
@@ -304,12 +362,12 @@ class OnTheWeb extends Component {
                                 <p className='inputLabel'>YELP BUSINESS PROFILE</p>
                             </div>
                             <input
-                                name='yelpBusinessProfile'
+                                name='yelp_business_profile'
                                 className="formInput"
                                 type="text"
                                 onChange={this.handleInputTextChange}
                                 placeholder=''
-                                value={this.state.yelpBusinessProfile}>
+                                value={this.state.yelp_business_profile}>
                             </input>
                         </div>
                         <div className="formInputCont">
@@ -317,12 +375,12 @@ class OnTheWeb extends Component {
                                 <p className='inputLabel'>YELP GOALS</p>
                             </div>
                             <input
-                                name='yelpGoals'
+                                name='yelp_goals'
                                 className="formInput"
                                 type="text"
                                 onChange={this.handleInputTextChange}
                                 placeholder=''
-                                value={this.state.yelpGoals}>
+                                value={this.state.yelp_goals}>
                             </input>
                         </div>
                         <div className="formInputCont">
@@ -330,12 +388,12 @@ class OnTheWeb extends Component {
                                 <p className='inputLabel'>BETTER BUSINESS BUREAU PROFILE</p>
                             </div>
                             <input
-                                name='bbbProfile'
+                                name='better_business_bureau_profile'
                                 className="formInput"
                                 type="text"
                                 onChange={this.handleInputTextChange}
                                 placeholder=''
-                                value={this.state.bbbProfile}>
+                                value={this.state.better_business_bureau_profile}>
                             </input>
                         </div>
                         <div className="formInputCont">
@@ -343,12 +401,12 @@ class OnTheWeb extends Component {
                                 <p className='inputLabel'>BETTER BUSINESS BUREAU GOALS</p>
                             </div>
                             <input
-                                name='bbbGoals'
+                                name='better_business_bureau_goals'
                                 className="formInput"
                                 type="text"
                                 onChange={this.handleInputTextChange}
                                 placeholder=''
-                                value={this.state.bbbGoals}>
+                                value={this.state.better_business_bureau_goals}>
                             </input>
                         </div>
                     </div>
@@ -360,4 +418,22 @@ class OnTheWeb extends Component {
     }
 }
 
-export default OnTheWeb;
+const mapStateToProps = state => ({
+    currentValues: state.currentValues,
+    userFbId: state.currentValues.currentFbId,
+    companyInfo: state.companyInfo,
+});
+
+const mapDispatchToProps = dispatch => {
+    return {
+        addCompanyInfo: (companyId, companyObj) => {
+            dispatch(updateCompanyInfo(companyId, companyObj))
+        },
+        getCompanyList: (fb_id) => {
+            dispatch(getCompanyList(fb_id))
+        }
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(OnTheWeb)
+

@@ -5,3 +5,7 @@
 .hidden {
   visibility: hidden;
 }
+
+.tabSection{
+  min-height:750vh;
+}
