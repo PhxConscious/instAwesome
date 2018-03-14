@@ -3,7 +3,6 @@ import '../../Styles/FormsStyles.css';
 import {connect} from 'react-redux';
 import {addCompanyInfo} from "../../redux/actions/companyInfo";
 import {postUserCompanyJoinInfo} from "../../redux/actions/userCompanyJoin";
-import axios from 'axios';
 
 class Company extends Component {
     componentDidMount() {
@@ -13,18 +12,15 @@ class Company extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            form: {
-              company_name: ''
-            },
-            styleGuide: '',
-            primaryGoal: '',
+                company_name: '',
+                company_email: '',
+                company_phone: '',
             error: '',
             loading: false
         };
         this.addNewCompany = this.addNewCompany.bind(this);
         this.onButtonPress = this.onButtonPress.bind(this);
     }
-
 
     renderButton() {
         if (this.state.loading) {
@@ -41,36 +37,37 @@ class Company extends Component {
         );
     }
 
-
     addNewCompany() {
-      return new Promise((resolve) => {
-        this.props.postUserCompanyJoinInfo(this.props.userFbId)
-        setTimeout(()=>{
-          resolve(this.props.userCompanyJoin.companyInfo.company_id)
-        }, 1000)
+        return new Promise((resolve) => {
+            this.props.postUserCompanyJoinInfo(this.props.userFbId);
+            setTimeout(() => {
+                resolve(this.props.userCompanyJoin.companyInfo.company_id)
+            }, 2000)
 
-      })
-    }
-
-    onButtonPress(e) {
-      e.preventDefault();
-      const {name, styleGuide, primaryGoal} = this.state;
-      // if (name === '' || styleGuide === '' || primaryGoal === '') {
-      //     return alert('Must fill in all fields')
-      // }
-
-      this.addNewCompany()
-        .then(companyId => {
-            this.props.createNewCompany(companyId, this.state.form)
-            alert(`You created company:  ${this.state.form.company_name}`)
         })
     }
 
+    onButtonPress(e) {
+        e.preventDefault();
+        const {company_name, company_email, company_phone} = this.state;
+        if ( company_name === '' || company_email === '' || company_phone === '') {
+            return alert('Must fill in all fields')
+        }
 
+        this.addNewCompany()
+            .then(companyId => {
+                this.props.createNewCompany(companyId, {company_name, company_email, company_phone});
+                alert(`You created company:  ${this.state.company_name}`)
+            })
+    }
 
     render() {
+        const {company_email, company_name, company_phone} = this.state;
+        console.log(company_email)
+        console.log(company_phone)
         return (
             <div>
+                <h5>ADD YOUR COMPANY</h5>
                 <form className="formCont" action="#">
                     <div className='inputCont'>
                         <div className='formTitleCont'>
@@ -84,37 +81,37 @@ class Company extends Component {
                                 name='name'
                                 className="formInput"
                                 type="text"
-                                onChange={e=>this.setState({form:{company_name:e.target.value}})}
+                                onChange={e => this.setState({company_name: e.target.value})}
                                 placeholder='input company name'
-                                value={this.state.form.company_name}>
+                                value={this.state.company_name}>
                             </input>
                         </div>
-                        {/*<div className="formInputCont">*/}
-                        {/*<div>*/}
-                        {/*<p className='inputLabel'>STYLE GUIDE</p>*/}
-                        {/*</div>*/}
-                        {/*<input*/}
-                        {/*name='styleGuide'*/}
-                        {/*className="formInput"*/}
-                        {/*type="text"*/}
-                        {/*onChange={this.handleInputTextChange}*/}
-                        {/*placeholder='https://phxconscious.com'*/}
-                        {/*value={this.state.styleGuide}>*/}
-                        {/*</input>*/}
-                        {/*</div>*/}
-                        {/*<div className="formInputCont">*/}
-                        {/*<div>*/}
-                        {/*<p className='inputLabel'>PRIMARY GOAL</p>*/}
-                        {/*</div>*/}
-                        {/*<input*/}
-                        {/*name='primaryGoal'*/}
-                        {/*className="formInput"*/}
-                        {/*type="text"*/}
-                        {/*onChange={this.handleInputTextChange}*/}
-                        {/*placeholder='Brand awareness'*/}
-                        {/*value={this.state.primaryGoal}>*/}
-                        {/*</input>*/}
-                        {/*</div>*/}
+                        <div className="formInputCont">
+                            <div>
+                                <p className='inputLabel'>COMPANY EMAIL</p>
+                            </div>
+                            <input
+                                name='email'
+                                className="formInput"
+                                type="text"
+                                onChange={e => this.setState({company_email: e.target.value})}
+                                placeholder='input company email'
+                                value={this.state.company_email}>
+                            </input>
+                        </div>
+                        <div className="formInputCont">
+                            <div>
+                                <p className='inputLabel'>COMPANY PHONE</p>
+                            </div>
+                            <input
+                                name='phone'
+                                className="formInput"
+                                type="text"
+                                onChange={e => this.setState({company_phone: e.target.value})}
+                                placeholder='input company phone number'
+                                value={this.state.company_phone}>
+                            </input>
+                        </div>
                     </div>
                     <br/>
                     {this.renderButton()}
