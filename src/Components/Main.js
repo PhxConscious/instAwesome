@@ -8,6 +8,7 @@ import RecoverPasswordPage from './Pages/RecoverPasswordPage';
 import UserProfile from "./Pages/UserProfile";
 import SignUp from "./Pages/SignUp";
 import Splash from "./Pages/Splash";
+import Feedback from "./Pages/Feedback";
 
 class Main extends React.Component {
 
@@ -22,6 +23,7 @@ class Main extends React.Component {
                     <Route exact path="/profile" render={props => <UserProfile {...props}/>}/>
                     <Route exact path="/signup" render={props => <SignUp {...props}/>}/>
                     <Route exact path="/splash" render={props => <Splash {...props}/>}/>
+                    <Route exact path="/feedback" render={props => <Feedback {...props}/>}/>
                 </Switch>
             </main>
         )
