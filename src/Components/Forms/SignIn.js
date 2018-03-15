@@ -53,10 +53,17 @@ class LoginForm extends Component {
 
 
     pullInUserValues(fb_id){
-        this.props.setCurrentUserFbId("currentFbId", fb_id)
-        this.props.fetchUserInfo(fb_id);
-        this.props.getCompanyList(fb_id);
-        this.props.getLmsContent();
+        let {setCurrentUserFbId, fetchUserInfo, getCompanyList, getLmsContent} = this.props;
+        firebase.auth().onAuthStateChanged(function(user) {
+          if (user) {
+            setCurrentUserFbId("currentFbId", fb_id)
+            fetchUserInfo(fb_id);
+            getCompanyList(fb_id);
+            getLmsContent();
+          } else {
+            console.log('theres no user - THIS IS SOMETHING WEIRD WITH FIREBASE, investigate')
+          }
+        });
     }
 
     onLoginSuccess = () => {

@@ -24,7 +24,7 @@ class Splash extends React.Component {
       return <Redirect to={ '/'}/>
     }
 
-    if(!userInfo.user_email){
+    if(userInfo && !userInfo.user_email){
       return (
         <div style={{width: "50vw", margin: "0 auto", marginTop: "100px"}}>
           <h6>Thanks for coming to see us. Please log back in</h6>
