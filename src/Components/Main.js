@@ -9,6 +9,7 @@ import UserProfile from "./Pages/UserProfile";
 import SignUp from "./Pages/SignUp";
 import Splash from "./Pages/Splash";
 import Feedback from "./Pages/Feedback";
+import ExpertDashboard from "./Pages/ExpertDashboard";
 
 class Main extends React.Component {
 
@@ -24,6 +25,7 @@ class Main extends React.Component {
                     <Route exact path="/signup" render={props => <SignUp {...props}/>}/>
                     <Route exact path="/splash" render={props => <Splash {...props}/>}/>
                     <Route exact path="/feedback" render={props => <Feedback {...props}/>}/>
+                    <Route exact path="/expertdashboard" render={props => <ExpertDashboard {...props}/>}/>
                 </Switch>
             </main>
         )
