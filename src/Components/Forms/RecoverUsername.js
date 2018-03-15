@@ -20,7 +20,7 @@ class RecoverUsername extends Component {
         }
         return (
             <button
-                className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect signInFormButton"
+                className="signInFormButton"
                 onClick={() => console.log('button works')}>
                 <span className='buttonText'>
                     RECOVER

@@ -161,13 +161,13 @@ class LoginForm extends Component {
                     </div>
                     <div>
                         <p className='or'>OR SIGN IN WITH</p>
-                        <button className='mdl-button mdl-js-button googleButton' onClick={this.signInWithGoogle}>
+                        <button className='socialMediaLoginButton' onClick={this.signInWithGoogle}>
                             <i className="fab fa-google"> </i>
                         </button>
-                        <button className='mdl-button mdl-js-button googleButton'>
+                        <button className='socialMediaLoginButton'>
                             <i className="fab fa-facebook-f"> </i>
                         </button>
-                        <button className='mdl-button mdl-js-button googleButton'>
+                        <button className='socialMediaLoginButton'>
                             <i className="fab fa-linkedin-in"> </i>
                         </button>
                     </div>

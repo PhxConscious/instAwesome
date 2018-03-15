@@ -24,11 +24,11 @@ class Company extends Component {
 
     renderButton() {
         if (this.state.loading) {
-            return <p id='prog1' className="mdl-spinner mdl-js-spinner mdl-spinner--single-color is-active"/>
+            return <p className=""/>
         }
         return (
             <button
-                className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect formButton"
+                className="formButton"
                 onClick={(e) => this.onButtonPress(e)}>
                 <span className='buttonText'>
                     UPDATE
