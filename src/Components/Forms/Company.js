@@ -38,13 +38,10 @@ class Company extends Component {
     }
 
     addNewCompany() {
-        return new Promise((resolve) => {
-            this.props.postUserCompanyJoinInfo(this.props.userFbId);
-            setTimeout(() => {
-                resolve(this.props.userCompanyJoin.companyInfo.company_id)
-            }, 2000)
+      const {company_name, company_email, company_phone} = this.state;
 
-        })
+        this.props.combineCallJoinAndCreateCompany(this.props.userFbId, company_name, company_email, company_phone)
+
     }
 
     onButtonPress(e) {
@@ -55,16 +52,10 @@ class Company extends Component {
         }
 
         this.addNewCompany()
-            .then(companyId => {
-                this.props.createNewCompany(companyId, {company_name, company_email, company_phone});
-                alert(`You created company:  ${this.state.company_name}`)
-            })
     }
 
     render() {
         const {company_email, company_name, company_phone} = this.state;
-        console.log(company_email)
-        console.log(company_phone)
         return (
             <div>
                 <h5>ADD YOUR COMPANY</h5>
@@ -129,11 +120,15 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
     return {
-        createNewCompany: (companyId, companyObj) => {
-            dispatch(addCompanyInfo(companyId, companyObj))
-        },
-        postUserCompanyJoinInfo: (fb_id) => {
-            dispatch(postUserCompanyJoinInfo(fb_id))
+        combineCallJoinAndCreateCompany: (fb_id, co_name, co_email, co_phone) => {
+          dispatch(postUserCompanyJoinInfo(fb_id))
+          .then((companyId) =>{
+            dispatch(addCompanyInfo(companyId.value.data[0].company_id, {
+              company_name: co_name,
+              company_email: co_email,
+              company_phone: co_phone}
+            ))
+          })
         }
     }
 };
