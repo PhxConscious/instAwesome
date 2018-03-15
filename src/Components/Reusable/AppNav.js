@@ -2,7 +2,8 @@ import React, {Component} from "react";
 import firebase from 'firebase';
 import {Link, Redirect} from 'react-router-dom';
 import {Layout, Header, Navigation, Drawer, Content} from 'react-mdl'
-
+import { instanceOf } from 'prop-types';
+import { withCookies, Cookies } from 'react-cookie';
 import '../../Styles/AppNavStyles.css';
 import {connect} from "react-redux";
 import {getUserProgress} from "../../redux/actions/userProgress";
@@ -16,16 +17,19 @@ class AppNavbar extends Component {
         }
     }
 
+    static propTypes = {
+      cookies: instanceOf(Cookies).isRequired
+    };
+
     userSignOut = () => {
-        if (firebase.auth().currentUser) {
-            firebase.auth().signOut()
-                .then(() => {
-                    this.setState({redirect: true})
-                });
-            return console.log(`user: ${firebase.auth().currentUser.email} signed out`);
-        } else {
-            alert('no user signed in')
-        }
+      const { cookies } = this.props;
+      if (firebase.auth().currentUser) {
+          firebase.auth().signOut()
+          console.log(`user: ${firebase.auth().currentUser.email} signed out, cookie: ${cookies.get('hash')} was removed`);
+          cookies.remove('hash')
+      } else {
+          alert('no user signed in')
+      }
     };
 
     render() {
@@ -34,9 +38,9 @@ class AppNavbar extends Component {
 
         const {redirect} = this.state;
 
-        if (redirect) {
-            return <Redirect to='/'/>;
-        }
+        // if (redirect) {
+        //     return <Redirect to='/'/>;
+        // }
 
         if(true){
           return (
@@ -82,4 +86,4 @@ const mapStateToProps = state => ({
 });
 
 
-export default connect(mapStateToProps, null)(AppNavbar)
+export default withCookies(connect(mapStateToProps, null)(AppNavbar));
