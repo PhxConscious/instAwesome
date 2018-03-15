@@ -30,11 +30,13 @@ class Dashboard extends React.Component {
 
 
   componentDidMount(){
+    console.log('componentDidMount in lms')
     // @TODO remove timeout
     if(this.props.currentValues.currentFbId){
+      console.log('component mounted and theyere a fb_id')
       setTimeout(()=>{
         this.getActiveUnit();
-      }, 1000)
+      }, 0)
     }
   }
 

@@ -114,7 +114,7 @@ class LoginForm extends Component {
         if (userCookie) {
           this.pullInUserValues(userCookie);
           return (
-            <Redirect to={ '/profile'}/>
+            <Redirect to={ '/splash'}/>
           )
         }
 

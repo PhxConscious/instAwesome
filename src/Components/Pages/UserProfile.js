@@ -27,9 +27,11 @@ class UserProfile extends Component {
 
     render() {
         const {redirect, activeTab} = this.state;
-        const { companyInfo } = this.props;
-        if (redirect) {
-            return <Redirect to='/'/>
+        const { companyInfo, userInfo } = this.props;
+
+        // if not logged in, go to login to get user info
+        if (userInfo.currentUser && !userInfo.currentUser.user_id) {
+          return <Redirect to='/'/>
         }
 
         // user must have company to access anything but the createCompany tab
@@ -79,6 +81,7 @@ class UserProfile extends Component {
 
 const mapStateToProps = state => ({
   companyInfo: state.companyInfo,
+  userInfo: state.userProgress,
 })
 
 export default connect(mapStateToProps, null)(UserProfile);
