@@ -1,9 +1,9 @@
 import React, {Component} from "react";
 import firebase from 'firebase';
 import {Link, Redirect} from 'react-router-dom';
-import {Layout, Header, Navigation, Drawer, Content} from 'react-mdl'
-import { instanceOf } from 'prop-types';
-import { withCookies, Cookies } from 'react-cookie';
+import {Grid, Cell} from 'react-mdl'
+import {instanceOf} from 'prop-types';
+import {withCookies, Cookies} from 'react-cookie';
 import '../../Styles/AppNavStyles.css';
 import {connect} from "react-redux";
 import {getUserProgress} from "../../redux/actions/userProgress";
@@ -18,43 +18,63 @@ class AppNavbar extends Component {
     }
 
     static propTypes = {
-      cookies: instanceOf(Cookies).isRequired
+        cookies: instanceOf(Cookies).isRequired
     };
 
     userSignOut = () => {
-      const { cookies } = this.props;
-      if (firebase.auth().currentUser) {
-          firebase.auth().signOut()
-          console.log(`user: ${firebase.auth().currentUser.email} signed out, cookie: ${cookies.get('hash')} was removed`);
-          cookies.remove('hash')
-      } else {
-          alert('no user signed in')
-      }
+        const {cookies} = this.props;
+        if (firebase.auth().currentUser) {
+            firebase.auth().signOut()
+            console.log(`user: ${firebase.auth().currentUser.email} signed out, cookie: ${cookies.get('hash')} was removed`);
+            cookies.remove('hash')
+        } else {
+            alert('no user signed in')
+        }
     };
 
     render() {
 
-        let { userInfo } = this.props;
+        let {userInfo} = this.props;
 
         const {redirect} = this.state;
 
         return (
-            <header className="">
-                <div className="mdl-layout__header-row navContentCont">
-                    <i className="material-icons bookLogo">import_contacts</i>
-                    <Link to={userInfo ? '/learn/dashboard' : '/'} className="mdl-navigation__link learnTextCont" href="">
-                        <span className='learnText'>LEARN</span>
-                    </Link>
+            <Grid className="navContentCont">
+                <Cell className='leftCol' col={4} hideTablet={true} hidePhone={true}>
+                    <div className='leftSideLogoCont'>
+                        <Grid>
+                            <Cell col={2}>
+                                <i className="bookIcon fab fa-leanpub"/>
+                            </Cell>
+                            <Cell className='learnText' col={6}>
+                                <div className='learnCont'>
+                                    <Link
+                                        to={userInfo ? '/learn/dashboard' : '/'}
+                                        className="learnTextCont linkTo">
+                                        Learn
+                                    </Link>
+                                </div>
+                            </Cell>
+                        </Grid>
+                    </div>
+                </Cell>
+                <Cell className='centerCol' col={4} tablet={12}>
                     <div className="mdl-layout-spacer centerLogoCont">
                         <img className='centerLogo' src='https://i.imgur.com/qYqmu8v.png' alt="blah"/>
                     </div>
-                    <nav className="mdl-navigation mdl-layout--large-screen-only content">
-                        <div className='rightSideLogoCont'>
-                            <span className='phxConsciousText phxConsciousTextCont'>{userInfo ? userInfo.user_email : "" }</span>
-                        </div>
+                </Cell>
+                <Cell className='rightCol' col={4} hideTablet={true} hidePhone={true}>
+                    <Grid>
+                        <Cell col={10}>
+                            <div className='rightSideLogoCont'>
+                                <span
+                                    className='phxConsciousText phxConsciousTextCont'>{userInfo ? userInfo.user_email : "" }</span>
+                            </div>
+                        </Cell>
+                        <Cell col={2}>
                             <button id="demo-menu-lower-right"
-                                    className="mdl-button mdl-js-button mdl-button--icon">
-                                <i className="material-icons accountCircleIcon">account_circle</i>
+                                    className="mdl-button  mdl-button--icon">
+                                <i className="profileIcon fas fa-user-circle"/>
                             </button>
                             <ul className="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
                                 htmlFor="demo-menu-lower-right">
@@ -64,9 +84,10 @@ class AppNavbar extends Component {
                                 <li className="mdl-menu__item">FEEDBACK</li>
                                 <li onClick={this.userSignOut} className="mdl-menu__item">SIGN OUT</li>
                             </ul>
-                    </nav>
-                </div>
-            </header>
+                        </Cell>
+                    </Grid>
+                </Cell>
+            </Grid>
         );
 
 
