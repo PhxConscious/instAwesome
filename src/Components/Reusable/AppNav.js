@@ -61,7 +61,9 @@ class AppNavbar extends Component {
                                 <Link className='linkTo' to='/profile'>
                                     <li className="mdl-menu__item">ACCOUNT</li>
                                 </Link>
-                                <li className="mdl-menu__item">FEEDBACK</li>
+                                <Link className='linkTo' to='/feedback'>
+                                    <li className="mdl-menu__item">FEEDBACK</li>
+                                </Link>
                                 <li onClick={this.userSignOut} className="mdl-menu__item">SIGN OUT</li>
                             </ul>
                     </nav>
