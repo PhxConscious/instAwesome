@@ -19,7 +19,6 @@ class UserProfile extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            redirect: false,
             activeTab: 0
         }
     }
@@ -27,10 +26,21 @@ class UserProfile extends Component {
 
     render() {
         const {redirect, activeTab} = this.state;
-        const { companyInfo } = this.props;
-        if (redirect) {
-            return <Redirect to='/'/>
-        }
+        const { companyInfo, userInfo } = this.props;
+        // const redirectToLogin = () => {
+        //   // console.log('redirecting')
+        //   return <Redirect to={ '/'}/>
+        // }
+        // // console.log("UserProfile outside", userInfo)
+        // if (userInfo.currentUser && !userInfo.currentUser.user_id) {
+        //   // console.log("UserProfile", userInfo)
+        //     return <div>
+        //       Good to see you again! Click here to log in
+        //       <button
+        //         onClick={redirectToLogin}
+        //       >Login</button>
+        //     </div>
+        // }
 
         // user must have company to access anything but the createCompany tab
         let userHasCompany = false;
@@ -79,6 +89,7 @@ class UserProfile extends Component {
 
 const mapStateToProps = state => ({
   companyInfo: state.companyInfo,
+  userInfo: state.userProgress
 })
 
 export default connect(mapStateToProps, null)(UserProfile);
