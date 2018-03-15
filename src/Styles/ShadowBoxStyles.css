@@ -1,9 +1,8 @@
 .shadowBoxCont{
-    margin-left: auto;
-    margin-right: auto;
     background-color: black;
     opacity: 0.80;
     border-radius: 20px;
+    text-align: center;
 }
 
 .shadowBoxInnerCont{

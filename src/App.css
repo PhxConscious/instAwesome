@@ -1,5 +1,6 @@
+
 .App {
-  text-align: center;
+  /*text-align: center;*/
 }
 
 .hidden {
@@ -10,3 +11,7 @@
   height:100vh;
   overflow: auto;
 }
+.pageCont{
+  padding-top: 20vh;
+}
+

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import '../../App.css';
+import {Grid, Cell} from 'react-mdl';
 
 import SignInForm from '../Forms/SignIn';
 import UnderwaterWrapper from '../Reusable/UnderwaterWrapper';
@@ -14,11 +15,16 @@ class LandingPage extends Component {
         return (
             <div className="App">
                 <Gradient/>
-                <UnderwaterWrapper>z
-                    <ConsciousCenter/>
-                    <ShadowBox>
-                        <SignInForm/>
-                    </ShadowBox>
+                <UnderwaterWrapper>
+                    <div className='pageCont'>
+                        <Grid className='pageCont'>
+                            <Cell col={6} offsetDesktop={3} tablet={12} phone={12}>
+                                <ShadowBox>
+                                    <SignInForm/>
+                                </ShadowBox>
+                            </Cell>
+                        </Grid>
+                    </div>
                 </UnderwaterWrapper>
                 <Gradient/>
             </div>
@@ -27,3 +33,4 @@ class LandingPage extends Component {
 }
 
 export default LandingPage;
+
