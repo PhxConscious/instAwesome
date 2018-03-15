@@ -45,12 +45,12 @@ class ChangePassword extends Component {
     renderButton() {
         if (this.state.loading) {
             return (
-                <p id='loadingText' className="mdl-spinner mdl-js-spinner mdl-spinner--single-color is-active"></p>
+                <p id='loadingText' className=""></p>
             )
         }
         return (
             <button
-                className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect formButton"
+                className="formButton"
                 onClick={() => this.onButtonPress()}>
                 <span className='buttonText'>
                     UPDATE

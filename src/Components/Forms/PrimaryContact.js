@@ -20,11 +20,11 @@ class PrimaryContact extends Component {
 
     renderButton() {
         if (this.state.loading) {
-            return <p id='prog1' className="mdl-spinner mdl-js-spinner mdl-spinner--single-color is-active"></p>
+            return <p className=""></p>
         }
         return (
             <button
-                className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect formButton"
+                className="formButton"
                 onClick={() => this.onButtonPress()}>
                 <span className='buttonText'>
                     UPDATE

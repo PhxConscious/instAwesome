@@ -19,7 +19,7 @@ class RecoverPassword extends Component {
         }
         return (
             <button
-                className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect formButton"
+                className="formButton"
                 onClick={() => this.emailPasswordReset()}>
                 <span className='buttonText'>
                     RECOVER
