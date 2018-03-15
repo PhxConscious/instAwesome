@@ -22,8 +22,10 @@ class Feedback extends React.Component {
   render(){
 
     return (
-      <div>
+      <div style={{width: "50vw", margin: "0 auto", marginTop: "100px"}}>
+        <label for="form">Comment Section</label>
         <form
+          id="form"
           onSubmit={e => {
             e.preventDefault()
             this.handleSubmit()
@@ -33,6 +35,8 @@ class Feedback extends React.Component {
             value={this.state.textArea}
             onChange={e => this.setState({textArea: e.target.value})}
             placeholder="put your comment here"
+            rows={12}
+            autofocus
           />
           <button
             type="submit"
