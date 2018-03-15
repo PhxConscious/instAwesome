@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import {Redirect} from 'react-router-dom';
 import { postFeedback } from '../../redux/actions/feedback'
 
 class Feedback extends React.Component {
@@ -20,10 +21,15 @@ class Feedback extends React.Component {
   }
 
   render(){
+    const { userInfo } = this.props;
+
+    if (typeof(userInfo.currentUser)==='undefined') {
+      return <Redirect to='/'/>
+    }
 
     return (
       <div style={{width: "50vw", margin: "0 auto", marginTop: "100px"}}>
-        <label for="form">Comment Section</label>
+        <label htmlFor="form">Comment Section</label>
         <form
           id="form"
           onSubmit={e => {
