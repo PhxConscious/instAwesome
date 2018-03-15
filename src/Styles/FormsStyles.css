@@ -43,12 +43,12 @@
     color: white;
 }
 
-.googleButton {
+.socialMediaLoginButton {
     font-family: 'Asap', sans-serif;
     color: #48C8D3;
 }
 
-.googleButton:hover {
+.socialMediaLoginButton:hover {
     color: #9BDD82;
     background: none;
 }

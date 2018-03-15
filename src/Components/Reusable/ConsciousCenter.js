@@ -4,7 +4,7 @@ import '../../Styles/ConsciousCenterStyles.css';
 
 const ConsciousCenter = () => {
     return (
-        <div className='outerCont content-row mdl-cell mdl-cell--6-col mdl-cell--top'>
+        <div className='outerCont'>
             <img className='consciousLogo' src='https://i.imgur.com/HJHf2gc.png'/>
         </div>
     )

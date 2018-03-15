@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import firebase from 'firebase';
 import {Link, Redirect} from 'react-router-dom';
+import {Layout, Header, Navigation, Drawer, Content} from 'react-mdl'
 
 import '../../Styles/AppNavStyles.css';
 import {connect} from "react-redux";

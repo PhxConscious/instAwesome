@@ -146,7 +146,7 @@ class SignUpForm extends Component {
                 </div>
                 <br/>
                 <button
-                    className="mdl-button mdl-js-button mdl-button--raised signInFormButton"
+                    className="signInFormButton"
                     onClick={(e) => {
                         e.preventDefault();
                         this.onButtonPress()
