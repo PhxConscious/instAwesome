@@ -36,7 +36,7 @@ class Feedback extends React.Component {
             onChange={e => this.setState({textArea: e.target.value})}
             placeholder="put your comment here"
             rows={12}
-            autofocus
+            autoFocus
           />
           <button
             type="submit"
