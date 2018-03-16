@@ -10,6 +10,7 @@ class ExpertDashboard extends React.Component {
     super(props)
     this.state = {userObj: {}}
     this.selectUser = this.selectUser.bind(this);
+    this.claimUser = this.claimUser.bind(this);
   }
   componentWillMount(){
     this.props.getFreeUsers()
@@ -17,6 +18,10 @@ class ExpertDashboard extends React.Component {
 
   selectUser(user){
     this.setState({userObj: user})
+  }
+
+  claimUser(user){
+    console.log("in claimUser", user)
   }
 
   render(){
@@ -51,6 +56,10 @@ class ExpertDashboard extends React.Component {
             <p>name: {userObj.first_name} {userObj.last_name}</p>
             <p>email: {userObj.user_email}</p>
             <p>phone: {userObj.user_phone}</p>
+            <button
+              disabled={!userObj.first_name}
+              onClick={e => this.claimUser(userObj)}
+            >claim this user</button>
           </div>
         </div>
       )
