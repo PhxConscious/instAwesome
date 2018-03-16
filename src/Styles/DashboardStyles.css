@@ -1,10 +1,10 @@
 .background {
-  height: 100vh;
-  width: 100vw;
+  min-height: 90.5vh;
+  /*width: 100;*/
   background-color: #005259;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
+  /*display: flex;*/
+  /*flex-direction: row;*/
+  /*justify-content: space-evenly;*/
   padding-top: 20px;
 }
 
@@ -14,8 +14,7 @@
 }
 
 .lessonContentContainer{
-  display: inline-block;
-  flex-basis: 60vw;
+  /*flex-basis: 60vw;*/
 }
 
 #lessonContentComponent {

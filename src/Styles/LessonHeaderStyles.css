@@ -1,17 +1,21 @@
 #LessonHeaderContainer {
-
 }
 
 #titleContainer {
-  width: 500px; /*same as reactPlayer*/
-  margin: 0 auto;
+    width: 100%; /*same as reactPlayer*/
+    margin-left: 16px;
+    margin-top: 6px;
 }
 
 #title {
-  margin: 0px 0px 0px 0px;
+    margin-top: 0;
+    padding-top: 20px;
+    height: 8vh;
+    font-family: Asap;
+    font-weight: bold;
+    color: #075258;
+    font-size: 27px;
 }
-
-
 
 #reactPlayerContainer {
 }

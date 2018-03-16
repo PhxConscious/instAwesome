@@ -272,8 +272,11 @@ class CheckTasks extends React.Component {
               raised accent ripple
               className={prevButtonHidden ? 'hidden' : ""}
               onClick={prevQuestClickHandler}
-              value="nextQuestion"
-            >prevQuestion</Button>
+              value="nextQuestion">
+              <span className='lmsBtnText'>
+                prevQuestion
+              </span>
+            </Button>
 
             {
               currentQuestionObj.contentType === "checkTasks" ? <Button
@@ -282,7 +285,7 @@ class CheckTasks extends React.Component {
                       onClick={nextQuestClickHandler}
                       value="nextQuestion"
                       disabled={!isCheckMarked}
-                    >nextQuestion</Button> : null
+              ><span className='lmsBtnText'>nextQuestion</span></Button> : null
             }
             {
               currentQuestionObj.contentType === "textArea" ? <Button

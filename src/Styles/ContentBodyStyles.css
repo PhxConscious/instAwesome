@@ -1,5 +1,6 @@
 .hidden {
   visibility: hidden;
+  background-color: green;
 }
 
 #lessonTitleContainer {
@@ -45,4 +46,11 @@
 #nextPrevButtonContainer Button {
   display: flex;
   margin: 0 5px 5px 5px;
+  width: 50%;
+  border-radius: 10px;
+}
+
+.lmsBtnText{
+  text-align: center;
+  width: 100%;
 }
