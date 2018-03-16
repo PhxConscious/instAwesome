@@ -84,6 +84,7 @@
     border-radius: 10px;
     color: white;
     font-size: 18px;
+    height: 35px;
 }
 
 #loadingText {
@@ -94,7 +95,7 @@
 .signInFormButton {
     background-color: #48C8D3;
     width: 30%;
-    height: 40px;
+    height: 50px;
     border-radius: 10px;
     color: white;
 
@@ -168,3 +169,10 @@ li {
     margin-bottom: 0;
     height: 18px;
 }
+
+/*.formBtnCont{*/
+   /*text-align: center;*/
+    /*height: 80px;*/
+    /*position: fixed;*/
+    /*z-index: 1;*/
+/*}*/

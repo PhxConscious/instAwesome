@@ -74,7 +74,6 @@ class LoginForm extends Component {
             password: '',
             loginError: '',
             user_token: firebase.auth().currentUser.uid,
-            loginError: ''
         });
 
         setTimeout(() => {
