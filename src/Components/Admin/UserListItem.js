@@ -6,9 +6,9 @@ const UserListItem = ({ userInfo, user, selectUser }) => {
 
   return (
     <div
-      onClick={e => selectUser(user.first_name)}
+      onClick={e => selectUser(user)}
     >
-      {user.first_name}
+      <p>{user.first_name}</p>
     </div>
   )
 }
