@@ -1,8 +1,7 @@
 .formCont {
-    /*width: 95%;*/
-    margin-right: auto;
-    margin-left: auto;
     margin-bottom: 20px;
+    text-align: center;
+    margin-top: 3vh;
 }
 
 .formTitleCont {
@@ -95,6 +94,7 @@
 .signInFormButton {
     background-color: #48C8D3;
     width: 30%;
+    height: 40px;
     border-radius: 10px;
     color: white;
 

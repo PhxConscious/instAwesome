@@ -2,32 +2,34 @@ import React, {Component} from "react";
 import firebase from 'firebase';
 import {Redirect, Link} from 'react-router-dom';
 import Styles from '../../Styles/FormsStyles.css';
-import { connect } from 'react-redux';
-import { setCurrentValue } from "../../redux/actions/currentValues";
-import { getUserProgress } from '../../redux/actions/userProgress';
-import { getCompanyList } from '../../redux/actions/companyInfo';
-import { getLmsContent } from '../../redux/actions/lmsContent';
-import { instanceOf } from 'prop-types';
-import { withCookies, Cookies } from 'react-cookie';
+import {connect} from 'react-redux';
+import {setCurrentValue} from "../../redux/actions/currentValues";
+import {getUserProgress} from '../../redux/actions/userProgress';
+import {getCompanyList} from '../../redux/actions/companyInfo';
+import {getLmsContent} from '../../redux/actions/lmsContent';
+import {instanceOf} from 'prop-types';
+import {withCookies, Cookies} from 'react-cookie';
+import {Spinner} from 'react-mdl';
 
 class LoginForm extends Component {
 
     constructor(props) {
-      super(props);
-      this.state = {
-          email: '',
-          password: '',
-          phone: '',
-          loginError: '',
-          user_token: '',
-          redirect: false,
-          OAuthToken: '',
-      };
-      this.pullInUserValues = this.pullInUserValues.bind(this)
+        super(props);
+        this.state = {
+            email: '',
+            password: '',
+            phone: '',
+            loginError: '',
+            user_token: '',
+            redirect: false,
+            OAuthToken: '',
+            loading: false
+        };
+        this.pullInUserValues = this.pullInUserValues.bind(this)
     }
 
     static propTypes = {
-      cookies: instanceOf(Cookies).isRequired
+        cookies: instanceOf(Cookies).isRequired
     };
 
     handleInputTextChange = e => {
@@ -52,61 +54,79 @@ class LoginForm extends Component {
     };
 
 
-    pullInUserValues(fb_id){
+    pullInUserValues(fb_id) {
         let {setCurrentUserFbId, fetchUserInfo, getCompanyList, getLmsContent} = this.props;
-        firebase.auth().onAuthStateChanged(function(user) {
-          if (user) {
-            setCurrentUserFbId("currentFbId", fb_id)
-            fetchUserInfo(fb_id);
-            getCompanyList(fb_id);
-            getLmsContent();
-          } else {
-            console.log('theres no user - THIS IS SOMETHING WEIRD WITH FIREBASE, investigate')
-          }
+        firebase.auth().onAuthStateChanged(function (user) {
+            if (user) {
+                setCurrentUserFbId("currentFbId", fb_id)
+                fetchUserInfo(fb_id);
+                getCompanyList(fb_id);
+                getLmsContent();
+            } else {
+                console.log('theres no user - THIS IS SOMETHING WEIRD WITH FIREBASE, investigate')
+            }
         });
     }
 
     onLoginSuccess = () => {
-      this.setState({
-          email: '',
-          password: '',
-          loginError: '',
-          user_token: firebase.auth().currentUser.uid,
-          redirect: true
-      });
-      // set a cookie upon login with fb_id
-      const { cookies } = this.props;
+        this.setState({
+            email: '',
+            password: '',
+            loginError: '',
+            user_token: firebase.auth().currentUser.uid,
+            loginError: ''
+        });
 
-      cookies.set('hash', firebase.auth().currentUser.uid, { path: '/', maxAge: 1000000 });
+        setTimeout(() => {
+            this.setState({
+                redirect: true
+            })
+        },2000);
 
-      this.pullInUserValues(firebase.auth().currentUser.uid)
+        // set a cookie upon login with fb_id
+        const {cookies} = this.props;
+
+        cookies.set('hash', firebase.auth().currentUser.uid, {path: '/', maxAge: 1000000});
+
+        this.pullInUserValues(firebase.auth().currentUser.uid)
+
     };
 
     onLoginFail = () => {
-        this.setState({loginError: 'Authentication Failed'});
+        this.setState({
+            loginError: 'Authentication Failed',
+            loading: false
+        });
         console.log(`this is the login error: ${this.state.loginError}`);
     };
 
     renderButton = () => {
-        return (
-            <button
-                className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect signInFormButton"
-                onClick={this.onButtonPress}
-                color='orange'>
+        if(!this.state.loading){
+            return (
+                <button
+                    className="signInFormButton"
+                    onClick={this.onButtonPress}
+                    color='orange'>
                 <span className='buttonText'>
                     LOGIN
                 </span>
-            </button>
-        );
+                </button>
+            );
+        }
+        return(
+            <Spinner />
+        )
     };
-
 
 
     onButtonPress = (e) => {
         e.preventDefault();
-        const {email, password} = this.state;
+        const {email, password, loading} = this.state;
         console.log(" current email and password", email, password)
-        this.setState({error: ''});
+        this.setState({
+            error: '',
+            loading: true
+        });
         firebase.auth().signInWithEmailAndPassword(email, password)
             .then(this.onLoginSuccess)
             .then(this.setState({email: '', password: ''}))
@@ -114,15 +134,15 @@ class LoginForm extends Component {
     };
 
     render() {
-        const { cookies } = this.props;
+        const {cookies} = this.props;
 
         // keeps user logged in
         let userCookie = cookies.get('hash')
         if (userCookie) {
-          this.pullInUserValues(userCookie);
-          return (
-            <Redirect to={ '/splash'}/>
-          )
+            this.pullInUserValues(userCookie);
+            return (
+                <Redirect to={'/splash'}/>
+            )
         }
 
 
@@ -199,14 +219,14 @@ const mapDispatchToProps = dispatch => {
         setCurrentUserFbId: (key, value) => {
             dispatch(setCurrentValue(key, value))
         },
-        fetchUserInfo : (fb_id) => {
-          dispatch(getUserProgress(fb_id))
+        fetchUserInfo: (fb_id) => {
+            dispatch(getUserProgress(fb_id))
         },
         getCompanyList: (fb_id) => {
-          dispatch(getCompanyList(fb_id))
+            dispatch(getCompanyList(fb_id))
         },
-        getLmsContent : () => {
-          dispatch(getLmsContent())
+        getLmsContent: () => {
+            dispatch(getLmsContent())
         },
     }
 };
