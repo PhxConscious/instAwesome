@@ -451,7 +451,7 @@ class Dashboard extends React.Component {
                 <div className="background">
                     <Grid>
                         <Cell col={4} tablet={12} phone={12}>
-                            <div id="spacer"></div>
+                            {/*<div id="spacer"></div>*/}
                             <div className="unitCardsContainer">
                                 {lmsCards}
                             </div>
