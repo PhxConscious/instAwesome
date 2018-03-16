@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {Redirect} from 'react-router-dom';
 import { postFeedback } from '../../redux/actions/feedback';
-import { getFreeUsers } from '../../redux/actions/userExpertJoin';
+import { getFreeUsers, postNewUserExpertJoin } from '../../redux/actions/userExpertJoin';
 import UserListItem from '../Admin/UserListItem';
 
 class ExpertDashboard extends React.Component {
@@ -21,7 +21,13 @@ class ExpertDashboard extends React.Component {
   }
 
   claimUser(user){
-    console.log("in claimUser", user)
+    let { userInfo } = this.props;
+    this.props.postNewUserExpertJoin({
+      user_id: user.firebase_id,
+      expert_id: userInfo.firebase_id})
+      this.setState({
+        userObj:{}
+      })
   }
 
   render(){
@@ -77,11 +83,11 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = dispatch => {
   return {
-    postFeedback: (fb_id, commentObj) => {
-      dispatch(postFeedback(fb_id, commentObj))
-    },
     getFreeUsers: () => {
       dispatch(getFreeUsers())
+    },
+    postNewUserExpertJoin: (obj) => {
+      dispatch(postNewUserExpertJoin(obj))
     }
   }
 }
