@@ -36,8 +36,6 @@ class AppNavbar extends Component {
 
         let {userInfo} = this.props;
 
-        const {redirect} = this.state;
-
         return (
             <Grid className="navContentCont">
                 <Cell className='leftCol' col={4} hideTablet={true} hidePhone={true}>
@@ -68,7 +66,7 @@ class AppNavbar extends Component {
                         <Cell col={10}>
                             <div className='rightSideLogoCont'>
                                 <span
-                                    className='phxConsciousText phxConsciousTextCont'>{userInfo ? userInfo.user_email : "" }</span>
+                                    className='phxConsciousText phxConsciousTextCont'>{userInfo ? userInfo.user_email : ""}</span>
                             </div>
                         </Cell>
                         <Cell col={2}>
@@ -87,7 +85,9 @@ class AppNavbar extends Component {
                                 <Link className='linkTo' to='/expertdashboard'>
                                     <li className="mdl-menu__item">EXPERT ONLY</li>
                                 </Link>
-                                <li onClick={this.userSignOut} className="mdl-menu__item">SIGN OUT</li>
+                                <Link className='linkTo' to='/'>
+                                    <li onClick={this.userSignOut} className="mdl-menu__item">SIGN OUT</li>
+                                </Link>
                             </ul>
                         </Cell>
                     </Grid>
