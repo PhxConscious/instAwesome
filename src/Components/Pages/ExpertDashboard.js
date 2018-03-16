@@ -21,16 +21,27 @@ class ExpertDashboard extends React.Component {
     }
 
     let freeUsers;
+    let unhitchedUsers
     if(userExpertJoin && userExpertJoin.freeUsers){
       freeUsers = userExpertJoin.freeUsers;
+      unhitchedUsers = freeUsers.map((user, i) => {
+        return <div key={i}>
+          {user.first_name}
+        </div>
+      })
     }
 
     console.log("freeUsers", freeUsers)
-    return (
-      <div style={{width: "50vw", margin: "0 auto", marginTop: "100px"}}>
-        expert panel
-      </div>
-    )
+    if(userExpertJoin && userExpertJoin.freeUsers){
+      return (
+        <div style={{width: "50vw", margin: "0 auto", marginTop: "100px"}}>
+          expert panel
+          {unhitchedUsers}
+        </div>
+      )
+    } else {
+      return <div>loading expert panel...</div>
+    }
   }
 }
 
