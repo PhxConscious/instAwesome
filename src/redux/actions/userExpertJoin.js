@@ -20,3 +20,10 @@ export const getFreeUsers = () => {
     payload: axios.get(`http://localhost:8080/userexpertjoin/freeusers`)
   }
 }
+
+export const postNewUserExpertJoin = (obj) => {
+  return {
+    type: "POST_NEW_USER_EXPERT_JOIN",
+    payload: axios.post(`http://localhost:8080/userexpertjoin/new`, obj)
+  }
+}
