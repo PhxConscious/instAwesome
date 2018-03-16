@@ -5,12 +5,9 @@ import {updateCompanyInfo, getCompanyList} from "../../redux/actions/companyInfo
 import {getUserProgress} from "../../redux/actions/userProgress";
 import {connect} from "react-redux";
 import {postUserCompanyJoinInfo} from "../../redux/actions/userCompanyJoin";
+import {Spinner} from 'react-mdl';
 
 class OnTheWeb extends Component {
-
-    componentDidMount() {
-
-    }
 
     constructor(props) {
         super(props);
@@ -52,7 +49,6 @@ class OnTheWeb extends Component {
         this.pullInUserValues = this.pullInUserValues.bind(this);
     }
 
-
     onButtonPress(e) {
         e.preventDefault();
         const {
@@ -89,9 +85,7 @@ class OnTheWeb extends Component {
     }
 
     renderButton() {
-        if (this.state.loading) {
-            return <p className=""></p>
-        }
+        if(!this.state.loading){
         return (
             <button
                 className="formButton"
@@ -101,6 +95,11 @@ class OnTheWeb extends Component {
                 </span>
             </button>
         );
+        }
+        return(
+            // console.log(this.props.)
+            <Spinner />
+        )
     }
 
     handleInputTextChange = e => {
@@ -115,7 +114,8 @@ class OnTheWeb extends Component {
     }
 
     render() {
-        console.log('THIS IS THE COMPANY INFO', )
+        console.log(this.props.addCompanyInfo.payload)
+
         return (
             <div>
                 <form className="formCont" action="#">
@@ -411,7 +411,9 @@ class OnTheWeb extends Component {
                         </div>
                     </div>
                     <br/>
-                    {this.renderButton()}
+                    <div className='formBtnCont'>
+                        {this.renderButton()}
+                    </div>
                 </form>
             </div>
         );
