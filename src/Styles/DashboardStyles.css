@@ -14,7 +14,6 @@
 }
 
 .lessonContentContainer{
-  display: inline-block;
   flex-basis: 60vw;
 }
 

@@ -8,7 +8,7 @@ export const VideoContent = ({title, video, description}) => {
       <ReactPlayer
         url={video}
         controls={true}
-        width="500px"
+        width="100%"
         height="280px"
         playing={true}
       />
