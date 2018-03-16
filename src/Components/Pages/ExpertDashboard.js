@@ -3,14 +3,21 @@ import { connect } from 'react-redux';
 import {Redirect} from 'react-router-dom';
 import { postFeedback } from '../../redux/actions/feedback';
 import { getFreeUsers } from '../../redux/actions/userExpertJoin';
+import UserListItem from '../Admin/UserListItem';
 
 class ExpertDashboard extends React.Component {
   constructor(props){
     super(props)
-
+    this.state = {userName: ''}
+    this.selectUser = this.selectUser.bind(this);
   }
   componentWillMount(){
     this.props.getFreeUsers()
+  }
+
+  selectUser(user){
+    console.log("inselectuser", user)
+    this.setState({userName: user})
   }
 
   render(){
@@ -25,17 +32,19 @@ class ExpertDashboard extends React.Component {
     if(userExpertJoin && userExpertJoin.freeUsers){
       freeUsers = userExpertJoin.freeUsers;
       unhitchedUsers = freeUsers.map((user, i) => {
-        return <div key={i}>
-          {user.first_name}
-        </div>
+        return <UserListItem
+          key={i}
+          user={user}
+          selectUser={this.selectUser}
+        />
       })
     }
 
-    console.log("freeUsers", freeUsers)
     if(userExpertJoin && userExpertJoin.freeUsers){
       return (
         <div style={{width: "50vw", margin: "0 auto", marginTop: "100px"}}>
           expert panel
+          current state: {this.state.userName}
           {unhitchedUsers}
         </div>
       )
