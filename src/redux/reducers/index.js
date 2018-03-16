@@ -5,6 +5,7 @@ import currentValues from './currentValues';
 import companyInfo from "./companyInfo";
 import userCompanyJoin from "./userCompanyJoin";
 import feedback from "./feedback";
+import userExpertJoin from './userExpertJoin';
 
 const rootReducer = combineReducers({
   userProgress: userProgress,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   companyInfo: companyInfo,
   userCompanyJoin: userCompanyJoin,
   feedback: feedback,
+  userExpertJoin, userExpertJoin
 });
 
 export default rootReducer;

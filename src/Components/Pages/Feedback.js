@@ -23,7 +23,8 @@ class Feedback extends React.Component {
   render(){
     const { userInfo } = this.props;
 
-    if (typeof(userInfo.currentUser)==='undefined') {
+    if (typeof(userInfo.currentUser)===undefined) {
+      console.log("undefined?", userInfo.currentUser)
       return <Redirect to='/'/>
     }
 
