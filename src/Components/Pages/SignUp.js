@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import '../../App.css';
+import {Grid, Cell} from 'react-mdl';
 
 import Gradient from "../Reusable/Gradient";
 import BlueAppBg from "../Reusable/BlueAppBg";
@@ -12,7 +13,11 @@ class UserProfile extends Component {
             <div className="App">
                 <Gradient/>
                 <BlueAppBg>
-                    <SignUpForm/>
+                    <Grid className='pageCont'>
+                        <Cell col={8} offsetDesktop={2} tablet={12} phone={12}>
+                            <SignUpForm/>
+                        </Cell>
+                    </Grid>
                 </BlueAppBg>
                 <Gradient/>
             </div>
