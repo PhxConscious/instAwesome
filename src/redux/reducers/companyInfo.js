@@ -47,7 +47,8 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 companyInfo: action.payload.data[0],
-                companyList: action.payload.data
+                companyList: action.payload.data,
+                status: action.payload.status
             }
         case "GET_COMPANY_LIST_PENDING":
             return {

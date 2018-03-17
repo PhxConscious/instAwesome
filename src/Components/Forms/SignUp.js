@@ -1,11 +1,11 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import firebase from 'firebase';
 import axios from 'axios';
-import { Redirect } from 'react-router-dom';
-import { connect } from "react-redux";
+import {Redirect} from 'react-router-dom';
+import {connect} from "react-redux";
 import starterObj from '../../config/starterUserProgressObject';
 import Styles from '../../Styles/FormsStyles.css';
-import { nextQuestion, createNewUser } from "../../redux/actions/userProgress";
+import {nextQuestion, createNewUser} from "../../redux/actions/userProgress";
 
 class SignUpForm extends Component {
     constructor(props) {
@@ -22,7 +22,7 @@ class SignUpForm extends Component {
     }
 
     onButtonPress = () => {
-        const { email, password, verifyPassword, firstName, lastName, userPhone } = this.state;
+        const {email, password, verifyPassword, firstName, lastName, userPhone} = this.state;
         if (email === '' || password === '') {
             return alert('Must fill in all fields')
         } else if (password !== verifyPassword) {
@@ -33,18 +33,21 @@ class SignUpForm extends Component {
         return (
 
             firebase.auth().createUserWithEmailAndPassword(email, password)
-                // call action with the correct user object
+            // call action with the correct user object
                 .then(user => {
-                  this.props.createNewUser({
-                  user_email: email,
-                  firebase_id: firebase.auth().currentUser.uid,
-                  first_name: firstName,
-                  last_name: lastName,
-                  user_phone: userPhone,
-                  user_progress: starterObj
-                  })
+                    this.props.createNewUser({
+                        user_email: email,
+                        firebase_id: firebase.auth().currentUser.uid,
+                        first_name: firstName,
+                        last_name: lastName,
+                        user_phone: userPhone,
+                        user_progress: starterObj
+                    })
                 })
-                .then(this.setState({redirect: true}))
+                .then(() => {
+                    this.setState({redirect: true});
+                    firebase.auth().currentUser.sendEmailVerification()
+                })
         )
     };
 
@@ -53,7 +56,7 @@ class SignUpForm extends Component {
     };
 
     render() {
-        const { redirect } = this.state;
+        const {redirect} = this.state;
 
         if (redirect) {
             return <Redirect to='/'/>;
@@ -167,11 +170,11 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
     return {
-        putNextQuestion : (fb_id, data) => {
-            dispatch(nextQuestion(fb_id, data ))
+        putNextQuestion: (fb_id, data) => {
+            dispatch(nextQuestion(fb_id, data))
         },
-        createNewUser : (userObj) => {
-          dispatch(createNewUser(userObj))
+        createNewUser: (userObj) => {
+            dispatch(createNewUser(userObj))
         }
     }
 };
