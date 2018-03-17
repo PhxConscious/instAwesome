@@ -1,0 +1,19 @@
+#container: {
+  /*position: "relative";*/
+  /*margin: "0 auto";*/
+  /*width: "50vw";*/
+  /*margin: "20px 0 20px";*/
+  /*paddingTop: "30px";*/
+}
+
+#questionContainer {
+  display: flex;
+}
+
+.check {
+  flex-basis: 10%;
+}
+
+.question {
+  flex-basis: 90%;
+}
