@@ -5,6 +5,7 @@ import { postFeedback } from '../../redux/actions/feedback';
 import { getFreeUsers, postNewUserExpertJoin } from '../../redux/actions/userExpertJoin';
 import { getAllUsers } from '../../redux/actions/userProgress';
 import UserListItem from '../Admin/UserListItem';
+import UserOverview from '../Admin/UserOverview';
 
 class AdminDashboard extends React.Component {
   constructor(props){
@@ -57,7 +58,7 @@ class AdminDashboard extends React.Component {
     if(allUsers){
       userList = allUsers.map((user, i) => {
         return (
-          <div>
+          <div onClick={e=>this.setState({selectedUser:user})}>
             {user.first_name}
           </div>
         )
@@ -68,18 +69,11 @@ class AdminDashboard extends React.Component {
       return (
         <div style={{width: "50vw", margin: "0 auto", marginTop: "100px"}}>
           <div style={{display:"inline-block", width: "20vw", "backgroundColor": "yellow"}}>
-            <h6>expert panel</h6>
-            {unhitchedUsers}
+            {userList}
           </div>
-          {userList}
+
           <div style={{display:"inline-block", width: "30vw", "backgroundColor": "pink"}}>
-            <p>name: {userObj.first_name} {userObj.last_name}</p>
-            <p>email: {userObj.user_email}</p>
-            <p>phone: {userObj.user_phone}</p>
-            <button
-              disabled={!userObj.first_name}
-              onClick={e => this.claimUser(userObj)}
-            >claim this user</button>
+            {this.state.selectedUser ? <UserOverview user={this.state.selectedUser}/>:''}
           </div>
         </div>
       )
