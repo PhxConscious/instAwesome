@@ -1,13 +1,19 @@
 import React from 'react';
-import { IconButton, Menu, MenuItem } from 'react-mdl';
+import { IconButton, Menu, MenuItem, Dialog, DialogTitle, DialogContent, DialogActions, Button } from 'react-mdl';
 import { connect } from 'react-redux';
 import { getAllExperts } from '../../redux/actions/userProgress';
+import { postNewUserExpertJoin } from '../../redux/actions/userExpertJoin';
 
 class UserOverview extends React.Component {
   constructor(props){
     super(props)
-    this.state={}
+    this.state={
+      selectedExpert: '',
+      openModal: false
+    }
     this.getCompletedLessons = this.getCompletedLessons.bind(this);
+    this.handleSelect = this.handleSelect.bind(this);
+    this.connectUserAndExpert = this.connectUserAndExpert.bind(this);
   }
 
   componentWillMount(){
@@ -26,15 +32,31 @@ class UserOverview extends React.Component {
     return result;
   }
 
+  handleSelect(expertId){
+    this.setState({selectedExpert: expertId, openModal: true})
+    console.log('in handleSelect')
+  }
+
+  connectUserAndExpert(){
+    console.log('connect those shits', this.props.user.firebase_id, this.state.selectedExpert)
+    // post here
+    this.props.joinUserAndExpert({
+      expert_id: this.state.selectedExpert,
+      user_id: this.props.user.firebase_id
+    })
+    this.setState({selectedExpert: '', openModal: false})
+  }
 
   render(){
     let { expertList } = this.props.users;
     let theExperts;
-    console.log("suser", this.props.users)
+
     if(this.props.users.expertList){
       theExperts = expertList.map(expert => {
         return (
-          <MenuItem>
+          <MenuItem
+            onClick={e => this.handleSelect(expert.firebase_id)}
+          >
             {expert.first_name}
           </MenuItem>
         )
@@ -55,6 +77,16 @@ class UserOverview extends React.Component {
               {theExperts}
           </Menu>
         </div>
+        <Dialog open={this.state.openModal}>
+          <DialogTitle>Connect this user with this expert</DialogTitle>
+          <DialogContent>
+            <p>Be sure, we cannot change it yet</p>
+          </DialogContent>
+          <DialogActions>
+            <Button type='button' onClick={e=>this.setState({openModal:false})}>Wait, not sure</Button>
+            <Button type='button' onClick={this.connectUserAndExpert}>Lets do it</Button>
+          </DialogActions>
+        </Dialog>
       </div>
     )
   }
@@ -69,6 +101,9 @@ const mapDispatchToProps = dispatch => {
     getAllExperts: () => {
       dispatch(getAllExperts())
     },
+    joinUserAndExpert: (obj) => {
+      dispatch(postNewUserExpertJoin(obj))
+    }
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(UserOverview);
