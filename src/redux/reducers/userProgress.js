@@ -4,6 +4,19 @@ let initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type){
+    case "GET_ALL_USERS_FULFILLED":
+      return {
+        ...state,
+        allUsers: action.payload.data
+      }
+    case "GET_ALL_USERS_PENDING":
+      return {
+        ...state
+      }
+    case "GET_ALL_USERS_REJECTED":
+      return {
+        ...state
+      }
     case "GET_USER_PROGRESS_FULFILLED":
       return {
         ...state,
