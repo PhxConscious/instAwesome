@@ -31,3 +31,10 @@ export const createNewUser = (userObj) => {
     payload: axios.post(`http://localhost:8080/users/new`, userObj)
   }
 }
+
+export const getAllExperts = () => {
+  return {
+    type: "GET_ALL_EXPERTS",
+    payload: axios.get(`http://localhost:8080/users/experts`)
+  }
+}
