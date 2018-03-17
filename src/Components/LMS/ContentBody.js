@@ -22,6 +22,7 @@ class CheckTasks extends React.Component {
     this.isPrevQ = this.isPrevQ.bind(this);
     this.isChecked = this.isChecked.bind(this);
     this.checkBox = this.checkBox.bind(this);
+    this.multiChoiceAttempted = this.multiChoiceAttempted.bind(this);
   }
 
   componentDidMount(){
@@ -90,6 +91,10 @@ class CheckTasks extends React.Component {
 
   checkBox(){
     this.setState({isCheckMarked: !this.state.isCheckMarked})
+  }
+
+  multiChoiceAttempted(){
+    this.setState({multiChoiceAttempted: true})
   }
 
 
@@ -221,6 +226,7 @@ class CheckTasks extends React.Component {
           {
             currentQuestionObj.contentType === "multiChoice" ? <MultiChoiceShell
               currentQuestionObj={currentQuestionObj}
+              multiChoiceAttempted={this.multiChoiceAttempted}
             /> : ""
           }
 
@@ -286,21 +292,29 @@ class CheckTasks extends React.Component {
 
             {
               currentQuestionObj.contentType === "checkTasks" ? <Button
-                      raised accent ripple
-                      className={nextButtonHidden ? 'hidden' : ""}
-                      onClick={nextQuestClickHandler}
-                      value="nextQuestion"
-                      disabled={!isCheckMarked}
+                raised accent ripple
+                className={nextButtonHidden ? 'hidden' : ""}
+                onClick={nextQuestClickHandler}
+                value="nextQuestion"
+                disabled={!isCheckMarked}
               ><span className='lmsBtnText'>nextQuestion</span></Button> : null
             }
             {
               currentQuestionObj.contentType === "textArea" ? <Button
-                      raised accent ripple
-                      className={nextButtonHidden ? 'hidden' : ""}
-                      onClick={submitTextArea}
-                      value="nextQuestion"
-                      disabled={this.state.textArea.length === 0}
-                    >nextQuestion</Button> : null
+                  raised accent ripple
+                  className={nextButtonHidden ? 'hidden' : ""}
+                  onClick={submitTextArea}
+                  value="nextQuestion"
+                  disabled={this.state.textArea.length === 0}
+                >nextQuestion</Button> : null
+            }
+            {
+              currentQuestionObj.contentType === "multiChoice" ? <Button
+                  raised accent ripple
+                  onClick={nextQuestClickHandler}
+                  value="nextQuestion"
+                  disabled={!this.state.multiChoiceAttempted}
+                >nextMultiChoice</Button> : null
             }
 
 

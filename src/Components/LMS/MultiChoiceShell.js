@@ -14,6 +14,7 @@ class MultiChoiceShell extends React.Component{
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.addToIndices = this.addToIndices.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
 
@@ -46,10 +47,14 @@ class MultiChoiceShell extends React.Component{
       result = arr.filter(elem => {
         return elem !== i;
       })
-      this.setState({indicesOfChecked: result})
+      this.setState({indicesOfChecked: result, indicesOfChecked: []})
     }
   }
 
+  handleClick(){
+    this.setState({openDialog: false, resetLocal: !this.state.resetLocal})
+    this.props.multiChoiceAttempted();
+  }
 
   render(){
     let { isCorrect, resetLocal } = this.state;
@@ -82,7 +87,7 @@ class MultiChoiceShell extends React.Component{
           {theQuestions}
           <button
             type="submit"
-          >Submit</button>
+          >Attempt</button>
         </form>
 
         <Dialog open={this.state.openDialog}>
@@ -92,7 +97,7 @@ class MultiChoiceShell extends React.Component{
             {!isCorrect ? questObj.incorrectResponse : ''}
           </DialogContent>
           <DialogActions>
-            <Button type='button' onClick={e => this.setState({openDialog: false, resetLocal: !this.state.resetLocal})}>OK</Button>
+            <Button type='button' onClick={this.handleClick}>OK</Button>
           </DialogActions>
         </Dialog>
 
