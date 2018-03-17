@@ -64,19 +64,20 @@ class UserOverview extends React.Component {
     }
 
     let { user } = this.props;
-    // console.log("user", user)
+    console.log("user", user.expert_id)
     return(
       <div>
         <p>{user.first_name} {user.last_name}</p>
         <p>{user.user_email}</p>
         <p>{user.user_phone}</p>
         <ul>{this.getCompletedLessons(user.user_progress).map(lesson => <li>lesson</li>)}</ul>
-        <div style={{position: 'relative'}}>
-          <IconButton name="more_vert" id="demo-menu-top-left" />
+        {user.expert_id ? "already claimed" : <div style={{position: 'relative'}}>
+          <IconButton name="more_vert" id="demo-menu-top-left" /> Pair with expert
           <Menu target="demo-menu-top-left" valign="bottom" ripple>
               {theExperts}
           </Menu>
         </div>
+      }
         <Dialog open={this.state.openModal}>
           <DialogTitle>Connect this user with this expert</DialogTitle>
           <DialogContent>
