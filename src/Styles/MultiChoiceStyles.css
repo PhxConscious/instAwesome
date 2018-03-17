@@ -1,0 +1,18 @@
+#container: {
+}
+
+#questionContainer {
+  display: flex;
+}
+
+.check {
+  flex-basis: 10%;
+}
+
+.question {
+  flex-basis: 90%;
+}
+
+.highlightCorrect {
+  background-color: rgba(0, 255, 0, 0.3);
+}

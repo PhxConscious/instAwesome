@@ -13,7 +13,7 @@
 
 #inputComponent {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   /*width: 100%;*/
   /*background-color: red;*/
   padding: 0 10px 0 10px;
