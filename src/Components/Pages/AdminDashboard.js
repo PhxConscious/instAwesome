@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import {Redirect} from 'react-router-dom';
 import { postFeedback } from '../../redux/actions/feedback';
 import { getFreeUsers, postNewUserExpertJoin } from '../../redux/actions/userExpertJoin';
+import { getAllUsers } from '../../redux/actions/userProgress';
 import UserListItem from '../Admin/UserListItem';
 
 class AdminDashboard extends React.Component {
@@ -14,6 +15,7 @@ class AdminDashboard extends React.Component {
   }
   componentWillMount(){
     this.props.getFreeUsers()
+    this.props.getAllUsers()
   }
 
   selectUser(user){
@@ -31,7 +33,7 @@ class AdminDashboard extends React.Component {
   }
 
   render(){
-    const { userInfo, userExpertJoin } = this.props;
+    const { userInfo, allUsers, userExpertJoin } = this.props;
     let { userObj } = this.state;
 
     if (typeof(userInfo.currentUser)===undefined) {
@@ -51,13 +53,25 @@ class AdminDashboard extends React.Component {
       })
     }
 
-    if(userExpertJoin && userExpertJoin.freeUsers){
+    let userList;
+    if(allUsers){
+      userList = allUsers.map((user, i) => {
+        return (
+          <div>
+            {user.first_name}
+          </div>
+        )
+      })
+    }
+
+    if(userExpertJoin && userExpertJoin.freeUsers && allUsers){
       return (
         <div style={{width: "50vw", margin: "0 auto", marginTop: "100px"}}>
           <div style={{display:"inline-block", width: "20vw", "backgroundColor": "yellow"}}>
             <h6>expert panel</h6>
             {unhitchedUsers}
           </div>
+          {userList}
           <div style={{display:"inline-block", width: "30vw", "backgroundColor": "pink"}}>
             <p>name: {userObj.first_name} {userObj.last_name}</p>
             <p>email: {userObj.user_email}</p>
@@ -78,6 +92,7 @@ class AdminDashboard extends React.Component {
 const mapStateToProps = state => {
   return {
     userInfo: state.userProgress.currentUser,
+    allUsers: state.userProgress.allUsers,
     userExpertJoin: state.userExpertJoin
   }
 }
@@ -88,6 +103,9 @@ const mapDispatchToProps = dispatch => {
     },
     postNewUserExpertJoin: (obj) => {
       dispatch(postNewUserExpertJoin(obj))
+    },
+    getAllUsers: () => {
+      dispatch(getAllUsers())
     }
   }
 }
