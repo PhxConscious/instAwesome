@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5dcbd94a-9853-46c1-a5fe-46ff5bc17eff" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/src/Components/Forms/OnTheWeb.js" afterPath="$PROJECT_DIR$/src/Components/Forms/OnTheWeb.js" />
-      <change beforePath="$PROJECT_DIR$/src/redux/reducers/companyInfo.js" afterPath="$PROJECT_DIR$/src/redux/reducers/companyInfo.js" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Forms/SignIn.js" afterPath="$PROJECT_DIR$/src/Components/Forms/SignIn.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -18,16 +17,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="LessonContent.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Components/LMS/LessonContent.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="21" column="12" lean-forward="false" selection-start-line="21" selection-start-column="12" selection-end-line="21" selection-end-column="12" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Dashboard.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Components/LMS/Dashboard.js">
           <provider selected="true" editor-type-id="text-editor">
@@ -82,11 +71,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="OnTheWeb.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="OnTheWeb.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Components/Forms/OnTheWeb.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="584">
-              <caret line="85" column="84" lean-forward="false" selection-start-line="85" selection-start-column="84" selection-end-line="85" selection-end-column="84" />
+            <state relative-caret-position="246">
+              <caret line="85" column="46" lean-forward="true" selection-start-line="85" selection-start-column="46" selection-end-line="85" selection-end-column="46" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SignIn.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Components/Forms/SignIn.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="968">
+              <caret line="198" column="29" lean-forward="true" selection-start-line="187" selection-start-column="19" selection-end-line="198" selection-end-column="29" />
               <folding />
             </state>
           </provider>
@@ -174,7 +173,6 @@
         <option value="$PROJECT_DIR$/src/Styles/ShadowBoxStyles.css" />
         <option value="$PROJECT_DIR$/src/Styles/AppNavStyles.css" />
         <option value="$PROJECT_DIR$/src/Styles/FormsStyles.css" />
-        <option value="$PROJECT_DIR$/src/Components/Forms/SignIn.js" />
         <option value="$PROJECT_DIR$/src/Components/Reusable/AppNav.js" />
         <option value="$PROJECT_DIR$/src/Components/Reusable/LmsCard.js" />
         <option value="$PROJECT_DIR$/src/Styles/LmsCardStyles.css" />
@@ -189,6 +187,7 @@
         <option value="$PROJECT_DIR$/src/Styles/LessonHeaderStyles.css" />
         <option value="$PROJECT_DIR$/src/redux/reducers/companyInfo.js" />
         <option value="$PROJECT_DIR$/src/Components/Forms/OnTheWeb.js" />
+        <option value="$PROJECT_DIR$/src/Components/Forms/SignIn.js" />
       </list>
     </option>
   </component>
@@ -392,12 +391,12 @@
       <workItem from="1521088846474" duration="2497000" />
       <workItem from="1521150586250" duration="1775000" />
       <workItem from="1521232140601" duration="11006000" />
-      <workItem from="1521319384809" duration="4815000" />
+      <workItem from="1521319384809" duration="5500000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="229715000" />
+    <option name="totallyTimeSpent" value="230400000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1280" y="22" width="1280" height="1418" extended-state="0" />
@@ -545,6 +544,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
           <caret line="20" column="83" lean-forward="true" selection-start-line="19" selection-start-column="24" selection-end-line="20" selection-end-column="83" />
+          <folding>
+            <element signature="e#0#39#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -634,16 +636,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="7" column="37" lean-forward="false" selection-start-line="7" selection-start-column="37" selection-end-line="7" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/Forms/SignIn.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="515">
-          <caret line="144" column="9" lean-forward="true" selection-start-line="135" selection-start-column="7" selection-end-line="144" selection-end-column="9" />
-          <folding>
-            <element signature="e#0#39#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -816,8 +808,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Components/Forms/OnTheWeb.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="584">
-          <caret line="85" column="84" lean-forward="false" selection-start-line="85" selection-start-column="84" selection-end-line="85" selection-end-column="84" />
+        <state relative-caret-position="246">
+          <caret line="85" column="46" lean-forward="true" selection-start-line="85" selection-start-column="46" selection-end-line="85" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/Forms/SignIn.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="968">
+          <caret line="198" column="29" lean-forward="true" selection-start-line="187" selection-start-column="19" selection-end-line="198" selection-end-column="29" />
           <folding />
         </state>
       </provider>

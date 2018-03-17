@@ -83,8 +83,7 @@ class OnTheWeb extends Component {
 
         this.setState({error: ''})
         this.props.addCompanyInfo(this.props.companyInfo.companyList && this.props.companyInfo.companyList[0].company_id, this.state)
-        console.log('KKKKKKKKKKKKKKKKKKKKKKKKK!!!!!!', this.props.companyInfo.status)
-        if (this.props.companyInfo.status != '200') {
+        if (this.props.companyInfo.status !== 200) {
             return alert('update failed')
         } else {
             return alert('update successful')
