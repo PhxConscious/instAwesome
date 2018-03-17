@@ -1,9 +1,4 @@
 #container: {
-  /*position: "relative";*/
-  /*margin: "0 auto";*/
-  /*width: "50vw";*/
-  /*margin: "20px 0 20px";*/
-  /*paddingTop: "30px";*/
 }
 
 #questionContainer {
@@ -16,4 +11,8 @@
 
 .question {
   flex-basis: 90%;
+}
+
+.highlightCorrect {
+  background-color: rgba(0, 255, 0, 0.3);
 }

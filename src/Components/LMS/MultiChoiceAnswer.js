@@ -1,6 +1,6 @@
 import React from 'react';
 import { Checkbox } from 'react-mdl';
-
+import '../../Styles/MultiChoiceStyles.css';
 
 class MultiChoiceAnswer extends React.Component {
   constructor(props){
@@ -16,11 +16,11 @@ class MultiChoiceAnswer extends React.Component {
         this.setState({checked:false})
         if(this.props.obj.isCorrect){
           this.setState({
-            isGreen: true
+            highlightCorrect: true
           })
           setTimeout(() => {
             this.setState({
-              isGreen: false
+              highlightCorrect: false
             })
           }, 1000)
         }
@@ -35,10 +35,11 @@ class MultiChoiceAnswer extends React.Component {
 
 
     render() {
-      let { isGreen } = this.state;
+      let { highlightCorrect } = this.state;
       let { question } = this.props;
       return (
-        <div className={isGreen ? "green" : ''} id="questionContainer">
+
+        <div className={highlightCorrect?"highlightCorrect":'' } id="questionContainer">
           <div className="check">
             <Checkbox
               ripple
@@ -47,9 +48,10 @@ class MultiChoiceAnswer extends React.Component {
             />
           </div>
           <div className="question">
-            {question}
+            <p>{question}</p>
           </div>
         </div>
+
       )
   }
 }
