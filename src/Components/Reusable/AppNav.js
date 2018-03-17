@@ -82,8 +82,11 @@ class AppNavbar extends Component {
                                 <Link className='linkTo' to='/feedback'>
                                     <li className="mdl-menu__item">FEEDBACK</li>
                                 </Link>
-                                <Link className='linkTo' to='/expertdashboard'>
+                                <Link className='linkTo' to='/expert/dashboard'>
                                     <li className="mdl-menu__item">EXPERT ONLY</li>
+                                </Link>
+                                <Link className='linkTo' to='/admin/dashboard'>
+                                    <li className="mdl-menu__item">ADMIN ONLY</li>
                                 </Link>
                                 <Link className='linkTo' to='/'>
                                     <li onClick={this.userSignOut} className="mdl-menu__item">SIGN OUT</li>
