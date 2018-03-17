@@ -7,6 +7,7 @@ import { CheckBox, LessonIcon } from './Checkbox';
 import TextInput from './TextInput';
 import { Button, Dialog, DialogTitle, DialogActions, DialogContent, Textfield } from 'react-mdl';
 import { updateCompanyInfo } from '../../redux/actions/companyInfo';
+import MultiChoiceShell from './MultiChoiceShell';
 
 class CheckTasks extends React.Component {
   constructor(props){
@@ -215,6 +216,11 @@ class CheckTasks extends React.Component {
               label="Text lines..."
               rows={3}
               style={{width: '100%'}}
+            /> : ""
+          }
+          {
+            currentQuestionObj.contentType === "multiChoice" ? <MultiChoiceShell
+              currentQuestionObj={currentQuestionObj}
             /> : ""
           }
 
