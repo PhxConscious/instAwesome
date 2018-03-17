@@ -72,19 +72,19 @@ class ChangePassword extends Component {
                         <div className='formTitleCont'>
                             <p className="formTitle">CHANGE PASSWORD</p>
                         </div>
-                        <div className="formInputCont">
-                            <div>
-                                <p className='inputLabel'>VERFIY CURRENT PASSWORD</p>
-                            </div>
-                            <input
-                                name='verifyPassword'
-                                className="formInput"
-                                type="password"
-                                onChange={this.handleInputTextChange}
-                                placeholder=''
-                                value={this.state.verifyPassword}>
-                            </input>
-                        </div>
+                        {/*<div className="formInputCont">*/}
+                            {/*<div>*/}
+                                {/*<p className='inputLabel'>VERFIY CURRENT PASSWORD</p>*/}
+                            {/*</div>*/}
+                            {/*<input*/}
+                                {/*name='verifyPassword'*/}
+                                {/*className="formInput"*/}
+                                {/*type="password"*/}
+                                {/*onChange={this.handleInputTextChange}*/}
+                                {/*placeholder=''*/}
+                                {/*value={this.state.verifyPassword}>*/}
+                            {/*</input>*/}
+                        {/*</div>*/}
                         <div className="formInputCont">
                             <div>
                                 <p className='inputLabel'>CHOOSE NEW PASSWORD</p>
