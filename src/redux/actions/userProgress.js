@@ -1,5 +1,13 @@
 import axios from 'axios';
 
+export const getAllUsers = () => {
+  // console.log("Action: Getting user", fb_id)
+  return {
+    type: "GET_ALL_USERS",
+    payload: axios.get(`http://localhost:8080/users`)
+  }
+}
+
 export const getUserProgress = (fb_id) => {
   // console.log("Action: Getting user", fb_id)
   return {
