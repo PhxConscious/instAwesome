@@ -80,26 +80,29 @@ class OnTheWeb extends Component {
             better_business_bureau_profile,
             better_business_bureau_goals,
         } = this.state;
-        this.setState({error: '', loading: true});
+
+        this.setState({error: ''})
         this.props.addCompanyInfo(this.props.companyInfo.companyList && this.props.companyInfo.companyList[0].company_id, this.state)
+        if (this.props.companyInfo.status !== 200) {
+            return alert('update failed')
+        } else {
+            return alert('update successful')
+        }
+
     }
 
     renderButton() {
-        if(!this.state.loading){
-        return (
-            <button
-                className="formButton"
-                onClick={(e) => this.onButtonPress(e)}>
+        if (!this.state.loading) {
+            return (
+                <button
+                    className="formButton"
+                    onClick={(e) => this.onButtonPress(e)}>
                 <span className='buttonText'>
                     UPDATE
                 </span>
-            </button>
-        );
+                </button>
+            );
         }
-        return(
-            // console.log(this.props.)
-            <Spinner />
-        )
     }
 
     handleInputTextChange = e => {
@@ -114,8 +117,6 @@ class OnTheWeb extends Component {
     }
 
     render() {
-        console.log(this.props.addCompanyInfo.payload)
-
         return (
             <div>
                 <form className="formCont" action="#">

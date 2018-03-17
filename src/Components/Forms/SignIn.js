@@ -185,20 +185,20 @@ class LoginForm extends Component {
                     <div>
                         {this.renderButton()}
                     </div>
-                    <div>
-                        <p className='or'>OR SIGN IN WITH</p>
-                        <button className='socialMediaLoginButton' onClick={this.signInWithGoogle}>
-                            <i className="fab fa-google"> </i>
-                        </button>
-                        <button className='socialMediaLoginButton'>
-                            <i className="fab fa-facebook-f"> </i>
-                        </button>
-                        <button className='socialMediaLoginButton'>
-                            <i className="fab fa-linkedin-in"> </i>
-                        </button>
-                    </div>
+                    {/*<div>*/}
+                        {/*<p className='or'>OR SIGN IN WITH</p>*/}
+                        {/*<button className='socialMediaLoginButton' onClick={this.signInWithGoogle}>*/}
+                            {/*<i className="fab fa-google"> </i>*/}
+                        {/*</button>*/}
+                        {/*<button className='socialMediaLoginButton'>*/}
+                            {/*<i className="fab fa-facebook-f"> </i>*/}
+                        {/*</button>*/}
+                        {/*<button className='socialMediaLoginButton'>*/}
+                            {/*<i className="fab fa-linkedin-in"> </i>*/}
+                        {/*</button>*/}
+                    {/*</div>*/}
                     <div className='forgotLinksCont'>
-                        <Link to='/forgotusername' className='forgotLinks' href='#'>FORGOT USERNAME? </Link>
+                        {/*<Link to='/forgotusername' className='forgotLinks' href='#'>FORGOT USERNAME? </Link>*/}
                         <Link to='/forgotpassword' className='forgotLinks' href='#'>FORGOT PASSWORD? </Link>
                     </div>
                 </form>
