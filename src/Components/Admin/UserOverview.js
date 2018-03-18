@@ -37,9 +37,9 @@ class UserOverview extends React.Component {
   }
 
   deleteUserExpertJoin(){
-    console.log('deleteUserExpertJoin');
-    this.props.deleteUserExpertJoin(this.props.user.fifirebase_id)
+    this.props.deleteUserExpertJoin(this.props.user.firebase_id)
     this.props.getFreeUsers()
+    this.props.selectAnExpert('invalidToResetRedux');
   }
 
   // render the completed lessons on screen
@@ -95,6 +95,7 @@ class UserOverview extends React.Component {
     let theExperts;
     let assignedExpert = "pair with expert";
     if(selectedExpert){
+      console.log('selectedExpert', selectedExpert)
       assignedExpert = selectedExpert.first_name;
     }
     console.log('user', user)
