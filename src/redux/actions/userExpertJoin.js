@@ -27,3 +27,10 @@ export const postNewUserExpertJoin = (obj) => {
     payload: axios.post(`http://localhost:8080/userexpertjoin/new`, obj)
   }
 }
+
+export const deleteUserExpertJoin = (user_id) => {
+  return {
+    type: "DELETE_USER_EXPERT_JOIN",
+    payload: axios.delete(`http://localhost:8080/userexpertjoin/${user_id}`)
+  }
+}
