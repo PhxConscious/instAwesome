@@ -14,6 +14,7 @@ class UserOverview extends React.Component {
     this.getCompletedLessons = this.getCompletedLessons.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
     this.connectUserAndExpert = this.connectUserAndExpert.bind(this);
+    this.getCompletedQuestionStatus = this.getCompletedQuestionStatus.bind(this);
   }
 
   componentWillMount(){
@@ -34,16 +35,39 @@ class UserOverview extends React.Component {
     }
   }
 
+  // render the completed lessons on screen
   getCompletedLessons = (units) => {
     let result = [];
     for(let unit in units){
       for(let lesson in units[unit].lessons){
         if(units[unit].lessons[lesson].lessonCompleted === true){
           result.push(lesson)
+          console.log(lesson)
         }
       }
     }
     return result;
+  }
+
+  // return an percentage of answered questions
+  getCompletedQuestionStatus = data => {
+    let total = 0;
+    let completed = 0;
+    for(let unit in data){
+      for(let key in data[unit]){
+        if(key === "lessons"){
+          for(let ky in data[unit][key]){
+            for(let k in data[unit][key][ky].questions){
+              if(data[unit][key][ky].questions[k]===true){
+                completed ++;
+              }
+              total ++;
+            }
+          }
+        }
+      }
+    }
+    return Math.round((completed / total)*100)
   }
 
   handleSelect(expertId){
@@ -60,6 +84,7 @@ class UserOverview extends React.Component {
 
   render(){
     let { expertList, selectedExpert } = this.props.users;
+    let { user } = this.props;
     let theExperts;
     let assignedExpert = "pair with expert";
     if(selectedExpert){
@@ -80,14 +105,15 @@ class UserOverview extends React.Component {
       })
     }
 
-    let { user } = this.props;
-    console.log("user", user.expert_id)
     return(
       <div>
         <p>{user.first_name} {user.last_name}</p>
         <p>{user.user_email}</p>
         <p>{user.user_phone}</p>
-        <ul>{this.getCompletedLessons(user.user_progress).map(lesson => <li>lesson</li>)}</ul>
+
+        <ul>{this.getCompletedLessons(user.user_progress).map(lesson => <li>{lesson}</li>)}</ul>
+
+        <p>percentage of questions completed: {this.getCompletedQuestionStatus(user.user_progress)}%</p>
         {user.expert_id ? assignedExpert : <div style={{position: 'relative'}}>
           <IconButton name="more_vert" id="demo-menu-top-left" /> Pair with expert
           <Menu target="demo-menu-top-left" valign="bottom" ripple>
