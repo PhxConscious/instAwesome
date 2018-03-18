@@ -2,7 +2,7 @@ import React from 'react';
 import { IconButton, Menu, MenuItem, Dialog, DialogTitle, DialogContent, DialogActions, Button } from 'react-mdl';
 import { connect } from 'react-redux';
 import { getAllExperts, selectAnExpert } from '../../redux/actions/userProgress';
-import { postNewUserExpertJoin } from '../../redux/actions/userExpertJoin';
+import { postNewUserExpertJoin, deleteUserExpertJoin, getFreeUsers } from '../../redux/actions/userExpertJoin';
 
 class UserOverview extends React.Component {
   constructor(props){
@@ -15,6 +15,7 @@ class UserOverview extends React.Component {
     this.handleSelect = this.handleSelect.bind(this);
     this.connectUserAndExpert = this.connectUserAndExpert.bind(this);
     this.getCompletedQuestionStatus = this.getCompletedQuestionStatus.bind(this);
+    this.deleteUserExpertJoin = this.deleteUserExpertJoin.bind(this);
   }
 
   componentWillMount(){
@@ -33,6 +34,12 @@ class UserOverview extends React.Component {
     if(this.props.user.expert_id !== prevProps.user.expert_id){
       this.props.selectAnExpert(this.props.user.expert_id);
     }
+  }
+
+  deleteUserExpertJoin(){
+    console.log('deleteUserExpertJoin');
+    this.props.deleteUserExpertJoin(this.props.user.fifirebase_id)
+    this.props.getFreeUsers()
   }
 
   // render the completed lessons on screen
@@ -90,7 +97,7 @@ class UserOverview extends React.Component {
     if(selectedExpert){
       assignedExpert = selectedExpert.first_name;
     }
-
+    console.log('user', user)
 
     if(this.props.users.expertList){
       theExperts = expertList.map((expert, i) => {
@@ -114,7 +121,7 @@ class UserOverview extends React.Component {
         <ul>{this.getCompletedLessons(user.user_progress).map(lesson => <li>{lesson}</li>)}</ul>
 
         <p>percentage of questions completed: {this.getCompletedQuestionStatus(user.user_progress)}%</p>
-        {user.expert_id ? assignedExpert : <div style={{position: 'relative'}}>
+        {user.expert_id ? <div>{assignedExpert} <button onClick={this.deleteUserExpertJoin}>unpair</button></div>: <div style={{position: 'relative'}}>
           <IconButton name="more_vert" id="demo-menu-top-left" /> Pair with expert
           <Menu target="demo-menu-top-left" valign="bottom" ripple>
               {theExperts}
@@ -150,6 +157,12 @@ const mapDispatchToProps = dispatch => {
     },
     selectAnExpert: (fb_id) => {
       dispatch(selectAnExpert(fb_id))
+    },
+    deleteUserExpertJoin: (user_id) => {
+      dispatch(deleteUserExpertJoin(user_id))
+    },
+    getFreeUsers: () => {
+      dispatch(getFreeUsers())
     },
   }
 }
