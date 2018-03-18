@@ -34,6 +34,11 @@ export default (state = initState, action) => {
         selectedJoin: action.payload.data,
         freeUsers: removeObj(action.payload.data[0], state.freeUsers)
       }
+    case "DELETE_USER_EXPERT_JOIN_FULFILLED":
+      return {
+        ...state,
+        deletedJoin: action.payload.data[0]
+      }
     case "GET_USERS_OF_EXPERT_PENDING":
       return { ...state }
     case "GET_EXPERT_OF_USER_PENDING":
@@ -42,6 +47,9 @@ export default (state = initState, action) => {
       return { ...state }
     case "POST_NEW_USER_EXPERT_JOIN_PENDING":
       return { ...state }
+    case "DELETE_USER_EXPERT_JOIN_PENDING":
+      return { ...state }
+
     case "GET_USERS_OF_EXPERT_REJECTED":
       return { ...state }
     case "GET_EXPERT_OF_USER_REJECTED":
@@ -50,6 +58,9 @@ export default (state = initState, action) => {
       return { ...state }
     case "POST_NEW_USER_EXPERT_JOIN_REJECTED":
       return { ...state }
+    case "DELETE_USER_EXPERT_JOIN_REJECTED":
+      return { ...state }
+
     default:
       return { ...state }
   }
