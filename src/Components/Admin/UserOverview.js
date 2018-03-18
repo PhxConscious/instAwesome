@@ -1,7 +1,7 @@
 import React from 'react';
 import { IconButton, Menu, MenuItem, Dialog, DialogTitle, DialogContent, DialogActions, Button } from 'react-mdl';
 import { connect } from 'react-redux';
-import { getAllExperts } from '../../redux/actions/userProgress';
+import { getAllExperts, selectAnExpert } from '../../redux/actions/userProgress';
 import { postNewUserExpertJoin } from '../../redux/actions/userExpertJoin';
 
 class UserOverview extends React.Component {
@@ -20,6 +20,20 @@ class UserOverview extends React.Component {
     this.props.getAllExperts();
   }
 
+  // get the relevant expert upon first click
+  componentDidMount(){
+    if(this.props.user.expert_id){
+      this.props.selectAnExpert(this.props.user.expert_id);
+    }
+  }
+
+  // get the relevant expert upon subsequent clicks
+  componentDidUpdate(prevProps, prevState){
+    if(this.props.user.expert_id !== prevProps.user.expert_id){
+      this.props.selectAnExpert(this.props.user.expert_id);
+    }
+  }
+
   getCompletedLessons = (units) => {
     let result = [];
     for(let unit in units){
@@ -34,12 +48,9 @@ class UserOverview extends React.Component {
 
   handleSelect(expertId){
     this.setState({selectedExpert: expertId, openModal: true})
-    console.log('in handleSelect')
   }
 
   connectUserAndExpert(){
-    console.log('connect those shits', this.props.user.firebase_id, this.state.selectedExpert)
-    // post here
     this.props.joinUserAndExpert({
       expert_id: this.state.selectedExpert,
       user_id: this.props.user.firebase_id
@@ -48,13 +59,19 @@ class UserOverview extends React.Component {
   }
 
   render(){
-    let { expertList } = this.props.users;
+    let { expertList, selectedExpert } = this.props.users;
     let theExperts;
+    let assignedExpert = "pair with expert";
+    if(selectedExpert){
+      assignedExpert = selectedExpert.first_name;
+    }
+
 
     if(this.props.users.expertList){
-      theExperts = expertList.map(expert => {
+      theExperts = expertList.map((expert, i) => {
         return (
           <MenuItem
+            key={i}
             onClick={e => this.handleSelect(expert.firebase_id)}
           >
             {expert.first_name}
@@ -71,7 +88,7 @@ class UserOverview extends React.Component {
         <p>{user.user_email}</p>
         <p>{user.user_phone}</p>
         <ul>{this.getCompletedLessons(user.user_progress).map(lesson => <li>lesson</li>)}</ul>
-        {user.expert_id ? "already claimed" : <div style={{position: 'relative'}}>
+        {user.expert_id ? assignedExpert : <div style={{position: 'relative'}}>
           <IconButton name="more_vert" id="demo-menu-top-left" /> Pair with expert
           <Menu target="demo-menu-top-left" valign="bottom" ripple>
               {theExperts}
@@ -104,7 +121,10 @@ const mapDispatchToProps = dispatch => {
     },
     joinUserAndExpert: (obj) => {
       dispatch(postNewUserExpertJoin(obj))
-    }
+    },
+    selectAnExpert: (fb_id) => {
+      dispatch(selectAnExpert(fb_id))
+    },
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(UserOverview);
