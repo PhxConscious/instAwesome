@@ -26,6 +26,17 @@ export default (state = initialState, action) => {
       return {...state}
 
 
+    case "SELECT_AN_EXPERT_FULFILLED":
+      return {
+        ...state,
+        selectedExpert: action.payload.data[0]
+      }
+    case "SELECT_AN_EXPERT_PENDING":
+      return {...state}
+    case "SELECT_AN_EXPERT_REJECTED":
+      return {...state}
+
+
     case "NEXT_QUESTION_FULFILLED":
       return {
         ...state,

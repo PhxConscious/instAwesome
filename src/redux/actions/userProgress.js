@@ -16,6 +16,14 @@ export const getUserProgress = (fb_id) => {
   }
 }
 
+export const selectAnExpert = (fb_id) => {
+  // console.log("Action: Getting user", fb_id)
+  return {
+    type: "SELECT_AN_EXPERT",
+    payload: axios.get(`http://localhost:8080/users/${fb_id}`)
+  }
+}
+
 export const nextQuestion = (fb_id, data) => {
   // console.log("action: nextQuestion", fb_id, data)
   return {
