@@ -25,7 +25,8 @@ class LoginForm extends Component {
             OAuthToken: '',
             loading: false
         };
-        this.pullInUserValues = this.pullInUserValues.bind(this)
+        this.pullInUserValues = this.pullInUserValues.bind(this);
+        this.loginRefresh = this.loginRefresh.bind(this);
     }
 
     static propTypes = {
@@ -35,6 +36,14 @@ class LoginForm extends Component {
     handleInputTextChange = e => {
         this.setState({[e.target.name]: e.target.value});
     };
+
+    loginRefresh(){
+      console.log("loginRefresh")
+      const {cookies} = this.props;
+      cookies.remove('hash');
+      window.location.reload();
+      alert("Sorry you're having technical difficulties! Please bear with us as continue improving as quickly as we can. Clicking this link will ensure your login info is reset - try logging in again.")
+    }
 
     signInWithGoogle = (e) => {
         e.preventDefault();
@@ -199,7 +208,14 @@ class LoginForm extends Component {
                     {/*</div>*/}
                     <div className='forgotLinksCont'>
                         {/*<Link to='/forgotusername' className='forgotLinks' href='#'>FORGOT USERNAME? </Link>*/}
+                        <Link to='/signup' className='forgotLinks' href='#'>CREATE AN ACCOUNT? </Link>
                         <Link to='/forgotpassword' className='forgotLinks' href='#'>FORGOT PASSWORD? </Link>
+                        <div
+                          className="loginTrouble"
+                          onClick={this.loginRefresh}
+                        >
+                          <p className="forgotLinks">TROUBLE LOGGING IN?</p>
+                        </div>
                     </div>
                 </form>
             </div>
