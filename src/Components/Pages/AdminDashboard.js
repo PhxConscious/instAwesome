@@ -6,11 +6,13 @@ import { getFreeUsers, postNewUserExpertJoin } from '../../redux/actions/userExp
 import { getAllUsers } from '../../redux/actions/userProgress';
 import UserListItem from '../Admin/UserListItem';
 import UserOverview from '../Admin/UserOverview';
+import { Tab, Tabs } from 'react-mdl';
+import '../../Styles/AdminDashboardStyles.css'
 
 class AdminDashboard extends React.Component {
   constructor(props){
     super(props)
-    this.state = {userObj: {}}
+    this.state = {userObj: {}, activeTab: 0}
     this.selectUser = this.selectUser.bind(this);
     this.claimUser = this.claimUser.bind(this);
   }
@@ -70,13 +72,27 @@ class AdminDashboard extends React.Component {
     if(userExpertJoin && userExpertJoin.freeUsers && allUsers){
       return (
         <div style={{width: "50vw", margin: "0 auto", marginTop: "100px"}}>
-          <div style={{display:"inline-block", width: "20vw", "backgroundColor": "yellow"}}>
-            {userList}
+          <Tabs activeTab={this.state.activeTab} onChange={(tabId) => this.setState({ activeTab: tabId })} ripple>
+            <Tab>Users</Tab>
+            <Tab>Experts</Tab>
+          </Tabs>
+          <div>
+              {this.state.activeTab === 0 ? <div
+              id="userPanelContainer">
+
+                <div id="usersPanelSelector">
+                  <strong>User List</strong>
+                    {userList}
+                </div>
+
+                <div id="userPanelDetail">
+                  {this.state.selectedUser ? <UserOverview user={this.state.selectedUser}/>:''}
+                </div>
+              </div> : ''
+            }
+
           </div>
 
-          <div style={{display:"inline-block", width: "30vw", "backgroundColor": "pink"}}>
-            {this.state.selectedUser ? <UserOverview user={this.state.selectedUser}/>:''}
-          </div>
         </div>
       )
     } else {

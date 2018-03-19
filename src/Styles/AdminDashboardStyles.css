@@ -1,0 +1,20 @@
+#userPanelContainer {
+  display: flex;
+  flex-direction: row;
+  padding-top: 3vh;
+}
+
+#usersPanelSelector {
+  flex:1;
+  /*display:inline-block;*/
+  width: 20vw;
+  background-color: rgba(100,0,0,.1);
+  padding: 10px 0px 10px 10px;
+}
+
+#userPanelDetail {
+  flex:1;
+  /*display:inline-block;*/
+  width: 20vw;
+  background-color: rgba(0,100,0,.1);
+}
