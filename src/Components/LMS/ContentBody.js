@@ -221,6 +221,9 @@ class CheckTasks extends React.Component {
 
           <div id="inputComponent">
           {
+            // contentType: blank    goes here
+          }
+          {
             currentQuestionObj.contentType === "checkTasks" ? <CheckBox
                         checkBox={this.checkBox}
                         isCheckMarked={this.state.isCheckMarked}
@@ -327,6 +330,9 @@ class CheckTasks extends React.Component {
                   value="nextQuestion"
                   disabled={!this.state.multiChoiceAttempted}
                 ><span className="lmsBtnText">{buttonText}</span></Button> : null
+            }
+            {
+              // contentType: blank    button goes here
             }
 
 
