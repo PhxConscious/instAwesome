@@ -53,19 +53,27 @@ class ExpertDashboard extends React.Component {
 
     if(userExpertJoin && userExpertJoin.freeUsers){
       return (
-        <div style={{width: "50vw", margin: "0 auto", marginTop: "100px"}}>
-          <div style={{display:"inline-block", width: "20vw", "backgroundColor": "yellow"}}>
-            <h6>expert panel</h6>
-            {unhitchedUsers}
-          </div>
-          <div style={{display:"inline-block", width: "30vw", "backgroundColor": "pink"}}>
-            <p>name: {userObj.first_name} {userObj.last_name}</p>
-            <p>email: {userObj.user_email}</p>
-            <p>phone: {userObj.user_phone}</p>
-            <button
-              disabled={!userObj.first_name}
-              onClick={e => this.claimUser(userObj)}
-            >claim this user</button>
+
+        <div style={{width: "80vw", margin: "0 auto", marginTop: "100px"}}>
+          <div>
+            <div className="fullPanelContainer">
+
+                <div className="leftPanelSelector">
+                  <strong>User List</strong>
+                    {unhitchedUsers}
+                </div>
+
+                <div className="rightPanelDetail">
+                  <p>name: {userObj.first_name} {userObj.last_name}</p>
+                  <p>email: {userObj.user_email}</p>
+                  <p>phone: {userObj.user_phone}</p>
+                  <button
+                    disabled={!userObj.first_name}
+                    onClick={e => this.claimUser(userObj)}
+                  >claim this user</button>
+                </div>
+              </div>
+
           </div>
         </div>
       )
