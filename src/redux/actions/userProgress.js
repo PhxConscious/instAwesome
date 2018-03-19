@@ -46,3 +46,10 @@ export const getAllExperts = () => {
     payload: axios.get(`http://localhost:8080/users/experts`)
   }
 }
+
+export const deleteUser = (fb_id) => {
+  return {
+    type: "DELETE_USER",
+    payload: axios.delete(`http://localhost:8080/users/${fb_id}`)
+  }
+}

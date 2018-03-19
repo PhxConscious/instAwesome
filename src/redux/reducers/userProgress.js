@@ -2,6 +2,16 @@ let initialState = {
   currentUser: {}
 }
 
+const removeObj = (takeOut, arr) => {
+  let result = [];
+  for(let i = 0; i < arr.length; i++){
+    if(arr[i].firebase_id !== takeOut.firebase_id){
+      result.push(arr[i])
+    }
+  }
+  return result;
+}
+
 export default (state = initialState, action) => {
   switch (action.type){
     case "GET_ALL_USERS_FULFILLED":
@@ -67,6 +77,16 @@ export default (state = initialState, action) => {
     case "GET_ALL_EXPERTS_PENDING":
       return {...state}
     case "GET_ALL_EXPERTS_REJECTED":
+      return {...state}
+
+    case "DELETE_USER_FULFILLED":
+      return {
+        ...state,
+        expertList: removeObj(state.expertList, action.payload.data[0])
+      }
+    case "DELETE_USER_PENDING":
+      return {...state}
+    case "DELETE_USER_REJECTED":
       return {...state}
 
     default:
