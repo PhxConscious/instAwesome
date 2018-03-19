@@ -1,0 +1,39 @@
+/* ------ for AdminDashboard ------ */
+
+.fullPanelContainer {
+  display: flex;
+  flex-direction: row;
+  padding-top: 3vh;
+}
+
+.leftPanelSelector {
+  flex-basis:35%;
+  width: 20vw;
+  background-color: rgba(100,0,0,.1);
+  padding: 10px 10px 10px 10px;
+}
+
+#selectedUserInList {
+  background-color: rgba(200,0,0,.4);
+}
+
+
+
+.rightPanelDetail {
+  flex-basis:65%;
+  width: 20vw;
+  background-color: rgba(0,100,0,.1);
+  padding: 10px 10px 10px 10px;
+}
+
+/* ------ for UserOverview ---------*/
+
+#userDetailContainer {
+
+}
+
+#lessonProgressContainer {
+  display: flex;
+  border-right: 2px solid black;
+  margin-bottom: 10px;
+}

@@ -3,20 +3,24 @@ import { connect } from 'react-redux';
 import {Redirect} from 'react-router-dom';
 import { postFeedback } from '../../redux/actions/feedback';
 import { getFreeUsers, postNewUserExpertJoin } from '../../redux/actions/userExpertJoin';
-import { getAllUsers } from '../../redux/actions/userProgress';
+import { getAllUsers, getAllExperts } from '../../redux/actions/userProgress';
 import UserListItem from '../Admin/UserListItem';
 import UserOverview from '../Admin/UserOverview';
+import ExpertOverview from '../Admin/ExpertOverview';
+import { Tab, Tabs } from 'react-mdl';
+import '../../Styles/AdminDashboardStyles.css'
 
 class AdminDashboard extends React.Component {
   constructor(props){
     super(props)
-    this.state = {userObj: {}}
+    this.state = {userObj: {}, activeTab: 0}
     this.selectUser = this.selectUser.bind(this);
     this.claimUser = this.claimUser.bind(this);
   }
   componentWillMount(){
     this.props.getFreeUsers()
     this.props.getAllUsers()
+    this.props.getAllExperts()
   }
 
   selectUser(user){
@@ -34,7 +38,7 @@ class AdminDashboard extends React.Component {
   }
 
   render(){
-    const { userInfo, allUsers, userExpertJoin } = this.props;
+    const { userInfo, allUsers, allExperts, userExpertJoin } = this.props;
     let { userObj } = this.state;
 
     if (typeof(userInfo.currentUser)===undefined) {
@@ -59,24 +63,70 @@ class AdminDashboard extends React.Component {
       userList = allUsers.map((user, i) => {
         return (
           <div
+            id={this.state.index === i ? "selectedUserInList" : ''}
+            index={i}
             key={i}
-            onClick={e=>this.setState({selectedUser:user})}>
+            onClick={e=>this.setState({selectedUser:user, index:i})}>
             {user.first_name}
           </div>
         )
       })
     }
 
+    let expertsList;
+    if(allExperts){
+      expertsList = allExperts.map((expert, i) => {
+        return (
+          <div
+            id={this.state.index === i ? "selectedUserInList" : ''}
+            index={i}
+            key={i}
+            onClick={e=>this.setState({selectedExpert:expert, index:i})}>
+            {expert.first_name}
+          </div>
+        )
+      })
+    }
+
     if(userExpertJoin && userExpertJoin.freeUsers && allUsers){
+
+      console.log("expertasdfa", this.state.selectedExpert)
       return (
-        <div style={{width: "50vw", margin: "0 auto", marginTop: "100px"}}>
-          <div style={{display:"inline-block", width: "20vw", "backgroundColor": "yellow"}}>
-            {userList}
+        <div style={{width: "80vw", margin: "0 auto", marginTop: "100px"}}>
+          <Tabs activeTab={this.state.activeTab} onChange={(tabId) => this.setState({ activeTab: tabId })} ripple>
+            <Tab>Users</Tab>
+            <Tab>Experts</Tab>
+          </Tabs>
+          <div>
+            {this.state.activeTab === 0 ? <div
+              className="fullPanelContainer">
+
+                <div className="leftPanelSelector">
+                  <strong>User List</strong>
+                    {userList}
+                </div>
+
+                <div className="rightPanelDetail">
+                  {this.state.selectedUser ? <UserOverview user={this.state.selectedUser}/>:''}
+                </div>
+              </div> : ''
+            }
+            {this.state.activeTab === 1 ? <div>
+              <div className="fullPanelContainer">
+                <div className="leftPanelSelector">
+                  <strong>Expert List</strong>
+                    {expertsList}
+                </div>
+
+                <div className="rightPanelDetail">
+                  {this.state.selectedExpert ? <ExpertOverview expert={this.state.selectedExpert}/>:''}
+                </div>
+              </div>
+            </div> : ''
+            }
+
           </div>
 
-          <div style={{display:"inline-block", width: "30vw", "backgroundColor": "pink"}}>
-            {this.state.selectedUser ? <UserOverview user={this.state.selectedUser}/>:''}
-          </div>
         </div>
       )
     } else {
@@ -89,6 +139,7 @@ const mapStateToProps = state => {
   return {
     userInfo: state.userProgress.currentUser,
     allUsers: state.userProgress.allUsers,
+    allExperts: state.userProgress.expertList,
     userExpertJoin: state.userExpertJoin
   }
 }
@@ -102,6 +153,9 @@ const mapDispatchToProps = dispatch => {
     },
     getAllUsers: () => {
       dispatch(getAllUsers())
+    },
+    getAllExperts: () => {
+      dispatch(getAllExperts())
     }
   }
 }

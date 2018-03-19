@@ -1,8 +1,10 @@
 import React from 'react';
 import { IconButton, Menu, MenuItem, Dialog, DialogTitle, DialogContent, DialogActions, Button } from 'react-mdl';
 import { connect } from 'react-redux';
-import { getAllExperts, selectAnExpert } from '../../redux/actions/userProgress';
+import { getAllExperts, selectAnExpert, nextQuestion, deleteUser } from '../../redux/actions/userProgress';
 import { postNewUserExpertJoin, deleteUserExpertJoin, getFreeUsers } from '../../redux/actions/userExpertJoin';
+import { getCompletedQuestionStatus, getCompletedLessons } from '../../utils/helper';
+import '../../Styles/AdminDashboardStyles.css';
 
 class UserOverview extends React.Component {
   constructor(props){
@@ -11,11 +13,14 @@ class UserOverview extends React.Component {
       selectedExpert: '',
       openModal: false
     }
-    this.getCompletedLessons = this.getCompletedLessons.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
     this.connectUserAndExpert = this.connectUserAndExpert.bind(this);
-    this.getCompletedQuestionStatus = this.getCompletedQuestionStatus.bind(this);
     this.deleteUserExpertJoin = this.deleteUserExpertJoin.bind(this);
+    this.makeAdmin = this.makeAdmin.bind(this);
+    this.removeAdmin = this.removeAdmin.bind(this);
+    this.makeExpert = this.makeExpert.bind(this);
+    this.removeExpert = this.removeExpert.bind(this);
+    this.deleteUser = this.deleteUser.bind(this);
   }
 
   componentWillMount(){
@@ -37,44 +42,29 @@ class UserOverview extends React.Component {
   }
 
   deleteUserExpertJoin(){
-    console.log('deleteUserExpertJoin');
-    this.props.deleteUserExpertJoin(this.props.user.fifirebase_id)
+    this.props.deleteUserExpertJoin(this.props.user.firebase_id)
     this.props.getFreeUsers()
+    this.props.selectAnExpert('invalidToResetRedux');
   }
 
-  // render the completed lessons on screen
-  getCompletedLessons = (units) => {
-    let result = [];
-    for(let unit in units){
-      for(let lesson in units[unit].lessons){
-        if(units[unit].lessons[lesson].lessonCompleted === true){
-          result.push(lesson)
-          console.log(lesson)
-        }
-      }
-    }
-    return result;
+  makeAdmin(){
+    this.props.updateUser(this.props.user.firebase_id, {isAdmin: true})
   }
 
-  // return an percentage of answered questions
-  getCompletedQuestionStatus = data => {
-    let total = 0;
-    let completed = 0;
-    for(let unit in data){
-      for(let key in data[unit]){
-        if(key === "lessons"){
-          for(let ky in data[unit][key]){
-            for(let k in data[unit][key][ky].questions){
-              if(data[unit][key][ky].questions[k]===true){
-                completed ++;
-              }
-              total ++;
-            }
-          }
-        }
-      }
-    }
-    return Math.round((completed / total)*100)
+  removeAdmin(){
+    this.props.updateUser(this.props.user.firebase_id, {isAdmin: false})
+  }
+
+  makeExpert(){
+    this.props.updateUser(this.props.user.firebase_id, {isExpert: true})
+  }
+
+  removeExpert(){
+    this.props.updateUser(this.props.user.firebase_id, {isExpert: false})
+  }
+
+  deleteUser(){
+    this.props.deleteUser(this.props.user.firebase_id);
   }
 
   handleSelect(expertId){
@@ -97,7 +87,6 @@ class UserOverview extends React.Component {
     if(selectedExpert){
       assignedExpert = selectedExpert.first_name;
     }
-    console.log('user', user)
 
     if(this.props.users.expertList){
       theExperts = expertList.map((expert, i) => {
@@ -114,14 +103,19 @@ class UserOverview extends React.Component {
 
     return(
       <div>
-        <p>{user.first_name} {user.last_name}</p>
-        <p>{user.user_email}</p>
-        <p>{user.user_phone}</p>
+        <strong>User Details</strong>
+        <div>name: {user.first_name} {user.last_name}</div>
+        <div>email: {user.user_email}</div>
+        <div>phone: {user.user_phone}</div>
 
-        <ul>{this.getCompletedLessons(user.user_progress).map(lesson => <li>{lesson}</li>)}</ul>
+        <div id="lessonProgressContainer">
+          Completed Lessons:
+          <ul>{getCompletedLessons(user.user_progress).map(lesson => <li>{lesson}</li>)}</ul>
+        </div>
 
-        <p>percentage of questions completed: {this.getCompletedQuestionStatus(user.user_progress)}%</p>
-        {user.expert_id ? <div>{assignedExpert} <button onClick={this.deleteUserExpertJoin}>unpair</button></div>: <div style={{position: 'relative'}}>
+        <p>User's LMS Progress: {getCompletedQuestionStatus(user.user_progress)}%</p>
+
+        {user.expert_id ? <div>Expert: {assignedExpert} <button onClick={this.deleteUserExpertJoin}>unpair</button></div>: <div style={{position: 'relative'}}>
           <IconButton name="more_vert" id="demo-menu-top-left" /> Pair with expert
           <Menu target="demo-menu-top-left" valign="bottom" ripple>
               {theExperts}
@@ -138,6 +132,11 @@ class UserOverview extends React.Component {
             <Button type='button' onClick={this.connectUserAndExpert}>Lets do it</Button>
           </DialogActions>
         </Dialog>
+        <button onClick={this.makeAdmin}>make admin</button>
+        <button onClick={this.removeAdmin}>remove admin</button>
+        <button onClick={this.makeExpert}>make expert</button>
+        <button onClick={this.removeExpert}>remove expert</button>
+        <button onClick={this.deleteUser}>delete user</button>
       </div>
     )
   }
@@ -163,6 +162,12 @@ const mapDispatchToProps = dispatch => {
     },
     getFreeUsers: () => {
       dispatch(getFreeUsers())
+    },
+    updateUser: (fb_id, userObj) => {
+      dispatch(nextQuestion(fb_id, userObj))
+    },
+    deleteUser: (fb_id) => {
+      dispatch(deleteUser(fb_id))
     },
   }
 }
