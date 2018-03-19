@@ -3,14 +3,14 @@ import { connect } from 'react-redux';
 import {Redirect} from 'react-router-dom';
 import { postFeedback } from '../../redux/actions/feedback';
 import { getFreeUsers, postNewUserExpertJoin } from '../../redux/actions/userExpertJoin';
-import UserListItem from '../Admin/UserListItem';
+
 
 class ExpertDashboard extends React.Component {
   constructor(props){
     super(props)
     this.state = {userObj: {}}
     this.selectUser = this.selectUser.bind(this);
-    this.claimUser = this.claimUser.bind(this);
+    // this.select = this.select.bind(this);
   }
   componentWillMount(){
     this.props.getFreeUsers()
@@ -18,16 +18,6 @@ class ExpertDashboard extends React.Component {
 
   selectUser(user){
     this.setState({userObj: user})
-  }
-
-  claimUser(user){
-    let { userInfo } = this.props;
-    this.props.postNewUserExpertJoin({
-      user_id: user.firebase_id,
-      expert_id: userInfo.firebase_id})
-      this.setState({
-        userObj:{}
-      })
   }
 
   render(){
@@ -43,11 +33,13 @@ class ExpertDashboard extends React.Component {
     if(userExpertJoin && userExpertJoin.freeUsers){
       freeUsers = userExpertJoin.freeUsers;
       unhitchedUsers = freeUsers.map((user, i) => {
-        return <UserListItem
+        return <div
                   key={i}
                   user={user}
-                  selectUser={this.selectUser}
-                />
+                  onClick={e => this.selectUser(user)}
+                >
+                {user.first_name} {user.last_name}
+              </div>
       })
     }
 
