@@ -7,7 +7,7 @@ import {withCookies, Cookies} from 'react-cookie';
 import '../../Styles/AppNavStyles.css';
 import {connect} from "react-redux";
 import {getUserProgress} from "../../redux/actions/userProgress";
-import {setCurrentValue} from "../../redux/actions/currentValues";
+import { userLogout } from "../../redux/actions/currentValues";
 
 class AppNavbar extends Component {
     constructor(props) {
@@ -26,7 +26,7 @@ class AppNavbar extends Component {
         const {cookies} = this.props;
         if (firebase.auth().currentUser) {
             console.log(`user: ${firebase.auth().currentUser.email} signed out, cookie: ${cookies.get('hash')} was removed`);
-            this.props.resetUserValues();
+            this.props.userLogout();
             cookies.remove('hash')
             firebase.auth().signOut()
             // @TODO clear out current and user values here
@@ -113,8 +113,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
   return {
-    resetUserValues: () => {
-      dispatch(setCurrentValue("currentFbId", ""))
+    userLogout: () => {
+      dispatch(userLogout())
     }
   }
 }
