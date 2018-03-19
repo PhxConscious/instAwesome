@@ -3,7 +3,8 @@ import { IconButton, Menu, MenuItem, Dialog, DialogTitle, DialogContent, DialogA
 import { connect } from 'react-redux';
 import { getAllExperts, selectAnExpert, nextQuestion } from '../../redux/actions/userProgress';
 import { postNewUserExpertJoin, deleteUserExpertJoin, getFreeUsers } from '../../redux/actions/userExpertJoin';
-import '../../Styles/AdminDashboardStyles.css'
+import { getCompletedQuestionStatus } from '../../utils/helper';
+import '../../Styles/AdminDashboardStyles.css';
 
 class UserOverview extends React.Component {
   constructor(props){
@@ -15,7 +16,6 @@ class UserOverview extends React.Component {
     this.getCompletedLessons = this.getCompletedLessons.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
     this.connectUserAndExpert = this.connectUserAndExpert.bind(this);
-    this.getCompletedQuestionStatus = this.getCompletedQuestionStatus.bind(this);
     this.deleteUserExpertJoin = this.deleteUserExpertJoin.bind(this);
     this.makeAdmin = this.makeAdmin.bind(this);
     this.removeAdmin = this.removeAdmin.bind(this);
@@ -75,32 +75,10 @@ class UserOverview extends React.Component {
       for(let lesson in units[unit].lessons){
         if(units[unit].lessons[lesson].lessonCompleted === true){
           result.push(lesson)
-          console.log(lesson)
         }
       }
     }
     return result;
-  }
-
-  // return an percentage of answered questions
-  getCompletedQuestionStatus = data => {
-    let total = 0;
-    let completed = 0;
-    for(let unit in data){
-      for(let key in data[unit]){
-        if(key === "lessons"){
-          for(let ky in data[unit][key]){
-            for(let k in data[unit][key][ky].questions){
-              if(data[unit][key][ky].questions[k]===true){
-                completed ++;
-              }
-              total ++;
-            }
-          }
-        }
-      }
-    }
-    return Math.round((completed / total)*100)
   }
 
   handleSelect(expertId){
@@ -121,10 +99,8 @@ class UserOverview extends React.Component {
     let theExperts;
     let assignedExpert = "pair with expert";
     if(selectedExpert){
-      console.log('selectedExpert', selectedExpert)
       assignedExpert = selectedExpert.first_name;
     }
-    console.log('user', user)
 
     if(this.props.users.expertList){
       theExperts = expertList.map((expert, i) => {
@@ -151,7 +127,7 @@ class UserOverview extends React.Component {
           <ul>{this.getCompletedLessons(user.user_progress).map(lesson => <li>{lesson}</li>)}</ul>
         </div>
 
-        <p>User's LMS Progress: {this.getCompletedQuestionStatus(user.user_progress)}%</p>
+        <p>User's LMS Progress: {getCompletedQuestionStatus(user.user_progress)}%</p>
 
         {user.expert_id ? <div>Expert: {assignedExpert} <button onClick={this.deleteUserExpertJoin}>unpair</button></div>: <div style={{position: 'relative'}}>
           <IconButton name="more_vert" id="demo-menu-top-left" /> Pair with expert

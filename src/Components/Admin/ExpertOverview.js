@@ -3,8 +3,8 @@ import { IconButton, Menu, MenuItem, Dialog, DialogTitle, DialogContent, DialogA
 import { connect } from 'react-redux';
 import { getUserProgress } from '../../redux/actions/userProgress';
 import { getUsersOfExpert } from '../../redux/actions/userExpertJoin';
-import { getCompletedQuestionStatus } from '../../utils/helper'
-import '../../Styles/AdminDashboardStyles.css'
+import { getCompletedQuestionStatus } from '../../utils/helper';
+import '../../Styles/AdminDashboardStyles.css';
 
 class ExpertOverview extends React.Component {
   constructor(props){
