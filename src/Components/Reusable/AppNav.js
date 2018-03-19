@@ -7,6 +7,7 @@ import {withCookies, Cookies} from 'react-cookie';
 import '../../Styles/AppNavStyles.css';
 import {connect} from "react-redux";
 import {getUserProgress} from "../../redux/actions/userProgress";
+import { userLogout } from "../../redux/actions/currentValues";
 
 class AppNavbar extends Component {
     constructor(props) {
@@ -24,9 +25,12 @@ class AppNavbar extends Component {
     userSignOut = () => {
         const {cookies} = this.props;
         if (firebase.auth().currentUser) {
-            firebase.auth().signOut()
             console.log(`user: ${firebase.auth().currentUser.email} signed out, cookie: ${cookies.get('hash')} was removed`);
+            this.props.userLogout();
             cookies.remove('hash')
+            firebase.auth().signOut()
+            // @TODO clear out current and user values here
+              // reset store
         } else {
             alert('no user signed in')
         }
@@ -107,5 +111,13 @@ const mapStateToProps = state => ({
     userInfo: state.userProgress.currentUser
 });
 
+const mapDispatchToProps = dispatch => {
+  return {
+    userLogout: () => {
+      dispatch(userLogout())
+    }
+  }
+}
 
-export default withCookies(connect(mapStateToProps, null)(AppNavbar));
+
+export default withCookies(connect(mapStateToProps, mapDispatchToProps)(AppNavbar));
