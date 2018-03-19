@@ -99,7 +99,12 @@ class CheckTasks extends React.Component {
 
 
   render(){
+    let lessNum = this.props.currentValues.currentLesson;
+    let questNum = this.props.currentValues.currentQuestion;
+    let unitNum = this.props.currentValues.currentUnit;
 
+    console.log('!!!!!!!!!!!!!!!!!!!', lessNum, questNum, unitNum)
+    let buttonText = this.props.book[unitNum].lessons[lessNum].questions[questNum].buttonText;
 
     let { isCheckMarked, nextButtonHidden, prevButtonHidden } = this.state;
 
@@ -297,7 +302,7 @@ class CheckTasks extends React.Component {
                 onClick={nextQuestClickHandler}
                 value="nextQuestion"
                 disabled={!isCheckMarked}
-              ><span className='lmsBtnText'>nextQuestion</span></Button> : null
+              ><span className='lmsBtnText'>{buttonText}</span></Button> : null
             }
             {
               currentQuestionObj.contentType === "textArea" ? <Button
@@ -306,7 +311,7 @@ class CheckTasks extends React.Component {
                   onClick={submitTextArea}
                   value="nextQuestion"
                   disabled={this.state.textArea.length === 0}
-                >nextQuestion</Button> : null
+                ><span className='lmsBtnText'>{buttonText}</span></Button> : null
             }
             {
               currentQuestionObj.contentType === "multiChoice" ? <Button
@@ -314,7 +319,7 @@ class CheckTasks extends React.Component {
                   onClick={nextQuestClickHandler}
                   value="nextQuestion"
                   disabled={!this.state.multiChoiceAttempted}
-                >nextMultiChoice</Button> : null
+                ><span className="lmsBtnText">{buttonText}</span></Button> : null
             }
 
 
@@ -322,7 +327,7 @@ class CheckTasks extends React.Component {
         </div>
       )
     }
-    return <div>loadin...</div>
+    return <div>loading...</div>
   }
 }
 
