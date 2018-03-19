@@ -1,12 +1,12 @@
 /* ------ for AdminDashboard ------ */
 
-#userPanelContainer {
+.fullPanelContainer {
   display: flex;
   flex-direction: row;
   padding-top: 3vh;
 }
 
-#usersPanelSelector {
+.leftPanelSelector {
   flex-basis:35%;
   width: 20vw;
   background-color: rgba(100,0,0,.1);
@@ -19,7 +19,7 @@
 
 
 
-#userPanelDetail {
+.rightPanelDetail {
   flex-basis:65%;
   width: 20vw;
   background-color: rgba(0,100,0,.1);

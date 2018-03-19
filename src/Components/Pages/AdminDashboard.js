@@ -3,9 +3,10 @@ import { connect } from 'react-redux';
 import {Redirect} from 'react-router-dom';
 import { postFeedback } from '../../redux/actions/feedback';
 import { getFreeUsers, postNewUserExpertJoin } from '../../redux/actions/userExpertJoin';
-import { getAllUsers } from '../../redux/actions/userProgress';
+import { getAllUsers, getAllExperts } from '../../redux/actions/userProgress';
 import UserListItem from '../Admin/UserListItem';
 import UserOverview from '../Admin/UserOverview';
+import ExpertOverview from '../Admin/ExpertOverview';
 import { Tab, Tabs } from 'react-mdl';
 import '../../Styles/AdminDashboardStyles.css'
 
@@ -19,6 +20,7 @@ class AdminDashboard extends React.Component {
   componentWillMount(){
     this.props.getFreeUsers()
     this.props.getAllUsers()
+    this.props.getAllExperts()
   }
 
   selectUser(user){
@@ -36,7 +38,7 @@ class AdminDashboard extends React.Component {
   }
 
   render(){
-    const { userInfo, allUsers, userExpertJoin } = this.props;
+    const { userInfo, allUsers, allExperts, userExpertJoin } = this.props;
     let { userObj } = this.state;
 
     if (typeof(userInfo.currentUser)===undefined) {
@@ -71,7 +73,24 @@ class AdminDashboard extends React.Component {
       })
     }
 
+    let expertsList;
+    if(allExperts){
+      expertsList = allExperts.map((expert, i) => {
+        return (
+          <div
+            id={this.state.index === i ? "selectedUserInList" : ''}
+            index={i}
+            key={i}
+            onClick={e=>this.setState({selectedExpert:expert, index:i})}>
+            {expert.first_name}
+          </div>
+        )
+      })
+    }
+
     if(userExpertJoin && userExpertJoin.freeUsers && allUsers){
+
+      console.log("expertasdfa", this.state.selectedExpert)
       return (
         <div style={{width: "80vw", margin: "0 auto", marginTop: "100px"}}>
           <Tabs activeTab={this.state.activeTab} onChange={(tabId) => this.setState({ activeTab: tabId })} ripple>
@@ -79,18 +98,31 @@ class AdminDashboard extends React.Component {
             <Tab>Experts</Tab>
           </Tabs>
           <div>
-              {this.state.activeTab === 0 ? <div
-              id="userPanelContainer">
+            {this.state.activeTab === 0 ? <div
+              className="fullPanelContainer">
 
-                <div id="usersPanelSelector">
+                <div className="leftPanelSelector">
                   <strong>User List</strong>
                     {userList}
                 </div>
 
-                <div id="userPanelDetail">
+                <div className="rightPanelDetail">
                   {this.state.selectedUser ? <UserOverview user={this.state.selectedUser}/>:''}
                 </div>
               </div> : ''
+            }
+            {this.state.activeTab === 1 ? <div>
+              <div className="fullPanelContainer">
+                <div className="leftPanelSelector">
+                  <strong>Expert List</strong>
+                    {expertsList}
+                </div>
+
+                <div className="rightPanelDetail">
+                  {this.state.selectedExpert ? <ExpertOverview expert={this.state.selectedExpert}/>:''}
+                </div>
+              </div>
+            </div> : ''
             }
 
           </div>
@@ -107,6 +139,7 @@ const mapStateToProps = state => {
   return {
     userInfo: state.userProgress.currentUser,
     allUsers: state.userProgress.allUsers,
+    allExperts: state.userProgress.expertList,
     userExpertJoin: state.userExpertJoin
   }
 }
@@ -120,6 +153,9 @@ const mapDispatchToProps = dispatch => {
     },
     getAllUsers: () => {
       dispatch(getAllUsers())
+    },
+    getAllExperts: () => {
+      dispatch(getAllExperts())
     }
   }
 }
