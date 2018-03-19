@@ -99,18 +99,25 @@ class CheckTasks extends React.Component {
 
 
   render(){
+
+    // delete from HERE
     let lessNum = this.props.currentValues.currentLesson;
     let questNum = this.props.currentValues.currentQuestion;
     let unitNum = this.props.currentValues.currentUnit;
-
-    console.log('!!!!!!!!!!!!!!!!!!!', lessNum, questNum, unitNum)
+    // console.log('!!!!!!!!!!!!!!!!!!!', lessNum, questNum, unitNum)
     let buttonText = this.props.book[unitNum].lessons[lessNum].questions[questNum].buttonText;
+    // to HERE
 
     let { isCheckMarked, nextButtonHidden, prevButtonHidden } = this.state;
 
     let { lesson, nextLesson, prevLesson, nextQuestion, prevQuestion, nextUnit, userProgress, book, currentValues, selectLessonOnClick, companyInfo } = this.props;
 
     let { currentUnit, currentUnitObj, currentLesson, currentLessonObj, currentQuestion, currentQuestionObj } = this.props.currentValues;
+
+
+    // ISMAEL - look at currentQuestionObj for almost all data in this component. it comes from redux currentValues
+    console.log("ismael look here ----", currentQuestionObj.buttonText)
+
 
     let userProg = userProgress.currentUser.user_progress;
 
@@ -213,6 +220,9 @@ class CheckTasks extends React.Component {
           </div>
 
           <div id="inputComponent">
+          {
+            // contentType: blank    goes here
+          }
           {
             currentQuestionObj.contentType === "checkTasks" ? <CheckBox
                         checkBox={this.checkBox}
@@ -320,6 +330,9 @@ class CheckTasks extends React.Component {
                   value="nextQuestion"
                   disabled={!this.state.multiChoiceAttempted}
                 ><span className="lmsBtnText">{buttonText}</span></Button> : null
+            }
+            {
+              // contentType: blank    button goes here
             }
 
 
