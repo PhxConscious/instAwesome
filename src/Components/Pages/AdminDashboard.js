@@ -73,7 +73,7 @@ class AdminDashboard extends React.Component {
 
     if(userExpertJoin && userExpertJoin.freeUsers && allUsers){
       return (
-        <div style={{width: "50vw", margin: "0 auto", marginTop: "100px"}}>
+        <div style={{width: "80vw", margin: "0 auto", marginTop: "100px"}}>
           <Tabs activeTab={this.state.activeTab} onChange={(tabId) => this.setState({ activeTab: tabId })} ripple>
             <Tab>Users</Tab>
             <Tab>Experts</Tab>

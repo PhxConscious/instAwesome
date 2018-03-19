@@ -1,7 +1,7 @@
 import React from 'react';
 import { IconButton, Menu, MenuItem, Dialog, DialogTitle, DialogContent, DialogActions, Button } from 'react-mdl';
 import { connect } from 'react-redux';
-import { getAllExperts, selectAnExpert } from '../../redux/actions/userProgress';
+import { getAllExperts, selectAnExpert, nextQuestion } from '../../redux/actions/userProgress';
 import { postNewUserExpertJoin, deleteUserExpertJoin, getFreeUsers } from '../../redux/actions/userExpertJoin';
 import '../../Styles/AdminDashboardStyles.css'
 
@@ -17,6 +17,11 @@ class UserOverview extends React.Component {
     this.connectUserAndExpert = this.connectUserAndExpert.bind(this);
     this.getCompletedQuestionStatus = this.getCompletedQuestionStatus.bind(this);
     this.deleteUserExpertJoin = this.deleteUserExpertJoin.bind(this);
+    this.makeAdmin = this.makeAdmin.bind(this);
+    this.removeAdmin = this.removeAdmin.bind(this);
+    this.makeExpert = this.makeExpert.bind(this);
+    this.removeExpert = this.removeExpert.bind(this);
+    this.deleteUser = this.deleteUser.bind(this);
   }
 
   componentWillMount(){
@@ -41,6 +46,26 @@ class UserOverview extends React.Component {
     this.props.deleteUserExpertJoin(this.props.user.firebase_id)
     this.props.getFreeUsers()
     this.props.selectAnExpert('invalidToResetRedux');
+  }
+
+  makeAdmin(){
+    this.props.updateUser(this.props.user.firebase_id, {isAdmin: true})
+  }
+
+  removeAdmin(){
+    this.props.updateUser(this.props.user.firebase_id, {isAdmin: false})
+  }
+
+  makeExpert(){
+    this.props.updateUser(this.props.user.firebase_id, {isExpert: true})
+  }
+
+  removeExpert(){
+    this.props.updateUser(this.props.user.firebase_id, {isExpert: false})
+  }
+
+  deleteUser(){
+    console.log("action not finished")
   }
 
   // render the completed lessons on screen
@@ -127,6 +152,7 @@ class UserOverview extends React.Component {
         </div>
 
         <p>User's LMS Progress: {this.getCompletedQuestionStatus(user.user_progress)}%</p>
+
         {user.expert_id ? <div>Expert: {assignedExpert} <button onClick={this.deleteUserExpertJoin}>unpair</button></div>: <div style={{position: 'relative'}}>
           <IconButton name="more_vert" id="demo-menu-top-left" /> Pair with expert
           <Menu target="demo-menu-top-left" valign="bottom" ripple>
@@ -144,6 +170,11 @@ class UserOverview extends React.Component {
             <Button type='button' onClick={this.connectUserAndExpert}>Lets do it</Button>
           </DialogActions>
         </Dialog>
+        <button onClick={this.makeAdmin}>make admin</button>
+        <button onClick={this.removeAdmin}>remove admin</button>
+        <button onClick={this.makeExpert}>make expert</button>
+        <button onClick={this.removeExpert}>remove expert</button>
+        <button onClick={this.deleteUser}>delete user</button>
       </div>
     )
   }
@@ -170,6 +201,9 @@ const mapDispatchToProps = dispatch => {
     getFreeUsers: () => {
       dispatch(getFreeUsers())
     },
+    updateUser: (fb_id, userObj) => {
+      dispatch(nextQuestion(fb_id, userObj))
+    }
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(UserOverview);
