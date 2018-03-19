@@ -1,9 +1,9 @@
 import React from 'react';
 import { IconButton, Menu, MenuItem, Dialog, DialogTitle, DialogContent, DialogActions, Button } from 'react-mdl';
 import { connect } from 'react-redux';
-import { getAllExperts, selectAnExpert, nextQuestion } from '../../redux/actions/userProgress';
+import { getAllExperts, selectAnExpert, nextQuestion, deleteUser } from '../../redux/actions/userProgress';
 import { postNewUserExpertJoin, deleteUserExpertJoin, getFreeUsers } from '../../redux/actions/userExpertJoin';
-import { getCompletedQuestionStatus } from '../../utils/helper';
+import { getCompletedQuestionStatus, getCompletedLessons } from '../../utils/helper';
 import '../../Styles/AdminDashboardStyles.css';
 
 class UserOverview extends React.Component {
@@ -13,7 +13,6 @@ class UserOverview extends React.Component {
       selectedExpert: '',
       openModal: false
     }
-    this.getCompletedLessons = this.getCompletedLessons.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
     this.connectUserAndExpert = this.connectUserAndExpert.bind(this);
     this.deleteUserExpertJoin = this.deleteUserExpertJoin.bind(this);
@@ -65,20 +64,7 @@ class UserOverview extends React.Component {
   }
 
   deleteUser(){
-    console.log("action not finished")
-  }
-
-  // render the completed lessons on screen
-  getCompletedLessons = (units) => {
-    let result = [];
-    for(let unit in units){
-      for(let lesson in units[unit].lessons){
-        if(units[unit].lessons[lesson].lessonCompleted === true){
-          result.push(lesson)
-        }
-      }
-    }
-    return result;
+    this.props.deleteUser(this.props.user.firebase_id);
   }
 
   handleSelect(expertId){
@@ -124,7 +110,7 @@ class UserOverview extends React.Component {
 
         <div id="lessonProgressContainer">
           Completed Lessons:
-          <ul>{this.getCompletedLessons(user.user_progress).map(lesson => <li>{lesson}</li>)}</ul>
+          <ul>{getCompletedLessons(user.user_progress).map(lesson => <li>{lesson}</li>)}</ul>
         </div>
 
         <p>User's LMS Progress: {getCompletedQuestionStatus(user.user_progress)}%</p>
@@ -179,7 +165,10 @@ const mapDispatchToProps = dispatch => {
     },
     updateUser: (fb_id, userObj) => {
       dispatch(nextQuestion(fb_id, userObj))
-    }
+    },
+    deleteUser: (fb_id) => {
+      dispatch(deleteUser(fb_id))
+    },
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(UserOverview);
