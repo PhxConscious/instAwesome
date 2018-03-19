@@ -8,6 +8,6 @@ export const setCurrentValue = (key, value) => {
   }
 }
 
-// export const resetCurrentValues = () => ({
-//
-// })
+export const userLogout = () => ({
+  type: "USER_LOGOUT",
+})

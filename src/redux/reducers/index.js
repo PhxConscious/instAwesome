@@ -7,7 +7,7 @@ import userCompanyJoin from "./userCompanyJoin";
 import feedback from "./feedback";
 import userExpertJoin from './userExpertJoin';
 
-const rootReducer = combineReducers({
+const appReducer = combineReducers({
   userProgress: userProgress,
   lmsContent: lmsContent,
   currentValues: currentValues,
@@ -16,5 +16,14 @@ const rootReducer = combineReducers({
   feedback: feedback,
   userExpertJoin, userExpertJoin
 });
+
+const rootReducer = (state, action) => {
+  if (action.type === 'USER_LOGOUT') {
+    state = undefined
+  }
+
+  console.log("rootReducer state:", state, "action.type", action.type)
+  return appReducer(state, action)
+}
 
 export default rootReducer;
