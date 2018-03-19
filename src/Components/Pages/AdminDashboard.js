@@ -61,8 +61,10 @@ class AdminDashboard extends React.Component {
       userList = allUsers.map((user, i) => {
         return (
           <div
+            id={this.state.index === i ? "selectedUserInList" : ''}
+            index={i}
             key={i}
-            onClick={e=>this.setState({selectedUser:user})}>
+            onClick={e=>this.setState({selectedUser:user, index:i})}>
             {user.first_name}
           </div>
         )
