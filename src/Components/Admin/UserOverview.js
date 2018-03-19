@@ -3,6 +3,7 @@ import { IconButton, Menu, MenuItem, Dialog, DialogTitle, DialogContent, DialogA
 import { connect } from 'react-redux';
 import { getAllExperts, selectAnExpert } from '../../redux/actions/userProgress';
 import { postNewUserExpertJoin, deleteUserExpertJoin, getFreeUsers } from '../../redux/actions/userExpertJoin';
+import '../../Styles/AdminDashboardStyles.css'
 
 class UserOverview extends React.Component {
   constructor(props){
@@ -115,14 +116,18 @@ class UserOverview extends React.Component {
 
     return(
       <div>
-        <p>{user.first_name} {user.last_name}</p>
-        <p>{user.user_email}</p>
-        <p>{user.user_phone}</p>
+        <strong>User Details</strong>
+        <div>name: {user.first_name} {user.last_name}</div>
+        <div>email: {user.user_email}</div>
+        <div>phone: {user.user_phone}</div>
 
-        <ul>{this.getCompletedLessons(user.user_progress).map(lesson => <li>{lesson}</li>)}</ul>
+        <div id="lessonProgressContainer">
+          Completed Lessons:
+          <ul>{this.getCompletedLessons(user.user_progress).map(lesson => <li>{lesson}</li>)}</ul>
+        </div>
 
-        <p>percentage of questions completed: {this.getCompletedQuestionStatus(user.user_progress)}%</p>
-        {user.expert_id ? <div>{assignedExpert} <button onClick={this.deleteUserExpertJoin}>unpair</button></div>: <div style={{position: 'relative'}}>
+        <p>User's LMS Progress: {this.getCompletedQuestionStatus(user.user_progress)}%</p>
+        {user.expert_id ? <div>Expert: {assignedExpert} <button onClick={this.deleteUserExpertJoin}>unpair</button></div>: <div style={{position: 'relative'}}>
           <IconButton name="more_vert" id="demo-menu-top-left" /> Pair with expert
           <Menu target="demo-menu-top-left" valign="bottom" ripple>
               {theExperts}

@@ -1,3 +1,5 @@
+/* ------ for AdminDashboard ------ */
+
 #userPanelContainer {
   display: flex;
   flex-direction: row;
@@ -5,16 +7,33 @@
 }
 
 #usersPanelSelector {
-  flex:1;
-  /*display:inline-block;*/
+  flex-basis:35%;
   width: 20vw;
   background-color: rgba(100,0,0,.1);
-  padding: 10px 0px 10px 10px;
+  padding: 10px 10px 10px 10px;
 }
 
+#selectedUserInList {
+  background-color: rgba(200,0,0,.4);
+}
+
+
+
 #userPanelDetail {
-  flex:1;
-  /*display:inline-block;*/
+  flex-basis:65%;
   width: 20vw;
   background-color: rgba(0,100,0,.1);
+  padding: 10px 10px 10px 10px;
+}
+
+/* ------ for UserOverview ---------*/
+
+#userDetailContainer {
+
+}
+
+#lessonProgressContainer {
+  display: flex;
+  border-right: 2px solid black;
+  margin-bottom: 10px;
 }
