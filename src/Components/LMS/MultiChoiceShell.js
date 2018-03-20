@@ -24,7 +24,7 @@ class MultiChoiceShell extends React.Component{
 
     // selected answer array sorted
     let checkedArray = this.state.indicesOfChecked.sort((a,b) => a - b)
-
+    console.log(correctArray, checkedArray)
     // compare the two arrays to flag the correct modal
     if(correctArray.join("") === checkedArray.join("")){
       this.setState({isCorrect: true})
@@ -40,14 +40,17 @@ class MultiChoiceShell extends React.Component{
   addToIndices(i){
     let arr = this.state.indicesOfChecked;
     let result;
+
     if(arr.indexOf(i) === -1){
       arr.push(i)
       this.setState({indicesOfChecked: arr})
+
     } else {
       result = arr.filter(elem => {
         return elem !== i;
       })
-      this.setState({indicesOfChecked: result, indicesOfChecked: []})
+
+      this.setState({indicesOfChecked: result})
     }
   }
 
