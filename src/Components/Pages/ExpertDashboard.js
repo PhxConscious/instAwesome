@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {Redirect} from 'react-router-dom';
 import { postFeedback } from '../../redux/actions/feedback';
-import { getFreeUsers, postNewUserExpertJoin } from '../../redux/actions/userExpertJoin';
+import { getUsersOfExpert } from '../../redux/actions/userExpertJoin';
 
 
 class ExpertDashboard extends React.Component {
@@ -13,7 +13,7 @@ class ExpertDashboard extends React.Component {
     // this.select = this.select.bind(this);
   }
   componentWillMount(){
-    this.props.getFreeUsers()
+    this.props.getUsersOfExpert(this.props.userInfo.firebase_id)
   }
 
   selectUser(user){
@@ -28,11 +28,11 @@ class ExpertDashboard extends React.Component {
       return <Redirect to='/'/>
     }
 
-    let freeUsers;
-    let unhitchedUsers
-    if(userExpertJoin && userExpertJoin.freeUsers){
-      freeUsers = userExpertJoin.freeUsers;
-      unhitchedUsers = freeUsers.map((user, i) => {
+    let listOfUsersOfExpert;
+    let userList;
+    if(userExpertJoin && userExpertJoin.usersOfExpert){
+      listOfUsersOfExpert = userExpertJoin.usersOfExpert;
+      userList = listOfUsersOfExpert.map((user, i) => {
         return <div
                   key={i}
                   user={user}
@@ -43,7 +43,7 @@ class ExpertDashboard extends React.Component {
       })
     }
 
-    if(userExpertJoin && userExpertJoin.freeUsers){
+    if(userExpertJoin && userExpertJoin.usersOfExpert){
       return (
 
         <div style={{width: "80vw", margin: "0 auto", marginTop: "100px"}}>
@@ -52,7 +52,7 @@ class ExpertDashboard extends React.Component {
 
                 <div className="leftPanelSelector">
                   <strong>User List</strong>
-                    {unhitchedUsers}
+                    {userList}
                 </div>
 
                 <div className="rightPanelDetail">
@@ -83,12 +83,9 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = dispatch => {
   return {
-    getFreeUsers: () => {
-      dispatch(getFreeUsers())
+    getUsersOfExpert: (expert_id) => {
+      dispatch(getUsersOfExpert(expert_id))
     },
-    postNewUserExpertJoin: (obj) => {
-      dispatch(postNewUserExpertJoin(obj))
-    }
   }
 }
 
