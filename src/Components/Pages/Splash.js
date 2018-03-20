@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {Redirect} from 'react-router-dom';
+import {withCookies, Cookies} from 'react-cookie';
 
 class Splash extends React.Component {
   constructor(props){
@@ -9,12 +10,20 @@ class Splash extends React.Component {
       goBackThruLogin: false
     }
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.loginRefresh = this.loginRefresh.bind(this);
   }
 
   handleSubmit(){
     this.setState({goBackThruLogin:true})
   }
 
+  loginRefresh(){
+    console.log("loginRefresh")
+    const {cookies} = this.props;
+    cookies.remove('hash');
+    window.location.reload();
+    alert("Sorry you're having technical difficulties! Please bear with us as continue improving as quickly as we can. Clicking this link will ensure your login info is reset - try logging in again.")
+  }
 
   render(){
     let { userInfo, companyInfo } = this.props;
@@ -38,6 +47,11 @@ class Splash extends React.Component {
             type="submit"
           >Login now</button>
           </form>
+          <button
+            onClick={this.loginRefresh}
+          >
+            Trouble logging in?
+          </button>
         </div>
       )
     } else {
@@ -57,4 +71,4 @@ const mapStateToProps = state => ({
   userInfo: state.userProgress.currentUser,
   companyInfo: state.companyInfo
 })
-export default connect(mapStateToProps, null)(Splash);
+export default withCookies(connect(mapStateToProps, null)(Splash));
