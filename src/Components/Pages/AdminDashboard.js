@@ -131,8 +131,13 @@ class AdminDashboard extends React.Component {
 
                 <div className="rightPanelDetail">
                   {this.state.selectedExpert ? <ExpertOverview expert={this.state.selectedExpert}/>:''}
-                  <button onClick={this.removeExpert}>remove expert permissions</button>
-                  <button onClick={this.deleteUser}>delete account completely</button>
+                  <div id="currentExpertButtons">
+                    *caution*
+                    <button onClick={this.removeExpert}>remove expert permissions</button>
+                    <button onClick={this.deleteUser}>delete account completely</button>
+                    *caution*
+                  </div>
+
                 </div>
               </div>
             </div> : ''
