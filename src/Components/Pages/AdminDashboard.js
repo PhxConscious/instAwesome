@@ -101,7 +101,7 @@ class AdminDashboard extends React.Component {
 
     if(userExpertJoin && userExpertJoin.freeUsers && allUsers){
 
-      console.log("expertasdfa", this.state.selectedExpert)
+
       return (
         <div style={{width: "80vw", margin: "0 auto", marginTop: "100px"}}>
           <Tabs activeTab={this.state.activeTab} onChange={(tabId) => this.setState({ activeTab: tabId })} ripple>
