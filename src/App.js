@@ -6,7 +6,6 @@ import Store from './redux/stores';
 import { CookiesProvider } from 'react-cookie';
 
 export const initGA = () => {
-    console.log('GA INIT');
     ReactGA.initialize('')
 };
 

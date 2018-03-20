@@ -17,13 +17,17 @@
   background-color: rgba(200,0,0,.4);
 }
 
-
+#currentExpertButtons {
+  position:absolute;
+  bottom: 3px;
+}
 
 .rightPanelDetail {
   flex-basis:65%;
   width: 20vw;
   background-color: rgba(0,100,0,.1);
   padding: 10px 10px 10px 10px;
+  position: relative;
 }
 
 /* ------ for UserOverview ---------*/

@@ -1,7 +1,7 @@
 import React from 'react';
 import { IconButton, Menu, MenuItem, Dialog, DialogTitle, DialogContent, DialogActions, Button } from 'react-mdl';
 import { connect } from 'react-redux';
-import { getAllExperts, selectAnExpert, nextQuestion, deleteUser } from '../../redux/actions/userProgress';
+import { getAllExperts, selectAnExpert, updateNonCurrentUser, deleteUser } from '../../redux/actions/userProgress';
 import { postNewUserExpertJoin, deleteUserExpertJoin, getFreeUsers } from '../../redux/actions/userExpertJoin';
 import { getCompletedQuestionStatus, getCompletedLessons } from '../../utils/helper';
 import '../../Styles/AdminDashboardStyles.css';
@@ -17,9 +17,7 @@ class UserOverview extends React.Component {
     this.connectUserAndExpert = this.connectUserAndExpert.bind(this);
     this.deleteUserExpertJoin = this.deleteUserExpertJoin.bind(this);
     this.makeAdmin = this.makeAdmin.bind(this);
-    this.removeAdmin = this.removeAdmin.bind(this);
     this.makeExpert = this.makeExpert.bind(this);
-    this.removeExpert = this.removeExpert.bind(this);
     this.deleteUser = this.deleteUser.bind(this);
   }
 
@@ -51,16 +49,8 @@ class UserOverview extends React.Component {
     this.props.updateUser(this.props.user.firebase_id, {isAdmin: true})
   }
 
-  removeAdmin(){
-    this.props.updateUser(this.props.user.firebase_id, {isAdmin: false})
-  }
-
   makeExpert(){
     this.props.updateUser(this.props.user.firebase_id, {isExpert: true})
-  }
-
-  removeExpert(){
-    this.props.updateUser(this.props.user.firebase_id, {isExpert: false})
   }
 
   deleteUser(){
@@ -133,9 +123,7 @@ class UserOverview extends React.Component {
           </DialogActions>
         </Dialog>
         <button onClick={this.makeAdmin}>make admin</button>
-        <button onClick={this.removeAdmin}>remove admin</button>
         <button onClick={this.makeExpert}>make expert</button>
-        <button onClick={this.removeExpert}>remove expert</button>
         <button onClick={this.deleteUser}>delete user</button>
       </div>
     )
@@ -164,7 +152,7 @@ const mapDispatchToProps = dispatch => {
       dispatch(getFreeUsers())
     },
     updateUser: (fb_id, userObj) => {
-      dispatch(nextQuestion(fb_id, userObj))
+      dispatch(updateNonCurrentUser(fb_id, userObj))
     },
     deleteUser: (fb_id) => {
       dispatch(deleteUser(fb_id))

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import {Redirect} from 'react-router-dom';
 import { postFeedback } from '../../redux/actions/feedback';
 import { getFreeUsers, postNewUserExpertJoin } from '../../redux/actions/userExpertJoin';
-import { getAllUsers, getAllExperts } from '../../redux/actions/userProgress';
+import { getAllUsers, getAllExperts, deleteUser, updateNonCurrentUser } from '../../redux/actions/userProgress';
 import UserListItem from '../Admin/UserListItem';
 import UserOverview from '../Admin/UserOverview';
 import ExpertOverview from '../Admin/ExpertOverview';
@@ -16,11 +16,22 @@ class AdminDashboard extends React.Component {
     this.state = {userObj: {}, activeTab: 0}
     this.selectUser = this.selectUser.bind(this);
     this.claimUser = this.claimUser.bind(this);
+    this.removeExpert = this.removeExpert.bind(this);
+    this.deleteUser = this.deleteUser.bind(this);
   }
   componentWillMount(){
     this.props.getFreeUsers()
     this.props.getAllUsers()
     this.props.getAllExperts()
+  }
+
+  removeExpert(){
+    console.log('expert', this.state.selectedExpert.firebase_id)
+    this.props.updateUser(this.state.selectedExpert.firebase_id, {isExpert: false})
+  }
+
+  deleteUser(){
+    this.props.deleteUser(this.state.selectedExpert.firebase_id);
   }
 
   selectUser(user){
@@ -90,7 +101,7 @@ class AdminDashboard extends React.Component {
 
     if(userExpertJoin && userExpertJoin.freeUsers && allUsers){
 
-      console.log("expertasdfa", this.state.selectedExpert)
+
       return (
         <div style={{width: "80vw", margin: "0 auto", marginTop: "100px"}}>
           <Tabs activeTab={this.state.activeTab} onChange={(tabId) => this.setState({ activeTab: tabId })} ripple>
@@ -120,6 +131,13 @@ class AdminDashboard extends React.Component {
 
                 <div className="rightPanelDetail">
                   {this.state.selectedExpert ? <ExpertOverview expert={this.state.selectedExpert}/>:''}
+                  <div id="currentExpertButtons">
+                    *caution*
+                    <button onClick={this.removeExpert}>remove expert permissions</button>
+                    <button onClick={this.deleteUser}>delete account completely</button>
+                    *caution*
+                  </div>
+
                 </div>
               </div>
             </div> : ''
@@ -156,7 +174,13 @@ const mapDispatchToProps = dispatch => {
     },
     getAllExperts: () => {
       dispatch(getAllExperts())
-    }
+    },
+    updateUser: (fb_id, userObj) => {
+      dispatch(updateNonCurrentUser(fb_id, userObj))
+    },
+    deleteUser: (fb_id) => {
+      dispatch(deleteUser(fb_id))
+    },
   }
 }
 

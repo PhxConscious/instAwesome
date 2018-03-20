@@ -32,6 +32,14 @@ export const nextQuestion = (fb_id, data) => {
   }
 }
 
+export const updateNonCurrentUser = (fb_id, data) => {
+  // console.log("action: nextQuestion", fb_id, data)
+  return {
+    type: "UPDATE_NON_CURRENT_USER",
+    payload: axios.put(`http://localhost:8080/users/${fb_id}`, data)
+  }
+}
+
 export const createNewUser = (userObj) => {
   // console.log("Action: createNewUser", userObj);
   return {
