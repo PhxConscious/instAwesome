@@ -17,9 +17,7 @@ class UserOverview extends React.Component {
     this.connectUserAndExpert = this.connectUserAndExpert.bind(this);
     this.deleteUserExpertJoin = this.deleteUserExpertJoin.bind(this);
     this.makeAdmin = this.makeAdmin.bind(this);
-    this.removeAdmin = this.removeAdmin.bind(this);
     this.makeExpert = this.makeExpert.bind(this);
-    this.removeExpert = this.removeExpert.bind(this);
     this.deleteUser = this.deleteUser.bind(this);
   }
 
@@ -51,16 +49,8 @@ class UserOverview extends React.Component {
     this.props.updateUser(this.props.user.firebase_id, {isAdmin: true})
   }
 
-  removeAdmin(){
-    this.props.updateUser(this.props.user.firebase_id, {isAdmin: false})
-  }
-
   makeExpert(){
     this.props.updateUser(this.props.user.firebase_id, {isExpert: true})
-  }
-
-  removeExpert(){
-    this.props.updateUser(this.props.user.firebase_id, {isExpert: false})
   }
 
   deleteUser(){
@@ -133,9 +123,7 @@ class UserOverview extends React.Component {
           </DialogActions>
         </Dialog>
         <button onClick={this.makeAdmin}>make admin</button>
-        <button onClick={this.removeAdmin}>remove admin</button>
         <button onClick={this.makeExpert}>make expert</button>
-        <button onClick={this.removeExpert}>remove expert</button>
         <button onClick={this.deleteUser}>delete user</button>
       </div>
     )
