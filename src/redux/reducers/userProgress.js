@@ -58,6 +58,17 @@ export default (state = initialState, action) => {
         return {...state}
 
 
+    case "UPDATE_NON_CURRENT_USER_FULFILLED":
+      return {
+        ...state,
+        nonCurrentUser: action.payload.data[0]
+      }
+    case "UPDATE_NON_CURRENT_USER_PENDING":
+      return {...state}
+    case "UPDATE_NON_CURRENT_USER_REJECTED":
+        return {...state}
+
+
     case "CREATE_NEW_USER_FULFILLED":
       return {
         ...state,
