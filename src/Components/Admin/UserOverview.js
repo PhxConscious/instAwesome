@@ -1,7 +1,7 @@
 import React from 'react';
 import { IconButton, Menu, MenuItem, Dialog, DialogTitle, DialogContent, DialogActions, Button } from 'react-mdl';
 import { connect } from 'react-redux';
-import { getAllExperts, selectAnExpert, nextQuestion, deleteUser } from '../../redux/actions/userProgress';
+import { getAllExperts, selectAnExpert, updateNonCurrentUser, deleteUser } from '../../redux/actions/userProgress';
 import { postNewUserExpertJoin, deleteUserExpertJoin, getFreeUsers } from '../../redux/actions/userExpertJoin';
 import { getCompletedQuestionStatus, getCompletedLessons } from '../../utils/helper';
 import '../../Styles/AdminDashboardStyles.css';
@@ -164,7 +164,7 @@ const mapDispatchToProps = dispatch => {
       dispatch(getFreeUsers())
     },
     updateUser: (fb_id, userObj) => {
-      dispatch(nextQuestion(fb_id, userObj))
+      dispatch(updateNonCurrentUser(fb_id, userObj))
     },
     deleteUser: (fb_id) => {
       dispatch(deleteUser(fb_id))
