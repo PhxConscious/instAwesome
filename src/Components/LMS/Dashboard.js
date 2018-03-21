@@ -450,25 +450,23 @@ class Dashboard extends React.Component {
             return (
                 <div className="background">
                     <Grid>
-                        <Cell col={4} tablet={12} phone={12}>
+                        <Cell col={4} tablet={12} phone={12} className="unitCardsContainer">
                             {/*<div id="spacer"></div>*/}
-                            <div className="unitCardsContainer">
+                            <div >
                                 {lmsCards}
                             </div>
                         </Cell>
-                        <Cell col={8} tablet={12} phone={12}>
-                            <div className="lessonContentContainer">
-                                <div id="lessonContentComponent">
-                                    {this.state.readyForRender ?
-                                        <LessonContent
-                                            nextUnit={this.nextUnit}
-                                            nextLesson={this.nextLesson}
-                                            prevLesson={this.prevLesson}
-                                            nextQuestion={this.nextQuestion}
-                                            prevQuestion={this.prevQuestion}
-                                            selectLessonOnClick={this.selectLessonOnClick}
-                                        /> : 'Select a unit to begin'}
-                                </div>
+                        <Cell col={8} tablet={12} phone={12} className="lessonContentContainer">
+                            <div id="lessonContentComponent">
+                                {this.state.readyForRender ?
+                                    <LessonContent
+                                        nextUnit={this.nextUnit}
+                                        nextLesson={this.nextLesson}
+                                        prevLesson={this.prevLesson}
+                                        nextQuestion={this.nextQuestion}
+                                        prevQuestion={this.prevQuestion}
+                                        selectLessonOnClick={this.selectLessonOnClick}
+                                    /> : 'Select a unit to begin'}
                             </div>
                         </Cell>
                     </Grid>
