@@ -1,6 +1,7 @@
 import React from 'react';
 import MultiChoiceAnswer from './MultiChoiceAnswer'
-import { Dialog, DialogContent, DialogActions, DialogTitle, Button } from 'react-mdl';
+import { Button } from 'react-mdl';
+import ReactModal from 'react-modal'
 import "../../Styles/MultiChoiceStyles.css"
 
 class MultiChoiceShell extends React.Component{
@@ -93,16 +94,23 @@ class MultiChoiceShell extends React.Component{
           >Attempt</button>
         </form>
 
-        <Dialog open={this.state.openDialog}>
-          <DialogTitle>{isCorrect ? "CORRECT!" : "noooo"}</DialogTitle>
-          <DialogContent>
-            {isCorrect ? questObj.correctResponse : ''}
-            {!isCorrect ? questObj.incorrectResponse : ''}
-          </DialogContent>
-          <DialogActions>
-            <Button type='button' onClick={this.handleClick}>OK</Button>
-          </DialogActions>
-        </Dialog>
+        <ReactModal
+          isOpen={this.state.openDialog}
+          contentLabel="content Label"
+          className="Modal"
+          overlayClassName="Overlay"
+        >
+          <div className="modalAllContent">
+            <h3 className="modalTitle">{isCorrect ? "CORRECT!" : "try again"}</h3>
+            <h6 className="modalDescription">
+              {isCorrect ? questObj.correctResponse : ''}
+              {!isCorrect ? questObj.incorrectResponse : ''}
+            </h6>
+            <div className="modalButtonContainer">
+              <Button type='button' onClick={this.handleClick}>OK</Button>
+            </div>
+          </div>
+        </ReactModal>
 
       </div>
     )

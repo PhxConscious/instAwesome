@@ -5,9 +5,10 @@ import ReactPlayer from 'react-player';
 import '../../Styles/ContentBodyStyles.css';
 import { CheckBox, LessonIcon } from './Checkbox';
 import TextInput from './TextInput';
-import { Button, Dialog, DialogTitle, DialogActions, DialogContent, Textfield } from 'react-mdl';
+import { Button, Textfield } from 'react-mdl';
 import { updateCompanyInfo } from '../../redux/actions/companyInfo';
 import MultiChoiceShell from './MultiChoiceShell';
+import ReactModal from 'react-modal';
 
 class CheckTasks extends React.Component {
   constructor(props){
@@ -248,43 +249,54 @@ class CheckTasks extends React.Component {
 
           </div>
 
-          <Dialog open={this.state.openLessonDialog}>
-            <DialogTitle>{this.state.lessonDialogTitle}</DialogTitle>
-            <DialogContent>
-              <p>{this.state.lessonDialogText}</p>
-            </DialogContent>
-            <DialogActions>
-              <Button
-                type='button'
-                onClick={nextLesson}
-              >{this.state.lessonDialogButton1}
-              </Button>
-              <Button
-                type='button'
-                onClick={e=>this.setState({openLessonDialog:false})}
-              >{this.state.lessonDialogButton2}
-            </Button>
-            </DialogActions>
-          </Dialog>
 
-          <Dialog open={this.state.openUnitDialog}>
-            <DialogTitle>{this.state.unitDialogTitle}</DialogTitle>
-            <DialogContent>
-              <p>{this.state.unitDialogText}</p>
-            </DialogContent>
-            <DialogActions>
-              <Button
-                type='button'
-                onClick={nextUnit}
-              >{this.state.unitDialogButton1}
-              </Button>
-              <Button
-                type='button'
-                onClick={e=>this.setState({openUnitDialog:false})}
-              >{this.state.unitDialogButton2}
-            </Button>
-            </DialogActions>
-          </Dialog>
+
+          <ReactModal
+            isOpen={this.state.openLessonDialog}
+            className="Modal"
+            overlayClassName="Overlay"
+          >
+            <div className="modalAllContent">
+              <h3 className="modalTitle">{this.state.lessonDialogTitle}</h3>
+              <h6 className="modalDescription">{this.state.lessonDialogText}</h6>
+              <div className="modalButtonContainer">
+                <Button
+                  type='button'
+                  onClick={nextLesson}
+                >{this.state.lessonDialogButton1}
+                </Button>
+                <Button
+                  type='button'
+                  onClick={e=>this.setState({openLessonDialog:false})}
+                >{this.state.lessonDialogButton2}
+                </Button>
+              </div>
+            </div>
+          </ReactModal>
+
+          <ReactModal
+            isOpen={this.state.openUnitDialog}
+            contentLabel="content Label"
+            className="Modal"
+            overlayClassName="Overlay"
+          >
+            <div className="modalAllContent">
+              <h3 className="modalTitle">{this.state.unitDialogTitle}</h3>
+              <h6 className="modalDescription">{this.state.unitDialogText}</h6>
+              <div className="modalButtonContainer">
+                <Button
+                  type='button'
+                  onClick={nextUnit}
+                >{this.state.unitDialogButton1}
+                </Button>
+                <Button
+                  type='button'
+                  onClick={e=>this.setState({openUnitDialog:false})}
+                >{this.state.unitDialogButton2}
+                </Button>
+              </div>
+            </div>
+          </ReactModal>
 
           <div>Unit: {parseInt(currentUnit, 10)+1} of {book.length}</div>
           <div>Lesson: {parseInt(currentLesson, 10)+1} of {book[currentUnit].lessons.length}</div>
@@ -363,3 +375,23 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CheckTasks);
+
+
+// <Dialog open={this.state.openLessonDialog}>
+//   <DialogTitle>{this.state.lessonDialogTitle}</DialogTitle>
+//   <DialogContent>
+//     <p>{this.state.lessonDialogText}</p>
+//   </DialogContent>
+//   <DialogActions>
+//     <Button
+//       type='button'
+//       onClick={nextLesson}
+//     >{this.state.lessonDialogButton1}
+//     </Button>
+//     <Button
+//       type='button'
+//       onClick={e=>this.setState({openLessonDialog:false})}
+//     >{this.state.lessonDialogButton2}
+//   </Button>
+//   </DialogActions>
+// </Dialog>
