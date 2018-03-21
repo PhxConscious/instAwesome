@@ -5,58 +5,76 @@ import {Grid, Cell} from 'react-mdl';
 
 class LmsCard extends Component {
 
-    render() {
-        let {image, title, description, active, onClick, userProgress, book, id, index} = this.props;
+  render() {
+    let {
+      image,
+      title,
+      description,
+      active,
+      onClick,
+      userProgress,
+      book,
+      id,
+      index
+    } = this.props;
 
-        let {currentUnit, currentUnitObj,} = this.props.currentValues;
+    let {currentUnit, currentUnitObj} = this.props.currentValues;
 
-        let userProg = userProgress.currentUser.user_progress;
+    let userProg = userProgress.currentUser.user_progress;
 
-        let clickHandler = () => {
-            if (!userProg[id].unitLocked) {
-                onClick(id)
-            } else {
-                alert("Please finish the current unit before continuing to later units")
-            }
-        }
-
-        return (
-                <Grid>
-            <div
-                className={!userProg[id].unitCompleted ? "LmsCardContainer locked" : "LmsCardContainer unlocked"}
-                id={active ? "currentCard" : ""}
-                onClick={clickHandler}>
-                    <Cell col={1} tablet={1}>
-                        <div className="lockIcon">
-                            <i className="material-icons">{userProg[id].unitLocked ? "lock" : ""}</i>
-                        </div>
-                    </Cell>
-                    <Cell col={4} tablet={2}>
-                        <img src={image} className="LmsImage" alt="blah"/>
-                    </Cell>
-                    <Cell col={6} tablet={8}>
-                        {/*<div className="titleCheckboxRow">*/}
-                            {/*<div className="lmsTitleSpan">*/}
-                                <p className={userProg[id].unitCompleted ? "lmsTitle" : "lmsTitle greyText"} id={active ? "currentCard" : ""}>{title}</p>
-                            {/*</div>*/}
-                        {/*</div>*/}
-                        <p className={userProg[id].unitCompleted ? "lmsDescription" : "lmsDescription greyText"} id={active ? "currentCard" : ""}>{description}</p>
-                    </Cell>
-                    <Cell col={1} tablet={1}>
-                        <div className="lmsCheckboxSpan">
-                            <i className="material-icons checkBox">{userProg[id].unitCompleted ? "check_box" : "visibility"}</i>
-                        </div>
-                    </Cell>
-            </div>
-                </Grid>
-        )
+    let clickHandler = () => {
+      if (!userProg[id].unitLocked) {
+        onClick(id)
+      } else {
+        alert("Please finish the current unit before continuing to later units")
+      }
     }
+
+    return (
+      <Grid>
+        <div className={!userProg[id].unitCompleted
+          ? "LmsCardContainer locked"
+          : "LmsCardContainer unlocked"} id={active
+          ? "currentCard"
+          : ""} onClick={clickHandler}>
+          <div className={!userProg[id].unitCompleted && !active
+            ? "overlay"
+            : ""}></div>
+          <Cell col={1} tablet={1}>
+            <div className="lockIcon">
+              <i className="material-icons">{userProg[id].unitLocked
+                  ? "lock"
+                  : ""}</i>
+            </div>
+          </Cell>
+          <Cell className="imageContainer" col={4} tablet={2}>
+            <img src={image} className="LmsImage" alt="blah"/>
+          </Cell>
+          <Cell col={6} tablet={8}>
+            <div className={userProg[id].unitCompleted
+              ? "lmsTitle"
+              : "lmsTitle greyText"} id={active
+              ? "currentCard"
+              : ""}>{title}</div>
+            <p className={userProg[id].unitCompleted
+              ? "lmsDescription"
+              : "lmsDescription greyText"} id={active
+              ? "currentCard"
+              : ""}>{description}</p>
+          </Cell>
+          <Cell col={1} tablet={1}>
+            <div className="lmsCheckboxSpan">
+              <i className="material-icons checkBox">{userProg[id].unitCompleted
+                  ? "check_box"
+                  : "visibility"}</i>
+            </div>
+          </Cell>
+        </div>
+      </Grid>
+    )
+  }
 }
 
-const mapStateToProps = state => ({
-    book: state.lmsContent.book,
-    userProgress: state.userProgress,
-    currentValues: state.currentValues
-})
+const mapStateToProps = state => ({book: state.lmsContent.book, userProgress: state.userProgress, currentValues: state.currentValues})
 
 export default connect(mapStateToProps, null)(LmsCard);

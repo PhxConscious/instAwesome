@@ -1,46 +1,68 @@
-.LmsCardContainer{
+.LmsCardContainer {
   /*display: block;*/
   height: 120px;
   border-radius: 10px;
   display: flex;
   flex-direction: row;
   margin-bottom: 5px;
+  position: relative;
 }
 
-.LmsImage{
-  height: 75px;
-  width: 90%;
+.overlay {
+  height: 100%;
+  width: 100%;
+  background-color: rgba(65, 126, 131, .7) !important;
+  position: absolute;
+  /*opacity: .3;*/
+  border-radius: 10px;
+  /*z-index: 5;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 5px;*/
+}
+
+.imageContainer {
+  /*display: flex;*/
+  /*justify-content: center;*/
+  /*align-items: center;*/
+  /*overflow: hidden;*/
+  /*background-color: green;*/
+  /*position:relative;*/
+}
+
+.LmsImage {
+  /*position: relative;*/
+  /*top: 50%;*/
+  /*transform: translateY(-50%);*/
+  height: auto;
+  width: 80%;
   background-color: black;
   /*margin: 15px;*/
-  margin-left: 0;
-  margin-right: 0;
-  margin-top: 8px;
-  margin-bottom: 8px;
-
+  z-index: -1;
 }
 
-.leftSide{
+.leftSide {
   /*height: 100%;*/
   /*flex: 1;*/
   /*display: inline-block;*/
   /*vertical-align: middle;*/
 }
 
-.rightSide{
+.rightSide {
   /*height: 100%;*/
   /*flex: 1;*/
   /*display: inline-block;*/
   /*vertical-align: middle;*/
 }
 
-#currentCard{
+#currentCard {
   background-color: #99DE7E !important;
   color: #005259 !important;
 }
 
-
-.locked{
-  background-color: #417E83 !important;
+.locked {
+  background-color: rgba(65, 126, 131, 1) !important;
+  /*z-index: 1;*/
 }
 
 .unlocked {
@@ -51,6 +73,7 @@
   color: #A7A7A7;
   margin: 0;
   padding: 0;
+  z-index: 10;
 }
 
 .titleCheckboxRow {
@@ -60,30 +83,40 @@
   /*flex-direction: row;*/
 }
 
-.lmsTitleSpan {
-  /*width: 88%;*/
-}
 
-.lmsTitle{
+/*.lmsTitleSpan {
+
+  position:relative;
+  z-index: 3;
+}
+*/
+
+.lmsTitle {
+  position: relative;
+  z-index: 3;
   font-weight: 800;
   font-size: 1em;
   color: #005259;
 }
 
 .lmsCheckboxSpan {
-  /*width: 12%;*/
-  /*display: inline;*/
+  position: relative;
+  z-index: 3;
   float: right;
 }
 
-.lmsDescription{
+.lmsDescription {
   font-size: 1em;
   line-height: 100%;
   color: #005259;
   /*margin-right: 5px;*/
 }
 
-.lockIcon{
+.lockIcon {
+  position: absolute;
+  left: 45%;
+  top: 45%;
+  z-index: 3;
   font-size: 15px;
   /*margin-left: 22.5vw;*/
   /*margin-top: 38px;*/
