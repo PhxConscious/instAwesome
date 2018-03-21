@@ -61,9 +61,10 @@ class AppNavbar extends Component {
                     </div>
                 </Cell>
                 <Cell className='centerCol' col={4} tablet={12}>
-                    <div className="mdl-layout-spacer centerLogoCont">
+                    <Link to='/splash'
+                      className="mdl-layout-spacer centerLogoCont">
                         <img className='centerLogo' src='https://i.imgur.com/qYqmu8v.png' alt="blah"/>
-                    </div>
+                    </Link>
                 </Cell>
                 <Cell className='rightCol' col={4} hideTablet={true} hidePhone={true}>
                     <Grid>
