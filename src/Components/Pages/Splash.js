@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {Redirect} from 'react-router-dom';
+import {Redirect, Link} from 'react-router-dom';
 import {withCookies, Cookies} from 'react-cookie';
 
 class Splash extends React.Component {
@@ -57,9 +57,23 @@ class Splash extends React.Component {
     } else {
       return (
         <div style={{width: "50vw", margin: "0 auto", marginTop: "100px"}}>
-          Welcome back to instAwesome.
           This is the spash page where users gain an idea of what they can do on the site.
           We could also put up some kind of article feed - do we have content coming off of wordpress?
+          <div>
+            {companyInfo.companyList && companyInfo.companyList.length === 0 ? <div>
+              <h3>We notice you haven't set up your company yet...</h3>
+              <p>Please set up your company profile immediately so that we can better help you.</p>
+              <Link className='linkTo' to='/profile'>
+                  Add My Company
+              </Link>
+            </div> : <div>
+              <h3>Welcome back to instAwesome.</h3>
+              <Link className='linkTo' to='/learn/dashboard'>
+                  Continue The Journey
+              </Link>
+            </div>}
+          </div>
+
         </div>
       )
     }
