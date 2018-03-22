@@ -25,9 +25,10 @@
     "redux-promise-middleware": "^5.0.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "env": ". tmp/ENV && env | grep -E 'REACT_APP|NODE_ENV' | grep -v 'npm.*script'",
+    "start": ". tmp/ENV && react-scripts start",
+    "build": ". tmp/ENV && react-scripts build",
+    "test": ". tmp/ENV && react-scripts test --env=jsdom",
+    "eject": ". tmp/ENV && react-scripts eject"
   }
 }
