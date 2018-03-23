@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import {Redirect} from 'react-router-dom';
 import { postFeedback } from '../../redux/actions/feedback';
 import { getUsersOfExpert } from '../../redux/actions/userExpertJoin';
-
+import { getUserCompanyJoinInfo } from '../../redux/actions/userCompanyJoin';
 
 class ExpertDashboard extends React.Component {
   constructor(props){
@@ -18,12 +18,13 @@ class ExpertDashboard extends React.Component {
 
   selectUser(user){
     this.setState({userObj: user})
+    this.props.getCompanyOfUser(user.firebase_id);
   }
 
   render(){
-    const { userInfo, userExpertJoin } = this.props;
+    const { userInfo, userExpertJoin, userCompanyJoin } = this.props;
     let { userObj } = this.state;
-
+    console.log("userCompanyJoin", userCompanyJoin)
     if (typeof(userInfo.currentUser)===undefined) {
       return <Redirect to='/'/>
     }
@@ -59,10 +60,49 @@ class ExpertDashboard extends React.Component {
                   <p>name: {userObj.first_name} {userObj.last_name}</p>
                   <p>email: {userObj.user_email}</p>
                   <p>phone: {userObj.user_phone}</p>
-                  <button
-                    disabled={!userObj.first_name}
-                    onClick={e => this.claimUser(userObj)}
-                  >claim this user</button>
+                  <hr/>
+                  <p>company: {userCompanyJoin.companyInfo ? userCompanyJoin.companyInfo.company_name : '' }</p>
+                  <p>company website: {userCompanyJoin.companyInfo ? userCompanyJoin.companyInfo.company_website : '' }</p>
+                  <p>content creator: {userCompanyJoin.companyInfo ? userCompanyJoin.companyInfo.company_content_creator : '' }</p>
+
+                  <p>storage locale: {userCompanyJoin.companyInfo ? userCompanyJoin.companyInfo.cloudbased_storage_locale : '' }</p>
+
+                  <p>company phone: {userCompanyJoin.companyInfo ? userCompanyJoin.companyInfo.company_phone : '' }</p>
+                  <p>company primary goals: {userCompanyJoin.companyInfo ? userCompanyJoin.companyInfo.company_primary_goal : '' }</p>
+                  <hr/>
+                  <p>instagram username: {userCompanyJoin.companyInfo ? userCompanyJoin.companyInfo.instagram_username : '' }</p>
+                  <p>instagram goal #1: {userCompanyJoin.companyInfo ? userCompanyJoin.companyInfo.insta_goal1 : '' }</p>
+                  <p>instagram goal #2: {userCompanyJoin.companyInfo ? userCompanyJoin.companyInfo.insta_goal2 : '' }</p>
+                  <p>instagram goal #3: {userCompanyJoin.companyInfo ? userCompanyJoin.companyInfo.insta_goal3 : '' }</p>
+                  <p>instagram bio: {userCompanyJoin.companyInfo ? userCompanyJoin.companyInfo.instagram_bio : '' }</p>
+                  <p>instagram goals: {userCompanyJoin.companyInfo ? userCompanyJoin.companyInfo.instagram_goals : '' }  <strong> isnt this redundant?</strong></p>
+                  <hr/>
+                  <p>facebook url: {userCompanyJoin.companyInfo ? userCompanyJoin.companyInfo.facebook_page_url : '' }</p>
+                  <p>facebook goals: {userCompanyJoin.companyInfo ? userCompanyJoin.companyInfo.facebook_goals : '' }</p>
+                  <hr/>
+                  <p>google business profile: {userCompanyJoin.companyInfo ? userCompanyJoin.companyInfo.google_business_profile : '' }</p>
+                  <p>google plus goals: {userCompanyJoin.companyInfo ? userCompanyJoin.companyInfo.google_plus_goals : '' }</p>
+                  <p>google plus profile: {userCompanyJoin.companyInfo ? userCompanyJoin.companyInfo.google_plus_profile_url : '' }</p>
+                  <p>google search goals: {userCompanyJoin.companyInfo ? userCompanyJoin.companyInfo.google_search_goals : '' }</p>
+                  <hr/>
+                  <p>linkedIn goals: {userCompanyJoin.companyInfo ? userCompanyJoin.companyInfo.linkedin_goals : '' }</p>
+                  <p>linkedIn profile: {userCompanyJoin.companyInfo ? userCompanyJoin.companyInfo.linkedin_profile : '' }</p>
+                  <hr/>
+                  <p>pinterest goals: {userCompanyJoin.companyInfo ? userCompanyJoin.companyInfo.pinterest_goals : '' }</p>
+                  <p>pinterest profile: {userCompanyJoin.companyInfo ? userCompanyJoin.companyInfo.pinterest_profile : '' }</p>
+                  <hr/>
+                  <p>twitter username: {userCompanyJoin.companyInfo ? userCompanyJoin.companyInfo.twitter_username : '' }</p>
+                  <p>twitter goals: {userCompanyJoin.companyInfo ? userCompanyJoin.companyInfo.twitter_goals : '' }</p>
+                  <hr/>
+                  <p>yelp business profile: {userCompanyJoin.companyInfo ? userCompanyJoin.companyInfo.yelp_business_profile : '' }</p>
+                  <p>yelp goals: {userCompanyJoin.companyInfo ? userCompanyJoin.companyInfo.yelp_goals : '' }</p>
+                  <hr/>
+                  <p>BBB profile: {userCompanyJoin.companyInfo ? userCompanyJoin.companyInfo.better_business_bureau_profile : '' }</p>
+                  <p>BBB goals: {userCompanyJoin.companyInfo ? userCompanyJoin.companyInfo.better_business_bureau_goals : '' }</p>
+                  <hr/>
+                  <p>youtube profile: {userCompanyJoin.companyInfo ? userCompanyJoin.companyInfo.youtube_url : '' }</p>
+                  <p>vimeo profile: {userCompanyJoin.companyInfo ? userCompanyJoin.companyInfo.vimeo_url : '' }</p>
+                  <p>youtube & vimeo goals: {userCompanyJoin.companyInfo ? userCompanyJoin.companyInfo.youtube_vimeo_goals : '' }</p>
                 </div>
               </div>
 
@@ -78,13 +118,17 @@ class ExpertDashboard extends React.Component {
 const mapStateToProps = state => {
   return {
     userInfo: state.userProgress.currentUser,
-    userExpertJoin: state.userExpertJoin
+    userExpertJoin: state.userExpertJoin,
+    userCompanyJoin: state.userCompanyJoin,
   }
 }
 const mapDispatchToProps = dispatch => {
   return {
     getUsersOfExpert: (expert_id) => {
       dispatch(getUsersOfExpert(expert_id))
+    },
+    getCompanyOfUser: (fb_id) => {
+      dispatch(getUserCompanyJoinInfo(fb_id))
     },
   }
 }
