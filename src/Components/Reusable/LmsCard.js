@@ -47,10 +47,10 @@ class LmsCard extends Component {
                   : ""}</i>
             </div>
           </Cell>
-          <Cell className="imageContainer" col={4} tablet={2}>
+          <Cell className="imageContainer" col={6} tablet={6} phone={6}>
             <img src={image} className="LmsImage" alt="blah"/>
           </Cell>
-          <Cell col={6} tablet={8}>
+          <Cell className='lmsTitleCont' col={6} tablet={6} phone={6}>
             <div className={userProg[id].unitCompleted
               ? "lmsTitle"
               : "lmsTitle greyText"} id={active

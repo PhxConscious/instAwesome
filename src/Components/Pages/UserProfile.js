@@ -50,14 +50,14 @@ class UserProfile extends Component {
             <div className="App">
                 <Gradient/>
                 <BlueAppBg>
-                    <Tabs activeTab={this.state.activeTab} onChange={(tabId) => this.setState({activeTab: tabId})}
+                    <Tabs activeTab={this.state.activeTab}  onChange={(tabId) => this.setState({activeTab: tabId})}
                           ripple>
                         <Tab className={isMaxOneCompany ? "" : "hidden"}>Add Company</Tab>
 
-                        <Tab className={userHasCompany ? "" : "hidden"}>Company Info</Tab>
-                        <Tab className={userHasCompany ? "" : "hidden"}>On The Web</Tab>
-                        <Tab className={userHasCompany ? "" : "hidden"}>Primary Contact</Tab>
-                        <Tab className={userHasCompany ? "" : "hidden"}>Change Password</Tab>
+                        <Tab className={userHasCompany ? "" : "hidden"}><span className="consciousBlueColor">Company Info</span></Tab>
+                        <Tab className={userHasCompany ? "" : "hidden"}><span className="consciousBlueColor">On The Web</span></Tab>
+                        <Tab className={userHasCompany ? "" : "hidden"}><span className="consciousBlueColor">Primary Contact</span></Tab>
+                        <Tab className={userHasCompany ? "" : "hidden"}><span className="consciousBlueColor">Change Password</span></Tab>
                     </Tabs>
                     <section className="tabSection">
                         <div style={{width: '80%', margin: 'auto', height: '1000px'}}>
