@@ -65,7 +65,12 @@ class LoginForm extends Component {
 
     pullInUserValues(fb_id) {
         let {setCurrentUserFbId, fetchUserInfo, getCompanyList, getLmsContent} = this.props;
+
+        // WARNING: this should not be called multiple times - it will result in duplicate events firing
+        // currently pullInUserValues is called from render and from onLoginSuccess
+        // consider only calling it once from 'mounted' and have it read fb_id from state
         firebase.auth().onAuthStateChanged(function (user) {
+            console.log('auth state changed')
             if (user) {
                 setCurrentUserFbId("currentFbId", fb_id)
                 fetchUserInfo(fb_id);
@@ -147,6 +152,8 @@ class LoginForm extends Component {
         // keeps user logged in
         let userCookie = cookies.get('hash')
         if (userCookie) {
+            // WARNING: this should not be called in a render function
+            console.log(`usercookie found: ${userCookie}, redirecting to /splash`)
             this.pullInUserValues(userCookie);
             return (
                 <Redirect to={'/splash'}/>

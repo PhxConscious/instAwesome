@@ -5,7 +5,7 @@ export const getAllUsers = () => {
   // console.log("Action: Getting user", fb_id)
   return {
     type: "GET_ALL_USERS",
-    payload: axios.get(`#{config.app.api}/users`)
+    payload: axios.get(`${config.app.api}/users`)
   }
 }
 
@@ -13,7 +13,7 @@ export const getUserProgress = (fb_id) => {
   // console.log("Action: Getting user", fb_id)
   return {
     type: "GET_USER_PROGRESS",
-    payload: axios.get(`#{config.app.api}/users/${fb_id}`)
+    payload: axios.get(`${config.app.api}/users/${fb_id}`)
   }
 }
 
@@ -21,7 +21,7 @@ export const selectAnExpert = (fb_id) => {
   // console.log("Action: Getting user", fb_id)
   return {
     type: "SELECT_AN_EXPERT",
-    payload: axios.get(`#{config.app.api}/users/${fb_id}`)
+    payload: axios.get(`${config.app.api}/users/${fb_id}`)
   }
 }
 
@@ -29,7 +29,7 @@ export const nextQuestion = (fb_id, data) => {
   // console.log("action: nextQuestion", fb_id, data)
   return {
     type: "NEXT_QUESTION",
-    payload: axios.put(`#{config.app.api}/users/${fb_id}`, data)
+    payload: axios.put(`${config.app.api}/users/${fb_id}`, data)
   }
 }
 
@@ -37,7 +37,7 @@ export const updateNonCurrentUser = (fb_id, data) => {
   // console.log("action: nextQuestion", fb_id, data)
   return {
     type: "UPDATE_NON_CURRENT_USER",
-    payload: axios.put(`#{config.app.api}/users/${fb_id}`, data)
+    payload: axios.put(`${config.app.api}/users/${fb_id}`, data)
   }
 }
 
@@ -45,20 +45,20 @@ export const createNewUser = (userObj) => {
   // console.log("Action: createNewUser", userObj);
   return {
     type: "CREATE_NEW_USER",
-    payload: axios.post(`#{config.app.api}/users/new`, userObj)
+    payload: axios.post(`${config.app.api}/users/new`, userObj)
   }
 }
 
 export const getAllExperts = () => {
   return {
     type: "GET_ALL_EXPERTS",
-    payload: axios.get(`#{config.app.api}/users/experts`)
+    payload: axios.get(`${config.app.api}/users/experts`)
   }
 }
 
 export const deleteUser = (fb_id) => {
   return {
     type: "DELETE_USER",
-    payload: axios.delete(`#{config.app.api}/users/${fb_id}`)
+    payload: axios.delete(`${config.app.api}/users/${fb_id}`)
   }
 }
