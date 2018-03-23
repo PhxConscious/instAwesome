@@ -22,4 +22,6 @@
 
 #reactPlayer {
     margin: 0 auto;
+    min-height:30vh;
+    width: 100%;
 }

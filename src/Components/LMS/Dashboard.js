@@ -446,13 +446,13 @@ class Dashboard extends React.Component {
             return (
                 <div className="background">
                     <Grid>
-                        <Cell col={4} tablet={12} phone={12} className="unitCardsContainer">
+                        <Cell col={5} tablet={12} phone={12} className="unitCardsContainer">
                             {/*<div id="spacer"></div>*/}
                             <div className='lmsCards'>
                                 {lmsCards}
                             </div>
                         </Cell>
-                        <Cell col={8} tablet={12} phone={12} className="lessonContentContainer">
+                        <Cell col={7} tablet={12} phone={12} className="lessonContentContainer">
                             <div id="lessonContentComponent">
                                 {this.state.readyForRender ?
                                     <LessonContent

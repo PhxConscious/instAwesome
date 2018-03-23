@@ -20,8 +20,8 @@ class LessonHeader extends React.Component {
               id="reactPlayer"
               url={currentLessonObj.video}
               controls={true}
-              width="100%"
-              height="70vh"
+              width="auto%"
+              min-height="auto"
               playing={false}
             />
           </div>
