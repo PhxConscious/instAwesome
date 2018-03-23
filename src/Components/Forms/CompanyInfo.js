@@ -4,7 +4,6 @@ import {connect} from 'react-redux';
 import {updateCompanyInfo} from "../../redux/actions/companyInfo";
 
 class CompanyInfo extends Component {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -14,6 +13,17 @@ class CompanyInfo extends Component {
             error: '',
             loading: false
         };
+    }
+
+    componentDidMount() {
+        let {companyInfo} = this.props;
+        if (companyInfo && companyInfo.companyList && companyInfo.companyList[0]) {
+            this.setState({
+                company_name: companyInfo.companyList[0].company_name,
+                company_email: companyInfo.companyList[0].company_email,
+                company_phone: companyInfo.companyList[0].company_phone
+            })
+        }
     }
 
     renderButton() {

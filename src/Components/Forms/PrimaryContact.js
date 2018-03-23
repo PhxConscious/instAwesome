@@ -1,7 +1,7 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import '../../Styles/FormsStyles.css';
-import {connect} from 'react-redux';
-import {updateCompanyInfo} from "../../redux/actions/companyInfo";
+import { connect } from 'react-redux';
+import { updateCompanyInfo } from "../../redux/actions/companyInfo";
 
 class PrimaryContact extends Component {
     constructor(props) {
@@ -13,6 +13,17 @@ class PrimaryContact extends Component {
             error: '',
             loading: false
         };
+    }
+
+    componentDidMount() {
+        let { companyInfo } = this.props;
+        if (companyInfo && companyInfo.companyList && companyInfo.companyList[0]) {
+            this.setState({
+                primary_contact_full_name: companyInfo.companyList[0].primary_contact_full_name,
+                primary_contact_phone_number: companyInfo.companyList[0].primary_contact_phone_number,
+                primary_contact_email: companyInfo.companyList[0].primary_contact_email
+            })
+        }
     }
 
     onButtonPress(e) {
@@ -41,7 +52,6 @@ class PrimaryContact extends Component {
 
     handleInputTextChange = e => {
         this.setState({[e.target.name]: e.target.value});
-        // console.log(`this is the current state ${this.state}`)
     };
 
     render() {
