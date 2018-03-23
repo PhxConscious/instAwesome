@@ -15,16 +15,15 @@ class CompanyInfo extends Component {
         };
     }
 
-    componentDidMount(){
-        let { companyInfo } = this.props;
-        if(companyInfo && companyInfo.companyList && companyInfo.companyList[0]){
+    componentDidMount() {
+        let {companyInfo} = this.props;
+        if (companyInfo && companyInfo.companyList && companyInfo.companyList[0]) {
             this.setState({
                 company_name: companyInfo.companyList[0].company_name,
                 company_email: companyInfo.companyList[0].company_email,
-                company_phone: companyInfo.companyList[0].company_phone,
+                company_phone: companyInfo.companyList[0].company_phone
             })
         }
-
     }
 
     renderButton() {
@@ -78,7 +77,7 @@ class CompanyInfo extends Component {
                                 className="formInput"
                                 type="text"
                                 onChange={this.handleInputTextChange}
-                                placeholder=''
+                                placeholder='input company name'
                                 value={this.state.company_name}>
                             </input>
                         </div>
@@ -91,7 +90,7 @@ class CompanyInfo extends Component {
                                 className="formInput"
                                 type="text"
                                 onChange={this.handleInputTextChange}
-                                placeholder=''
+                                placeholder='input company email'
                                 value={this.state.company_email}>
                             </input>
                         </div>
@@ -104,7 +103,7 @@ class CompanyInfo extends Component {
                                 className="formInput"
                                 type="text"
                                 onChange={this.handleInputTextChange}
-                                placeholder=''
+                                placeholder='input company phone number'
                                 value={this.state.company_phone}>
                             </input>
                         </div>
