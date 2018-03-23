@@ -10,7 +10,7 @@ import { updateCompanyInfo } from '../../redux/actions/companyInfo';
 import MultiChoiceShell from './MultiChoiceShell';
 import ReactModal from 'react-modal';
 
-class CheckTasks extends React.Component {
+class ContentBody extends React.Component {
   constructor(props){
     super(props);
     this.state = {
@@ -139,7 +139,12 @@ class CheckTasks extends React.Component {
     // get current text values for companyObj
     if(currentQuestionObj.contentType === "textArea"  && this.state.alreadyUpdated === false){
 
-      let initialValue = companyInfo.companyList[0][currentQuestionObj.columnName];
+      let initialValue = null;
+
+      if(companyInfo.companyList && companyInfo.companyList[0] && companyInfo.companyList[0][currentQuestionObj.columnName]){
+        initialValue = companyInfo.companyList[0][currentQuestionObj.columnName];
+      }
+
 
       if(initialValue === null){
         initialValue = "add your text here"
@@ -170,6 +175,10 @@ class CheckTasks extends React.Component {
 
       let lengthOfLessonArr = book[currentUnit].lessons.length
 
+      this.setState({
+        multiChoiceAttempted: false
+      })
+
       if(lengthOfQuestArr === parseInt(currentQuestion,10)+1 && lengthOfLessonArr === parseInt(currentLesson,10)+1){
         console.log("END OF THE UNIT")
         this.setState({
@@ -177,8 +186,8 @@ class CheckTasks extends React.Component {
           openUnitDialog: true,
           unitDialogTitle: "Congrats! You finished the unit",
           unitDialogText: "onto the next unit?",
-          unitDialogButton1: "continue",
-          unitDialogButton2: "stay here"
+          unitDialogButton1: "CONTINUE",
+          unitDialogButton2: "STAY HERE"
         })
         nextQuestion();
       } else if (lengthOfQuestArr === parseInt(currentQuestion,10)+1){
@@ -187,13 +196,20 @@ class CheckTasks extends React.Component {
           openLessonDialog: true,
           lessonDialogTitle: "You finished the Lesson",
           lessonDialogText: "onto the next lesson?",
-          lessonDialogButton1: "continue",
-          lessonDialogButton2: "stay here"
+          lessonDialogButton1: "CONTINUE",
+          lessonDialogButton2: "STAY HERE"
         })
         nextQuestion();
       } else {
         nextQuestion();
       }
+    }
+
+    let nextLessonModalHandler = () => {
+      nextLesson();
+      this.setState({
+        openLessonDialog:false
+      })
     }
 
     let prevQuestClickHandler = () => {
@@ -262,7 +278,7 @@ class CheckTasks extends React.Component {
               <div className="modalButtonContainer">
                 <Button
                   type='button'
-                  onClick={nextLesson}
+                  onClick={nextLessonModalHandler}
                 >{this.state.lessonDialogButton1}
                 </Button>
                 <Button
@@ -374,7 +390,7 @@ const mapDispatchToProps = dispatch => {
     }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CheckTasks);
+export default connect(mapStateToProps, mapDispatchToProps)(ContentBody);
 
 
 // <Dialog open={this.state.openLessonDialog}>
