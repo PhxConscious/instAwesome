@@ -58,7 +58,7 @@ class Company extends Component {
         const {company_email, company_name, company_phone} = this.state;
         return (
             <div>
-                <h5>ADD YOUR COMPANY</h5>
+                {/*<h5>ADD YOUR COMPANY</h5>*/}
                 <form className="formCont" action="#">
                     <div className='inputCont'>
                         <div className='formTitleCont'>
