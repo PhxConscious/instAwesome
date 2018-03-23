@@ -38,7 +38,6 @@ class LoginForm extends Component {
     };
 
     loginRefresh(){
-      console.log("loginRefresh")
       const {cookies} = this.props;
       cookies.remove('hash');
       window.location.reload();
@@ -70,7 +69,6 @@ class LoginForm extends Component {
         // currently pullInUserValues is called from render and from onLoginSuccess
         // consider only calling it once from 'mounted' and have it read fb_id from state
         firebase.auth().onAuthStateChanged(function (user) {
-            console.log('auth state changed')
             if (user) {
                 setCurrentUserFbId("currentFbId", fb_id)
                 fetchUserInfo(fb_id);
@@ -153,7 +151,6 @@ class LoginForm extends Component {
         let userCookie = cookies.get('hash')
         if (userCookie) {
             // WARNING: this should not be called in a render function
-            console.log(`usercookie found: ${userCookie}, redirecting to /splash`)
             this.pullInUserValues(userCookie);
             return (
                 <Redirect to={'/splash'}/>
