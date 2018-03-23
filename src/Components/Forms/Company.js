@@ -50,8 +50,12 @@ class Company extends Component {
         if ( company_name === '' || company_email === '' || company_phone === '') {
             return alert('Must fill in all fields')
         }
-
         this.addNewCompany()
+        if (this.props.companyInfo.status !== 200) {
+            return alert('update failed')
+        } else {
+            return alert('Congrats! You just added your company!!')
+        }
     }
 
     render() {

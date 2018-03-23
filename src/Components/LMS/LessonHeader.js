@@ -21,7 +21,7 @@ class LessonHeader extends React.Component {
               url={currentLessonObj.video}
               controls={true}
               width="100%"
-              height="40vh"
+              height="70vh"
               playing={false}
             />
           </div>

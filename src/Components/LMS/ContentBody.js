@@ -362,8 +362,6 @@ class ContentBody extends React.Component {
             {
               // contentType: blank    button goes here
             }
-
-
           </div>
         </div>
       )

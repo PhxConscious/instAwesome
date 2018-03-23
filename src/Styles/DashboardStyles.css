@@ -10,7 +10,7 @@
 
 .unitCardsContainer{
   display: inline-block;
-  flex-basis: 30vw;
+  /*flex-basis: 30vw;*/
   z-index: 0;
 }
 

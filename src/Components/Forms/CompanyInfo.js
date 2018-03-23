@@ -62,7 +62,7 @@ class CompanyInfo extends Component {
     render() {
         return (
             <div>
-                <h5>Edit Your Company Info</h5>
+                <h5><span className='consciousBlueColor'>Edit Your Company Info</span></h5>
                 <form className="formCont" action="#">
                     <div className='inputCont'>
                         <div className='formTitleCont'>

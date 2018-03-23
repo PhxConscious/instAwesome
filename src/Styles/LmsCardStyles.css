@@ -34,10 +34,11 @@
   /*position: relative;*/
   /*top: 50%;*/
   /*transform: translateY(-50%);*/
-  height: auto;
+  height: 100%;
   width: 80%;
   background-color: black;
-  /*margin: 15px;*/
+  margin-top: auto;
+  margin-bottom: auto;
   z-index: -1;
 }
 
@@ -97,6 +98,11 @@
   font-weight: 800;
   font-size: 1em;
   color: #005259;
+}
+
+.lmsTitleCont{
+  padding-top:7vh;
+  height: 10vh;
 }
 
 .lmsCheckboxSpan {
