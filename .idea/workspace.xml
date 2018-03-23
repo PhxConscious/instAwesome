@@ -3,14 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="5dcbd94a-9853-46c1-a5fe-46ff5bc17eff" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Forms/Company.js" afterPath="$PROJECT_DIR$/src/Components/Forms/Company.js" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Forms/CompanyInfo.js" afterPath="$PROJECT_DIR$/src/Components/Forms/CompanyInfo.js" />
+      <change beforePath="$PROJECT_DIR$/src/Components/LMS/ContentBody.js" afterPath="$PROJECT_DIR$/src/Components/LMS/ContentBody.js" />
       <change beforePath="$PROJECT_DIR$/src/Components/LMS/Dashboard.js" afterPath="$PROJECT_DIR$/src/Components/LMS/Dashboard.js" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Pages/UserProfile.js" afterPath="$PROJECT_DIR$/src/Components/Pages/UserProfile.js" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Reusable/LmsCard.js" afterPath="$PROJECT_DIR$/src/Components/Reusable/LmsCard.js" />
-      <change beforePath="$PROJECT_DIR$/src/Styles/DashboardStyles.css" afterPath="$PROJECT_DIR$/src/Styles/DashboardStyles.css" />
-      <change beforePath="$PROJECT_DIR$/src/Styles/LmsCardStyles.css" afterPath="$PROJECT_DIR$/src/Styles/LmsCardStyles.css" />
-      <change beforePath="$PROJECT_DIR$/src/Styles/LmsComponentsStyles.css" afterPath="$PROJECT_DIR$/src/Styles/LmsComponentsStyles.css" />
+      <change beforePath="$PROJECT_DIR$/src/Components/LMS/LessonHeader.js" afterPath="$PROJECT_DIR$/src/Components/LMS/LessonHeader.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -24,16 +19,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="LmsContainerStyles.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Styles/LmsContainerStyles.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="LmsComponentsStyles.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Styles/LmsComponentsStyles.css">
           <provider selected="true" editor-type-id="text-editor">
@@ -44,11 +29,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AdminDashboardStyles.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Styles/AdminDashboardStyles.css">
+      <file leaf-file-name="Dashboard.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Components/LMS/Dashboard.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="-790">
+              <caret line="418" column="14" lean-forward="false" selection-start-line="418" selection-start-column="14" selection-end-line="418" selection-end-column="14" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LessonContent.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Components/LMS/LessonContent.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="534">
+              <caret line="39" column="0" lean-forward="false" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LessonHeader.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Components/LMS/LessonHeader.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="264">
+              <caret line="23" column="23" lean-forward="false" selection-start-line="23" selection-start-column="23" selection-end-line="23" selection-end-column="23" />
               <folding />
             </state>
           </provider>
@@ -57,48 +62,8 @@
       <file leaf-file-name="ContentBody.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Components/LMS/ContentBody.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1543">
-              <caret line="153" column="0" lean-forward="false" selection-start-line="153" selection-start-column="0" selection-end-line="153" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Dashboard.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Components/LMS/Dashboard.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1874">
-              <caret line="329" column="16" lean-forward="true" selection-start-line="329" selection-start-column="16" selection-end-line="329" selection-end-column="16" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LmsCards.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Components/Reusable/LmsCards.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LmsCard.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Components/Reusable/LmsCard.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="188">
-              <caret line="52" column="39" lean-forward="false" selection-start-line="52" selection-start-column="27" selection-end-line="52" selection-end-column="39" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LmsContainer.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Components/Reusable/LmsContainer.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="19" column="27" lean-forward="true" selection-start-line="19" selection-start-column="27" selection-end-line="19" selection-end-column="27" />
+            <state relative-caret-position="-282">
+              <caret line="363" column="13" lean-forward="false" selection-start-line="363" selection-start-column="13" selection-end-line="363" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -114,7 +79,37 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LmsCardStyles.css" pinned="false" current-in-tab="true">
+      <file leaf-file-name="LessonHeaderStyles.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Styles/LessonHeaderStyles.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="4" column="40" lean-forward="false" selection-start-line="4" selection-start-column="40" selection-end-line="4" selection-end-column="40" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HeaderStyles.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Styles/HeaderStyles.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ContentBodyStyles.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Styles/ContentBodyStyles.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="340">
+              <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LmsCardStyles.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Styles/LmsCardStyles.css">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="343">
@@ -167,9 +162,7 @@
         <option value="$PROJECT_DIR$/src/Components/Reusable/AppNav.js" />
         <option value="$PROJECT_DIR$/src/Components/LMS/VideoContent.js" />
         <option value="$PROJECT_DIR$/src/Components/LMS/LessonContent.js" />
-        <option value="$PROJECT_DIR$/src/Components/LMS/LessonHeader.js" />
         <option value="$PROJECT_DIR$/src/Styles/ContentBodyStyles.css" />
-        <option value="$PROJECT_DIR$/src/Styles/LessonHeaderStyles.css" />
         <option value="$PROJECT_DIR$/src/redux/reducers/companyInfo.js" />
         <option value="$PROJECT_DIR$/src/Components/Forms/SignIn.js" />
         <option value="$PROJECT_DIR$/src/Components/Forms/SignUp.js" />
@@ -179,7 +172,6 @@
         <option value="$PROJECT_DIR$/src/Styles/UnderwaterWrapperStyles.css" />
         <option value="$PROJECT_DIR$/src/Components/Pages/Splash.js" />
         <option value="$PROJECT_DIR$/src/Components/Layout.js" />
-        <option value="$PROJECT_DIR$/src/Components/LMS/ContentBody.js" />
         <option value="$PROJECT_DIR$/src/Components/Forms/OnTheWeb.js" />
         <option value="$PROJECT_DIR$/src/Components/Forms/PrimaryContact.js" />
         <option value="$PROJECT_DIR$/src/Components/Forms/Company.js" />
@@ -188,9 +180,12 @@
         <option value="$PROJECT_DIR$/src/Components/Pages/UserProfile.js" />
         <option value="$PROJECT_DIR$/src/Styles/DashboardStyles.css" />
         <option value="$PROJECT_DIR$/src/Styles/LmsComponentsStyles.css" />
-        <option value="$PROJECT_DIR$/src/Components/LMS/Dashboard.js" />
         <option value="$PROJECT_DIR$/src/Components/Reusable/LmsCard.js" />
         <option value="$PROJECT_DIR$/src/Styles/LmsCardStyles.css" />
+        <option value="$PROJECT_DIR$/src/Styles/LessonHeaderStyles.css" />
+        <option value="$PROJECT_DIR$/src/Components/LMS/ContentBody.js" />
+        <option value="$PROJECT_DIR$/src/Components/LMS/Dashboard.js" />
+        <option value="$PROJECT_DIR$/src/Components/LMS/LessonHeader.js" />
       </list>
     </option>
   </component>
@@ -357,7 +352,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="249936000" />
+    <option name="totallyTimeSpent" value="250946000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1280" height="778" extended-state="6" />
@@ -396,13 +391,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Styles/GreenFormContainerStyles.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="26" column="18" lean-forward="false" selection-start-line="26" selection-start-column="18" selection-end-line="26" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Components/Pages/SignUp.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
@@ -456,13 +444,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Styles/LessonHeaderStyles.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -693,38 +674,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Styles/ContentBodyStyles.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/LMS/LessonContent.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="646">
-          <caret line="39" column="0" lean-forward="false" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/LMS/LessonHeader.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="14" column="11" lean-forward="false" selection-start-line="14" selection-start-column="11" selection-end-line="14" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/LMS/ContentBody.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1543">
-          <caret line="153" column="0" lean-forward="false" selection-start-line="153" selection-start-column="0" selection-end-line="153" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Styles/LmsContainerStyles.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -737,30 +686,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Styles/LmsComponentsStyles.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Styles/DashboardStyles.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="23" lean-forward="true" selection-start-line="12" selection-start-column="23" selection-end-line="12" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/LMS/Dashboard.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1874">
-          <caret line="329" column="16" lean-forward="true" selection-start-line="329" selection-start-column="16" selection-end-line="329" selection-end-column="16" />
           <folding />
         </state>
       </provider>
@@ -793,6 +718,78 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="343">
           <caret line="103" column="15" lean-forward="false" selection-start-line="103" selection-start-column="15" selection-end-line="103" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Styles/ContentBodyStyles.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Styles/LmsComponentsStyles.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Styles/DashboardStyles.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="23" lean-forward="true" selection-start-line="12" selection-start-column="23" selection-end-line="12" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Styles/HeaderStyles.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Styles/LessonHeaderStyles.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="40" lean-forward="false" selection-start-line="4" selection-start-column="40" selection-end-line="4" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/LMS/ContentBody.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-282">
+          <caret line="363" column="13" lean-forward="false" selection-start-line="363" selection-start-column="13" selection-end-line="363" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/LMS/Dashboard.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-790">
+          <caret line="418" column="14" lean-forward="false" selection-start-line="418" selection-start-column="14" selection-end-line="418" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/LMS/LessonContent.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="534">
+          <caret line="39" column="0" lean-forward="false" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/LMS/LessonHeader.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="23" column="23" lean-forward="false" selection-start-line="23" selection-start-column="23" selection-end-line="23" selection-end-column="23" />
           <folding />
         </state>
       </provider>

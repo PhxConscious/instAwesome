@@ -417,12 +417,8 @@ class Dashboard extends React.Component {
 
 
     render() {
-
         let {active, currentUnit, currentUnitName, currentUnitId, currentLesson, currentLessonObj, currentQuestion, currentQuestionObj, currentFbId} = this.props.currentValues;
-
-
         let {userProgress, book} = this.props;
-
         let lmsCards = null;
 
         if (!currentFbId) {
