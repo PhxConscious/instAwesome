@@ -1,14 +1,9 @@
 import React, {Component} from "react";
 import '../../Styles/FormsStyles.css';
-import firebase from "firebase";
 import {updateCompanyInfo, getCompanyList} from "../../redux/actions/companyInfo";
-import {getUserProgress} from "../../redux/actions/userProgress";
 import {connect} from "react-redux";
-import {postUserCompanyJoinInfo} from "../../redux/actions/userCompanyJoin";
-import {Spinner} from 'react-mdl';
 
 class OnTheWeb extends Component {
-
     constructor(props) {
         super(props);
         this.state = {
