@@ -3,24 +3,6 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 Below you will find some information on how to perform common tasks.<br>
 You can find the most recent version of this guide [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
 
-## Configuration
-
-The scripts in `package.json` will load your environment configurations from a file at `tmp/ENV`.  This will then be [processed into the build](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#adding-custom-environment-variables)  You'll have to set this up the first time you clone the project.  Here is a sample `tmp/ENV`:
-
-```bash
-export REACT_APP_FIREBASE_KEY=AIzaSyBFEdZg8MAuR418IROwh-ypm6D-imqTAGI
-export REACT_APP_FIREBASE_DOMAIN=instawesome-263a4.firebaseapp.com
-export REACT_APP_FIREBASE_DB_URL=https://instawesome-263a4.firebaseio.com
-export REACT_APP_FIREBASE_PROJECT_ID=instawesome-263a4
-export REACT_APP_FIREBASE_BUCKET=instawesome-263a4.appspot.com
-export REACT_APP_FIREBASE_SENDER_ID=349229241615
-
-export REACT_APP_DOMAIN=https://apps.phxconscious.com
-export REACT_APP_API=https://api.phxconscious.com
-```
-
-You can run `npm run env` to verify that you've set these correctly.
-
 ## Table of Contents
 
 - [Updating to New Releases](#updating-to-new-releases)
