@@ -9,6 +9,13 @@ export default {
               "questions":{
                  "u01l01q01":false
               }
+           },
+           "u01l02":{
+              "lessonLocked":true,
+              "lessonCompleted":false,
+              "questions":{
+                 "u01l02q01":false
+              }
            }
         }
      },
@@ -27,8 +34,7 @@ export default {
                  "u02l01q05":false,
                  "u02l01q06":false,
                  "u02l01q07":false,
-                 "u02l01q08":false,
-                 "u02l01q09":false
+                 "u02l01q08":false
               }
            },
            "u02l02":{
@@ -38,7 +44,9 @@ export default {
                  "u02l02q01":false,
                  "u02l02q02":false,
                  "u02l02q03":false,
-                 "u02l02q04":false
+                 "u02l02q04":false,
+                 "u02l02q05":false,
+                 "u02l02q06":false
               }
            },
            "u02l03":{
@@ -47,17 +55,14 @@ export default {
               "questions":{
                  "u02l03q01":false,
                  "u02l03q02":false,
-                 "u02l03q03":false,
-                 "u02l03q04":false,
-                 "u02l03q05":false
+                 "u02l03q03":false
               }
            },
            "u02l04":{
               "lessonLocked":true,
               "lessonCompleted":false,
               "questions":{
-                 "u02l04q01":false,
-                 "u02l04q02":false
+                 "u02l04q01":false
               }
            }
         }
@@ -110,8 +115,7 @@ export default {
                  "u04l03q01":false,
                  "u04l03q02":false,
                  "u04l03q03":false,
-                 "u04l03q04":false,
-                 "u04l03q05":false
+                 "u04l03q04":false
               }
            }
         }
