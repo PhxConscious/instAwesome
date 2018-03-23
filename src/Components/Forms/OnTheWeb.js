@@ -43,10 +43,49 @@ class OnTheWeb extends Component {
             yelp_goals: '',
             better_business_bureau_profile: '',
             better_business_bureau_goals: '',
-            error: '',
-            loading: false
         };
-        this.pullInUserValues = this.pullInUserValues.bind(this);
+        // this.pullInUserValues = this.pullInUserValues.bind(this);
+    }
+
+    componentDidMount(){
+      let { companyInfo } = this.props;
+      if(companyInfo && companyInfo.companyList && companyInfo.companyList[0]){
+        console.log("mounted", this.props.companyInfo.companyList[0])
+        this.setState({
+          company_content_creator: this.props.companyInfo.companyList[0].company_content_creator,
+          company_brand_id: this.props.companyInfo.companyList[0].company_brand_id,
+          company_primary_goal: this.props.companyInfo.companyList[0].company_primary_goal,
+          company_style_guide: this.props.companyInfo.companyList[0].company_style_guide,
+          company_website: this.props.companyInfo.companyList[0].company_website,
+          google_search_goals: this.props.companyInfo.companyList[0].google_search_goals,
+          google_business_profile: this.props.companyInfo.companyList[0].google_business_profile,
+          instagram_username: this.props.companyInfo.companyList[0].instagram_username,
+          instagram_goals: this.props.companyInfo.companyList[0].instagram_goals,
+          instagram_bio: this.props.companyInfo.companyList[0].instagram_bio,
+          insta_goal1: this.props.companyInfo.companyList[0].insta_goal1,
+          insta_goal2: this.props.companyInfo.companyList[0].insta_goal2,
+          insta_goal3: this.props.companyInfo.companyList[0].insta_goal3,
+          cloudbased_storage_locale: this.props.companyInfo.companyList[0].cloudbased_storage_locale,
+          facebook_page_url: this.props.companyInfo.companyList[0].facebook_page_url,
+          facebook_goals: this.props.companyInfo.companyList[0].facebook_goals,
+          twitter_username: this.props.companyInfo.companyList[0].twitter_username,
+          twitter_goals: this.props.companyInfo.companyList[0].twitter_goals,
+          linkedin_profile_url: this.props.companyInfo.companyList[0].linkedin_profile_url,
+          linkedin_goals: this.props.companyInfo.companyList[0].linkedin_goals,
+          google_plus_url: this.props.companyInfo.companyList[0].google_plus_url,
+          google_plus_goals: this.props.companyInfo.companyList[0].google_plus_goals,
+          youtube_url: this.props.companyInfo.companyList[0].youtube_url,
+          vimeo_url: this.props.companyInfo.companyList[0].vimeo_url,
+          youtube_vimeo_goals: this.props.companyInfo.companyList[0].youtube_vimeo_goals,
+          pinterest_profile: this.props.companyInfo.companyList[0].pinterest_profile,
+          pinterest_goals: this.props.companyInfo.companyList[0].pinterest_goals,
+          yelp_business_profile: this.props.companyInfo.companyList[0].yelp_business_profile,
+          yelp_goals: this.props.companyInfo.companyList[0].yelp_goals,
+          better_business_bureau_profile: this.props.companyInfo.companyList[0].better_business_bureau_profile,
+          better_business_bureau_goals: this.props.companyInfo.companyList[0].better_business_bureau_goals
+        })
+      }
+
     }
 
     onButtonPress(e) {
@@ -81,13 +120,15 @@ class OnTheWeb extends Component {
             better_business_bureau_goals,
         } = this.state;
 
-        this.setState({error: ''})
+        // this.setState({error: ''})
         this.props.addCompanyInfo(this.props.companyInfo.companyList && this.props.companyInfo.companyList[0].company_id, this.state)
-        if (this.props.companyInfo.status !== 200) {
-            return alert('update failed')
-        } else {
-            return alert('update successful')
-        }
+
+
+        // if (this.props.companyInfo.status !== 200) {
+        //     return alert('update failed')
+        // } else {
+        //     return alert('update successful')
+        // }
 
     }
 
@@ -109,12 +150,12 @@ class OnTheWeb extends Component {
         this.setState({[e.target.name]: e.target.value});
     };
 
-    pullInUserValues() {
-        return new Promise((resolve) => {
-            this.props.getCompanyList(this.props.currentValues.currentFbId);
-        })
-
-    }
+    // pullInUserValues() {
+    //     return new Promise((resolve) => {
+    //         this.props.getCompanyList(this.props.currentValues.currentFbId);
+    //     })
+    //
+    // }
 
     render() {
         return (
@@ -439,4 +480,3 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(OnTheWeb)
-
