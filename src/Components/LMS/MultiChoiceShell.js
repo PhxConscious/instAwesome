@@ -25,7 +25,7 @@ class MultiChoiceShell extends React.Component{
 
     // selected answer array sorted
     let checkedArray = this.state.indicesOfChecked.sort((a,b) => a - b)
-    console.log(correctArray, checkedArray)
+
     // compare the two arrays to flag the correct modal
     if(correctArray.join("") === checkedArray.join("")){
       this.setState({isCorrect: true})
@@ -33,7 +33,7 @@ class MultiChoiceShell extends React.Component{
     } else {
       this.setState({isCorrect: false})
     }
-    this.setState({openDialog: true});
+    this.setState({openDialog: true, indicesOfChecked: []});
 
   }
 
@@ -41,16 +41,16 @@ class MultiChoiceShell extends React.Component{
   addToIndices(i){
     let arr = this.state.indicesOfChecked;
     let result;
-
+    // console.log("first arr", arr)
     if(arr.indexOf(i) === -1){
       arr.push(i)
       this.setState({indicesOfChecked: arr})
-
+      // console.log("push arr", arr)
     } else {
       result = arr.filter(elem => {
         return elem !== i;
       })
-
+      // console.log("filter arr", result)
       this.setState({indicesOfChecked: result})
     }
   }
@@ -64,7 +64,7 @@ class MultiChoiceShell extends React.Component{
     let { isCorrect, resetLocal } = this.state;
     let { currentQuestionObj } = this.props;
     let questObj = currentQuestionObj;
-    console.log("questObj", questObj)
+    // console.log("questObj", questObj)
 
     let theQuestions = questObj.questions.map((question, i) => {
       return (
