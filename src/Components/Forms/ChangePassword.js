@@ -69,58 +69,60 @@ class ChangePassword extends Component {
             <div>
                 <form className="formCont" action="#">
                     <div className='inputCont'>
-                        <div className='formTitleCont'>
-                            <p className="formTitle">CHANGE PASSWORD</p>
-                        </div>
-                        {/*<div className="formInputCont">*/}
+                        {/*<div className='formTitleCont'>*/}
+                            {/*<p className="formTitle">CHANGE PASSWORD</p>*/}
+                        {/*</div>*/}
+                        <div className='formFieldContainer'>
+                            {/*<div className="formInputCont">*/}
                             {/*<div>*/}
-                                {/*<p className='inputLabel'>VERFIY CURRENT PASSWORD</p>*/}
+                            {/*<p className='inputLabel'>VERFIY CURRENT PASSWORD</p>*/}
                             {/*</div>*/}
                             {/*<input*/}
-                                {/*name='verifyPassword'*/}
-                                {/*className="formInput"*/}
-                                {/*type="password"*/}
-                                {/*onChange={this.handleInputTextChange}*/}
-                                {/*placeholder=''*/}
-                                {/*value={this.state.verifyPassword}>*/}
+                            {/*name='verifyPassword'*/}
+                            {/*className="formInput"*/}
+                            {/*type="password"*/}
+                            {/*onChange={this.handleInputTextChange}*/}
+                            {/*placeholder=''*/}
+                            {/*value={this.state.verifyPassword}>*/}
                             {/*</input>*/}
-                        {/*</div>*/}
-                        <div className="formInputCont">
-                            <div>
-                                <p className='inputLabel'>CHOOSE NEW PASSWORD</p>
+                            {/*</div>*/}
+                            <div className="formInputCont">
+                                <div>
+                                    <p className='inputLabel'>CHOOSE NEW PASSWORD</p>
+                                </div>
+                                <input
+                                    name='newPassword'
+                                    className="formInput"
+                                    type="password"
+                                    onChange={this.handleInputTextChange}
+                                    placeholder=''
+                                    value={this.state.newPassword}>
+                                </input>
                             </div>
-                            <input
-                                name='newPassword'
-                                className="formInput"
-                                type="password"
-                                onChange={this.handleInputTextChange}
-                                placeholder=''
-                                value={this.state.newPassword}>
-                            </input>
-                        </div>
-                        <div className='passwordRequirements'>
-                            <p className='finePrintTop'>
-                                MUST BE AT LEAST 7 CHARACTERS LONG, WITH AT LEAST ONE OF EACH:
-                            </p>
-                            <ul>
-                                <li className='passwordRequirementText'>UPPERCASE CHARACTER</li>
-                                <li className='passwordRequirementText'>LOWERCASE CHARACTER</li>
-                                <li className='passwordRequirementText'>NUMBER 0-9</li>
-                                <li className='passwordRequirementText'>SYMBOL</li>
-                            </ul>
-                        </div>
-                        <div className="formInputCont">
-                            <div>
-                                <p className='inputLabel'>CONFIRM NEW PASSWORD</p>
+                            {/*<div className='passwordRequirements'>*/}
+                                {/*<p className='finePrintTop'>*/}
+                                    {/*MUST BE AT LEAST 7 CHARACTERS LONG, WITH AT LEAST ONE OF EACH:*/}
+                                {/*</p>*/}
+                                {/*<ul>*/}
+                                    {/*<li className='passwordRequirementText'>UPPERCASE CHARACTER</li>*/}
+                                    {/*<li className='passwordRequirementText'>LOWERCASE CHARACTER</li>*/}
+                                    {/*<li className='passwordRequirementText'>NUMBER 0-9</li>*/}
+                                    {/*<li className='passwordRequirementText'>SYMBOL</li>*/}
+                                {/*</ul>*/}
+                            {/*</div>*/}
+                            <div className="formInputCont">
+                                <div>
+                                    <p className='inputLabel'>CONFIRM NEW PASSWORD</p>
+                                </div>
+                                <input
+                                    name='confirmNewPassword'
+                                    className="formInput"
+                                    type="password"
+                                    onChange={this.handleInputTextChange}
+                                    placeholder=''
+                                    value={this.state.confirmNewPassword}>
+                                </input>
                             </div>
-                            <input
-                                name='confirmNewPassword'
-                                className="formInput"
-                                type="password"
-                                onChange={this.handleInputTextChange}
-                                placeholder=''
-                                value={this.state.confirmNewPassword}>
-                            </input>
                         </div>
                     </div>
                     <br/>
