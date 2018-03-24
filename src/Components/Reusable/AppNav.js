@@ -7,7 +7,7 @@ import {withCookies, Cookies} from 'react-cookie';
 import '../../Styles/AppNavStyles.css';
 import {connect} from "react-redux";
 import {getUserProgress} from "../../redux/actions/userProgress";
-import { userLogout } from "../../redux/actions/currentValues";
+import {userLogout} from "../../redux/actions/currentValues";
 
 class AppNavbar extends Component {
     constructor(props) {
@@ -30,7 +30,7 @@ class AppNavbar extends Component {
             cookies.remove('hash')
             firebase.auth().signOut()
             // @TODO clear out current and user values here
-              // reset store
+            // reset store
         } else {
             alert('no user signed in')
         }
@@ -62,7 +62,7 @@ class AppNavbar extends Component {
                 </Cell>
                 <Cell className='centerCol' col={4} tablet={12}>
                     <Link to='/splash'
-                      className="mdl-layout-spacer centerLogoCont">
+                          className="mdl-layout-spacer centerLogoCont">
                         <img className='centerLogo' src='https://i.imgur.com/qYqmu8v.png' alt="blah"/>
                     </Link>
                 </Cell>
@@ -100,9 +100,22 @@ class AppNavbar extends Component {
                         </Cell>
                     </Grid>
                 </Cell>
+                <div className="mdl-layout mdl-js-layout mdl-layout--small-screen-only">
+                    <div className="mdl-layout__drawer">
+                        {/*<span className="mdl-layout-title">Title</span>*/}
+                        <nav className="mdl-navigation">
+                            <Link to='/profile' className="mdl-navigation__link" href="">ACCOUNT</Link>
+                            <Link to='/feedback' className="mdl-navigation__link" href="">FEEDBACK</Link>
+                            <Link to='/expert/dashboard' className="mdl-navigation__link" href="">EXPERT ONLY</Link>
+                            <Link to='/admin/dashboard' className="mdl-navigation__link" href="">ADMIN ONLY</Link>
+                        </nav>
+                    </div>
+                    {/*<main className="mdl-layout__content">*/}
+                        {/*<div className="page-content"></div>*/}
+                    {/*</main>*/}
+                </div>
             </Grid>
         );
-
 
     }
 }
@@ -113,11 +126,11 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => {
-  return {
-    userLogout: () => {
-      dispatch(userLogout())
+    return {
+        userLogout: () => {
+            dispatch(userLogout())
+        }
     }
-  }
 }
 
 
