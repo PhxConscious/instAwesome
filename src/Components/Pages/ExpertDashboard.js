@@ -26,7 +26,8 @@ class ExpertDashboard extends React.Component {
     render() {
         const {user, userInfo, userExpertJoin, userCompanyJoin} = this.props;
         let {userObj} = this.state;
-        console.log("userCompanyJoin", userCompanyJoin)
+        console.log("userCompanyJoin", userCompanyJoin);
+        console.log('&&&&&&&&&&&&&&&&&&&&!!!!!!!!!!&&&&&&&&&&&&&&&&&&&&', this.state.userObj);
         if (typeof(userInfo.currentUser) === undefined) {
             return <Redirect to='/'/>
         }
@@ -62,8 +63,8 @@ class ExpertDashboard extends React.Component {
                                 <p>name: {userObj.first_name} {userObj.last_name}</p>
                                 <p>email: {userObj.user_email}</p>
                                 <p>phone: {userObj.user_phone}</p>
-                                <p>completed lessons: {userCompanyJoin.companyInfo ? <ul>{getCompletedLessons(userInfo.user_progress).map(lesson => <li>{lesson}</li>)}</ul> : ''}</p>
-                                <p>user's LMS progress: {userCompanyJoin.companyInfo ? getCompletedQuestionStatus(userInfo.user_progress) : ''}%</p>
+                                <p>completed lessons: {userCompanyJoin.companyInfo ? <ul>{getCompletedLessons(userObj.user_progress).map(lesson => <li>{lesson}</li>)}</ul> : ''}</p>
+                                <p>user's LMS progress: {userCompanyJoin.companyInfo ? getCompletedQuestionStatus(userObj.user_progress) : ''}%</p>
                                 <hr/>
                                 <p>company: {userCompanyJoin.companyInfo ? userCompanyJoin.companyInfo.company_name : ''}</p>
                                 <p>company
