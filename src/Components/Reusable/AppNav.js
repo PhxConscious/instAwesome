@@ -41,15 +41,19 @@ class AppNavbar extends Component {
 
         return (
             <div className="mdl-layout mdl-js-layout">
-                <div className="mdl-layout__drawer">
-                    {/*<span className="mdl-layout-title">Title</span>*/}
-                    <nav className="mdl-navigation">
-                        <Link to='/profile' className="mdl-navigation__link" href="">ACCOUNT</Link>
-                        <Link to='/feedback' className="mdl-navigation__link" href="">FEEDBACK</Link>
-                        <Link to='/expert/dashboard' className="mdl-navigation__link" href="">EXPERT ONLY</Link>
-                        <Link to='/admin/dashboard' className="mdl-navigation__link" href="">ADMIN ONLY</Link>
-                    </nav>
-                </div>
+                        <div className="mdl-layout__drawer mdl-layout--small-screen-only drawerIcon">
+                            {/*<span className="mdl-layout-title">Title</span>*/}
+                            <nav className="mdl-navigation">
+                                <Link to='/profile' className="mdl-navigation__link" href="">ACCOUNT</Link>
+                                <Link to={userInfo ? '/learn/dashboard' : '/'} className="mdl-navigation__link">LEARN</Link>
+                                <Link to='/feedback' className="mdl-navigation__link" href="">FEEDBACK</Link>
+                                <Link to='/expert/dashboard' className="mdl-navigation__link" href="">EXPERT ONLY</Link>
+                                <Link to='/admin/dashboard' className="mdl-navigation__link" href="">ADMIN ONLY</Link>
+                                <Link className='mdl-navigation__link' to='/' onClick={this.userSignOut}>
+                                    SIGN OUT
+                                </Link>
+                            </nav>
+                        </div>
                 <main className="mdl-layout__content">
                     <div className="page-content">
                         <Grid className="navContentCont">
@@ -57,13 +61,13 @@ class AppNavbar extends Component {
                                 <div className='leftSideLogoCont'>
                                     <Grid>
                                         <Cell col={2}>
-                                            <i className="bookIcon fab fa-leanpub"/>
+                                            <i className="bookIcon fab fa-leanpub mdl-layout--large-screen-only"/>
                                         </Cell>
                                         <Cell className='learnText' col={6}>
                                             <div className='learnCont'>
                                                 <Link
                                                     to={userInfo ? '/learn/dashboard' : '/'}
-                                                    className="learnTextCont linkTo">
+                                                    className="learnTextCont linkTo mdl-layout--large-screen-only">
                                                     Learn
                                                 </Link>
                                             </div>

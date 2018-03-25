@@ -12,6 +12,7 @@ import Feedback from "./Pages/Feedback";
 import ExpertDashboard from "./Pages/ExpertDashboard";
 import AdminDashboard from "./Pages/AdminDashboard";
 import AppNav from './Reusable/AppNav';
+import Gradient from "./Reusable/Gradient";
 
 
 class Main extends React.Component {
@@ -20,6 +21,7 @@ class Main extends React.Component {
         return (
             <div>
                 <AppNav>
+                    <Gradient/>
                     <div>
                         <main>
                             <Switch>
