@@ -40,13 +40,18 @@
     margin-top: 13px;
 }
 
+div.mdl-layout__drawer-button{
+    margin-top: 39px;
+    margin-left: 10px;
+}
+
 .profileIcon{
     font-size: 35px;
 }
 
 .centerLogo {
     max-height: 100px;
-    margin-right: 10px;
+    margin-right: 15px;
 }
 
 .phxConsciousText {

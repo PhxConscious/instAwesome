@@ -14,7 +14,6 @@ class LandingPage extends Component {
     render() {
         return (
             <div className="App">
-                <Gradient/>
                 <UnderwaterWrapper>
                     <div className='pageCont'>
                         <Grid className='pageCont'>
