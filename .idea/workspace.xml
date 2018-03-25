@@ -2,9 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5dcbd94a-9853-46c1-a5fe-46ff5bc17eff" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/Components/Main.js" afterPath="$PROJECT_DIR$/src/Components/Main.js" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Pages/LandingPage.js" afterPath="$PROJECT_DIR$/src/Components/Pages/LandingPage.js" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Reusable/AppNav.js" afterPath="$PROJECT_DIR$/src/Components/Reusable/AppNav.js" />
       <change beforePath="$PROJECT_DIR$/src/Styles/AppNavStyles.css" afterPath="$PROJECT_DIR$/src/Styles/AppNavStyles.css" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -120,8 +117,8 @@
       <file leaf-file-name="AppNavStyles.css" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Styles/AppNavStyles.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="545">
-              <caret line="54" column="1" lean-forward="true" selection-start-line="54" selection-start-column="1" selection-end-line="54" selection-end-column="1" />
+            <state relative-caret-position="249">
+              <caret line="21" column="1" lean-forward="true" selection-start-line="21" selection-start-column="1" selection-end-line="21" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -403,12 +400,12 @@
       <workItem from="1521775312415" duration="1121000" />
       <workItem from="1521850191366" duration="2581000" />
       <workItem from="1521866588920" duration="9693000" />
-      <workItem from="1521945891685" duration="2497000" />
+      <workItem from="1521945891685" duration="2734000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="272896000" />
+    <option name="totallyTimeSpent" value="273133000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1278" y="22" width="1282" height="1418" extended-state="0" />
@@ -823,8 +820,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Styles/AppNavStyles.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="545">
-          <caret line="54" column="1" lean-forward="true" selection-start-line="54" selection-start-column="1" selection-end-line="54" selection-end-column="1" />
+        <state relative-caret-position="249">
+          <caret line="21" column="1" lean-forward="true" selection-start-line="21" selection-start-column="1" selection-end-line="21" selection-end-column="1" />
           <folding />
         </state>
       </provider>
