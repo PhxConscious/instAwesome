@@ -1,0 +1,29 @@
+.splashPageContent {
+    padding-top: 10vh;
+    text-align: center;
+}
+
+.splashText {
+    font-size: 19px;
+    margin: 0;
+    margin-bottom: 4px;
+    font-weight: 400;
+    color: #48C8D3;
+    font-family: 'Asap', sans-serif;
+}
+
+.splashButton {
+    background-color: #48C8D3;
+    width: 30%;
+    height: 50px;
+    border-radius: 10px;
+    color: white;
+    margin: 10px;
+    margin-top: 20px;
+    font-size: large;
+}
+
+.addCompanyText {
+
+}
+

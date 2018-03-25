@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Redirect, Link} from 'react-router-dom';
 import {withCookies, Cookies} from 'react-cookie';
-import styles from '../../Styles/SplashPageStyles.css'
+import '../../Styles/SplashPageStyles..css'
 
 class Splash extends React.Component {
     constructor(props) {
@@ -36,7 +36,7 @@ class Splash extends React.Component {
 
         if (userInfo && !userInfo.user_email) {
             return (
-                <div className='ladingPageContent'>
+                <div className='splashPageContent'>
                     <p className='splashText'>Thanks for coming to see us. Please log back in</p>
                     <form
                         onSubmit={e => {
@@ -54,7 +54,7 @@ class Splash extends React.Component {
             )
         } else {
             return (
-                <div className='ladingPageContent'>
+                <div className='splashPageContent'>
                     <div className='splashText'>
                         This is the spash page where users gain an idea of what they can do on the site.
                         We could also put up some kind of article feed - do we have content coming off of wordpress?
