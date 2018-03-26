@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import '../../Styles/FormsStyles.css';
 import firebase from 'firebase';
+import {Grid, Cell} from 'react-mdl'
 
 class ChangePassword extends Component {
     constructor(props) {
@@ -67,67 +68,42 @@ class ChangePassword extends Component {
     render() {
         return (
             <div>
-                <form className="formCont" action="#">
-                    <div className='inputCont'>
-                        {/*<div className='formTitleCont'>*/}
-                            {/*<p className="formTitle">CHANGE PASSWORD</p>*/}
-                        {/*</div>*/}
-                        <div className='formFieldContainer'>
-                            {/*<div className="formInputCont">*/}
-                            {/*<div>*/}
-                            {/*<p className='inputLabel'>VERFIY CURRENT PASSWORD</p>*/}
-                            {/*</div>*/}
-                            {/*<input*/}
-                            {/*name='verifyPassword'*/}
-                            {/*className="formInput"*/}
-                            {/*type="password"*/}
-                            {/*onChange={this.handleInputTextChange}*/}
-                            {/*placeholder=''*/}
-                            {/*value={this.state.verifyPassword}>*/}
-                            {/*</input>*/}
-                            {/*</div>*/}
-                            <div className="formInputCont">
-                                <div>
-                                    <p className='inputLabel'>CHOOSE NEW PASSWORD</p>
+                <Grid>
+                    <Cell col={8} offsetDesktop={2} tablet={12} phone={12}>
+                        <form className="formCont" action="#">
+                            <div className='inputCont'>
+                                <div className="formInputCont">
+                                    <div>
+                                        <p className='inputLabel'>CHOOSE NEW PASSWORD</p>
+                                    </div>
+                                    <input
+                                        name='newPassword'
+                                        className="formInput"
+                                        type="password"
+                                        onChange={this.handleInputTextChange}
+                                        placeholder=''
+                                        value={this.state.newPassword}>
+                                    </input>
                                 </div>
-                                <input
-                                    name='newPassword'
-                                    className="formInput"
-                                    type="password"
-                                    onChange={this.handleInputTextChange}
-                                    placeholder=''
-                                    value={this.state.newPassword}>
-                                </input>
-                            </div>
-                            {/*<div className='passwordRequirements'>*/}
-                                {/*<p className='finePrintTop'>*/}
-                                    {/*MUST BE AT LEAST 7 CHARACTERS LONG, WITH AT LEAST ONE OF EACH:*/}
-                                {/*</p>*/}
-                                {/*<ul>*/}
-                                    {/*<li className='passwordRequirementText'>UPPERCASE CHARACTER</li>*/}
-                                    {/*<li className='passwordRequirementText'>LOWERCASE CHARACTER</li>*/}
-                                    {/*<li className='passwordRequirementText'>NUMBER 0-9</li>*/}
-                                    {/*<li className='passwordRequirementText'>SYMBOL</li>*/}
-                                {/*</ul>*/}
-                            {/*</div>*/}
-                            <div className="formInputCont">
-                                <div>
-                                    <p className='inputLabel'>CONFIRM NEW PASSWORD</p>
+                                <div className="formInputCont">
+                                    <div>
+                                        <p className='inputLabel'>CONFIRM NEW PASSWORD</p>
+                                    </div>
+                                    <input
+                                        name='confirmNewPassword'
+                                        className="formInput"
+                                        type="password"
+                                        onChange={this.handleInputTextChange}
+                                        placeholder=''
+                                        value={this.state.confirmNewPassword}>
+                                    </input>
                                 </div>
-                                <input
-                                    name='confirmNewPassword'
-                                    className="formInput"
-                                    type="password"
-                                    onChange={this.handleInputTextChange}
-                                    placeholder=''
-                                    value={this.state.confirmNewPassword}>
-                                </input>
                             </div>
-                        </div>
-                    </div>
-                    <br/>
-                    {this.renderButton()}
-                </form>
+                            <br/>
+                            {this.renderButton()}
+                        </form>
+                    </Cell>
+                </Grid>
             </div>
         );
     }

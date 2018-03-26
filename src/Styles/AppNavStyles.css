@@ -6,52 +6,76 @@
     padding-left: 10px;
     padding-right: 10px;
     height: 100%;
-    max-height: 90px;
+    max-height: 80px;
+    margin: 0;
 }
 
-.leftCol{
+div.mdl-grid.navContentCont {
+    margin: 0;
+    padding: 0;
+}
+
+.leftCol {
     text-align: left;
 }
 
-.centerCol{
+.centerCol {
     text-align: center;
 }
 
-.rightCol{
+.rightCol {
     text-align: right;
 }
 
-.rightSideLogoCont{
-    margin-top: 25px;
+.rightSideLogoCont {
+    margin-top: 13px;
 }
 
 .content {
-    color: #48C8D3
+    color: #48C8D3;
 }
 
-.bookIcon{
+.bookIcon {
     font-size: 35px;
     color: silver;
 }
 
-#demo-menu-lower-right{
-    width: 40px;
-    height: 40px;
-    margin-top: 13px;
+#demo-menu-lower-right {
+    width: 50px;
+    height: 50px;
+    /*margin-top: 13px;*/
 }
 
-div.mdl-layout__drawer-button{
-    margin-top: 39px;
+div.mdl-layout__drawer-button {
+    margin-top: 10px;
     margin-left: 10px;
 }
 
-.profileIcon{
+div.mdl-cell.mdl-cell--2-col {
+    margin-top: 5px;
+    margin-right: 0;
+}
+
+div.learnCont {
+    margin-top: 7px;
+}
+
+div.mdl-cell.mdl-cell--4-col.mdl-cell--12-col-tablet.centerCol {
+    margin: 0;
+}
+
+div.mdl-cell.mdl-cell--4-col.mdl-cell--hide-phone.mdl-cell--hide-tablet.leftCol {
+    margin: 0;
+    padding-left: 40px;
+}
+
+.profileIcon {
     font-size: 35px;
 }
 
 .centerLogo {
-    max-height: 100px;
-    margin-right: 15px;
+    max-height: 90px;
+    margin-right: 10px;
 }
 
 .phxConsciousText {
@@ -60,15 +84,11 @@ div.mdl-layout__drawer-button{
     width: 70%;
 }
 
-.profileIconCont{
-    margin-top: 100px;
-}
-
-.leftSideLogoCont{
+.leftSideLogoCont {
     margin-top: 15px;
 }
 
-.learnCont{
+.learnCont {
     margin-top: 10px;
     margin-left: 20px;
 }
@@ -88,4 +108,3 @@ div.mdl-layout__drawer-button{
 .phxConsciousTextCont {
     margin-top: 5px;
 }
-

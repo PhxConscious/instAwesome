@@ -70,9 +70,9 @@ class RecoverPassword extends Component {
                         {this.renderButton()}
                     </div>
                     <div className='forgotLinksCont'>
-                        <Link to='/forgotusername' className='forgotLinks'>
-                            RECOVER USERNAME
-                        </Link>
+                        {/*<Link to='/forgotusername' className='forgotLinks'>*/}
+                            {/*RECOVER USERNAME*/}
+                        {/*</Link>*/}
                         <Link to='/' className='forgotLinks'>
                             RETURN TO LOGIN
                         </Link>
