@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import '../../Styles/FormsStyles.css';
 import {connect} from 'react-redux';
 import {updateCompanyInfo} from "../../redux/actions/companyInfo";
+import {Grid, Cell} from 'react-mdl';
 
 class PrimaryContact extends Component {
     constructor(props) {
@@ -57,56 +58,58 @@ class PrimaryContact extends Component {
     render() {
         return (
             <div>
-                <form className="formCont" action="#">
-                    <div className='inputCont'>
-                        {/*<div className='formTitleCont'>*/}
-                            {/*<p className="formTitle">PRIMARY CONTACT</p>*/}
-                        {/*</div>*/}
-                        <div className='formFieldContainer'>
-                            <div className="formInputCont">
-                                <div>
-                                    <p className='inputLabel'>FULL NAME</p>
+                <Grid>
+                    <Cell col={8} offsetDesktop={2} tablet={12} phone={12}>
+                        <form className="formCont" action="#">
+                            <div className='inputCont'>
+                                {/*<div className='formTitleCont'>*/}
+                                {/*<p className="formTitle">PRIMARY CONTACT</p>*/}
+                                {/*</div>*/}
+                                <div className="formInputCont">
+                                    <div>
+                                        <p className='inputLabel'>FULL NAME</p>
+                                    </div>
+                                    <input
+                                        name='primary_contact_full_name'
+                                        className="formInput"
+                                        type="text"
+                                        onChange={this.handleInputTextChange}
+                                        placeholder='Jeremy Chevallier'
+                                        value={this.state.primary_contact_full_name}>
+                                    </input>
                                 </div>
-                                <input
-                                    name='primary_contact_full_name'
-                                    className="formInput"
-                                    type="text"
-                                    onChange={this.handleInputTextChange}
-                                    placeholder='Jeremy Chevallier'
-                                    value={this.state.primary_contact_full_name}>
-                                </input>
-                            </div>
-                            <div className="formInputCont">
-                                <div>
-                                    <p className='inputLabel'>PHONE NUMBER</p>
+                                <div className="formInputCont">
+                                    <div>
+                                        <p className='inputLabel'>PHONE NUMBER</p>
+                                    </div>
+                                    <input
+                                        name='primary_contact_phone_number'
+                                        className="formInput"
+                                        type="text"
+                                        onChange={this.handleInputTextChange}
+                                        placeholder='480-268-5305'
+                                        value={this.state.primary_contact_phone_number}>
+                                    </input>
                                 </div>
-                                <input
-                                    name='primary_contact_phone_number'
-                                    className="formInput"
-                                    type="text"
-                                    onChange={this.handleInputTextChange}
-                                    placeholder='480-268-5305'
-                                    value={this.state.primary_contact_phone_number}>
-                                </input>
-                            </div>
-                            <div className="formInputCont">
-                                <div>
-                                    <p className='inputLabel'>EMAIL ADDRESS</p>
+                                <div className="formInputCont">
+                                    <div>
+                                        <p className='inputLabel'>EMAIL ADDRESS</p>
+                                    </div>
+                                    <input
+                                        name='primary_contact_email'
+                                        className="formInput"
+                                        type="text"
+                                        onChange={this.handleInputTextChange}
+                                        placeholder='Jeremy@phxconscious.com'
+                                        value={this.state.primary_contact_email}>
+                                    </input>
                                 </div>
-                                <input
-                                    name='primary_contact_email'
-                                    className="formInput"
-                                    type="text"
-                                    onChange={this.handleInputTextChange}
-                                    placeholder='Jeremy@phxconscious.com'
-                                    value={this.state.primary_contact_email}>
-                                </input>
                             </div>
-                        </div>
-                    </div>
-                    <br/>
-                    {this.renderButton()}
-                </form>
+                            <br/>
+                            {this.renderButton()}
+                        </form>
+                    </Cell>
+                </Grid>
             </div>
         );
     }

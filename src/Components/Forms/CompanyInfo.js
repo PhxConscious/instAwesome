@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import '../../Styles/FormsStyles.css';
 import {connect} from 'react-redux';
 import {updateCompanyInfo} from "../../redux/actions/companyInfo";
+import {Grid, Cell} from 'react-mdl';
 
 class CompanyInfo extends Component {
     constructor(props) {
@@ -62,57 +63,59 @@ class CompanyInfo extends Component {
     render() {
         return (
             <div>
-                {/*<h5><span className='consciousBlueColor'>Edit Your Company Info</span></h5>*/}
-                <form className="formCont" action="#">
-                    <div className='inputCont'>
-                        {/*<div className='formTitleCont'>*/}
-                            {/*<p className="formTitle">COMPANY</p>*/}
-                        {/*</div>*/}
-                        <div className='formFieldContainer'>
-                            <div className="formInputCont">
-                                <div>
-                                    <p className='inputLabel'>NAME</p>
+                <Grid>
+                    <Cell col={8} offsetDesktop={2} tablet={12} phone={12}>
+                        {/*<h5><span className='consciousBlueColor'>Edit Your Company Info</span></h5>*/}
+                        <form className="formCont" action="#">
+                            <div className='inputCont'>
+                                {/*<div className='formTitleCont'>*/}
+                                {/*<p className="formTitle">COMPANY</p>*/}
+                                {/*</div>*/}
+                                <div className="formInputCont">
+                                    <div>
+                                        <p className='inputLabel'>NAME</p>
+                                    </div>
+                                    <input
+                                        name='company_name'
+                                        className="formInput"
+                                        type="text"
+                                        onChange={this.handleInputTextChange}
+                                        placeholder='input company name'
+                                        value={this.state.company_name}>
+                                    </input>
                                 </div>
-                                <input
-                                    name='company_name'
-                                    className="formInput"
-                                    type="text"
-                                    onChange={this.handleInputTextChange}
-                                    placeholder='input company name'
-                                    value={this.state.company_name}>
-                                </input>
-                            </div>
-                            <div className="formInputCont">
-                                <div>
-                                    <p className='inputLabel'>COMPANY EMAIL</p>
+                                <div className="formInputCont">
+                                    <div>
+                                        <p className='inputLabel'>COMPANY EMAIL</p>
+                                    </div>
+                                    <input
+                                        name='company_email'
+                                        className="formInput"
+                                        type="text"
+                                        onChange={this.handleInputTextChange}
+                                        placeholder='input company email'
+                                        value={this.state.company_email}>
+                                    </input>
                                 </div>
-                                <input
-                                    name='company_email'
-                                    className="formInput"
-                                    type="text"
-                                    onChange={this.handleInputTextChange}
-                                    placeholder='input company email'
-                                    value={this.state.company_email}>
-                                </input>
-                            </div>
-                            <div className="formInputCont">
-                                <div>
-                                    <p className='inputLabel'>COMPANY PHONE</p>
+                                <div className="formInputCont">
+                                    <div>
+                                        <p className='inputLabel'>COMPANY PHONE</p>
+                                    </div>
+                                    <input
+                                        name='company_phone'
+                                        className="formInput"
+                                        type="text"
+                                        onChange={this.handleInputTextChange}
+                                        placeholder='input company phone number'
+                                        value={this.state.company_phone}>
+                                    </input>
                                 </div>
-                                <input
-                                    name='company_phone'
-                                    className="formInput"
-                                    type="text"
-                                    onChange={this.handleInputTextChange}
-                                    placeholder='input company phone number'
-                                    value={this.state.company_phone}>
-                                </input>
                             </div>
-                        </div>
-                    </div>
-                    <br/>
-                    {this.renderButton()}
-                </form>
+                            <br/>
+                            {this.renderButton()}
+                        </form>
+                    </Cell>
+                </Grid>
             </div>
         );
     }

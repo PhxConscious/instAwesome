@@ -3,6 +3,7 @@ import '../../Styles/FormsStyles.css';
 import {connect} from 'react-redux';
 import {addCompanyInfo} from "../../redux/actions/companyInfo";
 import {postUserCompanyJoinInfo} from "../../redux/actions/userCompanyJoin";
+import {Grid, Cell} from 'react-mdl'
 
 class Company extends Component {
     componentDidMount() {
@@ -62,57 +63,60 @@ class Company extends Component {
         const {company_email, company_name, company_phone} = this.state;
         return (
             <div>
-                {/*<h5>ADD YOUR COMPANY</h5>*/}
-                <form className="formCont" action="#">
-                    <div className='inputCont'>
-                        {/*<div className='formTitleCont'>*/}
-                            {/*<p className="formTitle">COMPANY</p>*/}
-                        {/*</div>*/}
-                        <div className='formFieldContainer'>
-                            <div className="formInputCont">
-                                <div>
-                                    <p className='inputLabel'>NAME</p>
+                <Grid>
+                    <Cell col={8} offsetDesktop={2} tablet={12} phone={12}>
+                        {/*<h5>ADD YOUR COMPANY</h5>*/}
+                        <form className="formCont" action="#">
+                            <div className='inputCont'>
+                                {/*<div className='formTitleCont'>*/}
+                                {/*<p className="formTitle">COMPANY</p>*/}
+                                {/*</div>*/}
+
+                                <div className="formInputCont">
+                                    <div>
+                                        <p className='inputLabel'>NAME</p>
+                                    </div>
+                                    <input
+                                        name='name'
+                                        className="formInput"
+                                        type="text"
+                                        onChange={e => this.setState({company_name: e.target.value})}
+                                        placeholder='input company name'
+                                        value={this.state.company_name}>
+                                    </input>
                                 </div>
-                                <input
-                                    name='name'
-                                    className="formInput"
-                                    type="text"
-                                    onChange={e => this.setState({company_name: e.target.value})}
-                                    placeholder='input company name'
-                                    value={this.state.company_name}>
-                                </input>
-                            </div>
-                            <div className="formInputCont">
-                                <div>
-                                    <p className='inputLabel'>COMPANY EMAIL</p>
+                                <div className="formInputCont">
+                                    <div>
+                                        <p className='inputLabel'>COMPANY EMAIL</p>
+                                    </div>
+                                    <input
+                                        name='email'
+                                        className="formInput"
+                                        type="text"
+                                        onChange={e => this.setState({company_email: e.target.value})}
+                                        placeholder='input company email'
+                                        value={this.state.company_email}>
+                                    </input>
                                 </div>
-                                <input
-                                    name='email'
-                                    className="formInput"
-                                    type="text"
-                                    onChange={e => this.setState({company_email: e.target.value})}
-                                    placeholder='input company email'
-                                    value={this.state.company_email}>
-                                </input>
-                            </div>
-                            <div className="formInputCont">
-                                <div>
-                                    <p className='inputLabel'>COMPANY PHONE</p>
+                                <div className="formInputCont">
+                                    <div>
+                                        <p className='inputLabel'>COMPANY PHONE</p>
+                                    </div>
+                                    <input
+                                        name='phone'
+                                        className="formInput"
+                                        type="text"
+                                        onChange={e => this.setState({company_phone: e.target.value})}
+                                        placeholder='input company phone number'
+                                        value={this.state.company_phone}>
+                                    </input>
                                 </div>
-                                <input
-                                    name='phone'
-                                    className="formInput"
-                                    type="text"
-                                    onChange={e => this.setState({company_phone: e.target.value})}
-                                    placeholder='input company phone number'
-                                    value={this.state.company_phone}>
-                                </input>
                             </div>
-                        </div>
-                    </div>
-                    <br/>
-                    {this.renderButton()}
-                </form>
+                            <br/>
+                            {this.renderButton()}
+                        </form>
+                    </Cell>
+                </Grid>
             </div>
         );
     }
