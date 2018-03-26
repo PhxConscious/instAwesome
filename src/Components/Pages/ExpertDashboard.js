@@ -5,6 +5,7 @@ import {postFeedback} from '../../redux/actions/feedback';
 import {getUsersOfExpert} from '../../redux/actions/userExpertJoin';
 import {getUserCompanyJoinInfo} from '../../redux/actions/userCompanyJoin';
 import {getCompletedLessons, getCompletedQuestionStatus} from "../../utils/helper";
+import Gradient from "../Reusable/Gradient";
 
 class ExpertDashboard extends React.Component {
     constructor(props) {

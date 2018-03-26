@@ -48,7 +48,6 @@ class UserProfile extends Component {
 
         return (
             <div className="App">
-                <Gradient/>
                 <BlueAppBg>
                     <Tabs activeTab={this.state.activeTab}  onChange={(tabId) => this.setState({activeTab: tabId})}
                           ripple>
