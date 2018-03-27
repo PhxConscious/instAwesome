@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {Redirect} from 'react-router-dom';
-import { postFeedback } from '../../redux/actions/feedback';
 import { getFreeUsers, postNewUserExpertJoin } from '../../redux/actions/userExpertJoin';
 import { getAllUsers, getAllExperts, deleteUser, updateNonCurrentUser } from '../../redux/actions/userProgress';
 import UserListItem from '../Admin/UserListItem';
@@ -50,24 +49,23 @@ class AdminDashboard extends React.Component {
 
   render(){
     const { userInfo, allUsers, allExperts, userExpertJoin } = this.props;
-    let { userObj } = this.state;
 
     if (typeof(userInfo.currentUser)===undefined) {
       return <Redirect to='/'/>
     }
 
     let freeUsers;
-    let unhitchedUsers
-    if(userExpertJoin && userExpertJoin.freeUsers){
-      freeUsers = userExpertJoin.freeUsers;
-      unhitchedUsers = freeUsers.map((user, i) => {
-        return <UserListItem
-                  key={i}
-                  user={user}
-                  selectUser={this.selectUser}
-                />
-      })
-    }
+    // let unhitchedUsers
+    // if(userExpertJoin && userExpertJoin.freeUsers){
+    //   freeUsers = userExpertJoin.freeUsers;
+    //   unhitchedUsers = freeUsers.map((user, i) => {
+    //     return <UserListItem
+    //               key={i}
+    //               user={user}
+    //               selectUser={this.selectUser}
+    //             />
+    //   })
+    // }
 
     let userList;
     if(allUsers){
