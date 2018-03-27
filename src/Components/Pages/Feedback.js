@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {Redirect} from 'react-router-dom';
-import { postFeedback } from '../../redux/actions/feedback'
+import { postFeedback } from '../../redux/actions/feedback';
+import { Button } from 'react-mdl';
 
 class Feedback extends React.Component {
   constructor(props){
@@ -30,7 +31,7 @@ class Feedback extends React.Component {
 
     return (
       <div style={{width: "50vw", margin: "0 auto", marginTop: "100px"}}>
-        <label htmlFor="form">Comment Section</label>
+        <label htmlFor="form"><h3>Comments</h3></label>
         <form
           id="form"
           onSubmit={e => {
@@ -41,14 +42,19 @@ class Feedback extends React.Component {
           <textarea
             value={this.state.textArea}
             onChange={e => this.setState({textArea: e.target.value})}
-            placeholder="put your comment here"
-            rows={12}
+            placeholder="write us a comment"
+            rows={24}
+            style={{width: "100%"}}
             autoFocus
           />
-          <button
-            type="submit"
-          >submit your comment
-          </button>
+        <div>
+          <Button
+              raised colored ripple
+              type="submit"
+            >submit your comment
+          </Button>
+        </div>
+
         </form>
       </div>
     )

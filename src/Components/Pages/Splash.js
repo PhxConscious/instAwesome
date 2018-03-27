@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Redirect, Link} from 'react-router-dom';
-import {withCookies, Cookies} from 'react-cookie';
+import {withCookies} from 'react-cookie';
 import '../../Styles/SplashPageStyles..css';
 import {Grid, Cell} from 'react-mdl';
 

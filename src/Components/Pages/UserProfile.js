@@ -22,7 +22,7 @@ class UserProfile extends Component {
     }
 
     render() {
-        const {redirect, activeTab} = this.state;
+        const {activeTab} = this.state;
         const {companyInfo, userInfo} = this.props;
 
         // if not logged in, go to login to get user info
