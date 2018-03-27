@@ -251,11 +251,15 @@ class ContentBody extends React.Component {
               <h6 className="modalDescription">{this.state.lessonDialogText}</h6>
               <div className="modalButtonContainer">
                 <Button
+                  style={{margin: "3px"}}
+                  raised colored ripple
                   type='button'
                   onClick={nextLessonModalHandler}
                 >{this.state.lessonDialogButton1}
                 </Button>
                 <Button
+                  style={{margin: "3px"}}
+                  raised colored ripple
                   type='button'
                   onClick={e=>this.setState({openLessonDialog:false})}
                 >{this.state.lessonDialogButton2}
@@ -275,11 +279,15 @@ class ContentBody extends React.Component {
               <h6 className="modalDescription">{this.state.unitDialogText}</h6>
               <div className="modalButtonContainer">
                 <Button
+                  style={{margin: "3px"}}
+                  raised colored ripple
                   type='button'
                   onClick={nextUnit}
                 >{this.state.unitDialogButton1}
                 </Button>
                 <Button
+                  style={{margin: "3px"}}
+                  raised colored ripple
                   type='button'
                   onClick={e=>this.setState({openUnitDialog:false})}
                 >{this.state.unitDialogButton2}
