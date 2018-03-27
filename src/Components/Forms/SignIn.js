@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import firebase from 'firebase';
 import {Redirect, Link} from 'react-router-dom';
-import Styles from '../../Styles/FormsStyles.css';
+import '../../Styles/FormsStyles.css';
 import {connect} from 'react-redux';
 import {setCurrentValue} from "../../redux/actions/currentValues";
 import {getUserProgress} from '../../redux/actions/userProgress';
@@ -132,7 +132,7 @@ class LoginForm extends Component {
 
     onButtonPress = (e) => {
         e.preventDefault();
-        const {email, password, loading} = this.state;
+        const {email, password} = this.state;
         console.log(" current email and password", email, password)
         this.setState({
             error: '',
