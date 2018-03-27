@@ -105,6 +105,7 @@ class AdminDashboard extends React.Component {
             <Tabs activeTab={this.state.activeTab} onChange={(tabId) => this.setState({ activeTab: tabId })} ripple>
               <Tab>Users</Tab>
               <Tab>Experts</Tab>
+              <Tab>Comments</Tab>
             </Tabs>
             <div>
               {this.state.activeTab === 0 ? <div
@@ -137,6 +138,19 @@ class AdminDashboard extends React.Component {
 
                     </div>
 
+                  </div>
+                </div>
+              </div> : ''
+              }
+              {this.state.activeTab === 2 ? <div>
+                <div className="fullPanelContainer">
+                  <div className="leftPanelSelector">
+                    users
+                  </div>
+
+                  <div className="rightPanelDetail">
+
+                    comments
                   </div>
                 </div>
               </div> : ''
