@@ -85,13 +85,25 @@ class Splash extends React.Component {
                                     </p>
                                 </Cell>
                                 <Cell col={2} hideTablet={true} hidePhone={true} className='rightArrowText'>
-                                        Finish your profile
+                                    Finish your profile
                                 </Cell>
                                 <Cell col={2} hideTablet={true} hidePhone={true}>
                                     <div>
                                         <img className='arrowRight' src='https://i.imgur.com/0ToSF6G.png'
                                              alt="blah"/>
                                     </div>
+                                </Cell>
+                                <Cell hideDesktop={true} hideTablet={false} hidePhone={false}
+                                      >
+                                    <Link className='startTrainingTextMobile' to='/learn/dashboard'>
+                                        Start Your Training
+                                    </Link>
+                                </Cell>
+                                <Cell hideDesktop={true} hideTablet={false} hidePhone={false}
+                                      >
+                                    <Link className='finishProfileTextMobile' to='/profile'>
+                                        Finish your profile
+                                    </Link>
                                 </Cell>
                             </Grid>
                         </div>}
