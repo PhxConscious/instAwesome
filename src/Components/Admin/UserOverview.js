@@ -105,7 +105,9 @@ class UserOverview extends React.Component {
 
         <p>User's LMS Progress: {getCompletedQuestionStatus(user.user_progress)}%</p>
 
-        {user.expert_id ? <div>Expert: {assignedExpert} <button onClick={this.deleteUserExpertJoin}>unpair</button></div>: <div style={{position: 'relative'}}>
+        {user.expert_id ? <div>Expert: {assignedExpert} <Button
+          raised accent ripple
+         onClick={this.deleteUserExpertJoin}>unpair</Button></div>: <div style={{position: 'relative'}}>
           <IconButton name="more_vert" id="demo-menu-top-left" /> Pair with expert
           <Menu target="demo-menu-top-left" valign="bottom" ripple>
               {theExperts}
@@ -118,13 +120,33 @@ class UserOverview extends React.Component {
             <p>Be sure, we cannot change it yet</p>
           </DialogContent>
           <DialogActions>
-            <Button type='button' onClick={e=>this.setState({openModal:false})}>Wait, not sure</Button>
-            <Button type='button' onClick={this.connectUserAndExpert}>Lets do it</Button>
+            <Button
+              raised colored ripple
+              type='button'
+              onClick={e=>this.setState({openModal:false})}>Wait, not sure
+            </Button>
+            <Button
+              raised accent ripple
+              type='button'
+              onClick={this.connectUserAndExpert}>Lets do it
+            </Button>
           </DialogActions>
         </Dialog>
-        <button onClick={this.makeAdmin}>make admin</button>
-        <button onClick={this.makeExpert}>make expert</button>
-        <button onClick={this.deleteUser}>delete user</button>
+        <Button
+          style={{margin: "10px 3px 0px 3px"}}
+          raised colored ripple
+          onClick={this.makeAdmin}>make admin
+        </Button>
+        <Button
+          style={{margin: "10px 3px 0px 3px"}}
+          raised colored ripple
+          onClick={this.makeExpert}>make expert
+        </Button>
+        <Button
+          style={{margin: "10px 3px 0px 3px"}}
+          raised accent ripple
+          onClick={this.deleteUser}>delete user
+        </Button>
       </div>
     )
   }
