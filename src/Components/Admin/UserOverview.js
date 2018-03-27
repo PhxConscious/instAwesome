@@ -3,7 +3,7 @@ import { IconButton, Menu, MenuItem, Dialog, DialogTitle, DialogContent, DialogA
 import { connect } from 'react-redux';
 import { getAllExperts, selectAnExpert, updateNonCurrentUser, deleteUser } from '../../redux/actions/userProgress';
 import { postNewUserExpertJoin, deleteUserExpertJoin, getFreeUsers } from '../../redux/actions/userExpertJoin';
-import { getCompletedQuestionStatus, getCompletedLessons } from '../../utils/helper';
+import { getCompletedQuestionStatus, getCompletedLessonTitles } from '../../utils/helper';
 import '../../Styles/AdminDashboardStyles.css';
 
 class UserOverview extends React.Component {
@@ -100,7 +100,7 @@ class UserOverview extends React.Component {
 
         <div id="lessonProgressContainer">
           Completed Lessons:
-          <ul>{getCompletedLessons(user.user_progress).map(lesson => <li>{lesson}</li>)}</ul>
+          <ul>{getCompletedLessonTitles(user.user_progress).map((lesson, i) => <li key={i}>{lesson}</li>)}</ul>
         </div>
 
         <p>User's LMS Progress: {getCompletedQuestionStatus(user.user_progress)}%</p>

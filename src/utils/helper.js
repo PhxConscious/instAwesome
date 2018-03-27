@@ -24,22 +24,28 @@ export const getCompletedLessons = (units) => {
     for (let unit in units) {
         for (let lesson in units[unit].lessons) {
             if (units[unit].lessons[lesson].lessonCompleted === true) {
+              console.log("lesson", lesson)
                 result.push(lesson)
             }
         }
     }
     return result;
 };
+
+const interpretLessonCode = (lessonCode) => {
+  let unitNo = lessonCode.substring(1,3);
+  let lessonNo = lessonCode.substring(4,6);
+  return "Unit: " + unitNo + ", Lesson: " + lessonNo;
+}
 
 export const getCompletedLessonTitles = (units) => {
     let result = [];
     for (let unit in units) {
         for (let lesson in units[unit].lessons) {
             if (units[unit].lessons[lesson].lessonCompleted === true) {
-                result.push(lesson)
+                result.push(interpretLessonCode(lesson))
             }
         }
     }
     return result;
 };
-
