@@ -1,15 +1,54 @@
 .splashPageContent {
-    padding-top: 10vh;
+    padding-top: 5vh;
     text-align: center;
 }
 
-.splashText {
+.getStartedTitle {
+    text-align: center;
     font-size: 19px;
-    margin: 0;
     margin-bottom: 4px;
     font-weight: 400;
     color: #48C8D3;
     font-family: 'Asap', sans-serif;
+}
+
+.splashText {
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    color: #48C8D3;
+    font-family: 'Asap', sans-serif;
+    margin-top: 80px;
+}
+
+.leftArrowText {
+    font-weight: bold;
+    font-size: 25px;
+    padding-left: 50px;
+    padding-top: 220px;
+    font-family: 'Asap', sans-serif;
+    color: #9BDD82;
+}
+
+.rightArrowText {
+    padding-right: 50px;
+    font-weight: bold;
+    font-size: 25px;
+    padding-top: 220px;
+    font-family: 'Asap', sans-serif;
+    color: #9BDD82;
+}
+
+.arrowRight {
+    max-width: 180px;
+    float: right;
+    margin-right: 80px;
+}
+
+.arrowLeft {
+    max-width: 180px;
+    float: left;
+    margin-left: 80px;
 }
 
 .splashButton {
@@ -22,8 +61,3 @@
     margin-top: 20px;
     font-size: large;
 }
-
-.addCompanyText {
-
-}
-

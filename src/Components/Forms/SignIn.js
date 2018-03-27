@@ -88,11 +88,11 @@ class LoginForm extends Component {
             user_token: firebase.auth().currentUser.uid,
         });
 
-        setTimeout(() => {
-            this.setState({
-                redirect: true
-            })
-        },2000);
+        // setTimeout(() => {
+        //     this.setState({
+        //         redirect: true
+        //     })
+        // },2000);
 
         // set a cookie upon login with fb_id
         const {cookies} = this.props;

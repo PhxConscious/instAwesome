@@ -2,7 +2,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Redirect, Link} from 'react-router-dom';
 import {withCookies, Cookies} from 'react-cookie';
-import '../../Styles/SplashPageStyles..css'
+import '../../Styles/SplashPageStyles..css';
+import {Grid, Cell} from 'react-mdl';
 
 class Splash extends React.Component {
     constructor(props) {
@@ -55,26 +56,45 @@ class Splash extends React.Component {
         } else {
             return (
                 <div className='splashPageContent'>
-                    <div className='splashText'>
-                        This is the spash page where users gain an idea of what they can do on the site.
-                        We could also put up some kind of article feed - do we have content coming off of wordpress?
-                        <div>
-                            {companyInfo.companyList && companyInfo.companyList.length === 0 ? <div>
-                                <h3 className='splashText'>We notice you haven't set up your company yet...</h3>
-                                <p className='splashText'>Please set up your company profile immediately so that we can
-                                    better help you.</p>
-                                <div className='addCompanyText'>
-                                    <Link className='linkTo ' to='/profile'>
-                                      Add My Company
-                                    </Link>
-                                </div>
-                            </div> : <div>
-                                <h3 className='splashText'>Welcome back to instAwesome.</h3>
-                                <Link className='linkTo' to='/learn/dashboard'>
-                                    Continue The Journey
+                    {/*This is the spash page where users gain an idea of what they can do on the site.*/}
+                    {/*We could also put up some kind of article feed - do we have content coming off of wordpress?*/}
+                    <div>
+                        {companyInfo.companyList && companyInfo.companyList.length === 0 ? <div>
+                            <h3 className='splashText'>We notice you haven't set up your company yet...</h3>
+                            <p className='splashText'>Please set up your company profile immediately so that we can
+                                better help you.</p>
+                            <div className='addCompanyText'>
+                                <Link className='linkTo ' to='/profile'>
+                                    Add My Company
                                 </Link>
-                            </div>}
-                        </div>
+                            </div>
+                        </div> : <div>
+                            <Grid>
+                                <Cell col={2} hideTablet={true} hidePhone={true}>
+                                    <div>
+                                        <img className='arrowLeft' src='https://i.imgur.com/qOttilO.png'
+                                             alt="blah"/>
+                                    </div>
+                                </Cell>
+                                <Cell col={2} hideTablet={true} hidePhone={true} className='leftArrowText'>
+                                    Start your training
+                                </Cell>
+                                <Cell col={4} tablet={12} phone={12}>
+                                    <p className='splashText'>
+                                        Welcome back to instAwesome. Ready to get started?
+                                    </p>
+                                </Cell>
+                                <Cell col={2} hideTablet={true} hidePhone={true} className='rightArrowText'>
+                                        Finish your profile
+                                </Cell>
+                                <Cell col={2} hideTablet={true} hidePhone={true}>
+                                    <div>
+                                        <img className='arrowRight' src='https://i.imgur.com/0ToSF6G.png'
+                                             alt="blah"/>
+                                    </div>
+                                </Cell>
+                            </Grid>
+                        </div>}
                     </div>
                 </div>
             )
