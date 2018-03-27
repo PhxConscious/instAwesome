@@ -20,6 +20,9 @@
 #currentExpertButtons {
   position:absolute;
   bottom: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .rightPanelDetail {
