@@ -1,10 +1,8 @@
 import React from "react";
 import { connect } from 'react-redux';
 import { nextQuestion } from '../../redux/actions/userProgress';
-import ReactPlayer from 'react-player';
 import '../../Styles/ContentBodyStyles.css';
 import { CheckBox, LessonIcon } from './Checkbox';
-import TextInput from './TextInput';
 import { Button, Textfield } from 'react-mdl';
 import { updateCompanyInfo } from '../../redux/actions/companyInfo';
 import MultiChoiceShell from './MultiChoiceShell';
@@ -20,7 +18,6 @@ class ContentBody extends React.Component {
       alreadyUpdated: false,
     }
     this.isNextQ = this.isNextQ.bind(this);
-    this.isPrevQ = this.isPrevQ.bind(this);
     this.isChecked = this.isChecked.bind(this);
     this.checkBox = this.checkBox.bind(this);
     this.multiChoiceAttempted = this.multiChoiceAttempted.bind(this);
@@ -30,7 +27,6 @@ class ContentBody extends React.Component {
     if(this.props.currentValues.currentQuestionObj){
       this.isChecked();
       this.isNextQ();
-      this.isPrevQ();
     }
   }
 
@@ -38,7 +34,6 @@ class ContentBody extends React.Component {
     if(prevProps.currentValues !== this.props.currentValues){
       this.isChecked();
       this.isNextQ();
-      this.isPrevQ();
     }
   }
 
@@ -74,22 +69,6 @@ class ContentBody extends React.Component {
     }
   }
 
-  isPrevQ() {
-    let { currentQuestion } = this.props.currentValues;
-
-    // if(parseInt(currentQuestion,10) === 0){
-    //   this.setState({
-    //     ...this.state,
-    //     prevButtonHidden: true
-    //   })
-    // }
-    // if(parseInt(currentQuestion,10) !== 0){
-    //   this.setState({
-    //     prevButtonHidden: false
-    //   })
-    // }
-  }
-
   checkBox(){
     this.setState({isCheckMarked: !this.state.isCheckMarked})
   }
@@ -114,11 +93,6 @@ class ContentBody extends React.Component {
     let { lesson, nextLesson, prevLesson, nextQuestion, prevQuestion, nextUnit, userProgress, book, currentValues, selectLessonOnClick, companyInfo } = this.props;
 
     let { currentUnit, currentUnitObj, currentLesson, currentLessonObj, currentQuestion, currentQuestionObj } = this.props.currentValues;
-
-
-    // ISMAEL - look at currentQuestionObj for almost all data in this component. it comes from redux currentValues
-    console.log("ismael look here ----", currentQuestionObj.buttonText)
-
 
     let userProg = userProgress.currentUser.user_progress;
 
@@ -218,7 +192,7 @@ class ContentBody extends React.Component {
         this.setState({
           ...this.state,
           openLessonDialog: true,
-          lessonDialogTitle: `You're still on lesson ${parseInt(currentLesson)+1}`,
+          lessonDialogTitle: `You're still on lesson ${parseInt(currentLesson, 10)+1}`,
           lessonDialogText: "go back to previous lesson?",
           lessonDialogButton1: "go back",
           lessonDialogButton2: "stay here"
