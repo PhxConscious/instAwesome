@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import firebase from 'firebase';
-import {Link, Redirect} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import {Grid, Cell} from 'react-mdl'
 import {instanceOf} from 'prop-types';
 import {withCookies, Cookies} from 'react-cookie';
