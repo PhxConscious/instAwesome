@@ -7,7 +7,7 @@ import { getAllUsers, getAllExperts, deleteUser, updateNonCurrentUser } from '..
 import UserListItem from '../Admin/UserListItem';
 import UserOverview from '../Admin/UserOverview';
 import ExpertOverview from '../Admin/ExpertOverview';
-import { Tab, Tabs } from 'react-mdl';
+import { Tab, Tabs, Button } from 'react-mdl';
 import '../../Styles/AdminDashboardStyles.css'
 
 class AdminDashboard extends React.Component {
@@ -132,10 +132,11 @@ class AdminDashboard extends React.Component {
                   <div className="rightPanelDetail">
                     {this.state.selectedExpert ? <ExpertOverview expert={this.state.selectedExpert}/>:''}
                     <div id="currentExpertButtons">
-                      *caution*
-                      <button onClick={this.removeExpert}>remove expert permissions</button>
-                      <button onClick={this.deleteUser}>delete account completely</button>
-                      *caution*
+
+                      <Button raised accent ripple onClick={this.removeExpert}>remove expert permissions</Button>
+                      <span style={{width: "1em"}}></span>
+                      <Button raised accent ripple onClick={this.deleteUser}>delete account completely</Button>
+
                     </div>
 
                   </div>
