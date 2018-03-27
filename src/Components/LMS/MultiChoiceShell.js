@@ -89,9 +89,10 @@ class MultiChoiceShell extends React.Component{
           }}
         >
           {theQuestions}
-          <button
+          <Button
+            raised colored ripple
             type="submit"
-          >Attempt</button>
+          >Attempt</Button>
         </form>
 
         <ReactModal
@@ -107,7 +108,11 @@ class MultiChoiceShell extends React.Component{
               {!isCorrect ? questObj.incorrectResponse : ''}
             </h6>
             <div className="modalButtonContainer">
-              <Button type='button' onClick={this.handleClick}>OK</Button>
+              <Button
+                raised accent ripple
+                type='button'
+                onClick={this.handleClick}>OK
+              </Button>
             </div>
           </div>
         </ReactModal>
