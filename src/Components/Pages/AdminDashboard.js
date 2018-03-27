@@ -101,52 +101,56 @@ class AdminDashboard extends React.Component {
 
     if(userExpertJoin && userExpertJoin.freeUsers && allUsers){
 
+      if(userInfo.isAdmin){
+        return (
+          <div style={{width: "80vw", margin: "0 auto", marginTop: "100px"}}>
+            <Tabs activeTab={this.state.activeTab} onChange={(tabId) => this.setState({ activeTab: tabId })} ripple>
+              <Tab>Users</Tab>
+              <Tab>Experts</Tab>
+            </Tabs>
+            <div>
+              {this.state.activeTab === 0 ? <div
+                className="fullPanelContainer">
 
-      return (
-        <div style={{width: "80vw", margin: "0 auto", marginTop: "100px"}}>
-          <Tabs activeTab={this.state.activeTab} onChange={(tabId) => this.setState({ activeTab: tabId })} ripple>
-            <Tab>Users</Tab>
-            <Tab>Experts</Tab>
-          </Tabs>
-          <div>
-            {this.state.activeTab === 0 ? <div
-              className="fullPanelContainer">
-
-                <div className="leftPanelSelector">
-                  <strong>User List</strong>
-                    {userList}
-                </div>
-
-                <div className="rightPanelDetail">
-                  {this.state.selectedUser ? <UserOverview user={this.state.selectedUser}/>:''}
-                </div>
-              </div> : ''
-            }
-            {this.state.activeTab === 1 ? <div>
-              <div className="fullPanelContainer">
-                <div className="leftPanelSelector">
-                  <strong>Expert List</strong>
-                    {expertsList}
-                </div>
-
-                <div className="rightPanelDetail">
-                  {this.state.selectedExpert ? <ExpertOverview expert={this.state.selectedExpert}/>:''}
-                  <div id="currentExpertButtons">
-                    *caution*
-                    <button onClick={this.removeExpert}>remove expert permissions</button>
-                    <button onClick={this.deleteUser}>delete account completely</button>
-                    *caution*
+                  <div className="leftPanelSelector">
+                    <strong>User List</strong>
+                      {userList}
                   </div>
 
+                  <div className="rightPanelDetail">
+                    {this.state.selectedUser ? <UserOverview user={this.state.selectedUser}/>:''}
+                  </div>
+                </div> : ''
+              }
+              {this.state.activeTab === 1 ? <div>
+                <div className="fullPanelContainer">
+                  <div className="leftPanelSelector">
+                    <strong>Expert List</strong>
+                      {expertsList}
+                  </div>
+
+                  <div className="rightPanelDetail">
+                    {this.state.selectedExpert ? <ExpertOverview expert={this.state.selectedExpert}/>:''}
+                    <div id="currentExpertButtons">
+                      *caution*
+                      <button onClick={this.removeExpert}>remove expert permissions</button>
+                      <button onClick={this.deleteUser}>delete account completely</button>
+                      *caution*
+                    </div>
+
+                  </div>
                 </div>
-              </div>
-            </div> : ''
-            }
+              </div> : ''
+              }
+
+            </div>
 
           </div>
+        )
+      } else {
+        return <div style={{marginTop: "10vh", display: "flex", justifyContent: "center", alignItems: "center"}} ><h3 style={{width: "75vw"}}>Please login to view the Admin panel or request admin permissions if you're not currently authorized.</h3></div>
+      }
 
-        </div>
-      )
     } else {
       return <div>loading expert panel...</div>
     }

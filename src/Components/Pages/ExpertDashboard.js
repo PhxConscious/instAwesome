@@ -49,8 +49,9 @@ class ExpertDashboard extends React.Component {
         }
 
         if (userExpertJoin && userExpertJoin.usersOfExpert) {
-            return (
 
+          if(userInfo.isExpert){
+            return (
                 <div style={{width: "80vw", margin: "0 auto", marginTop: "100px"}}>
                     <div>
                         <div className="fullPanelContainer">
@@ -146,6 +147,10 @@ class ExpertDashboard extends React.Component {
                     </div>
                 </div>
             )
+          } else {
+            return <div style={{marginTop: "10vh", display: "flex", justifyContent: "center", alignItems: "center"}} ><h3 style={{width: "75vw"}}>Please log into your account or request expert permissions if you are not authorized to view the expert panel</h3></div>
+          }
+
         } else {
             return <div>loading expert panel...</div>
         }
