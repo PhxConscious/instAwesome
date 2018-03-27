@@ -100,7 +100,7 @@ class UserOverview extends React.Component {
 
         <div id="lessonProgressContainer">
           Completed Lessons:
-          <ul>{getCompletedLessonTitles(user.user_progress).map(lesson => <li>{lesson}</li>)}</ul>
+          <ul>{getCompletedLessonTitles(user.user_progress).map((lesson, i) => <li key={i}>{lesson}</li>)}</ul>
         </div>
 
         <p>User's LMS Progress: {getCompletedQuestionStatus(user.user_progress)}%</p>
