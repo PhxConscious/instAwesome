@@ -19,10 +19,12 @@
     color: #48C8D3;
     font-family: 'Asap', sans-serif;
     margin-top: 80px;
+    line-height: normal;
 }
 
 .leftArrowText {
     font-weight: bold;
+    line-height: normal;
     font-size: 25px;
     padding-left: 50px;
     padding-top: 220px;
@@ -32,11 +34,44 @@
 
 .rightArrowText {
     padding-right: 50px;
+    line-height: normal;
     font-weight: bold;
     font-size: 25px;
     padding-top: 220px;
     font-family: 'Asap', sans-serif;
     color: #9BDD82;
+}
+
+.startTrainingTextMobile{
+    font-weight: bold;
+    font-size: 25px;
+    font-family: 'Asap', sans-serif;
+    color: #9BDD82;
+    text-decoration: none;
+}
+
+.finishProfileTextMobile{
+    font-weight: bold;
+    font-size: 25px;
+    font-family: 'Asap', sans-serif;
+    color: #9BDD82;
+    text-decoration: none;
+}
+
+.startTrainingTextMobile:hover {
+    font-weight: bold;
+    font-size: 25px;
+    font-family: 'Asap', sans-serif;
+    color: #48C8D3;
+    text-decoration: none;
+}
+
+.finishProfileTextMobile:hover{
+    font-weight: bold;
+    font-size: 25px;
+    font-family: 'Asap', sans-serif;
+    color: #48C8D3;
+    text-decoration: none;
 }
 
 .arrowRight {
