@@ -1,7 +1,5 @@
 import React from 'react';
-import { IconButton, Menu, MenuItem, Dialog, DialogTitle, DialogContent, DialogActions, Button } from 'react-mdl';
 import { connect } from 'react-redux';
-import { getUserProgress } from '../../redux/actions/userProgress';
 import { getUsersOfExpert } from '../../redux/actions/userExpertJoin';
 import { getCompletedQuestionStatus } from '../../utils/helper';
 import '../../Styles/AdminDashboardStyles.css';
@@ -38,16 +36,15 @@ class ExpertOverview extends React.Component {
       usersList = usersOfExpert.map((user, i) => {
         return (
           <div key={i}>
-          <span>{user.first_name} {user.last_name}</span>
-          <span style={{float:"right"}}>{getCompletedQuestionStatus(user.user_progress)}</span>
-
+            <span>{user.first_name} {user.last_name}</span>
+            <span style={{float:"right"}}>{getCompletedQuestionStatus(user.user_progress)}</span>
           </div>
         )
       })
     }
 
     return(
-      <div>
+      <div style={{marginBottom: "30px"}}>
         <strong>{expert.first_name}{"'s"} Current Clients</strong>
         {usersList}
       </div>
