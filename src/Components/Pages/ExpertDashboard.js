@@ -1,11 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
-import {postFeedback} from '../../redux/actions/feedback';
 import {getUsersOfExpert} from '../../redux/actions/userExpertJoin';
 import {getUserCompanyJoinInfo} from '../../redux/actions/userCompanyJoin';
 import {getCompletedLessons, getCompletedQuestionStatus} from "../../utils/helper";
-import Gradient from "../Reusable/Gradient";
 
 class ExpertDashboard extends React.Component {
     constructor(props) {
@@ -25,10 +23,9 @@ class ExpertDashboard extends React.Component {
     }
 
     render() {
-        const {user, userInfo, userExpertJoin, userCompanyJoin} = this.props;
+        const {userInfo, userExpertJoin, userCompanyJoin} = this.props;
         let {userObj} = this.state;
-        console.log("userCompanyJoin", userCompanyJoin);
-        console.log('&&&&&&&&&&&&&&&&&&&&!!!!!!!!!!&&&&&&&&&&&&&&&&&&&&', this.state.userObj);
+
         if (typeof(userInfo.currentUser) === undefined) {
             return <Redirect to='/'/>
         }
