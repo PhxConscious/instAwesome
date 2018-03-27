@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5dcbd94a-9853-46c1-a5fe-46ff5bc17eff" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/src/Components/Pages/Splash.js" afterPath="$PROJECT_DIR$/src/Components/Pages/Splash.js" />
       <change beforePath="$PROJECT_DIR$/src/Styles/SplashPageStyles..css" afterPath="$PROJECT_DIR$/src/Styles/SplashPageStyles..css" />
     </list>
@@ -18,11 +17,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Splash.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Splash.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Components/Pages/Splash.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1114">
-              <caret line="103" column="42" lean-forward="false" selection-start-line="103" selection-start-column="42" selection-end-line="103" selection-end-column="42" />
+            <state relative-caret-position="1190">
+              <caret line="70" column="35" lean-forward="false" selection-start-line="70" selection-start-column="35" selection-end-line="70" selection-end-column="35" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -30,11 +29,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SplashPageStyles..css" pinned="false" current-in-tab="true">
+      <file leaf-file-name="SplashPageStyles..css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Styles/SplashPageStyles..css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="25" column="22" lean-forward="true" selection-start-line="25" selection-start-column="22" selection-end-line="25" selection-end-column="22" />
+            <state relative-caret-position="663">
+              <caret line="39" column="23" lean-forward="true" selection-start-line="39" selection-start-column="23" selection-end-line="39" selection-end-column="23" />
               <folding />
             </state>
           </provider>
@@ -43,7 +42,7 @@
       <file leaf-file-name="AppNav.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Components/Reusable/AppNav.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="219">
+            <state relative-caret-position="1105">
               <caret line="74" column="62" lean-forward="false" selection-start-line="74" selection-start-column="46" selection-end-line="74" selection-end-column="62" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
@@ -107,8 +106,8 @@
       <file leaf-file-name="SignIn.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Components/Forms/SignIn.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1242">
-              <caret line="159" column="0" lean-forward="true" selection-start-line="159" selection-start-column="0" selection-end-line="159" selection-end-column="0" />
+            <state relative-caret-position="2516">
+              <caret line="159" column="0" lean-forward="false" selection-start-line="159" selection-start-column="0" selection-end-line="159" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -117,8 +116,8 @@
       <file leaf-file-name="SignUp.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Components/Forms/SignUp.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="731">
-              <caret line="43" column="49" lean-forward="true" selection-start-line="43" selection-start-column="49" selection-end-line="43" selection-end-column="49" />
+            <state relative-caret-position="612">
+              <caret line="43" column="49" lean-forward="false" selection-start-line="43" selection-start-column="49" selection-end-line="43" selection-end-column="49" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -191,8 +190,8 @@
         <option value="$PROJECT_DIR$/src/Styles/AppNavStyles.css" />
         <option value="$PROJECT_DIR$/src/Components/Forms/SignIn.js" />
         <option value="$PROJECT_DIR$/src/Components/Forms/SignUp.js" />
-        <option value="$PROJECT_DIR$/src/Components/Pages/Splash.js" />
         <option value="$PROJECT_DIR$/src/Styles/SplashPageStyles..css" />
+        <option value="$PROJECT_DIR$/src/Components/Pages/Splash.js" />
       </list>
     </option>
   </component>
@@ -208,9 +207,9 @@
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1280" />
+    <option name="x" value="1309" />
     <option name="y" value="22" />
-    <option name="width" value="1280" />
+    <option name="width" value="1251" />
     <option name="height" value="1418" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -408,17 +407,18 @@
       <workItem from="1522045034954" duration="15487000" />
       <workItem from="1522123847807" duration="3537000" />
       <workItem from="1522172443617" duration="3524000" />
+      <workItem from="1522187074068" duration="1156000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="310475000" />
+    <option name="totallyTimeSpent" value="311631000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1280" y="22" width="1280" height="1418" extended-state="0" />
+    <frame x="1309" y="22" width="1251" height="1418" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2065131" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21138212" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -651,9 +651,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="15" column="33" lean-forward="false" selection-start-line="15" selection-start-column="33" selection-end-line="15" selection-end-column="33" />
-          <folding>
-            <element signature="e#0#39#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -675,9 +672,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
           <caret line="28" column="0" lean-forward="false" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#39#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -794,16 +788,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Components/Forms/SignIn.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1242">
-          <caret line="159" column="0" lean-forward="true" selection-start-line="159" selection-start-column="0" selection-end-line="159" selection-end-column="0" />
+        <state relative-caret-position="2516">
+          <caret line="159" column="0" lean-forward="false" selection-start-line="159" selection-start-column="0" selection-end-line="159" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Components/Forms/SignUp.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="731">
-          <caret line="43" column="49" lean-forward="true" selection-start-line="43" selection-start-column="49" selection-end-line="43" selection-end-column="49" />
+        <state relative-caret-position="612">
+          <caret line="43" column="49" lean-forward="false" selection-start-line="43" selection-start-column="49" selection-end-line="43" selection-end-column="49" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
           </folding>
@@ -812,7 +806,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Components/Reusable/AppNav.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="219">
+        <state relative-caret-position="1105">
           <caret line="74" column="62" lean-forward="false" selection-start-line="74" selection-start-column="46" selection-end-line="74" selection-end-column="62" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
@@ -820,21 +814,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/Pages/Splash.js">
+    <entry file="file://$PROJECT_DIR$/src/Styles/SplashPageStyles..css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1114">
-          <caret line="103" column="42" lean-forward="false" selection-start-line="103" selection-start-column="42" selection-end-line="103" selection-end-column="42" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="663">
+          <caret line="39" column="23" lean-forward="true" selection-start-line="39" selection-start-column="23" selection-end-line="39" selection-end-column="23" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Styles/SplashPageStyles..css">
+    <entry file="file://$PROJECT_DIR$/src/Components/Pages/Splash.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="25" column="22" lean-forward="true" selection-start-line="25" selection-start-column="22" selection-end-line="25" selection-end-column="22" />
-          <folding />
+        <state relative-caret-position="1190">
+          <caret line="70" column="35" lean-forward="false" selection-start-line="70" selection-start-column="35" selection-end-line="70" selection-end-column="35" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

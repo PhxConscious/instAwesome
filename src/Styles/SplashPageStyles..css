@@ -1,5 +1,5 @@
 .splashPageContent {
-    padding-top: 5vh;
+    padding-top: 10vh;
     text-align: center;
 }
 
@@ -14,18 +14,29 @@
 
 .splashText {
     text-align: center;
-    font-size: 30px;
+    font-size: 35px;
     font-weight: bold;
     color: #48C8D3;
     font-family: 'Asap', sans-serif;
-    margin-top: 80px;
+    /*margin-top: 80px;*/
+    line-height: normal;
+}
+
+.addCompanyMainText {
+    margin-left: 20px;
+    margin-right: 20px;
+    text-align: center;
+    font-size: 35px;
+    font-weight: bold;
+    color: #48C8D3;
+    font-family: 'Asap', sans-serif;
     line-height: normal;
 }
 
 .leftArrowText {
     font-weight: bold;
     line-height: normal;
-    font-size: 25px;
+    font-size: 30px;
     padding-left: 50px;
     padding-top: 220px;
     font-family: 'Asap', sans-serif;
@@ -36,23 +47,23 @@
     padding-right: 50px;
     line-height: normal;
     font-weight: bold;
-    font-size: 25px;
+    font-size: 30px;
     padding-top: 220px;
     font-family: 'Asap', sans-serif;
     color: #9BDD82;
 }
 
-.startTrainingTextMobile{
+.startTrainingTextMobile {
     font-weight: bold;
-    font-size: 25px;
+    font-size: 30px;
     font-family: 'Asap', sans-serif;
     color: #9BDD82;
     text-decoration: none;
 }
 
-.finishProfileTextMobile{
+.finishProfileTextMobile {
     font-weight: bold;
-    font-size: 25px;
+    font-size: 30px;
     font-family: 'Asap', sans-serif;
     color: #9BDD82;
     text-decoration: none;
@@ -60,15 +71,31 @@
 
 .startTrainingTextMobile:hover {
     font-weight: bold;
-    font-size: 25px;
+    font-size: 29px;
     font-family: 'Asap', sans-serif;
     color: #48C8D3;
     text-decoration: none;
 }
 
-.finishProfileTextMobile:hover{
+.finishProfileTextMobile:hover {
     font-weight: bold;
-    font-size: 25px;
+    font-size: 29px;
+    font-family: 'Asap', sans-serif;
+    color: #48C8D3;
+    text-decoration: none;
+}
+
+.addMyCompanyText {
+    font-weight: bold;
+    font-size: 30px;
+    font-family: 'Asap', sans-serif;
+    color: #9BDD82;
+    text-decoration: none;
+}
+
+.addMyCompanyText:hover {
+    font-weight: bold;
+    font-size: 29px;
     font-family: 'Asap', sans-serif;
     color: #48C8D3;
     text-decoration: none;

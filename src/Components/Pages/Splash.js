@@ -60,14 +60,15 @@ class Splash extends React.Component {
                     {/*We could also put up some kind of article feed - do we have content coming off of wordpress?*/}
                     <div>
                         {companyInfo.companyList && companyInfo.companyList.length === 0 ? <div>
-                            <h3 className='splashText'>We notice you haven't set up your company yet...</h3>
-                            <p className='splashText'>Please set up your company profile immediately so that we can
-                                better help you.</p>
-                            <div className='addCompanyText'>
-                                <Link className='linkTo ' to='/profile'>
-                                    Add My Company
-                                </Link>
-                            </div>
+                            <p className='addCompanyMainText'>We notice you haven't set up your company yet...</p>
+                            <p className='addCompanyMainText'>
+                                Please set up your company profile immediately so that we can
+                                better help you.
+                            </p>
+                            <br/>
+                            <Link className='addMyCompanyText' to='/profile'>
+                                Add My Company
+                            </Link>
                         </div> : <div>
                             <Grid>
                                 <Cell col={2} hideTablet={true} hidePhone={true}>
@@ -93,14 +94,12 @@ class Splash extends React.Component {
                                              alt="blah"/>
                                     </div>
                                 </Cell>
-                                <Cell hideDesktop={true} hideTablet={false} hidePhone={false}
-                                      >
+                                <Cell hideDesktop={true} hideTablet={false} hidePhone={false}>
                                     <Link className='startTrainingTextMobile' to='/learn/dashboard'>
                                         Start Your Training
                                     </Link>
                                 </Cell>
-                                <Cell hideDesktop={true} hideTablet={false} hidePhone={false}
-                                      >
+                                <Cell hideDesktop={true} hideTablet={false} hidePhone={false}>
                                     <Link className='finishProfileTextMobile' to='/profile'>
                                         Finish your profile
                                     </Link>
