@@ -6,6 +6,7 @@ import { getAllUsers, getAllExperts, deleteUser, updateNonCurrentUser } from '..
 import UserListItem from '../Admin/UserListItem';
 import UserOverview from '../Admin/UserOverview';
 import ExpertOverview from '../Admin/ExpertOverview';
+import UserComments from '../Admin/UserComments';
 import { Tab, Tabs, Button } from 'react-mdl';
 import '../../Styles/AdminDashboardStyles.css'
 
@@ -145,12 +146,15 @@ class AdminDashboard extends React.Component {
               {this.state.activeTab === 2 ? <div>
                 <div className="fullPanelContainer">
                   <div className="leftPanelSelector">
-                    users
+                    <strong>User List</strong>
+                      {userList}
                   </div>
 
                   <div className="rightPanelDetail">
 
                     comments
+
+                    {this.state.selectedUser ? <UserComments user={this.state.selectedUser} />:''}
                   </div>
                 </div>
               </div> : ''
