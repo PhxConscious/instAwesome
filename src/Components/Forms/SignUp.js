@@ -1,10 +1,9 @@
 import React, {Component} from "react";
 import firebase from 'firebase';
-import axios from 'axios';
 import {Redirect} from 'react-router-dom';
 import {connect} from "react-redux";
 import starterObj from '../../config/starterUserProgressObject';
-import Styles from '../../Styles/FormsStyles.css';
+import '../../Styles/FormsStyles.css';
 import {nextQuestion, createNewUser} from "../../redux/actions/userProgress";
 
 class SignUpForm extends Component {
