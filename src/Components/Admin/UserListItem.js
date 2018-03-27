@@ -1,6 +1,4 @@
 import React from 'react';
-import {Redirect} from 'react-router-dom';
-import { postFeedback } from '../../redux/actions/feedback'
 
 const UserListItem = ({ userInfo, user, selectUser }) => {
 
