@@ -15,7 +15,7 @@ export const getFeedbackByCommentId = (comment_id) => {
   }
 }
 
-export const getAllFeedback = (fb_id) => {
+export const getAllFeedback = () => {
   return {
     type: 'GET_ALL_FEEDBACK',
     payload: axios.get(`${config.app.api}/feedback/`)

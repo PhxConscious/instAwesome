@@ -6,6 +6,8 @@ import { getAllUsers, getAllExperts, deleteUser, updateNonCurrentUser } from '..
 import UserListItem from '../Admin/UserListItem';
 import UserOverview from '../Admin/UserOverview';
 import ExpertOverview from '../Admin/ExpertOverview';
+import UserComments from '../Admin/UserComments';
+import CommentFeed from '../Admin/CommentFeed';
 import { Tab, Tabs, Button } from 'react-mdl';
 import '../../Styles/AdminDashboardStyles.css'
 
@@ -105,6 +107,8 @@ class AdminDashboard extends React.Component {
             <Tabs activeTab={this.state.activeTab} onChange={(tabId) => this.setState({ activeTab: tabId })} ripple>
               <Tab>Users</Tab>
               <Tab>Experts</Tab>
+              <Tab>Comment By User</Tab>
+              <Tab>Comment Feed</Tab>
             </Tabs>
             <div>
               {this.state.activeTab === 0 ? <div
@@ -139,6 +143,26 @@ class AdminDashboard extends React.Component {
 
                   </div>
                 </div>
+              </div> : ''
+              }
+              {this.state.activeTab === 2 ? <div>
+                <div className="fullPanelContainer">
+                  <div className="leftPanelSelector">
+                    <strong>User List</strong>
+                      {userList}
+                  </div>
+
+                  <div className="rightPanelDetail">
+
+                    comments
+
+                    {this.state.selectedUser ? <UserComments user={this.state.selectedUser} />:''}
+                  </div>
+                </div>
+              </div> : ''
+              }
+              {this.state.activeTab === 3 ? <div>
+                <CommentFeed />
               </div> : ''
               }
 
