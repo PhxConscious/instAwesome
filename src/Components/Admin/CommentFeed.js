@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { getAllFeedback, getFeedbackByParentId, postFeedback } from '../../redux/actions/feedback';
 import moment from 'moment';
+import '../../Styles/CommentFeed.css'
 
 class CommentFeed extends React.Component {
   constructor(props){
@@ -17,6 +18,7 @@ class CommentFeed extends React.Component {
 
   getChildComments(parent_id){
     console.log("getChildComments", parent_id)
+    this.props.getFeedbackByParentId(parent_id);
   }
 
   postComment(fb_id, commentObj){
@@ -25,25 +27,50 @@ class CommentFeed extends React.Component {
 
   render(){
 
-    let { allComments } = this.props;
+    let { allComments, userInfo, childGroups } = this.props;
 
     let theComments;
 
     if(allComments){
       theComments = allComments.map((comment, i) => {
         let time = moment(comment.created_at).fromNow();
+        if(childGroups && !childGroups[comment.feedback_id]){
+          this.getChildComments(comment.feedback_id)
+        }
         return <div
-            key={i}
-          >
-            <div><h5>{comment.comment}</h5></div>
+            key={i}    
+          > <div className="parentContainer">
+            <div><strong>{comment.comment}</strong></div>
             <div>
-              <span>{comment.firebase_id}</span>
+              <span>-{comment.first_name} {comment.last_name}</span>
               <span
-                style={{float:"right", fontSize:".8"}}
+                style={{float:"right", marginRight: "1.5em"}}
               >
                 {time}
               </span>
-              <hr/>
+            </div>
+            </div>
+            <div className="childrenContainer">
+            {!childGroups[comment.feedback_id]? "" : childGroups[comment.feedback_id].map(com => {
+              let time = moment(comment.created_at).fromNow();
+              return <div className="childComment">
+                <div>
+                  <strong>{com.comment}</strong>
+                </div>
+                <div>
+                  <span>-{com.first_name} {com.last_name}</span>
+                  <span
+                    style={{float:"right"}}
+                  >
+                    {time}
+                  </span>
+                  <hr/>
+                </div>
+              </div>
+
+            })
+
+            }
             </div>
 
           </div>
@@ -60,7 +87,7 @@ class CommentFeed extends React.Component {
 const mapStateToProps = state => ({
     allComments: state.feedback.allComments,
     userInfo: state.userProgress.currentUser,
-
+    childGroups: state.feedback.parentId
 })
 
 const mapDispatchToProps = dispatch => {
