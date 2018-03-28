@@ -254,15 +254,15 @@ class ContentBody extends React.Component {
                   style={{margin: "3px"}}
                   raised colored ripple
                   type='button'
-                  onClick={nextLessonModalHandler}
-                >{this.state.lessonDialogButton1}
+                  onClick={e=>this.setState({openLessonDialog:false})}
+                >{this.state.lessonDialogButton2}
                 </Button>
                 <Button
                   style={{margin: "3px"}}
                   raised colored ripple
                   type='button'
-                  onClick={e=>this.setState({openLessonDialog:false})}
-                >{this.state.lessonDialogButton2}
+                  onClick={nextLessonModalHandler}
+                >{this.state.lessonDialogButton1}
                 </Button>
               </div>
             </div>
@@ -311,7 +311,7 @@ class ContentBody extends React.Component {
               onClick={prevQuestClickHandler}
               value="nextQuestion">
               <span className='lmsBtnText'>
-                prevQuestion
+                BACK
               </span>
             </Button>
 

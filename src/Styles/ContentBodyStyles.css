@@ -45,38 +45,48 @@
 
 #nextPrevButtonContainer Button {
   display: flex;
-  margin: 0 5px 5px 5px;
-  width: 50%;
+  margin: 0 20px 20px 20px;
+  width: 20%;
+    min-width: 100px;
   border-radius: 10px;
+  height: 50px;
 }
 
 .lmsBtnText{
-  text-align: center;
-  width: 100%;
+  font-size: calc(85% + .25vw);
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /*----------MODAL DIALOG------------ */
 
 
+/*.Modal {*/
+    /*position: absolute;*/
+    /*top: 30vh;*/
+    /*left: 30vh;*/
+    /*right: 30vh;*/
+    /*bottom: 35vh;*/
+    /*background-color: white;*/
+    /*z-index: 1000 !important;*/
+    /*box-shadow: 20px 10px 60px #333;*/
+  /*}*/
+
 .Modal {
-    position: absolute;
-    top: 30vh;
-    left: 30vh;
-    right: 30vh;
-    bottom: 35vh;
+    position: relative;
     background-color: white;
     z-index: 1000 !important;
     box-shadow: 20px 10px 60px #333;
-  }
+}
 
-  /*.Overlay {*/
-    /*position: fixed;*/
-    /*top: 0;*/
-    /*left: 0;*/
-    /*right: 0;*/
-    /*bottom: 0;*/
-    /*background-color: rgba(255,255,255,.7);*/
-  /*}*/
+  .Overlay {
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255,255,255,.7);
+  }
 
   .modalTitle{
     font-family: Helvetica;
