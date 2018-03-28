@@ -1,18 +1,27 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getAllFeedback } from '../../redux/actions/feedback';
+import { getAllFeedback, getFeedbackByParentId, postFeedback } from '../../redux/actions/feedback';
 import moment from 'moment';
 
 class CommentFeed extends React.Component {
   constructor(props){
     super(props)
     this.state = {};
+    this.getChildComments = this.getChildComments.bind(this);
+    this.postComment = this.postComment.bind(this);
   }
 
   componentWillMount(){
     this.props.getAllFeedback()
   }
 
+  getChildComments(parent_id){
+    console.log("getChildComments", parent_id)
+  }
+
+  postComment(fb_id, commentObj){
+    console.log("postComment", fb_id, commentObj)
+  }
 
   render(){
 
@@ -49,14 +58,22 @@ class CommentFeed extends React.Component {
   }
 }
 const mapStateToProps = state => ({
-    allComments: state.feedback.allComments
+    allComments: state.feedback.allComments,
+    userInfo: state.userProgress.currentUser,
+
 })
 
 const mapDispatchToProps = dispatch => {
   return {
     getAllFeedback: () => {
       dispatch(getAllFeedback());
-    }
+    },
+    postFeedback: (fb_id, commentObj) => {
+      dispatch(postFeedback(fb_id, commentObj))
+    },
+    getFeedbackByParentId: (parent_id) => {
+      dispatch(getFeedbackByParentId(parent_id))
+    },
   }
 }
 
