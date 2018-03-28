@@ -12,7 +12,7 @@
 .childComment{
   marginLeft: 1em;
   background-color: white;
-  margin: .5em .5em .5em .5em;
-  padding: 0 .5em 0 .5em;
+  margin: .5em .5em .5em .25em;
+  padding: .5em .5em 0 .5em;
   border-radius: .5em;
 }
