@@ -78,6 +78,7 @@ class AppNavbar extends Component {
                             {this.isUserExpert()}
                             {this.isUserAdmin()}
 
+                        <Link className='mdl-navigation__link' to='/forum'>FORUM</Link>
                         <Link className='mdl-navigation__link' to='/' onClick={this.userSignOut}>
                             SIGN OUT
                         </Link>
@@ -135,9 +136,9 @@ class AppNavbar extends Component {
                                             {this.isUserExpert()}
                                             {this.isUserAdmin()}
 
+                                        <Link className='linkTo mdl-menu__item' to='/forum'>FORUM</Link>
                                         <Link className='linkTo mdl-menu__item' onClick={this.userSignOut} to='/'>
                                             SIGN OUT
-
                                         </Link>
                                     </ul>
                                 </Cell>
