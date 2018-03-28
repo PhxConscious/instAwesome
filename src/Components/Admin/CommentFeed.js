@@ -92,25 +92,31 @@ class CommentFeed extends React.Component {
               </div>
             })
             }
-            <form
-              className="formContainer"
-              onSubmit={e=> {
-                e.preventDefault();
-                this.postComment(comment.feedback_id, this.state.comments[comment.feedback_id]);
-              }}
-            >
-              <Textfield
-                style={{marginLeft:"1em", width: "80%"}}
-                className="textField"
-                label="comment here"
-                value={this.state.comments[comment.feedback_id] || ""}
-                onChange={e=>this.setState({comments:{[comment.feedback_id]:e.target.value}})}
-              />
-              <Button
-                style={{margin:"0 1em 0 1em", float:"right"}}
-                raised colored ripple mini
-              >SUBMIT</Button>
-            </form>
+
+            {/* conditionally renders comment form based on a logged in user*/}
+            {
+
+              (!userInfo.firebase_id) ? "" : <form
+                className="formContainer"
+                onSubmit={e=> {
+                  e.preventDefault();
+                  this.postComment(comment.feedback_id, this.state.comments[comment.feedback_id]);
+                }}
+              >
+                <Textfield
+                  style={{marginLeft:"1em", width: "80%"}}
+                  className="textField"
+                  label="comment here"
+                  value={this.state.comments[comment.feedback_id] || ""}
+                  onChange={e=>this.setState({comments:{[comment.feedback_id]:e.target.value}})}
+                />
+                <Button
+                  style={{margin:"0 1em 0 1em", float:"right"}}
+                  raised colored ripple mini
+                >SUBMIT</Button>
+              </form>
+
+            }
             </div>
 
 
@@ -119,14 +125,16 @@ class CommentFeed extends React.Component {
     }
 
     return (
-      <div>
-      {theComments}
-      <Button
-        raised colored ripple
-        onClick={this.getMoreResults}
-      >
-        show more comments
-      </Button>
+      <div style={{display:"flex", justifyContent:"center"}}>
+        <div style={{width: "85vw"}}>
+          {theComments}
+          <Button
+            raised colored ripple
+            onClick={this.getMoreResults}
+          >
+            show more comments
+          </Button>
+        </div>
       </div>
     )
   }
