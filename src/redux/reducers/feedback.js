@@ -1,4 +1,7 @@
-let initState = {parentId:{}};
+let initState = {
+  parentId:{},
+  // allComments:{}
+};
 
 export default (state = initState, action) => {
   switch (action.type) {
@@ -14,8 +17,14 @@ export default (state = initState, action) => {
       }
 
     case "GET_ALL_FEEDBACK_FULFILLED":
+      let newArr = [];
+      if(state.allComments && state.allComments.length) {
+        newArr = state.allComments
+      }
+      let result = newArr.concat(action.payload.data)
+
       return {
-        ...state, allComments: action.payload.data
+        ...state, allComments: result
       }
 
     case "POST_FEEDBACK_FULFILLED":
