@@ -5,6 +5,7 @@ import {connect} from "react-redux";
 import starterObj from '../../config/starterUserProgressObject';
 import '../../Styles/FormsStyles.css';
 import {nextQuestion, createNewUser} from "../../redux/actions/userProgress";
+import {Spinner} from 'react-mdl';
 
 class SignUpForm extends Component {
     constructor(props) {
@@ -16,23 +17,27 @@ class SignUpForm extends Component {
             email: '',
             password: '',
             verifyPassword: '',
-            redirect: false
+            redirect: false,
+            loading: false
         };
     }
 
     onButtonPress = () => {
+        this.setState({loading: true});
         const {email, password, verifyPassword, firstName, lastName, userPhone} = this.state;
         if (email === '' || password === '') {
+            this.setState({loading: false});
             return alert('Must fill in all fields')
         } else if (password !== verifyPassword) {
+            this.setState({loading: false});
             return alert('Passwords do not match');
         } else if (password.length < 6) {
+            this.setState({loading: false});
             return alert('password must be at least 6 characters long')
         }
         return (
-
             firebase.auth().createUserWithEmailAndPassword(email, password)
-            // call action with the correct user object
+                // call action with the correct user object
                 .then(user => {
                     this.props.createNewUser({
                         user_email: email,
@@ -48,6 +53,25 @@ class SignUpForm extends Component {
                     firebase.auth().currentUser.sendEmailVerification()
                 })
         )
+    };
+
+    renderButton = () => {
+        if (!this.state.loading) {
+            return (
+                <button
+                    className="signInFormButton"
+                    onClick={(e) => {
+                        e.preventDefault();
+                        this.onButtonPress()
+                    }
+                    }>
+                    <span className='buttonText'>
+                        Submit
+                    </span>
+                </button>
+            )
+        }
+        return <Spinner/>
     };
 
     handleInputTextChange = e => {
@@ -147,17 +171,7 @@ class SignUpForm extends Component {
                     </div>
                 </div>
                 <br/>
-                <button
-                    className="signInFormButton"
-                    onClick={(e) => {
-                        e.preventDefault();
-                        this.onButtonPress()
-                    }
-                    }>
-                    <span className='buttonText'>
-                        Submit
-                    </span>
-                </button>
+                {this.renderButton()}
             </form>
         );
     }
