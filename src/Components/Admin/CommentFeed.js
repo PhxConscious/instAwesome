@@ -8,13 +8,17 @@ import '../../Styles/CommentFeed.css';
 class CommentFeed extends React.Component {
   constructor(props){
     super(props)
-    this.state = {comments:{}};
+    this.state = {
+      comments:{},
+      offset: 5,
+    };
     this.getChildComments = this.getChildComments.bind(this);
     this.postComment = this.postComment.bind(this);
+    this.getMoreResults = this.getMoreResults.bind(this);
   }
 
   componentWillMount(){
-    this.props.getAllFeedback()
+    this.props.getAllFeedback(0)
   }
 
   getChildComments(parent_id){
@@ -28,6 +32,11 @@ class CommentFeed extends React.Component {
     }
     this.props.postFeedback(this.props.userInfo.firebase_id, commentObj)
     this.setState({comments:{}})
+  }
+
+  getMoreResults(){
+    this.props.getAllFeedback(this.state.offset);
+    this.setState({offset: this.state.offset + 5})
   }
 
   render(){
@@ -104,6 +113,7 @@ class CommentFeed extends React.Component {
             </form>
             </div>
 
+
           </div>
       })
     }
@@ -111,6 +121,12 @@ class CommentFeed extends React.Component {
     return (
       <div>
       {theComments}
+      <Button
+        raised colored ripple
+        onClick={this.getMoreResults}
+      >
+        show more comments
+      </Button>
       </div>
     )
   }
@@ -123,8 +139,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
   return {
-    getAllFeedback: () => {
-      dispatch(getAllFeedback());
+    getAllFeedback: (offset) => {
+      dispatch(getAllFeedback(offset));
     },
     postFeedback: (fb_id, commentObj) => {
       dispatch(postFeedback(fb_id, commentObj))
