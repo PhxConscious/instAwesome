@@ -22,10 +22,10 @@ export const getFeedbackByParentId = (parent_id) => {
   }
 }
 
-export const getAllFeedback = () => {
+export const getAllFeedback = (offset) => {
   return {
     type: 'GET_ALL_FEEDBACK',
-    payload: axios.get(`${config.app.api}/feedback/`)
+    payload: axios.get(`${config.app.api}/feedback/5/${offset.toString()}`)
   }
 }
 
