@@ -5,6 +5,7 @@ import '../../Styles/LmsComponentsStyles.css';
 export const CheckBox = ({isCheckMarked, checkBox}) => {
     return (
         <Checkbox
+            className='questionCheckBox'
             ripple
             type="checkbox"
             checked={isCheckMarked}

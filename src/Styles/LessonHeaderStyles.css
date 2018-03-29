@@ -1,18 +1,21 @@
 #LessonHeaderContainer {
+
 }
 
 #titleContainer {
-    min-height: 80px;
+    min-height: 70px;
     width: 100%; /*same as reactPlayer*/
     margin-left: 16px;
     margin-top: 6px;
+    padding-top: 30px;
+    /*height: 6.5vh;*/
 }
 
 #title {
     margin-top: 0;
-    padding-top: 20px;
-    height: 8vh;
-    font-family: Asap;
+    height: 100%;
+    padding-top: 10px;
+    font-family: Asap, sans-serif;
     font-weight: bold;
     color: #075258;
     font-size: 27px;

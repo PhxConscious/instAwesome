@@ -13,7 +13,7 @@
   width: 100%;
   background-color: rgba(65, 126, 131, .7) !important;
   position: absolute;
-  /*opacity: .3;*/
+  /*opacity: .8;*/
   border-radius: 10px;
   /*z-index: 5;
   display: flex;
@@ -22,12 +22,7 @@
 }
 
 .imageContainer {
-  /*display: flex;*/
-  /*justify-content: center;*/
   /*align-items: center;*/
-  /*overflow: hidden;*/
-  /*background-color: green;*/
-  /*position:relative;*/
 }
 
 .LmsImage {
@@ -40,20 +35,6 @@
   margin-top: auto;
   margin-bottom: auto;
   z-index: -1;
-}
-
-.leftSide {
-  /*height: 100%;*/
-  /*flex: 1;*/
-  /*display: inline-block;*/
-  /*vertical-align: middle;*/
-}
-
-.rightSide {
-  /*height: 100%;*/
-  /*flex: 1;*/
-  /*display: inline-block;*/
-  /*vertical-align: middle;*/
 }
 
 #currentCard {
@@ -73,8 +54,9 @@
 .greyText {
   color: #A7A7A7;
   margin: 0;
-  padding: 0;
+  /*padding: 0;*/
   z-index: 10;
+  padding-top:30px;
 }
 
 .titleCheckboxRow {
@@ -95,28 +77,29 @@
 .lmsTitle {
   position: relative;
   z-index: 3;
-  font-weight: 800;
-  font-size: 1em;
+  font-family: Asap, sans-serif;
+  font-weight: bolder;
+  font-size: 18px;
   color: #005259;
+  padding-top:20px;
 }
 
-.lmsTitleCont{
-  padding-top:6%;
-  height: 10vh;
-}
+/*.lmsTitleCont{*/
+  /*height: 10vh;*/
+/*}*/
 
-.lmsCheckboxSpan {
-  position: relative;
-  z-index: 3;
-  float: right;
-}
+/*.lmsCheckboxSpan {*/
+  /*position: relative;*/
+  /*z-index: 3;*/
+  /*float: right;*/
+/*}*/
 
-.lmsDescription {
-  font-size: 1em;
-  line-height: 100%;
-  color: #005259;
-  /*margin-right: 5px;*/
-}
+/*.lmsDescription {*/
+  /*font-size: 1em;*/
+  /*line-height: 100%;*/
+  /*color: #005259;*/
+  /*!*margin-right: 5px;*!*/
+/*}*/
 
 .lockIcon {
   position: absolute;
