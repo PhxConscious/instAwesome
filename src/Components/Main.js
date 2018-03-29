@@ -11,8 +11,10 @@ import Splash from "./Pages/Splash";
 import ExpertDashboard from "./Pages/ExpertDashboard";
 import AdminDashboard from "./Pages/AdminDashboard";
 import Forum from "./Pages/Forum";
+import Payment from "./Pages/Payment";
 import AppNav from './Reusable/AppNav';
 import Gradient from "./Reusable/Gradient";
+
 
 
 class Main extends React.Component {
@@ -36,6 +38,7 @@ class Main extends React.Component {
                                 <Route exact path="/expert/dashboard" render={props => <ExpertDashboard {...props}/>}/>
                                 <Route exact path="/admin/dashboard" render={props => <AdminDashboard {...props}/>}/>
                                 <Route exact path="/forum" render={props => <Forum {...props}/>}/>
+                                <Route exact path="/payment" render={props => <Payment {...props}/>}/>
                             </Switch>
                         </main>
                     </div>
