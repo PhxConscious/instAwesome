@@ -14,9 +14,12 @@
 .lessonContentContainer{
   /*flex-basis: 60vw;*/
   z-index: 0;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 #lessonContentComponent {
   background-color: white;
   border-radius: 10px;
+  height: 100%;
 }
