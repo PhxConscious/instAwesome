@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import '../../Styles/FormsStyles.css';
 import {updateCompanyInfo, getCompanyList} from "../../redux/actions/companyInfo";
 import {connect} from "react-redux";
-import {Grid, Cell} from 'react-mdl';
+import {Grid, Cell, Snackbar} from 'react-mdl';
 
 class OnTheWeb extends Component {
     constructor(props) {
@@ -39,8 +39,13 @@ class OnTheWeb extends Component {
             yelp_goals: '',
             better_business_bureau_profile: '',
             better_business_bureau_goals: '',
+            errorWarnings: [],
+            isError: false,
+            snackBarActive:false,
         };
         // this.pullInUserValues = this.pullInUserValues.bind(this);
+        this.validateFBUrl = this.validateFBUrl.bind(this);
+        this.validateTwitterUsername = this.validateTwitterUsername.bind(this);
     }
 
     componentDidMount() {
@@ -85,46 +90,21 @@ class OnTheWeb extends Component {
 
     onButtonPress(e) {
         e.preventDefault();
-        const {
-            company_website,
-            google_search_goals,
-            google_business_profile,
-            instagram_username,
-            instagram_goals,
-            instagram_bio,
-            insta_goal1,
-            insta_goal2,
-            insta_goal3,
-            cloudbased_storage_locale,
-            facebook_page_url,
-            facebook_goals,
-            twitter_username,
-            twitter_goals,
-            linkedin_profile_url,
-            linkedin_goals,
-            google_plus_url,
-            google_plus_goals,
-            youtube_url,
-            vimeo_url,
-            youtube_vimeo_goals,
-            pinterest_profile,
-            pinterest_goals,
-            yelp_business_profile,
-            yelp_goals,
-            better_business_bureau_profile,
-            better_business_bureau_goals,
-        } = this.state;
+        this.setState({
+          errorWarnings: [],
+          snackBarActive:false,
+        })
+        this.validateFBUrl(this.state.facebook_page_url);
+        this.validateTwitterUsername(this.state.twitter_username);
+        let me = this;
 
-        // this.setState({error: ''})
-        this.props.addCompanyInfo(this.props.companyInfo.companyList && this.props.companyInfo.companyList[0].company_id, this.state)
-
-
-        // if (this.props.companyInfo.status !== 200) {
-        //     return alert('update failed')
-        // } else {
-        //     return alert('update successful')
-        // }
-
+        setTimeout(function(){
+          if(me.state.errorWarnings.length === 0) {
+            me.props.addCompanyInfo(me.props.companyInfo.companyList && me.props.companyInfo.companyList[0].company_id, me.state)
+          } else {
+            me.setState({snackBarActive:true})
+          }
+        }, 500)
     }
 
     renderButton() {
@@ -145,24 +125,58 @@ class OnTheWeb extends Component {
         this.setState({[e.target.name]: e.target.value});
     };
 
-    // pullInUserValues() {
-    //     return new Promise((resolve) => {
-    //         this.props.getCompanyList(this.props.currentValues.currentFbId);
-    //     })
-    //
-    // }
+    validateFBUrl = (fb) => {
+      let base = "https://facebook.com/"
+
+      // validates anything with correct base or empty string
+      if((fb.substring(0,21) === base || fb.length === 0)){
+        return true;
+      }
+
+      let warning = 'Your facebook url should look like this: https://facebook.com/yourUserName. \n Enter your facebook url or leave this field blank.'
+
+      let newArr = this.state.errorWarnings;
+
+      if(!this.state.errorWarnings.includes(warning)){
+        newArr = this.state.errorWarnings.concat(warning);
+      }
+      this.setState({errorWarnings: newArr, isError: true})
+    }
+
+    validateTwitterUsername(twit){
+      if((twit.substring(0,1)==="@" && twit.length >= 3 && !twit.includes(" ")) || twit.length === 0){
+        return true;
+      }
+
+      let warning = "Your twitter user name should begin with '@' and have no spaces";
+      let newArr = this.state.errorWarnings;
+
+      if(!this.state.errorWarnings.includes(warning)){
+        newArr = this.state.errorWarnings.concat(warning);
+      }
+
+      this.setState({errorWarnings: newArr, isError: true})
+    }
 
     render() {
         return (
             <div>
                 <Grid>
+
                     <Cell col={8} offsetDesktop={2} tablet={12} phone={12}>
+                      <Snackbar
+                        style={{width:"100%"}}
+                        active={this.state.snackBarActive}
+                        onClick={e=>this.setState({isError:false, errorWarnings:[], snackBarActive:false})}
+                        onTimeout={e=>this.setState({snackBarActive: false})}
+                        action="OK"
+                      >
+                        {this.state.errorWarnings.map((warning, i)=>{
+                          return <div key={i}>* {warning}</div>
+                        })}
+                      </Snackbar>
                         <form className="formCont" action="#">
                             <div className='inputCont'>
-                                {/*<div className='formTitleCont'>*/}
-                                {/*<p className="formTitle">ON THE WEB</p>*/}
-                                {/*</div>*/}
-
                                 <div className="formInputCont">
                                     <div>
                                         <p className='inputLabel'>WEBSITE</p>
