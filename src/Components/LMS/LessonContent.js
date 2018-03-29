@@ -7,33 +7,33 @@ import LessonHeader from './LessonHeader';
 
 class LessonContent extends React.Component {
 
-  render() {
+    render() {
 
-    let contentType = "checkTasks";
+        let contentType = "checkTasks";
 
-    switch(contentType) {
+        switch (contentType) {
 
-      case "checkTasks":
-        let { nextUnit, nextLesson, prevLesson, nextQuestion, prevQuestion, selectLessonOnClick } = this.props;
+            case "checkTasks":
+                let {nextUnit, nextLesson, prevLesson, nextQuestion, prevQuestion, selectLessonOnClick} = this.props;
 
-        return(
-          <div>
-            <LessonHeader
-            />
-          <ContentBody
-              nextUnit={nextUnit}
-              nextLesson={nextLesson}
-              prevLesson={prevLesson}
-              nextQuestion={nextQuestion}
-              prevQuestion={prevQuestion}
-              selectLessonOnClick={selectLessonOnClick}
-            />
-          </div>
-        )
-
-      default:
-        return null;
+                return (
+                    <div>
+                        <LessonHeader
+                        />
+                        <ContentBody
+                            nextUnit={nextUnit}
+                            nextLesson={nextLesson}
+                            prevLesson={prevLesson}
+                            nextQuestion={nextQuestion}
+                            prevQuestion={prevQuestion}
+                            selectLessonOnClick={selectLessonOnClick}
+                        />
+                    </div>
+                );
+            default:
+                return null;
+        }
     }
-  }
 }
+
 export default LessonContent;
