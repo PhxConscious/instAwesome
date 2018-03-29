@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getAllFeedback, getFeedbackByParentId, postFeedback } from '../../redux/actions/feedback';
+import { getAllFeedback, getFeedbackByParentId, postFeedback, resetFeedback } from '../../redux/actions/feedback';
 import { Button, Textfield } from 'react-mdl';
 import moment from 'moment';
 import '../../Styles/CommentFeed.css';
@@ -11,14 +11,17 @@ class CommentFeed extends React.Component {
     this.state = {
       comments:{},
       offset: 5,
+      getChildrenCalled: [],
     };
     this.getChildComments = this.getChildComments.bind(this);
     this.postComment = this.postComment.bind(this);
     this.getMoreResults = this.getMoreResults.bind(this);
+    this.commentHandler = this.commentHandler.bind(this);
   }
 
   componentWillMount(){
-    this.props.getAllFeedback(0)
+    this.props.resetFeedback();
+    this.props.getAllFeedback(0);
   }
 
   getChildComments(parent_id){
@@ -39,9 +42,15 @@ class CommentFeed extends React.Component {
     this.setState({offset: this.state.offset + 5})
   }
 
+  commentHandler(e, feedback_id){
+    this.setState({comments: {[feedback_id]: e.target.value}})
+  }
+
   render(){
 
     let { allComments, userInfo, childGroups } = this.props;
+
+    let { getChildrenCalled } = this.state;
 
     let theComments;
 
@@ -51,7 +60,9 @@ class CommentFeed extends React.Component {
       });
       theComments = sortedComments.map((comment, i) => {
         let time = moment(comment.created_at).fromNow();
-        if(childGroups && !childGroups[comment.feedback_id]){
+        if(childGroups && !childGroups[comment.feedback_id] && !getChildrenCalled.includes(comment.feedback_id)){
+          let newArr = getChildrenCalled.concat(comment.feedback_id);
+          this.setState({getChildrenCalled: newArr})
           this.getChildComments(comment.feedback_id)
         }
         return <div
@@ -108,7 +119,7 @@ class CommentFeed extends React.Component {
                   className="textField"
                   label="comment here"
                   value={this.state.comments[comment.feedback_id] || ""}
-                  onChange={e=>this.setState({comments:{[comment.feedback_id]:e.target.value}})}
+                  onChange={e=> this.commentHandler(e, comment.feedback_id)}
                 />
                 <Button
                   style={{margin:"0 1em 0 1em", float:"right"}}
@@ -155,6 +166,9 @@ const mapDispatchToProps = dispatch => {
     },
     getFeedbackByParentId: (parent_id) => {
       dispatch(getFeedbackByParentId(parent_id))
+    },
+    resetFeedback: () => {
+      dispatch(resetFeedback())
     },
   }
 }
