@@ -73,7 +73,6 @@ class AppNavbar extends Component {
                     <nav className="mdl-navigation ">
                         <Link to='/profile' className="mdl-navigation__link" href="">ACCOUNT</Link>
                         <Link to={userInfo ? '/learn/dashboard' : '/'} className="mdl-navigation__link">LEARN</Link>
-                        <Link to='/feedback' className="mdl-navigation__link" href="">FEEDBACK</Link>
 
                             {this.isUserExpert()}
                             {this.isUserAdmin()}
@@ -128,9 +127,6 @@ class AppNavbar extends Component {
                                         htmlFor="demo-menu-lower-right">
                                         <Link className='linkTo mdl-menu__item' to='/profile'>
                                             <li className="">ACCOUNT</li>
-                                        </Link>
-                                        <Link className='linkTo mdl-menu__item' to='/feedback'>
-                                            FEEDBACK
                                         </Link>
 
                                             {this.isUserExpert()}

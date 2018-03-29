@@ -1,5 +1,6 @@
 import React from 'react';
 import CommentFeed from '../Admin/CommentFeed';
+import Feedback from '../Forms/Feedback';
 
 const Forum = () => {
 
@@ -10,6 +11,7 @@ const Forum = () => {
         >
           <h3><strong>InstAwesome Forum</strong></h3>
         </div>
+        <Feedback />
         <CommentFeed />
       </div>
     )

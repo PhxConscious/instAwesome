@@ -36,3 +36,9 @@ export const postFeedback = (fb_id, commentObj) => {
     payload: axios.post(`${config.app.api}/feedback/new/${fb_id}`, commentObj)
   }
 }
+
+export const resetFeedback = () => {
+  return {
+    type: "RESET_FEEDBACK"
+  }
+}

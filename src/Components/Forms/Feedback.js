@@ -16,6 +16,7 @@ class Feedback extends React.Component {
       this.props.postFeedback(this.props.userInfo.firebase_id, {
         comment: this.state.textArea
       })
+      this.setState({textArea:''})
     } else {
       alert("Please enter a comment before submitting")
     }
@@ -24,40 +25,38 @@ class Feedback extends React.Component {
   render(){
     const { userInfo } = this.props;
 
-    if (typeof(userInfo.currentUser)===undefined) {
-      console.log("undefined?", userInfo.currentUser)
-      return <Redirect to='/'/>
-    }
+    if(userInfo.firebase_id){
+      return (
+        <div style={{width: "85vw", margin: "0 auto", marginTop: "2em"}}>
+          <form
+            id="form"
+            onSubmit={e => {
+              e.preventDefault()
+              this.handleSubmit()
+            }}
+          >
+            <textarea
+              value={this.state.textArea}
+              onChange={e => this.setState({textArea: e.target.value})}
+              placeholder="write us a comment"
+              rows={4}
+              style={{width: "100%"}}
+              autoFocus
+            />
+          <div>
+            <Button
+                raised colored ripple
+                type="submit"
+              >submit your comment
+            </Button>
+          </div>
 
-    return (
-      <div style={{width: "50vw", margin: "0 auto", marginTop: "100px"}}>
-        <label htmlFor="form"><h3>Comments</h3></label>
-        <form
-          id="form"
-          onSubmit={e => {
-            e.preventDefault()
-            this.handleSubmit()
-          }}
-        >
-          <textarea
-            value={this.state.textArea}
-            onChange={e => this.setState({textArea: e.target.value})}
-            placeholder="write us a comment"
-            rows={24}
-            style={{width: "100%"}}
-            autoFocus
-          />
-        <div>
-          <Button
-              raised colored ripple
-              type="submit"
-            >submit your comment
-          </Button>
+          </form>
         </div>
-
-        </form>
-      </div>
-    )
+      )
+    } else {
+      return <div style={{display:"flex", justifyContent:"center"}}><h4>Please log in to post comments</h4></div>
+    }
   }
 }
 
