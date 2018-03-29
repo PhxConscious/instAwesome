@@ -2,6 +2,7 @@
 }
 
 #titleContainer {
+    min-height: 80px;
     width: 100%; /*same as reactPlayer*/
     margin-left: 16px;
     margin-top: 6px;

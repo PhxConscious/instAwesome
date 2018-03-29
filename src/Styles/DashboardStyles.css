@@ -1,11 +1,8 @@
 .background {
-  min-height: 90.5vh;
-  /*width: 100;*/
+  min-height: 91.5vh;
+  position: relative;
   background-color: #005259;
-  /*display: flex;*/
-  /*flex-direction: row;*/
-  /*justify-content: space-evenly;*/
-  padding-top: 20px;
+  padding-top: 10vh;
 }
 
 .unitCardsContainer{

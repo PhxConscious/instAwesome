@@ -10,10 +10,10 @@ import {Redirect} from 'react-router-dom';
 
 class Dashboard extends React.Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
             readyForRender: false,
-        }
+        };
         this.selectCardOnClick = this.selectCardOnClick.bind(this);
         this.selectLessonOnClick = this.selectLessonOnClick.bind(this);
         this.nextLesson = this.nextLesson.bind(this);
@@ -41,7 +41,7 @@ class Dashboard extends React.Component {
 
     // cycle through to find first incomplete unit
     getActiveUnit() {
-        console.log("getActiveUnit")
+        console.log("getActiveUnit");
         let {book} = this.props;
         let userProg = this.props.userProgress.currentUser.user_progress;
 
@@ -66,7 +66,6 @@ class Dashboard extends React.Component {
                 // this is potentially the correct unit = save the last one
                 lastUnlockedUnit = book[i];
                 finalUnitIndex = i;
-
             }
         }
         // 2. set the first unit where isCompleted != true to currentActiveUnitObj & currentActiveUnit
@@ -76,7 +75,7 @@ class Dashboard extends React.Component {
 
         // now that we have a unit, lets get the lesson
         this.getActiveLesson(lastUnlockedUnit, lastUnlockedUnit.id);
-    }
+    };
 
     // cycle through to find first incomplete lesson
     getActiveLesson(optUnitObj, optUnitId) {
@@ -110,11 +109,10 @@ class Dashboard extends React.Component {
 
         // set the first lesson where isComplete != true to currentActiveLessonObj and currentActiveLesson
         this.props.setCurrentValues("currentLessonObj", lastUnlockedLesson);
-        this.props.setCurrentValues("currentLesson", finalLessonIndex)
+        this.props.setCurrentValues("currentLesson", finalLessonIndex);
 
         // now lets get our active question based on our active lesson output
         this.getActiveQuestion(lastUnlockedLesson.questions);
-
     }
 
     // cycle through to find first question where id !== true
@@ -122,16 +120,13 @@ class Dashboard extends React.Component {
         console.log("getActiveQuestion", optQuestArr);
 
         let {userProgress, currentValues} = this.props;
-
         let userProg = userProgress.currentUser.user_progress;
-
         let {currentUnitObj, currentLessonObj} = currentValues;
 
         // handle optional param
         if (typeof optQuestArr === 'undefined') {
             optQuestArr = currentLessonObj.questions
         }
-
 
         let questionArrProg = userProg[currentUnitObj.id].lessons[currentLessonObj.id].questions;
         // 1. iterate through questions in the active lesson
@@ -144,7 +139,7 @@ class Dashboard extends React.Component {
 
         for (let i = 0; i < optQuestArr.length; i++) {
 
-            let currentQuestionId = optQuestArr[i].id
+            let currentQuestionId = optQuestArr[i].id;
             // @TODO post value to server if not present
 
             // 2. set the first question where id!=true as currentQuestionObj and currentQuestion
@@ -161,7 +156,7 @@ class Dashboard extends React.Component {
         }
 
         this.props.setCurrentValues("currentQuestionObj", lastTrueQuestion);
-        this.props.setCurrentValues("currentQuestion", finalQuestionIndex)
+        this.props.setCurrentValues("currentQuestion", finalQuestionIndex);
 
         this.setState({readyForRender: true})
     }
@@ -170,8 +165,8 @@ class Dashboard extends React.Component {
     selectCardOnClick(argId) {
         let {book, userProgress} = this.props;
         let userProg = userProgress.currentUser.user_progress;
-
         let index;
+
         book.forEach((unit, i) => {
 
             // don't allow click if it's locked
@@ -190,9 +185,8 @@ class Dashboard extends React.Component {
     selectLessonOnClick(lessonIndex) {
         let {book, currentValues} = this.props;
         let {currentUnit} = currentValues;
-
-        let targetLesson = book[currentUnit].lessons[lessonIndex]
-        console.log("targetLesson", targetLesson)
+        let targetLesson = book[currentUnit].lessons[lessonIndex];
+        console.log("targetLesson", targetLesson);
 
         this.props.setCurrentValues("currentLesson", lessonIndex);
         this.props.setCurrentValues("currentLessonObj", targetLesson);
@@ -200,11 +194,9 @@ class Dashboard extends React.Component {
         this.getActiveQuestion(targetLesson.questions)
     }
 
-
     nextUnit() {
 
         let {currentUnit, currentUnitObj, currentLessonObj, currentFbId} = this.props.currentValues;
-
         let {userProgress, book} = this.props;
 
         // the whole task obj in redux
@@ -230,7 +222,7 @@ class Dashboard extends React.Component {
         } else {
             // marks the next unit as unlocked
             nextUnit = parseInt(currentUnit, 10) + 1;
-            nextUnitObj = book[parseInt(currentUnit, 10) + 1]
+            nextUnitObj = book[parseInt(currentUnit, 10) + 1];
 
             // prepares to update server
             taskObjRedux[nextUnitObj.id]["unitCompleted"] = false;
@@ -245,17 +237,14 @@ class Dashboard extends React.Component {
         // 5. dispatch updated obj - format object for server
         let dto = {};
         dto["userProgress"] = taskObjRedux;
-        console.log('next unit dto', dto)
+        console.log('next unit dto', dto);
         this.props.putNextQuestion(currentFbId, dto)
     }
-
 
     nextLesson() {
 
         let {currentUnit, currentUnitObj, currentLesson, currentLessonObj, currentFbId} = this.props.currentValues;
-
         let {userProgress, book} = this.props;
-
         let targetLesson = (parseInt(currentLesson, 10) + 1).toString();
 
         // the whole task obj in redux
@@ -276,7 +265,7 @@ class Dashboard extends React.Component {
             // case 2: it's not the last lesson in the unit
         } else {
             // find next lesson id in book
-            nextLessonObj = book[currentUnit].lessons[parseInt(currentLesson, 10) + 1]
+            nextLessonObj = book[currentUnit].lessons[parseInt(currentLesson, 10) + 1];
 
             // set that to incomplete and unlocked in taskObjRedux
             taskObjRedux[currentUnitObj.id].lessons[nextLessonObj.id]["lessonCompleted"] = false;
@@ -293,14 +282,12 @@ class Dashboard extends React.Component {
         console.log("DTO from next lesson", dto)
         this.props.putNextQuestion(currentFbId, dto)
 
-
         // finds the first incomplete question and set that to currentQuestion
         this.getActiveQuestion(book[currentUnit].lessons[targetLesson].questions)
     }
 
     prevLesson() {
-        let {currentUnit, currentLesson } = this.props.currentValues;
-
+        let {currentUnit, currentLesson} = this.props.currentValues;
         let {book} = this.props;
 
         // handle if there is no previous lesson in unit
@@ -326,12 +313,9 @@ class Dashboard extends React.Component {
     }
 
     nextQuestion() {
-        let {currentUnit, currentUnitObj, currentLesson, currentLessonObj, currentQuestion, currentQuestionObj,  currentFbId} = this.props.currentValues;
+        let {currentUnit, currentUnitObj, currentLesson, currentLessonObj, currentQuestion, currentQuestionObj, currentFbId} = this.props.currentValues;
         let {userProgress, book} = this.props;
-
-
         let targetQuestion = (parseInt(currentQuestion, 10) + 1).toString()
-
 
         // the whole task obj in redux
         let taskObjRedux = userProgress.currentUser.user_progress;
@@ -343,7 +327,7 @@ class Dashboard extends React.Component {
         let curLesson = curUnit.lessons[currentLessonObj.id];
 
         // the current questions from redux
-        let curQuest = curLesson.questions
+        let curQuest = curLesson.questions;
 
         // 1. put new true questionId value in questions obj
         curQuest[currentQuestionObj.id] = true;
@@ -367,21 +351,20 @@ class Dashboard extends React.Component {
         // 5. dispatch updated obj - format object for server
         let dto = {};
         dto["userProgress"] = taskObjRedux;
-        console.log('next question dto', dto)
+        console.log('next question dto', dto);
         this.props.putNextQuestion(currentFbId, dto)
     }
 
     prevQuestion() {
         let {currentUnit, currentUnitObj, currentLesson, currentLessonObj, currentQuestion} = this.props.currentValues;
         let {userProgress, book} = this.props;
-
         let targetQuestion = currentQuestion;
+
         if (currentQuestion > 0) {
             targetQuestion = (parseInt(currentQuestion, 10) - 1).toString();
         } else {
             alert("You are already at the first question in the lesson - select another lesson")
         }
-
 
         this.props.setCurrentValues("currentQuestion", targetQuestion);
         this.props.setCurrentValues("currentQuestionObj", book[currentUnit].lessons[currentLesson].questions[targetQuestion]);

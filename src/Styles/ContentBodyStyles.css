@@ -1,6 +1,5 @@
 .hidden {
-  visibility: hidden;
-  background-color: green;
+    visibility: hidden;
 }
 
 #lessonTitleContainer {
@@ -8,69 +7,72 @@
 }
 
 #lessonTitleContainer h5 {
-  margin: 10px 10px 20px 10px;
+    margin: 10px 10px 20px 10px;
 }
 
 #inputComponent {
-  display: flex;
-  justify-content: center;
-  /*width: 100%;*/
-  /*background-color: red;*/
-  padding: 0 10px 0 10px;
+    display: flex;
+    justify-content: center;
+    /*width: 100%;*/
+    /*background-color: red;*/
+    padding: 0 10px 0 10px;
 }
 
 #inputComponent > * {
-  /*align-self: flex-end;
-  flex:1;*/
-  /*background-color: black;*/
-  /*float: right;*/
-  /*margin-right: 5vw;*/
-  /*margin-top: 20px;*/
+    /*align-self: flex-end;
+    flex:1;*/
+    /*background-color: black;*/
+    /*float: right;*/
+    /*margin-right: 5vw;*/
+    /*margin-top: 20px;*/
 }
 
 #lessonIconsContainer {
-  margin: 0 auto;
-  width: 20vw;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+    margin: 10px auto auto auto;
+    width: 20vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
 }
 
 #nextPrevButtonContainer {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+    width: 100%;
+    display: flex;
+    /*flex-direction: row;*/
+    margin-top: 10px;
 }
 
 #nextPrevButtonContainer Button {
-  display: flex;
-  margin: 0 20px 20px 20px;
-  width: 20%;
+    display: flex;
+    margin: 0 auto 20px auto;
+    width: 20%;
     min-width: 100px;
-  border-radius: 10px;
-  height: 50px;
+    border-radius: 10px;
+    height: 45px;
+    background-color: #48C8D3;
 }
 
-.lmsBtnText{
-  font-size: calc(85% + .25vw);
-  margin-left: auto;
-  margin-right: auto;
+.lmsBtnText {
+    font-size: calc(85% + .25vw);
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'Asap', sans-serif;
+    font-weight: bold;
+    line-height: normal;
 }
 
 /*----------MODAL DIALOG------------ */
 
-
 /*.Modal {*/
-    /*position: absolute;*/
-    /*top: 30vh;*/
-    /*left: 30vh;*/
-    /*right: 30vh;*/
-    /*bottom: 35vh;*/
-    /*background-color: white;*/
-    /*z-index: 1000 !important;*/
-    /*box-shadow: 20px 10px 60px #333;*/
-  /*}*/
+/*position: absolute;*/
+/*top: 30vh;*/
+/*left: 30vh;*/
+/*right: 30vh;*/
+/*bottom: 35vh;*/
+/*background-color: white;*/
+/*z-index: 1000 !important;*/
+/*box-shadow: 20px 10px 60px #333;*/
+/*}*/
 
 .Modal {
     position: relative;
@@ -79,28 +81,37 @@
     box-shadow: 20px 10px 60px #333;
 }
 
-  .Overlay {
+.Overlay {
     position: relative;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(255,255,255,.7);
-  }
+    background-color: rgba(255, 255, 255, .7);
+}
 
-  .modalTitle{
-    font-family: Helvetica;
-  }
+.modalTitle {
+    font-family: 'Asap', sans-serif;
+    font-weight: bold;
+}
 
-  .modalAllContent{
+.modalAllContent {
     padding: 15px;
-  }
+}
 
-  .modalTitle, .modalDescription{
+.modalTitle, .modalDescription {
     text-align: center;
-  }
+    font-family: 'Asap', sans-serif;
+    font-weight: bold;
+}
 
-  .modalButtonContainer {
+.modalButtonContainer {
     margin-top: 30px;
     text-align: center;
-  }
+}
+
+.modalButton{
+    background-color: #48C8D3 !important;
+    margin: 20px !important;
+    border-radius: 5px !important;
+}

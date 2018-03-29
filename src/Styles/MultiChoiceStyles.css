@@ -1,18 +1,34 @@
-#container: {
+#container {
+  text-align: center;
+  font-weight: bold;
 }
 
 #questionContainer {
   display: flex;
+  text-align: center;
+  width: 100%;
 }
 
 .check {
-  flex-basis: 10%;
+  text-align: center;
 }
 
 .question {
-  flex-basis: 90%;
+  font-family: Asap, sans-serif;
+  text-align: left;
 }
 
 .highlightCorrect {
   background-color: rgba(0, 255, 0, 0.3);
+}
+
+.attemptButton{
+  background-color: #e0e0e0 !important;
+  border-radius: 5px !important;
+  height: 35px !important;
+  width: 80px !important;
+}
+
+.attemptButton:hover{
+  background-color: #9BDD82 !important;
 }
