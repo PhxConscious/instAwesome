@@ -187,6 +187,11 @@ li {
     height: 18px;
 }
 
+.snackBar{
+    font-family: Asap, sans-serif !important;
+    font-weight: bold !important;
+}
+
 /*.formBtnCont{*/
 /*text-align: center;*/
 /*height: 80px;*/

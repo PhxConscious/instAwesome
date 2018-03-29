@@ -10,7 +10,6 @@ class UserProfile extends Component {
     render() {
         return (
             <div className="App">
-                <Gradient/>
                 <BlueAppBg>
                     <Grid className='pageCont'>
                         <Cell col={8} offsetDesktop={2} tablet={12} phone={12}>
@@ -18,7 +17,6 @@ class UserProfile extends Component {
                         </Cell>
                     </Grid>
                 </BlueAppBg>
-                <Gradient/>
             </div>
         );
     }

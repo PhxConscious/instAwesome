@@ -5,7 +5,7 @@ import {connect} from "react-redux";
 import starterObj from '../../config/starterUserProgressObject';
 import '../../Styles/FormsStyles.css';
 import {nextQuestion, createNewUser} from "../../redux/actions/userProgress";
-import {Spinner} from 'react-mdl';
+import {Spinner, Snackbar} from 'react-mdl';
 
 class SignUpForm extends Component {
     constructor(props) {
@@ -18,26 +18,30 @@ class SignUpForm extends Component {
             password: '',
             verifyPassword: '',
             redirect: false,
-            loading: false
+            loading: false,
+            isSnackbarActive: false,
+            error: ''
         };
+        this.handleShowSnackbar = this.handleShowSnackbar.bind(this);
+        this.handleTimeoutSnackbar = this.handleTimeoutSnackbar.bind(this);
     }
 
     onButtonPress = () => {
         this.setState({loading: true});
         const {email, password, verifyPassword, firstName, lastName, userPhone} = this.state;
-        if (email === '' || password === '') {
-            this.setState({loading: false});
-            return alert('Must fill in all fields')
+        if (firstName === '' || lastName === '' || email === '' || password === '' || userPhone === '') {
+            this.setState({loading: false, error: 'Must fill in all fields'});
+            return this.renderSnackbar;
         } else if (password !== verifyPassword) {
-            this.setState({loading: false});
-            return alert('Passwords do not match');
+            this.setState({loading: false, error: 'Passwords do not match'});
+            return this.renderSnackbar;
         } else if (password.length < 6) {
-            this.setState({loading: false});
-            return alert('password must be at least 6 characters long')
+            this.setState({loading: false, error: 'Password must be at least 6 characters long'});
+            return this.renderSnackbar;
         }
         return (
             firebase.auth().createUserWithEmailAndPassword(email, password)
-                // call action with the correct user object
+            // call action with the correct user object
                 .then(user => {
                     this.props.createNewUser({
                         user_email: email,
@@ -62,6 +66,7 @@ class SignUpForm extends Component {
                     className="signInFormButton"
                     onClick={(e) => {
                         e.preventDefault();
+                        this.handleShowSnackbar();
                         this.onButtonPress()
                     }
                     }>
@@ -73,6 +78,19 @@ class SignUpForm extends Component {
         }
         return <Spinner/>
     };
+
+    renderSnackbar = (error) => {
+        return(
+            <Snackbar className='snackBar' active={this.state.isSnackbarActive} timeout={4000} onTimeout={this.handleTimeoutSnackbar}>{this.state.error}</Snackbar>
+        )
+    };
+
+    handleShowSnackbar()  {
+        this.setState({isSnackbarActive: true});
+    }
+    handleTimeoutSnackbar()  {
+        this.setState({isSnackbarActive: false});
+    }
 
     handleInputTextChange = e => {
         this.setState({[e.target.name]: e.target.value});
@@ -172,6 +190,7 @@ class SignUpForm extends Component {
                 </div>
                 <br/>
                 {this.renderButton()}
+                {this.renderSnackbar()}
             </form>
         );
     }
