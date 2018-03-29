@@ -45,6 +45,7 @@ class OnTheWeb extends Component {
         };
         // this.pullInUserValues = this.pullInUserValues.bind(this);
         this.validateFBUrl = this.validateFBUrl.bind(this);
+        this.validateTwitterUsername = this.validateTwitterUsername.bind(this);
     }
 
     componentDidMount() {
@@ -89,22 +90,21 @@ class OnTheWeb extends Component {
 
     onButtonPress(e) {
         e.preventDefault();
-        this.validateFBUrl(this.state.facebook_page_url)
+        this.setState({
+          errorWarnings: [],
+          snackBarActive:false,
+        })
+        this.validateFBUrl(this.state.facebook_page_url);
+        this.validateTwitterUsername(this.state.twitter_username);
         let me = this;
 
         setTimeout(function(){
-          if(!me.state.isError) {
-            me.props.addCompanyInfo(this.props.companyInfo.companyList && me.props.companyInfo.companyList[0].company_id, this.state)
+          if(me.state.errorWarnings.length === 0) {
+            me.props.addCompanyInfo(me.props.companyInfo.companyList && me.props.companyInfo.companyList[0].company_id, me.state)
           } else {
             me.setState({snackBarActive:true})
           }
         }, 500)
-
-
-
-
-
-
     }
 
     renderButton() {
@@ -129,7 +129,7 @@ class OnTheWeb extends Component {
       let base = "https://facebook.com/"
 
       // validates anything with correct base or empty string
-      if((base.substring(0,20) === base || fb.length === 0)){
+      if((fb.substring(0,21) === base || fb.length === 0)){
         return true;
       }
 
@@ -140,10 +140,23 @@ class OnTheWeb extends Component {
       if(!this.state.errorWarnings.includes(warning)){
         newArr = this.state.errorWarnings.concat(warning);
       }
-
       this.setState({errorWarnings: newArr, isError: true})
     }
 
+    validateTwitterUsername(twit){
+      if((twit.substring(0,1)==="@" && twit.length >= 3 && !twit.includes(" ")) || twit.length === 0){
+        return true;
+      }
+
+      let warning = "Your twitter user name should begin with '@' and have no spaces";
+      let newArr = this.state.errorWarnings;
+
+      if(!this.state.errorWarnings.includes(warning)){
+        newArr = this.state.errorWarnings.concat(warning);
+      }
+
+      this.setState({errorWarnings: newArr, isError: true})
+    }
 
     render() {
         return (
@@ -155,7 +168,7 @@ class OnTheWeb extends Component {
                         style={{width:"100%"}}
                         active={this.state.snackBarActive}
                         onClick={e=>this.setState({isError:false, errorWarnings:[], snackBarActive:false})}
-                        onTimeout={10000}
+                        onTimeout={e=>this.setState({snackBarActive: false})}
                         action="OK"
                       >
                         {this.state.errorWarnings.map((warning, i)=>{
