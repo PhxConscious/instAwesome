@@ -146,10 +146,12 @@ class AppNavbar extends Component {
                         </Cell>
                     </Grid>
                     <Gradient/>
+                    <Gradient/>
                 </div>
                 <main className="mdl-layout__content">
                     {this.props.children}
                 </main>
+                <Gradient/>
                 <Gradient/>
             </div>
         );
