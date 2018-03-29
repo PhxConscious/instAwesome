@@ -9,7 +9,7 @@ import {getCompanyList} from '../../redux/actions/companyInfo';
 import {getLmsContent} from '../../redux/actions/lmsContent';
 import {instanceOf} from 'prop-types';
 import {withCookies, Cookies} from 'react-cookie';
-import {Spinner} from 'react-mdl';
+import {Spinner, Snackbar} from 'react-mdl';
 
 class LoginForm extends Component {
 
@@ -19,14 +19,17 @@ class LoginForm extends Component {
             email: '',
             password: '',
             phone: '',
-            loginError: '',
             user_token: '',
             redirect: false,
             OAuthToken: '',
-            loading: false
+            loading: false,
+            isSnackbarActive: false,
+            snackbarText: 'Login Success!'
         };
         this.pullInUserValues = this.pullInUserValues.bind(this);
         this.loginRefresh = this.loginRefresh.bind(this);
+        this.handleShowSnackbar = this.handleShowSnackbar.bind(this);
+        this.handleTimeoutSnackbar = this.handleTimeoutSnackbar.bind(this);
     }
 
     static propTypes = {
@@ -37,29 +40,31 @@ class LoginForm extends Component {
         this.setState({[e.target.name]: e.target.value});
     };
 
-    loginRefresh(){
-      const {cookies} = this.props;
-      cookies.remove('hash');
-      window.location.reload();
-      alert("Sorry you're having technical difficulties! Please bear with us as continue improving as quickly as we can. Clicking this link will ensure your login info is reset - try logging in again.")
+    loginRefresh() {
+        this.setState({isSnackbarActive: true, snackbarText: 'Sorry you\'re having technical difficulties! Please bear with us as continue improving as quickly as we can. Clicking this link will ensure your login info is reset - try logging in again.'})
+        const {cookies} = this.props;
+        cookies.remove('hash');
+        setTimeout(() => {
+            window.location.reload();
+        }, 4000)
     }
 
-    signInWithGoogle = (e) => {
-        e.preventDefault();
-        let provider = new firebase.auth.GoogleAuthProvider();
-        firebase.auth().useDeviceLanguage();
-        firebase.auth().signInWithPopup(provider)
-            .then(function (result) {
-                console.log(`${firebase.auth().currentUser.email} has just signed in with Google Auth`)
-            })
-            .then(this.onLoginSuccess)
-            .then(() => {
-                if (firebase.auth().currentUser) {
-                    this.setState({redirect: true, email: '', password: ''})
-                }
-            })
-            .catch(this.onLoginFail);
-    };
+    // signInWithGoogle = (e) => {
+    //     e.preventDefault();
+    //     let provider = new firebase.auth.GoogleAuthProvider();
+    //     firebase.auth().useDeviceLanguage();
+    //     firebase.auth().signInWithPopup(provider)
+    //         .then(function (result) {
+    //             console.log(`${firebase.auth().currentUser.email} has just signed in with Google Auth`)
+    //         })
+    //         .then(this.onLoginSuccess)
+    //         .then(() => {
+    //             if (firebase.auth().currentUser) {
+    //                 this.setState({redirect: true, email: '', password: ''})
+    //             }
+    //         })
+    //         .catch(this.onLoginFail);
+    // };
 
 
     pullInUserValues(fb_id) {
@@ -82,37 +87,46 @@ class LoginForm extends Component {
 
     onLoginSuccess = () => {
         this.setState({
+            snackbarText: 'Success',
             email: '',
             password: '',
-            loginError: '',
             user_token: firebase.auth().currentUser.uid,
+            isSnackbarActive: true,
         });
-
-        // setTimeout(() => {
-        //     this.setState({
-        //         redirect: true
-        //     })
-        // },2000);
 
         // set a cookie upon login with fb_id
         const {cookies} = this.props;
 
         cookies.set('hash', firebase.auth().currentUser.uid, {path: '/', maxAge: 1000000});
 
-        this.pullInUserValues(firebase.auth().currentUser.uid)
-
+       return this.pullInUserValues(firebase.auth().currentUser.uid)
     };
+
+    renderSnackbar = () => {
+        return (
+            <Snackbar className='snackbar' active={this.state.isSnackbarActive} timeout={3000}
+                      onTimeout={this.handleTimeoutSnackbar}>{this.state.snackbarText}</Snackbar>
+        )
+    };
+
+    handleShowSnackbar() {
+        this.setState({isSnackbarActive: true});
+    }
+
+    handleTimeoutSnackbar() {
+        this.setState({isSnackbarActive: false});
+    }
 
     onLoginFail = () => {
         this.setState({
-            loginError: 'Authentication Failed',
-            loading: false
+            loading: false,
+            snackbarText: 'Authentication failed',
+            isSnackbarActive: true
         });
-        console.log(`this is the login error: ${this.state.loginError}`);
     };
 
     renderButton = () => {
-        if(!this.state.loading){
+        if (!this.state.loading) {
             return (
                 <button
                     className="signInFormButton"
@@ -124,24 +138,26 @@ class LoginForm extends Component {
                 </button>
             );
         }
-        return(
-            <Spinner />
+        return (
+            <Spinner/>
         )
     };
 
 
     onButtonPress = (e) => {
         e.preventDefault();
+        this.handleShowSnackbar();
         const {email, password} = this.state;
         console.log(" current email and password", email, password)
         this.setState({
-            error: '',
-            loading: true
+            loading: true,
         });
         firebase.auth().signInWithEmailAndPassword(email, password)
             .then(this.onLoginSuccess)
             .then(this.setState({email: '', password: ''}))
-            .catch(this.onLoginFail)
+            .catch(() => {
+                this.onLoginFail()
+            })
     };
 
     render() {
@@ -159,7 +175,6 @@ class LoginForm extends Component {
 
 
         return (
-            <div>
                 <form className='formCont' action="#">
                     <div className='inputCont'>
                         <div className='formTitleCont'>
@@ -192,37 +207,34 @@ class LoginForm extends Component {
                             </input>
                         </div>
                     </div>
-                    <div className='errorMessage'>
-                        {this.state.loginError}
-                    </div>
                     <div>
                         {this.renderButton()}
                     </div>
                     {/*<div>*/}
-                        {/*<p className='or'>OR SIGN IN WITH</p>*/}
-                        {/*<button className='socialMediaLoginButton' onClick={this.signInWithGoogle}>*/}
-                            {/*<i className="fab fa-google"> </i>*/}
-                        {/*</button>*/}
-                        {/*<button className='socialMediaLoginButton'>*/}
-                            {/*<i className="fab fa-facebook-f"> </i>*/}
-                        {/*</button>*/}
-                        {/*<button className='socialMediaLoginButton'>*/}
-                            {/*<i className="fab fa-linkedin-in"> </i>*/}
-                        {/*</button>*/}
+                    {/*<p className='or'>OR SIGN IN WITH</p>*/}
+                    {/*<button className='socialMediaLoginButton' onClick={this.signInWithGoogle}>*/}
+                    {/*<i className="fab fa-google"> </i>*/}
+                    {/*</button>*/}
+                    {/*<button className='socialMediaLoginButton'>*/}
+                    {/*<i className="fab fa-facebook-f"> </i>*/}
+                    {/*</button>*/}
+                    {/*<button className='socialMediaLoginButton'>*/}
+                    {/*<i className="fab fa-linkedin-in"> </i>*/}
+                    {/*</button>*/}
                     {/*</div>*/}
                     <div className='forgotLinksCont'>
                         {/*<Link to='/forgotusername' className='forgotLinks' href='#'>FORGOT USERNAME? </Link>*/}
-                        <Link to='/signup' className='forgotLinks' href='#'>CREATE AN ACCOUNT? </Link>
-                        <Link to='/forgotpassword' className='forgotLinks' href='#'>FORGOT PASSWORD? </Link>
+                        <Link to='/signup' className='forgotLinks'>CREATE AN ACCOUNT? </Link>
+                        <Link to='/forgotpassword' className='forgotLinks'>FORGOT PASSWORD? </Link>
                         <div
-                          className="loginTrouble"
-                          onClick={this.loginRefresh}
+                            className="loginTrouble"
+                            onClick={this.loginRefresh}
                         >
-                          <p className="forgotLinks">TROUBLE LOGGING IN?</p>
+                            <p className="forgotLinks">TROUBLE LOGGING IN?</p>
                         </div>
                     </div>
+                    {this.renderSnackbar()}
                 </form>
-            </div>
         );
     }
 }

@@ -20,24 +20,24 @@ class SignUpForm extends Component {
             redirect: false,
             loading: false,
             isSnackbarActive: false,
-            error: ''
+            snackbarText: ''
         };
         this.handleShowSnackbar = this.handleShowSnackbar.bind(this);
         this.handleTimeoutSnackbar = this.handleTimeoutSnackbar.bind(this);
     }
 
     onButtonPress = () => {
-        this.setState({loading: true});
+        this.setState({loading: true, snackbarText: 'Success!'});
         const {email, password, verifyPassword, firstName, lastName, userPhone} = this.state;
         if (firstName === '' || lastName === '' || email === '' || password === '' || userPhone === '') {
-            this.setState({loading: false, error: 'Must fill in all fields'});
-            return this.renderSnackbar;
+            this.setState({loading: false, isSnackbarActive: true, snackbarText: 'Must fill in all fields'});
+            return;
         } else if (password !== verifyPassword) {
-            this.setState({loading: false, error: 'Passwords do not match'});
-            return this.renderSnackbar;
+            this.setState({loading: false, isSnackbarActive: true, snackbarText: 'Passwords do not match'});
+           return;
         } else if (password.length < 6) {
-            this.setState({loading: false, error: 'Password must be at least 6 characters long'});
-            return this.renderSnackbar;
+            this.setState({loading: false, isSnackbarActive: true, snackbarText: 'Password must be at least 6 characters long'});
+            return;
         }
         return (
             firebase.auth().createUserWithEmailAndPassword(email, password)
@@ -79,9 +79,9 @@ class SignUpForm extends Component {
         return <Spinner/>
     };
 
-    renderSnackbar = (error) => {
+    renderSnackbar = () => {
         return(
-            <Snackbar className='snackBar' active={this.state.isSnackbarActive} timeout={4000} onTimeout={this.handleTimeoutSnackbar}>{this.state.error}</Snackbar>
+            <Snackbar className='snackbar' active={this.state.isSnackbarActive} timeout={3000} onTimeout={this.handleTimeoutSnackbar}>{this.state.snackbarText}</Snackbar>
         )
     };
 
