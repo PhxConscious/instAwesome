@@ -55,6 +55,8 @@ export default (state = initState, action) => {
         }
       }
 
+    case "RESET_FEEDBACK":
+      return initState;
 
     case "GET_FEEDBACK_BY_PARENT_ID_FULFILLED":
       if(!action.payload.data[0]){
