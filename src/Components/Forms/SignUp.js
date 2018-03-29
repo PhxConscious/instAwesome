@@ -27,8 +27,8 @@ class SignUpForm extends Component {
     }
 
     onButtonPress = () => {
-        this.setState({loading: true, snackbarText: 'Success!'});
         const {email, password, verifyPassword, firstName, lastName, userPhone} = this.state;
+        this.setState({loading: true, snackbarText: 'Success!'});
         if (firstName === '' || lastName === '' || email === '' || password === '' || userPhone === '') {
             this.setState({loading: false, isSnackbarActive: true, snackbarText: 'Must fill in all fields'});
             return;
