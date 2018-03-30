@@ -3,10 +3,6 @@ import firebase from 'firebase';
 import {Redirect, Link} from 'react-router-dom';
 import '../../Styles/FormsStyles.css';
 import {connect} from 'react-redux';
-import {setCurrentValue} from "../../redux/actions/currentValues";
-import {getUserProgress} from '../../redux/actions/userProgress';
-import {getCompanyList} from '../../redux/actions/companyInfo';
-import {getLmsContent} from '../../redux/actions/lmsContent';
 import {instanceOf} from 'prop-types';
 import {withCookies, Cookies} from 'react-cookie';
 import {Spinner, Snackbar} from 'react-mdl';
@@ -26,7 +22,6 @@ class LoginForm extends Component {
             isSnackbarActive: false,
             snackbarText: ''
         };
-        this.pullInUserValues = this.pullInUserValues.bind(this);
         this.loginRefresh = this.loginRefresh.bind(this);
         this.handleShowSnackbar = this.handleShowSnackbar.bind(this);
         this.handleTimeoutSnackbar = this.handleTimeoutSnackbar.bind(this);
@@ -37,59 +32,9 @@ class LoginForm extends Component {
         cookies: instanceOf(Cookies).isRequired
     };
 
-
     handleInputTextChange = e => {
         this.setState({[e.target.name]: e.target.value});
     };
-
-
-    loginRefresh() {
-        this.setState({
-            isSnackbarActive: true,
-            snackbarText: 'Sorry you\'re having technical difficulties! Please bear with us as continue improving as quickly as we can. Clicking this link will ensure your login info is reset - try logging in again.'
-        });
-        const {cookies} = this.props;
-        cookies.remove('hash');
-        setTimeout(() => {
-            window.location.reload();
-        }, 4000)
-    }
-
-    // signInWithGoogle = (e) => {
-    //     e.preventDefault();
-    //     let provider = new firebase.auth.GoogleAuthProvider();
-    //     firebase.auth().useDeviceLanguage();
-    //     firebase.auth().signInWithPopup(provider)
-    //         .then(function (result) {
-    //             console.log(`${firebase.auth().currentUser.email} has just signed in with Google Auth`)
-    //         })
-    //         .then(this.onLoginSuccess)
-    //         .then(() => {
-    //             if (firebase.auth().currentUser) {
-    //                 this.setState({redirect: true, email: '', password: ''})
-    //             }
-    //         })
-    //         .catch(this.onLoginFail);
-    // };
-
-
-    pullInUserValues(firebase_id) {
-        let {setCurrentUserFbId, fetchUserInfo, getCompanyList, getLmsContent} = this.props;
-        // WARNING: this should not be called multiple times - it will result in duplicate events firing
-        // currently pullInUserValues is called from render and from onLoginSuccess
-        // consider only calling it once from 'mounted' and have it read firebase_id from state
-        firebase.auth().onAuthStateChanged(function (user) {
-            if (user) {
-                setCurrentUserFbId("currentFbId", firebase_id);
-                fetchUserInfo(firebase_id);
-                getCompanyList(firebase_id);
-                getLmsContent();
-            } else {
-                console.log('theres no user - THIS IS SOMETHING WEIRD WITH FIREBASE, investigate')
-            }
-        });
-    }
-
 
     renderSnackbar = () => {
         return (
@@ -97,7 +42,6 @@ class LoginForm extends Component {
                       onTimeout={this.handleTimeoutSnackbar}>{this.state.snackbarText}</Snackbar>
         )
     };
-
 
     handleShowSnackbar() {
         this.setState({isSnackbarActive: true});
@@ -108,16 +52,42 @@ class LoginForm extends Component {
         this.setState({isSnackbarActive: false});
     }
 
+    loginRefresh(){
+      const {cookies} = this.props;
+      cookies.remove('firebase_id');
+      window.location.reload();
+      alert("Sorry you're having technical difficulties! Please bear with us as continue improving as quickly as we can. Clicking this link will ensure your login info is reset - try logging in again.")
+    }
+
+    onLoginSuccess = (result) => {
+        // set a cookie upon login with firebase_id
+        const {cookies} = this.props;
+        cookies.set('firebase_id', result.user.uid, {path: '/', maxAge: 1000000});
+        if (result.credential) {
+            cookies.set('facebook_token', result.credential.accessToken, {path: '/', maxAge: 1000000});
+        }
+
+        this.setState({
+            redirect: '/splash', // trigger a redirect
+        });
+    };
+
+    onLoginFail= (error) => {
+        this.setState({
+            loading: false,
+            snackbarText: error.message,
+            isSnackbarActive: true
+        });
+        this.handleShowSnackbar();
+    }
+
 
     renderButton = () => {
         if (!this.state.loading) {
             return (
                 <button
                     className="signInFormButton"
-                    onClick={e => {
-                        e.preventDefault();
-                        this.onButtonPress()
-                    }}>
+                    onClick={this.signInWithEmailAndPassword}>
                 <span className='buttonText'>
                     LOGIN
                 </span>
@@ -129,116 +99,100 @@ class LoginForm extends Component {
         )
     };
 
-
-    onButtonPress = () => {
-        this.setState({snackbarText: '', loading: true});
+    signInWithEmailAndPassword = (e) => {
+        e.preventDefault();
         const {email, password} = this.state;
-        console.log(" current email and password", email, password);
-        if (email === '' || password === '') {
-            this.setState({loading: false, snackbarText: 'Please enter username and password'});
-            this.handleShowSnackbar();
-            return;
-        }
+        console.log("current email and password", email, password);
+        this.setState({
+            snackbarText: '',
+            loading: true
+        });
+        this.handleShowSnackbar();
         firebase.auth().signInWithEmailAndPassword(email, password)
-            .then(() => {
-                this.setState({email: '', password: ''})
-            })
-            .then(() => {
-                this.setState({snackbarText: 'Success'});
-                this.handleShowSnackbar();
-            })
-            .then(() => {
-                setTimeout(() => {
-                    this.onLoginSuccess();
-                }, 1500)
-            })
-            .catch((error) => {
-                this.setState({
-                    loading: false,
-                    snackbarText: error.message,
-                    isSnackbarActive: true
-                });
-                this.handleShowSnackbar();
-            })
+            // onLoginSuccess is expecting a UserCredential object, so wrap our result
+            .then(user => this.onLoginSuccess({user}))
+            .catch(this.onLoginFail);
     };
 
-
-    onLoginSuccess = () => {
-        this.setState({
-            loading: true,
-            email: '',
-            password: '',
-            user_token: firebase.auth().currentUser.uid,
+    signInWithFacebook = (e) => {
+        e.preventDefault();
+        const provider = new firebase.auth.FacebookAuthProvider();
+        provider.setCustomParameters({
+            'display': 'popup'
         });
 
-        // set a cookie upon login with firebase_id
-        const {cookies} = this.props;
-        cookies.set('hash', firebase.auth().currentUser.uid, {path: '/', maxAge: 1000000});
-        return this.pullInUserValues(firebase.auth().currentUser.uid)
+        firebase.auth().signInWithPopup(provider)
+            .then(this.onLoginSuccess)
+            .catch(this.onLoginFail);
     };
 
+    signInWithGoogle = (e) => {
+        e.preventDefault();
+        const provider = new firebase.auth.GoogleAuthProvider();
+        firebase.auth().useDeviceLanguage();
+        firebase.auth().signInWithPopup(provider)
+            .then(function (result) {
+                console.log(`${firebase.auth().currentUser.email} has just signed in with Google Auth`)
+            })
+            .then(this.onLoginSuccess)
+            .catch(this.onLoginFail);
+    };
 
     render() {
-        const {cookies} = this.props;
-        // keeps user logged in
-        let userCookie = cookies.get('hash');
-        if (userCookie) {
-            // WARNING: this should not be called in a render function
-            this.pullInUserValues(userCookie);
-            return (
-                <Redirect to={'/splash'}/>
-            )
+        if (this.state.redirect) {
+            return <Redirect to={this.state.redirect}/>
         }
 
-
         return (
-            <form className='formCont' action="#">
-                <div className='inputCont'>
-                    <div className='formTitleCont'>
-                        <p className="formTitle">SIGN IN</p>
-                    </div>
-                    <div className="formInputCont">
-                        <div>
-                            <p className='inputLabel'>EMAIL</p>
+            <div>
+                <form className='formCont' action="#">
+                    <div className='inputCont'>
+                        <div className='formTitleCont'>
+                            <p className="formTitle">SIGN IN</p>
                         </div>
-                        <input
-                            name='email'
-                            className="formInput"
-                            type="text"
-                            onChange={this.handleInputTextChange}
-                            placeholder='Your Email'
-                            value={this.state.email}>
-                        </input>
-                    </div>
-                    <div className="formInputCont">
-                        <div>
-                            <p className='inputLabel'>PASSWORD</p>
+                        <div className="formInputCont">
+                            <div>
+                                <p className='inputLabel'>EMAIL</p>
+                            </div>
+                            <input
+                                name='email'
+                                className="formInput"
+                                type="text"
+                                onChange={this.handleInputTextChange}
+                                placeholder='Your Email'
+                                value={this.state.email}>
+                            </input>
                         </div>
-                        <input
-                            name='password'
-                            className="formInput"
-                            type="password"
-                            onChange={this.handleInputTextChange}
-                            placeholder='Your Password'
-                            value={this.state.password}>
-                        </input>
+                        <div className="formInputCont">
+                            <div>
+                                <p className='inputLabel'>PASSWORD</p>
+                            </div>
+                            <input
+                                name='password'
+                                className="formInput"
+                                type="password"
+                                onChange={this.handleInputTextChange}
+                                placeholder='Your Password'
+                                value={this.state.password}>
+                            </input>
+                        </div>
                     </div>
+                    <div className='formButtonContainer'>
+                        {this.renderButton()}
+                    </div>
+                </form>
+                <div className="altSignIn">
+                    <p className='or'>OR SIGN IN WITH</p>
+                    {/*<button className='socialMediaLoginButton' onClick={this.signInWithGoogle}>*/}
+                        {/*<i className="fab fa-google"> </i>*/}
+                    {/*</button>*/}
+                    <button className='socialMediaLoginButton'>
+                        <i className="fab fa-facebook-f" onClick={this.signInWithFacebook}> </i>
+                    </button>
+                    {/*<button className='socialMediaLoginButton'>*/}
+                        {/*<i className="fab fa-linkedin-in"> </i>*/}
+                    {/*</button>*/}
                 </div>
-                <div className='formButtonContainer'>
-                    {this.renderButton()}
-                </div>
-                {/*<div>*/}
-                {/*<p className='or'>OR SIGN IN WITH</p>*/}
-                {/*<button className='socialMediaLoginButton' onClick={this.signInWithGoogle}>*/}
-                {/*<i className="fab fa-google"> </i>*/}
-                {/*</button>*/}
-                {/*<button className='socialMediaLoginButton'>*/}
-                {/*<i className="fab fa-facebook-f"> </i>*/}
-                {/*</button>*/}
-                {/*<button className='socialMediaLoginButton'>*/}
-                {/*<i className="fab fa-linkedin-in"> </i>*/}
-                {/*</button>*/}
-                {/*</div>*/}
                 <div className='forgotLinksCont'>
                     {/*<Link to='/forgotusername' className='forgotLinks' href='#'>FORGOT USERNAME? </Link>*/}
                     <Link to='/signup' className='forgotLinks'>CREATE AN ACCOUNT? </Link>
@@ -251,11 +205,10 @@ class LoginForm extends Component {
                     </div>
                 </div>
                 {this.renderSnackbar()}
-            </form>
+            </div>
         );
     }
 }
-
 
 const mapStateToProps = state => ({
     currentValues: state.currentValues,
@@ -263,23 +216,4 @@ const mapStateToProps = state => ({
     companyInfo: state.companyInfo,
 });
 
-
-const mapDispatchToProps = dispatch => {
-    return {
-        setCurrentUserFbId: (key, value) => {
-            dispatch(setCurrentValue(key, value))
-        },
-        fetchUserInfo: (firebase_id) => {
-            dispatch(getUserProgress(firebase_id))
-        },
-        getCompanyList: (firebase_id) => {
-            dispatch(getCompanyList(firebase_id))
-        },
-        getLmsContent: () => {
-            dispatch(getLmsContent())
-        },
-    }
-};
-
-
-export default withCookies(connect(mapStateToProps, mapDispatchToProps)(LoginForm))
+export default withCookies(connect(mapStateToProps)(LoginForm))
