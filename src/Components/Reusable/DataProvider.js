@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {withCookies, Cookies} from 'react-cookie';
 import firebase from 'firebase';
 import _ from 'lodash';
+import {Spinner} from 'react-mdl';
 
 // This is to import the possible actions we have to select from.
 // They won't actually be activated unless they're requested via the 'load' prop.
@@ -56,7 +57,7 @@ class DataProvider extends React.Component {
         for (let key of waitFor) {
             const val = _.get(state, key, undefined);
             console.log(key + ': ', val);
-            if (val === undefined) return false;
+            if (_.isEmpty(val)) return false;
         }
         return true;
     }
@@ -152,7 +153,7 @@ class DataProvider extends React.Component {
         } else {
             console.log('DataProvider rendering loading...')
             // TODO: replace 'loading...' with a spinner gif or other graphic of your choice
-            return <div>loading...</div>
+            return <Spinner/>
         }
     }
 }

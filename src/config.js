@@ -15,10 +15,6 @@ const configs = {
             ui: 'https://apps.phxconscious.com',
             api: 'https://api.phxconscious.com',
         },
-        fb: {
-            app_id: '2240304176196440',
-            redirect_uri: 'https://api.phxconscious.com/fb_graph/receive_code',
-        }
     },
 
     development: {
@@ -34,10 +30,6 @@ const configs = {
             ui: 'http://localhost:3000',
             api: 'http://localhost:8080',
         },
-        fb: {
-            app_id: '2240304176196440',
-            redirect_uri: 'http://lvh.me:8080/fb_graph/receive_code' // lvh.me is a DNS record for 127.0.0.1
-        }
     },
 };
 

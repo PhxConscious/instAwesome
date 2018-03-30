@@ -12,7 +12,7 @@ export const getAllUsers = () => {
 export const getUserProgress = ({firebase_id}) => {
   // console.log("Action: Getting user", firebase_id)
   return {
-    type: "GET_OR_CREATE_USER",
+    type: "GET_USER_PROGRESS",
     payload: axios.get(`${config.app.api}/users/${firebase_id}`)
   }
 }

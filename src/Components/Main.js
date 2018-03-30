@@ -25,8 +25,19 @@ class Main extends React.Component {
             <div>
                 <main>
                     <Switch>
-                        <Route exact path="/" render={props => <LandingPage {...props} />}/>
-                        <Route exact path="/signup" render={props => <SignUp {...props}/>}/>
+                        // You could wrap these all in one <AuthRedirect ifLoggedIn={true} to={"/splash"} />
+                        // if you prefixed the route with 'auth'.  You just need a base route that won't match
+                        // any of the logged-in routes in the app.
+                        <Route exact path="/" render={props =>
+                            <AuthRedirect ifLoggedIn={true} to={"/splash"}>
+                                <LandingPage {...props} />
+                            </AuthRedirect>
+                        }/>
+                        <Route exact path="/signup" render={props =>
+                            <AuthRedirect ifLoggedIn={true} to={"/splash"}>
+                                <SignUp {...props}/>
+                            </AuthRedirect>
+                        }/>
 
                         // check for login and redirect if we are on any one of these routes
                         <Route render={props =>

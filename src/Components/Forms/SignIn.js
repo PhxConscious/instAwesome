@@ -186,8 +186,8 @@ class LoginForm extends Component {
                     {/*<button className='socialMediaLoginButton' onClick={this.signInWithGoogle}>*/}
                         {/*<i className="fab fa-google"> </i>*/}
                     {/*</button>*/}
-                    <button className='socialMediaLoginButton'>
-                        <i className="fab fa-facebook-f" onClick={this.signInWithFacebook}> </i>
+                    <button className='socialMediaLoginButton' onClick={this.signInWithFacebook}>
+                        <i className="fab fa-facebook-f"></i>
                     </button>
                     {/*<button className='socialMediaLoginButton'>*/}
                         {/*<i className="fab fa-linkedin-in"> </i>*/}
