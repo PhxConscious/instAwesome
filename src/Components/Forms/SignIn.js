@@ -24,7 +24,7 @@ class LoginForm extends Component {
             OAuthToken: '',
             loading: false,
             isSnackbarActive: false,
-            snackbarText: 'Login Success!'
+            snackbarText: ''
         };
         this.pullInUserValues = this.pullInUserValues.bind(this);
         this.loginRefresh = this.loginRefresh.bind(this);
@@ -73,39 +73,22 @@ class LoginForm extends Component {
     // };
 
 
-    pullInUserValues(fb_id) {
+    pullInUserValues(firebase_id) {
         let {setCurrentUserFbId, fetchUserInfo, getCompanyList, getLmsContent} = this.props;
         // WARNING: this should not be called multiple times - it will result in duplicate events firing
         // currently pullInUserValues is called from render and from onLoginSuccess
-        // consider only calling it once from 'mounted' and have it read fb_id from state
+        // consider only calling it once from 'mounted' and have it read firebase_id from state
         firebase.auth().onAuthStateChanged(function (user) {
             if (user) {
-                setCurrentUserFbId("currentFbId", fb_id)
-                fetchUserInfo(fb_id);
-                getCompanyList(fb_id);
+                setCurrentUserFbId("currentFbId", firebase_id)
+                fetchUserInfo(firebase_id);
+                getCompanyList(firebase_id);
                 getLmsContent();
             } else {
                 console.log('theres no user - THIS IS SOMETHING WEIRD WITH FIREBASE, investigate')
             }
         });
     }
-
-
-    onLoginSuccess = () => {
-        this.setState({
-            snackbarText: 'Success',
-            email: '',
-            password: '',
-            user_token: firebase.auth().currentUser.uid,
-            isSnackbarActive: true,
-        });
-        // set a cookie upon login with fb_id
-        const {cookies} = this.props;
-
-        cookies.set('hash', firebase.auth().currentUser.uid, {path: '/', maxAge: 1000000});
-
-        return this.pullInUserValues(firebase.auth().currentUser.uid)
-    };
 
 
     renderSnackbar = () => {
@@ -131,8 +114,10 @@ class LoginForm extends Component {
             return (
                 <button
                     className="signInFormButton"
-                    onClick={this.onButtonPress}
-                    color='orange'>
+                    onClick={e => {
+                        e.preventDefault();
+                        this.onButtonPress()
+                    }}>
                 <span className='buttonText'>
                     LOGIN
                 </span>
@@ -145,20 +130,22 @@ class LoginForm extends Component {
     };
 
 
-    onButtonPress = (e) => {
-        e.preventDefault();
-        this.setState({snackbarText: ''});
+    onButtonPress = () => {
+        this.setState({snackbarText: '', loading: true});
         const {email, password} = this.state;
         console.log(" current email and password", email, password);
-        if(email === '' || password === '') {
-            this.setState({loading:false, snackbarText: 'Please fill in all fields' });
+        if (email === '' || password === '') {
+            this.setState({loading: false, snackbarText: 'Please enter username and password'});
             this.handleShowSnackbar();
             return;
         }
-        this.setState({loading: true});
         firebase.auth().signInWithEmailAndPassword(email, password)
-            .then(this.onLoginSuccess)
-            .then(this.setState({email: '', password: ''}))
+            .then(() => {
+                this.onLoginSuccess();
+            })
+            .then(() => {
+                this.setState({email: '', password: ''})
+            })
             .catch((error) => {
                 this.setState({
                     loading: false,
@@ -169,11 +156,28 @@ class LoginForm extends Component {
             })
     };
 
+    onLoginSuccess = () => {
+        this.setState({
+            loading: true,
+            snackbarText: 'Success',
+            email: '',
+            password: '',
+            user_token: firebase.auth().currentUser.uid,
+        });
+
+        // set a cookie upon login with firebase_id
+        const {cookies} = this.props;
+
+        cookies.set('hash', firebase.auth().currentUser.uid, {path: '/', maxAge: 1000000});
+
+        return this.pullInUserValues(firebase.auth().currentUser.uid)
+    };
+
 
     render() {
         const {cookies} = this.props;
         // keeps user logged in
-        let userCookie = cookies.get('hash')
+        let userCookie = cookies.get('hash');
         if (userCookie) {
             // WARNING: this should not be called in a render function
             this.pullInUserValues(userCookie);
@@ -261,11 +265,11 @@ const mapDispatchToProps = dispatch => {
         setCurrentUserFbId: (key, value) => {
             dispatch(setCurrentValue(key, value))
         },
-        fetchUserInfo: (fb_id) => {
-            dispatch(getUserProgress(fb_id))
+        fetchUserInfo: (firebase_id) => {
+            dispatch(getUserProgress(firebase_id))
         },
-        getCompanyList: (fb_id) => {
-            dispatch(getCompanyList(fb_id))
+        getCompanyList: (firebase_id) => {
+            dispatch(getCompanyList(firebase_id))
         },
         getLmsContent: () => {
             dispatch(getLmsContent())
