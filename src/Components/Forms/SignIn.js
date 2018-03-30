@@ -47,7 +47,7 @@ class LoginForm extends Component {
         this.setState({
             isSnackbarActive: true,
             snackbarText: 'Sorry you\'re having technical difficulties! Please bear with us as continue improving as quickly as we can. Clicking this link will ensure your login info is reset - try logging in again.'
-        })
+        });
         const {cookies} = this.props;
         cookies.remove('hash');
         setTimeout(() => {
@@ -80,7 +80,7 @@ class LoginForm extends Component {
         // consider only calling it once from 'mounted' and have it read firebase_id from state
         firebase.auth().onAuthStateChanged(function (user) {
             if (user) {
-                setCurrentUserFbId("currentFirebaseId", firebase_id);
+                setCurrentUserFbId("currentFbId", firebase_id);
                 fetchUserInfo(firebase_id);
                 getCompanyList(firebase_id);
                 getLmsContent();
@@ -149,7 +149,7 @@ class LoginForm extends Component {
             })
             .then(() => {
                 setTimeout(() => {
-                this.onLoginSuccess();
+                    this.onLoginSuccess();
                 }, 1500)
             })
             .catch((error) => {

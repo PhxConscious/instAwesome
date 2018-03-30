@@ -38,7 +38,7 @@ class Company extends Component {
                 className="formButton"
                 onClick={(e) => {
                     e.preventDefault();
-                    this.onButtonPress()
+                    this.onButtonPress(e)
                 }}>
                 <span className='buttonText'>
                     UPDATE
@@ -61,7 +61,7 @@ class Company extends Component {
             this.handleShowSnackbar();
             return;
         }
-        if(!this.ValidateEmail(company_email)) {
+        if (!this.ValidateEmail(company_email)) {
             this.setState({snackbarText: 'Invalid email format'});
             this.handleShowSnackbar();
             return;
@@ -98,14 +98,12 @@ class Company extends Component {
 
 
     ValidateEmail = (mail) => {
-        if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail))
-        {
+        if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail)) {
             return (true)
         }
         // alert("You have entered an invalid email address!");
         return (false)
     };
-
 
 
     render() {
@@ -180,8 +178,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
     return {
-        combineCallJoinAndCreateCompany: (firebase_id, co_name, co_email, co_phone) => {
-            dispatch(postUserCompanyJoinInfo(firebase_id))
+        combineCallJoinAndCreateCompany: (fb_id, co_name, co_email, co_phone) => {
+            dispatch(postUserCompanyJoinInfo(fb_id))
                 .then((companyId) => {
                     dispatch(addCompanyInfo(companyId.value.data[0].company_id, {
                             company_name: co_name,

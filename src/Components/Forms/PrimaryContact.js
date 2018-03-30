@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import '../../Styles/FormsStyles.css';
 import {connect} from 'react-redux';
 import {updateCompanyInfo} from "../../redux/actions/companyInfo";
-import {Grid, Cell} from 'react-mdl';
+import {Grid, Cell, Snackbar} from 'react-mdl';
 
 class PrimaryContact extends Component {
     constructor(props) {
@@ -12,8 +12,12 @@ class PrimaryContact extends Component {
             primary_contact_phone_number: '',
             primary_contact_email: '',
             error: '',
-            loading: false
+            loading: false,
+            isSnackbarActive: false,
+            snackbarText: ''
         };
+        this.handleShowSnackbar = this.handleShowSnackbar.bind(this);
+        this.handleTimeoutSnackbar = this.handleTimeoutSnackbar.bind(this);
     }
 
     componentDidMount() {
@@ -27,10 +31,18 @@ class PrimaryContact extends Component {
         }
     }
 
-    onButtonPress(e) {
-        e.preventDefault();
-        this.setState({error: ''});
-        console.log('button works and displays loading...')
+    onButtonPress() {
+        const {primary_contact_full_name, primary_contact_phone_number, primary_contact_email } = this.state;
+        if (primary_contact_full_name === '' || primary_contact_phone_number === '' || primary_contact_email === '') {
+            this.setState({snackbarText: 'Must fill in all fields'});
+            this.handleShowSnackbar();
+            return;
+        }
+        if (!this.ValidateEmail(primary_contact_email)) {
+            this.setState({snackbarText: 'Invalid email format'});
+            this.handleShowSnackbar();
+            return;
+        }
         this.props.addCompanyInfo(this.props.companyInfo.companyList && this.props.companyInfo.companyList[0].company_id, this.state);
         if (this.props.companyInfo.status !== 200) {
             return alert('update failed')
@@ -50,6 +62,32 @@ class PrimaryContact extends Component {
             </button>
         );
     }
+
+    renderSnackbar = () => {
+        return (
+            <Snackbar className='snackbar' active={this.state.isSnackbarActive} timeout={2000}
+                      onTimeout={this.handleTimeoutSnackbar}>{this.state.snackbarText}</Snackbar>
+        )
+    };
+
+
+    handleShowSnackbar() {
+        this.setState({isSnackbarActive: true});
+    }
+
+
+    handleTimeoutSnackbar() {
+        this.setState({isSnackbarActive: false});
+    }
+
+
+    ValidateEmail = (mail) => {
+        if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail)) {
+            return (true)
+        }
+        // alert("You have entered an invalid email address!");
+        return (false)
+    };
 
     handleInputTextChange = e => {
         this.setState({[e.target.name]: e.target.value});
