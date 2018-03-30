@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5dcbd94a-9853-46c1-a5fe-46ff5bc17eff" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/Components/Forms/ChangePassword.js" afterPath="$PROJECT_DIR$/src/Components/Forms/ChangePassword.js" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Forms/SignUp.js" afterPath="$PROJECT_DIR$/src/Components/Forms/SignUp.js" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Forms/RecoverPassword.js" afterPath="$PROJECT_DIR$/src/Components/Forms/RecoverPassword.js" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Forms/SignIn.js" afterPath="$PROJECT_DIR$/src/Components/Forms/SignIn.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -32,8 +32,8 @@
       <file leaf-file-name="SignUp.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Components/Forms/SignUp.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1156">
-              <caret line="68" column="50" lean-forward="true" selection-start-line="68" selection-start-column="23" selection-end-line="68" selection-end-column="50" />
+            <state relative-caret-position="322">
+              <caret line="25" column="75" lean-forward="true" selection-start-line="24" selection-start-column="8" selection-end-line="25" selection-end-column="75" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -51,11 +51,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SignIn.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="SignIn.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Components/Forms/SignIn.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="26" column="42" lean-forward="true" selection-start-line="26" selection-start-column="42" selection-end-line="26" selection-end-column="42" />
+            <state relative-caret-position="481">
+              <caret line="156" column="9" lean-forward="true" selection-start-line="152" selection-start-column="8" selection-end-line="156" selection-end-column="9" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -66,8 +66,8 @@
       <file leaf-file-name="RecoverPassword.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Components/Forms/RecoverPassword.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="590">
+              <caret line="75" column="59" lean-forward="true" selection-start-line="75" selection-start-column="59" selection-end-line="75" selection-end-column="59" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -75,7 +75,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ChangePassword.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ChangePassword.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Components/Forms/ChangePassword.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="51">
@@ -159,7 +159,6 @@
         <option value="$PROJECT_DIR$/src/Components/Forms/CompanyInfo.js" />
         <option value="$PROJECT_DIR$/src/Components/Forms/OnTheWeb.js" />
         <option value="$PROJECT_DIR$/src/Components/Forms/PrimaryContact.js" />
-        <option value="$PROJECT_DIR$/src/Components/Forms/RecoverPassword.js" />
         <option value="$PROJECT_DIR$/src/Components/Pages/AdminDashboard.js" />
         <option value="$PROJECT_DIR$/src/Components/Reusable/BlueAppBg.js" />
         <option value="$PROJECT_DIR$/src/Components/Pages/ExpertDashboard.js" />
@@ -194,9 +193,10 @@
         <option value="$PROJECT_DIR$/src/Components/Reusable/AppNav.js" />
         <option value="$PROJECT_DIR$/src/Styles/UnderwaterWrapperStyles.css" />
         <option value="$PROJECT_DIR$/src/Styles/FormsStyles.css" />
-        <option value="$PROJECT_DIR$/src/Components/Forms/SignIn.js" />
         <option value="$PROJECT_DIR$/src/Components/Forms/SignUp.js" />
         <option value="$PROJECT_DIR$/src/Components/Forms/ChangePassword.js" />
+        <option value="$PROJECT_DIR$/src/Components/Forms/SignIn.js" />
+        <option value="$PROJECT_DIR$/src/Components/Forms/RecoverPassword.js" />
       </list>
     </option>
   </component>
@@ -413,12 +413,12 @@
       <workItem from="1522123847807" duration="3537000" />
       <workItem from="1522172443617" duration="3524000" />
       <workItem from="1522187074068" duration="1156000" />
-      <workItem from="1522346959792" duration="14558000" />
+      <workItem from="1522346959792" duration="16278000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="350441000" />
+    <option name="totallyTimeSpent" value="352161000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1280" y="22" width="1280" height="1418" extended-state="0" />
@@ -855,20 +855,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/Forms/SignIn.js">
+    <entry file="file://$PROJECT_DIR$/src/Components/Forms/ChangePassword.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="26" column="42" lean-forward="true" selection-start-line="26" selection-start-column="42" selection-end-line="26" selection-end-column="42" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/Forms/RecoverPassword.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="51">
+          <caret line="3" column="38" lean-forward="true" selection-start-line="3" selection-start-column="38" selection-end-line="3" selection-end-column="38" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
           </folding>
@@ -877,18 +867,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Components/Forms/SignUp.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1156">
-          <caret line="68" column="50" lean-forward="true" selection-start-line="68" selection-start-column="23" selection-end-line="68" selection-end-column="50" />
+        <state relative-caret-position="322">
+          <caret line="25" column="75" lean-forward="true" selection-start-line="24" selection-start-column="8" selection-end-line="25" selection-end-column="75" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/Forms/ChangePassword.js">
+    <entry file="file://$PROJECT_DIR$/src/Components/Forms/RecoverPassword.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="38" lean-forward="true" selection-start-line="3" selection-start-column="38" selection-end-line="3" selection-end-column="38" />
+        <state relative-caret-position="590">
+          <caret line="75" column="59" lean-forward="true" selection-start-line="75" selection-start-column="59" selection-end-line="75" selection-end-column="59" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/Forms/SignIn.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="481">
+          <caret line="156" column="9" lean-forward="true" selection-start-line="152" selection-start-column="8" selection-end-line="156" selection-end-column="9" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
           </folding>

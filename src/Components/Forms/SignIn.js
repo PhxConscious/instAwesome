@@ -32,16 +32,22 @@ class LoginForm extends Component {
         this.handleTimeoutSnackbar = this.handleTimeoutSnackbar.bind(this);
     }
 
+
     static propTypes = {
         cookies: instanceOf(Cookies).isRequired
     };
+
 
     handleInputTextChange = e => {
         this.setState({[e.target.name]: e.target.value});
     };
 
+
     loginRefresh() {
-        this.setState({isSnackbarActive: true, snackbarText: 'Sorry you\'re having technical difficulties! Please bear with us as continue improving as quickly as we can. Clicking this link will ensure your login info is reset - try logging in again.'})
+        this.setState({
+            isSnackbarActive: true,
+            snackbarText: 'Sorry you\'re having technical difficulties! Please bear with us as continue improving as quickly as we can. Clicking this link will ensure your login info is reset - try logging in again.'
+        })
         const {cookies} = this.props;
         cookies.remove('hash');
         setTimeout(() => {
@@ -69,7 +75,6 @@ class LoginForm extends Component {
 
     pullInUserValues(fb_id) {
         let {setCurrentUserFbId, fetchUserInfo, getCompanyList, getLmsContent} = this.props;
-
         // WARNING: this should not be called multiple times - it will result in duplicate events firing
         // currently pullInUserValues is called from render and from onLoginSuccess
         // consider only calling it once from 'mounted' and have it read fb_id from state
@@ -85,6 +90,7 @@ class LoginForm extends Component {
         });
     }
 
+
     onLoginSuccess = () => {
         this.setState({
             snackbarText: 'Success',
@@ -93,14 +99,14 @@ class LoginForm extends Component {
             user_token: firebase.auth().currentUser.uid,
             isSnackbarActive: true,
         });
-
         // set a cookie upon login with fb_id
         const {cookies} = this.props;
 
         cookies.set('hash', firebase.auth().currentUser.uid, {path: '/', maxAge: 1000000});
 
-       return this.pullInUserValues(firebase.auth().currentUser.uid)
+        return this.pullInUserValues(firebase.auth().currentUser.uid)
     };
+
 
     renderSnackbar = () => {
         return (
@@ -109,21 +115,16 @@ class LoginForm extends Component {
         )
     };
 
+
     handleShowSnackbar() {
         this.setState({isSnackbarActive: true});
     }
+
 
     handleTimeoutSnackbar() {
         this.setState({isSnackbarActive: false});
     }
 
-    onLoginFail = () => {
-        this.setState({
-            loading: false,
-            snackbarText: 'Authentication failed',
-            isSnackbarActive: true
-        });
-    };
 
     renderButton = () => {
         if (!this.state.loading) {
@@ -146,23 +147,31 @@ class LoginForm extends Component {
 
     onButtonPress = (e) => {
         e.preventDefault();
-        this.handleShowSnackbar();
+        this.setState({snackbarText: ''});
         const {email, password} = this.state;
-        console.log(" current email and password", email, password)
-        this.setState({
-            loading: true,
-        });
+        console.log(" current email and password", email, password);
+        if(email === '' || password === '') {
+            this.setState({loading:false, snackbarText: 'Please fill in all fields' });
+            this.handleShowSnackbar();
+            return;
+        }
+        this.setState({loading: true});
         firebase.auth().signInWithEmailAndPassword(email, password)
             .then(this.onLoginSuccess)
             .then(this.setState({email: '', password: ''}))
-            .catch(() => {
-                this.onLoginFail()
+            .catch((error) => {
+                this.setState({
+                    loading: false,
+                    snackbarText: error.message,
+                    isSnackbarActive: true
+                });
+                this.handleShowSnackbar();
             })
     };
 
+
     render() {
         const {cookies} = this.props;
-
         // keeps user logged in
         let userCookie = cookies.get('hash')
         if (userCookie) {
@@ -175,75 +184,77 @@ class LoginForm extends Component {
 
 
         return (
-                <form className='formCont' action="#">
-                    <div className='inputCont'>
-                        <div className='formTitleCont'>
-                            <p className="formTitle">SIGN IN</p>
-                        </div>
-                        <div className="formInputCont">
-                            <div>
-                                <p className='inputLabel'>EMAIL</p>
-                            </div>
-                            <input
-                                name='email'
-                                className="formInput"
-                                type="text"
-                                onChange={this.handleInputTextChange}
-                                placeholder='Your Email'
-                                value={this.state.email}>
-                            </input>
-                        </div>
-                        <div className="formInputCont">
-                            <div>
-                                <p className='inputLabel'>PASSWORD</p>
-                            </div>
-                            <input
-                                name='password'
-                                className="formInput"
-                                type="password"
-                                onChange={this.handleInputTextChange}
-                                placeholder='Your Password'
-                                value={this.state.password}>
-                            </input>
-                        </div>
+            <form className='formCont' action="#">
+                <div className='inputCont'>
+                    <div className='formTitleCont'>
+                        <p className="formTitle">SIGN IN</p>
                     </div>
-                    <div>
-                        {this.renderButton()}
-                    </div>
-                    {/*<div>*/}
-                    {/*<p className='or'>OR SIGN IN WITH</p>*/}
-                    {/*<button className='socialMediaLoginButton' onClick={this.signInWithGoogle}>*/}
-                    {/*<i className="fab fa-google"> </i>*/}
-                    {/*</button>*/}
-                    {/*<button className='socialMediaLoginButton'>*/}
-                    {/*<i className="fab fa-facebook-f"> </i>*/}
-                    {/*</button>*/}
-                    {/*<button className='socialMediaLoginButton'>*/}
-                    {/*<i className="fab fa-linkedin-in"> </i>*/}
-                    {/*</button>*/}
-                    {/*</div>*/}
-                    <div className='forgotLinksCont'>
-                        {/*<Link to='/forgotusername' className='forgotLinks' href='#'>FORGOT USERNAME? </Link>*/}
-                        <Link to='/signup' className='forgotLinks'>CREATE AN ACCOUNT? </Link>
-                        <Link to='/forgotpassword' className='forgotLinks'>FORGOT PASSWORD? </Link>
-                        <div
-                            className="loginTrouble"
-                            onClick={this.loginRefresh}
-                        >
-                            <p className="forgotLinks">TROUBLE LOGGING IN?</p>
+                    <div className="formInputCont">
+                        <div>
+                            <p className='inputLabel'>EMAIL</p>
                         </div>
+                        <input
+                            name='email'
+                            className="formInput"
+                            type="text"
+                            onChange={this.handleInputTextChange}
+                            placeholder='Your Email'
+                            value={this.state.email}>
+                        </input>
                     </div>
-                    {this.renderSnackbar()}
-                </form>
+                    <div className="formInputCont">
+                        <div>
+                            <p className='inputLabel'>PASSWORD</p>
+                        </div>
+                        <input
+                            name='password'
+                            className="formInput"
+                            type="password"
+                            onChange={this.handleInputTextChange}
+                            placeholder='Your Password'
+                            value={this.state.password}>
+                        </input>
+                    </div>
+                </div>
+                <div>
+                    {this.renderButton()}
+                </div>
+                {/*<div>*/}
+                {/*<p className='or'>OR SIGN IN WITH</p>*/}
+                {/*<button className='socialMediaLoginButton' onClick={this.signInWithGoogle}>*/}
+                {/*<i className="fab fa-google"> </i>*/}
+                {/*</button>*/}
+                {/*<button className='socialMediaLoginButton'>*/}
+                {/*<i className="fab fa-facebook-f"> </i>*/}
+                {/*</button>*/}
+                {/*<button className='socialMediaLoginButton'>*/}
+                {/*<i className="fab fa-linkedin-in"> </i>*/}
+                {/*</button>*/}
+                {/*</div>*/}
+                <div className='forgotLinksCont'>
+                    {/*<Link to='/forgotusername' className='forgotLinks' href='#'>FORGOT USERNAME? </Link>*/}
+                    <Link to='/signup' className='forgotLinks'>CREATE AN ACCOUNT? </Link>
+                    <Link to='/forgotpassword' className='forgotLinks'>FORGOT PASSWORD? </Link>
+                    <div
+                        className="loginTrouble"
+                        onClick={this.loginRefresh}
+                    >
+                        <p className="forgotLinks">TROUBLE LOGGING IN?</p>
+                    </div>
+                </div>
+                {this.renderSnackbar()}
+            </form>
         );
     }
 }
+
 
 const mapStateToProps = state => ({
     currentValues: state.currentValues,
     userFbId: state.currentValues.currentFbId,
     companyInfo: state.companyInfo,
 });
+
 
 const mapDispatchToProps = dispatch => {
     return {
@@ -261,5 +272,6 @@ const mapDispatchToProps = dispatch => {
         },
     }
 };
+
 
 export default withCookies(connect(mapStateToProps, mapDispatchToProps)(LoginForm))
