@@ -147,12 +147,15 @@ class ContentBody extends React.Component {
 
             let lengthOfQuestArr = book[currentUnit].lessons[currentLesson].questions.length;
             let lengthOfLessonArr = book[currentUnit].lessons.length;
+            let lengthOfBookArr = book.length;
 
             this.setState({
                 multiChoiceAttempted: false
             });
 
-            if (lengthOfQuestArr === parseInt(currentQuestion, 10) + 1 && lengthOfLessonArr === parseInt(currentLesson, 10) + 1) {
+            if(lengthOfQuestArr === parseInt(currentQuestion, 10) + 1 && lengthOfLessonArr === parseInt(currentLesson, 10) + 1 && lengthOfBookArr === parseInt(currentUnit, 10) + 1){
+              alert("Congratulations! You're an instagram expert!")
+            } else if (lengthOfQuestArr === parseInt(currentQuestion, 10) + 1 && lengthOfLessonArr === parseInt(currentLesson, 10) + 1) {
                 console.log("END OF THE UNIT");
                 this.setState({
                     ...this.state,
@@ -164,6 +167,7 @@ class ContentBody extends React.Component {
                 });
                 nextQuestion();
             } else if (lengthOfQuestArr === parseInt(currentQuestion, 10) + 1) {
+              console.log("END OF THE LESSON")
                 this.setState({
                     ...this.state,
                     openLessonDialog: true,
