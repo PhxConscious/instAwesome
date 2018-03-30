@@ -30,21 +30,25 @@ class SignUpForm extends Component {
         const {email, password, verifyPassword, firstName, lastName, userPhone} = this.state;
         this.setState({loading: true, snackbarText: ''});
         if (firstName === '' || lastName === '' || email === '' || password === '' || userPhone === '') {
-            this.setState({loading: false, isSnackbarActive: true, snackbarText: 'Must fill in all fields'});
+            this.setState({loading: false, snackbarText: 'Must fill in all fields'});
             this.handleShowSnackbar();
             return;
         } else if (password !== verifyPassword) {
-            this.setState({loading: false, isSnackbarActive: true, snackbarText: 'Passwords do not match'});
+            this.setState({loading: false, snackbarText: 'Passwords do not match'});
             this.handleShowSnackbar();
-           return;
+            return;
         } else if (password.length < 6) {
-            this.setState({loading: false, isSnackbarActive: true, snackbarText: 'Password must be at least 6 characters long'});
+            this.setState({loading: false, snackbarText: 'Password must be at least 6 characters long'});
             this.handleShowSnackbar();
             return;
         }
         return (
             firebase.auth().createUserWithEmailAndPassword(email, password)
-            // call action with the correct user object
+                .then(() => {
+                    this.setState({snackbarText: 'Success'});
+                    this.handleShowSnackbar();
+                })
+                // call action with the correct user object
                 .then(user => {
                     this.props.createNewUser({
                         user_email: email,
@@ -56,14 +60,15 @@ class SignUpForm extends Component {
                     })
                 })
                 .then(() => {
-                    this.setState({redirect: true});
-                    firebase.auth().currentUser.sendEmailVerification()
+                    setTimeout(() => {
+                        this.setState({redirect: true});
+                        firebase.auth().currentUser.sendEmailVerification()
+                    }, 2000)
                 })
                 .catch((error) => {
                     this.setState({
                         loading: false,
                         snackbarText: error.message,
-                        isSnackbarActive: true
                     });
                     this.handleShowSnackbar();
                 })
@@ -77,7 +82,6 @@ class SignUpForm extends Component {
                     className="signInFormButton"
                     onClick={(e) => {
                         e.preventDefault();
-                        this.handleShowSnackbar();
                         this.onButtonPress()
                     }
                     }>
@@ -91,15 +95,17 @@ class SignUpForm extends Component {
     };
 
     renderSnackbar = () => {
-        return(
-            <Snackbar className='snackbar' active={this.state.isSnackbarActive} timeout={3000} onTimeout={this.handleTimeoutSnackbar}>{this.state.snackbarText}</Snackbar>
+        return (
+            <Snackbar className='snackbar' active={this.state.isSnackbarActive} timeout={2000}
+                      onTimeout={this.handleTimeoutSnackbar}>{this.state.snackbarText}</Snackbar>
         )
     };
 
-    handleShowSnackbar()  {
+    handleShowSnackbar() {
         this.setState({isSnackbarActive: true});
     }
-    handleTimeoutSnackbar()  {
+
+    handleTimeoutSnackbar() {
         this.setState({isSnackbarActive: false});
     }
 
@@ -200,7 +206,9 @@ class SignUpForm extends Component {
                     </div>
                 </div>
                 <br/>
-                {this.renderButton()}
+                <div className='formButtonContainer'>
+                    {this.renderButton()}
+                </div>
                 {this.renderSnackbar()}
             </form>
         );
