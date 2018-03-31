@@ -28,7 +28,6 @@ class RecoverPassword extends Component {
                 className="formButton"
                 onClick={(e) => {
                     e.preventDefault();
-                    this.handleShowSnackbar();
                     this.emailPasswordReset()
                 }}>
                 <span className='buttonText'>
@@ -41,7 +40,7 @@ class RecoverPassword extends Component {
 
     renderSnackbar = () => {
         return (
-            <Snackbar className='snackbar' active={this.state.isSnackbarActive} timeout={3000}
+            <Snackbar className='snackbar' active={this.state.isSnackbarActive} timeout={2000}
                       onTimeout={this.handleTimeoutSnackbar}>{this.state.snackbarText}</Snackbar>
         )
     };
