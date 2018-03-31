@@ -17,73 +17,80 @@ class ChangePassword extends Component {
         this.handleTimeoutSnackbar = this.handleTimeoutSnackbar.bind(this);
     }
 
+
     createNewPassword() {
         const {newPassword, confirmNewPassword} = this.state;
         let user = firebase.auth().currentUser;
         let newerPassword = newPassword;
 
+        this.setState({snackbarText: ''});
+
         if (newPassword === '' || confirmNewPassword === '') {
-            this.setState({snackbarText: 'Must fill in all fields', isSnackbarActive: true});
-            return;
-        } else if (newPassword !== confirmNewPassword) {
-            this.setState({snackbarText: 'Passwords do not match', isSnackbarActive: true});
-            return;
-        } else if (newPassword.length < 6) {
-            this.setState({
-                snackbarText: 'password must be at least 6 characters long',
-                isSnackbarActive: true
-            });
+            this.setState({snackbarText: 'Must fill in all fields'});
+            this.handleShowSnackbar();
             return;
         }
-        return (
-            user.updatePassword(newerPassword)
-                .catch(() => {
-                alert('Something went wrong.')
+        if (newPassword !== confirmNewPassword) {
+            this.setState({snackbarText: 'Passwords do not match'});
+            this.handleShowSnackbar();
+            return;
+        }
+        if (newPassword.length < 6) {
+            this.setState({snackbarText: 'password must be at least 6 characters long'});
+            this.handleShowSnackbar();
+            return;
+        }
+        user.updatePassword(newerPassword)
+            .then(() => {
+                this.setState({snackbarText: 'Your password has been updated'});
+                this.handleShowSnackbar()
             })
-        )
+            .catch((error) => {
+                this.setState({snackbarText: error.message});
+                this.handleShowSnackbar();
+            })
     }
 
-    onButtonPress() {
-        this.setState({snackbarText: 'Success'});
-        this.createNewPassword();
-        // this.reAuthUser();
-    }
 
     renderButton() {
-            return (
-                <button
-                    className="formButton"
-                    onClick={(e) => {
-                        e.preventDefault();
-                        this.handleShowSnackbar();
-                        this.onButtonPress()
-                    }}>
+        return (
+            <button
+                className="formButton"
+                onClick={(e) => {
+                    e.preventDefault();
+                    this.createNewPassword();
+                }}>
                 <span className='buttonText'>
                     UPDATE
                 </span>
-                </button>
-            )
+            </button>
+        )
     }
+
 
     renderSnackbar = () => {
         return (
-            <Snackbar className='snackbar' active={this.state.isSnackbarActive} timeout={3000}
+            <Snackbar className='snackbar' active={this.state.isSnackbarActive} timeout={2000}
                       onTimeout={this.handleTimeoutSnackbar}>{this.state.snackbarText}</Snackbar>
         )
     };
+
 
     handleShowSnackbar() {
         this.setState({isSnackbarActive: true});
     }
 
+
     handleTimeoutSnackbar() {
         this.setState({isSnackbarActive: false});
     }
+
 
     handleInputTextChange = e => {
         this.setState({[e.target.name]: e.target.value});
         // console.log(`this is the current state ${this.state}`)
     };
+
 
     render() {
         return (
