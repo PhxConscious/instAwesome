@@ -84,6 +84,10 @@
     margin-bottom: 10px;
 }
 
+.formButtonContainer{
+    height: 50px;
+}
+
 .formButton {
     background-color: #9BDD82;
     min-width: 200px;
@@ -152,6 +156,7 @@ li {
 
 .forgotLinksCont {
     margin-top: 12px;
+    min-height: 50px;
     font-family: 'Asap', sans-serif;
 }
 

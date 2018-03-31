@@ -47,7 +47,7 @@ class LoginForm extends Component {
         this.setState({
             isSnackbarActive: true,
             snackbarText: 'Sorry you\'re having technical difficulties! Please bear with us as continue improving as quickly as we can. Clicking this link will ensure your login info is reset - try logging in again.'
-        })
+        });
         const {cookies} = this.props;
         cookies.remove('hash');
         setTimeout(() => {
@@ -80,7 +80,7 @@ class LoginForm extends Component {
         // consider only calling it once from 'mounted' and have it read firebase_id from state
         firebase.auth().onAuthStateChanged(function (user) {
             if (user) {
-                setCurrentUserFbId("currentFbId", firebase_id)
+                setCurrentUserFbId("currentFbId", firebase_id);
                 fetchUserInfo(firebase_id);
                 getCompanyList(firebase_id);
                 getLmsContent();
@@ -93,7 +93,7 @@ class LoginForm extends Component {
 
     renderSnackbar = () => {
         return (
-            <Snackbar className='snackbar' active={this.state.isSnackbarActive} timeout={3000}
+            <Snackbar className='snackbar' active={this.state.isSnackbarActive} timeout={2000}
                       onTimeout={this.handleTimeoutSnackbar}>{this.state.snackbarText}</Snackbar>
         )
     };
@@ -141,10 +141,16 @@ class LoginForm extends Component {
         }
         firebase.auth().signInWithEmailAndPassword(email, password)
             .then(() => {
-                this.onLoginSuccess();
+                this.setState({email: '', password: ''})
             })
             .then(() => {
-                this.setState({email: '', password: ''})
+                this.setState({snackbarText: 'Success'});
+                this.handleShowSnackbar();
+            })
+            .then(() => {
+                setTimeout(() => {
+                    this.onLoginSuccess();
+                }, 1500)
             })
             .catch((error) => {
                 this.setState({
@@ -156,10 +162,10 @@ class LoginForm extends Component {
             })
     };
 
+
     onLoginSuccess = () => {
         this.setState({
             loading: true,
-            snackbarText: 'Success',
             email: '',
             password: '',
             user_token: firebase.auth().currentUser.uid,
@@ -167,9 +173,7 @@ class LoginForm extends Component {
 
         // set a cookie upon login with firebase_id
         const {cookies} = this.props;
-
         cookies.set('hash', firebase.auth().currentUser.uid, {path: '/', maxAge: 1000000});
-
         return this.pullInUserValues(firebase.auth().currentUser.uid)
     };
 
@@ -220,7 +224,7 @@ class LoginForm extends Component {
                         </input>
                     </div>
                 </div>
-                <div>
+                <div className='formButtonContainer'>
                     {this.renderButton()}
                 </div>
                 {/*<div>*/}
