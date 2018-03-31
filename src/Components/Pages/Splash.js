@@ -2,30 +2,58 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Redirect, Link} from 'react-router-dom';
 import {withCookies} from 'react-cookie';
+import {Grid, Cell, Snackbar} from 'react-mdl';
 import '../../Styles/SplashPageStyles..css';
-import {Grid, Cell} from 'react-mdl';
 
 class Splash extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            goBackThruLogin: false
-        }
+            goBackThruLogin: false,
+            isSnackbarActive: false,
+            snackbarText: ''
+        };
         this.handleSubmit = this.handleSubmit.bind(this);
         this.loginRefresh = this.loginRefresh.bind(this);
+        this.handleShowSnackbar = this.handleShowSnackbar.bind(this);
+        this.handleTimeoutSnackbar = this.handleTimeoutSnackbar.bind(this);
     }
+
 
     handleSubmit() {
         this.setState({goBackThruLogin: true})
     }
 
+
     loginRefresh() {
-        console.log("loginRefresh")
+        console.log("loginRefresh");
         const {cookies} = this.props;
         cookies.remove('hash');
-        window.location.reload();
-        alert("Sorry you're having technical difficulties! Please bear with us as continue improving as quickly as we can. Clicking this link will ensure your login info is reset - try logging in again.")
+        this.setState({snackbarText: "Sorry you're having technical difficulties! Please bear with us as continue improving as quickly as we can. Clicking this link will ensure your login info is reset - try logging in again."});
+        this.handleShowSnackbar();
+        setTimeout(() => {
+            window.location.reload();
+        }, 3500)
     }
+
+
+    renderSnackbar = () => {
+        return (
+            <Snackbar className='snackbar' active={this.state.isSnackbarActive} timeout={3000}
+                      onTimeout={this.handleTimeoutSnackbar}>{this.state.snackbarText}</Snackbar>
+        )
+    };
+
+
+    handleShowSnackbar() {
+        this.setState({isSnackbarActive: true});
+    }
+
+
+    handleTimeoutSnackbar() {
+        this.setState({isSnackbarActive: false});
+    }
+
 
     render() {
         let {userInfo, companyInfo} = this.props;
@@ -35,13 +63,14 @@ class Splash extends React.Component {
             return <Redirect to={'/'}/>
         }
 
+
         if (userInfo && !userInfo.user_email) {
             return (
                 <div className='splashPageContent'>
                     <p className='splashText'>Thanks for coming to see us. Please log back in</p>
                     <form
                         onSubmit={e => {
-                            e.preventDefault()
+                            e.preventDefault();
                             this.handleSubmit()
                         }}>
                         <button className="splashButton" type="submit">
@@ -51,6 +80,7 @@ class Splash extends React.Component {
                     <button className="splashButton" onClick={this.loginRefresh}>
                         Trouble logging in?
                     </button>
+                    {this.renderSnackbar()}
                 </div>
             )
         } else {
@@ -110,12 +140,12 @@ class Splash extends React.Component {
                 </div>
             )
         }
-
     }
 }
+
 
 const mapStateToProps = state => ({
     userInfo: state.userProgress.currentUser,
     companyInfo: state.companyInfo
-})
+});
 export default withCookies(connect(mapStateToProps, null)(Splash));
