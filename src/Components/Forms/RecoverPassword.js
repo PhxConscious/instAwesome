@@ -8,8 +8,6 @@ class RecoverPassword extends Component {
         super(props);
         this.state = {
             email: '',
-            error: '',
-            loading: false,
             user_token: '',
             isSnackbarActive: false,
             snackbarText: ''
@@ -20,15 +18,12 @@ class RecoverPassword extends Component {
 
 
     renderButton = () => {
-        if (this.state.loading) {
-            return <h4>Loading...</h4>
-        }
         return (
             <button
                 className="formButton"
                 onClick={(e) => {
                     e.preventDefault();
-                    this.emailPasswordReset()
+                    this.emailPasswordReset(e)
                 }}>
                 <span className='buttonText'>
                     RECOVER
@@ -66,17 +61,17 @@ class RecoverPassword extends Component {
         this.setState({snackbarText: ''});
 
         if (this.state.email === '') {
-            this.setState({loading: false, snackbarText: 'Please fill in all fields'});
+            this.setState({snackbarText: 'Please fill in all fields'});
             this.handleShowSnackbar();
             return;
         }
         firebase.auth().sendPasswordResetEmail(emailAddress)
             .then(() => {
-                this.setState({snackbarText: 'Email sent'})
+                this.setState({snackbarText: 'Email sent'});
                 this.handleShowSnackbar();
             })
             .catch((error) => {
-                this.setState({snackbarText: error.message})
+                this.setState({snackbarText: error.message});
                 this.handleShowSnackbar();
             });
     };
@@ -97,6 +92,7 @@ class RecoverPassword extends Component {
                             type="text"
                             onChange={this.handleInputTextChange}
                             placeholder=''
+                            autoComplete='off'
                             value={this.state.email}>
                         </input>
                         <p className='passwordRequirementText'>
