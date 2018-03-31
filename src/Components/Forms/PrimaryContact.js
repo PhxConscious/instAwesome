@@ -20,6 +20,7 @@ class PrimaryContact extends Component {
         this.handleTimeoutSnackbar = this.handleTimeoutSnackbar.bind(this);
     }
 
+
     componentDidMount() {
         let {companyInfo} = this.props;
         if (companyInfo && companyInfo.companyList && companyInfo.companyList[0]) {
@@ -31,8 +32,11 @@ class PrimaryContact extends Component {
         }
     }
 
+
     onButtonPress() {
-        const {primary_contact_full_name, primary_contact_phone_number, primary_contact_email } = this.state;
+        const {primary_contact_full_name, primary_contact_phone_number, primary_contact_email} = this.state;
+        this.setState({snackbarText: ''});
+
         if (primary_contact_full_name === '' || primary_contact_phone_number === '' || primary_contact_email === '') {
             this.setState({snackbarText: 'Must fill in all fields'});
             this.handleShowSnackbar();
@@ -47,21 +51,27 @@ class PrimaryContact extends Component {
         if (this.props.companyInfo.status !== 200) {
             return alert('update failed')
         } else {
-            return alert('update successful')
+            this.setState({snackbarText: 'Update Successful'});
+            this.handleShowSnackbar();
         }
     }
+
 
     renderButton() {
         return (
             <button
                 className="formButton"
-                onClick={(e) => this.onButtonPress(e)}>
+                onClick={(e) => {
+                    e.preventDefault();
+                    this.onButtonPress(e)
+                }}>
                 <span className='buttonText'>
                     UPDATE
                 </span>
             </button>
         );
     }
+
 
     renderSnackbar = () => {
         return (
@@ -85,78 +95,80 @@ class PrimaryContact extends Component {
         if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail)) {
             return (true)
         }
-        // alert("You have entered an invalid email address!");
         return (false)
     };
+
 
     handleInputTextChange = e => {
         this.setState({[e.target.name]: e.target.value});
     };
 
+
     render() {
         return (
-            <div>
-                <Grid>
-                    <Cell col={8} offsetDesktop={2} tablet={12} phone={12}>
-                        <form className="formCont" action="#">
-                            <div className='inputCont'>
-                                {/*<div className='formTitleCont'>*/}
-                                {/*<p className="formTitle">PRIMARY CONTACT</p>*/}
-                                {/*</div>*/}
-                                <div className="formInputCont">
-                                    <div>
-                                        <p className='inputLabel'>FULL NAME</p>
-                                    </div>
-                                    <input
-                                        name='primary_contact_full_name'
-                                        className="formInput"
-                                        type="text"
-                                        onChange={this.handleInputTextChange}
-                                        placeholder='Jeremy Chevallier'
-                                        value={this.state.primary_contact_full_name}>
-                                    </input>
+            <Grid>
+                <Cell col={8} offsetDesktop={2} tablet={12} phone={12}>
+                    <form className="formCont" action="#">
+                        <div className='inputCont'>
+                            {/*<div className='formTitleCont'>*/}
+                            {/*<p className="formTitle">PRIMARY CONTACT</p>*/}
+                            {/*</div>*/}
+                            <div className="formInputCont">
+                                <div>
+                                    <p className='inputLabel'>FULL NAME</p>
                                 </div>
-                                <div className="formInputCont">
-                                    <div>
-                                        <p className='inputLabel'>PHONE NUMBER</p>
-                                    </div>
-                                    <input
-                                        name='primary_contact_phone_number'
-                                        className="formInput"
-                                        type="text"
-                                        onChange={this.handleInputTextChange}
-                                        placeholder='480-268-5305'
-                                        value={this.state.primary_contact_phone_number}>
-                                    </input>
-                                </div>
-                                <div className="formInputCont">
-                                    <div>
-                                        <p className='inputLabel'>EMAIL ADDRESS</p>
-                                    </div>
-                                    <input
-                                        name='primary_contact_email'
-                                        className="formInput"
-                                        type="text"
-                                        onChange={this.handleInputTextChange}
-                                        placeholder='Jeremy@phxconscious.com'
-                                        value={this.state.primary_contact_email}>
-                                    </input>
-                                </div>
+                                <input
+                                    name='primary_contact_full_name'
+                                    className="formInput"
+                                    type="text"
+                                    onChange={this.handleInputTextChange}
+                                    placeholder='Jeremy Chevallier'
+                                    value={this.state.primary_contact_full_name}>
+                                </input>
                             </div>
-                            <br/>
-                            {this.renderButton()}
-                        </form>
-                    </Cell>
-                </Grid>
-            </div>
+                            <div className="formInputCont">
+                                <div>
+                                    <p className='inputLabel'>PHONE NUMBER</p>
+                                </div>
+                                <input
+                                    name='primary_contact_phone_number'
+                                    className="formInput"
+                                    type="text"
+                                    onChange={this.handleInputTextChange}
+                                    placeholder='480-268-5305'
+                                    value={this.state.primary_contact_phone_number}>
+                                </input>
+                            </div>
+                            <div className="formInputCont">
+                                <div>
+                                    <p className='inputLabel'>EMAIL ADDRESS</p>
+                                </div>
+                                <input
+                                    name='primary_contact_email'
+                                    className="formInput"
+                                    type="text"
+                                    onChange={this.handleInputTextChange}
+                                    placeholder='Jeremy@phxconscious.com'
+                                    value={this.state.primary_contact_email}>
+                                </input>
+                            </div>
+                        </div>
+                        <br/>
+                        {this.renderButton()}
+                        {this.renderSnackbar()}
+                    </form>
+                </Cell>
+            </Grid>
         );
     }
 }
+
 
 const mapStateToProps = state => ({
     currentValues: state.currentValues,
     companyInfo: state.companyInfo
 });
+
 
 const mapDispatchToProps = dispatch => {
     return {
