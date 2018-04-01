@@ -11,6 +11,7 @@
     "pg": "^7.4.1",
     "react": "^16.2.0",
     "react-cookie": "^2.1.4",
+    "react-copy-to-clipboard": "^5.0.1",
     "react-dom": "^16.2.0",
     "react-ga": "^2.4.1",
     "react-mdl": "^1.11.0",

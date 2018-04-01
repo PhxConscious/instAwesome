@@ -7,6 +7,8 @@ import {Button, Textfield} from 'react-mdl';
 import {updateCompanyInfo} from '../../redux/actions/companyInfo';
 import MultiChoiceShell from './MultiChoiceShell';
 import ReactModal from 'react-modal';
+import CopyTextField from './CopyTextInput';
+import TextInput from './TextInput'
 
 class ContentBody extends React.Component {
     constructor(props) {
@@ -15,6 +17,7 @@ class ContentBody extends React.Component {
             isCheckMarked: false,
             test: false,
             textArea: '',
+            copyTextArea: '',
             alreadyUpdated: false,
         };
         this.isNextQ = this.isNextQ.bind(this);
@@ -23,6 +26,7 @@ class ContentBody extends React.Component {
         this.multiChoiceAttempted = this.multiChoiceAttempted.bind(this);
     }
 
+
     componentDidMount() {
         if (this.props.currentValues.currentQuestionObj) {
             this.isChecked();
@@ -30,12 +34,14 @@ class ContentBody extends React.Component {
         }
     }
 
+
     componentDidUpdate(prevProps, prevState) {
         if (prevProps.currentValues !== this.props.currentValues) {
             this.isChecked();
             this.isNextQ();
         }
     }
+
 
     isChecked() {
         let userProg = this.props.userProgress.currentUser.user_progress;
@@ -54,6 +60,7 @@ class ContentBody extends React.Component {
         }
     }
 
+
     isNextQ() {
         let {book} = this.props;
         let {currentUnit, currentLesson, currentQuestion} = this.props.currentValues;
@@ -69,9 +76,11 @@ class ContentBody extends React.Component {
         }
     }
 
+
     checkBox() {
         this.setState({isCheckMarked: !this.state.isCheckMarked})
     }
+
 
     multiChoiceAttempted() {
         this.setState({multiChoiceAttempted: true})
@@ -110,6 +119,7 @@ class ContentBody extends React.Component {
             ))
         }
 
+
         // get current text values for companyObj
         if (currentQuestionObj.contentType === "textArea" && this.state.alreadyUpdated === false) {
 
@@ -121,15 +131,14 @@ class ContentBody extends React.Component {
             if (initialValue === null) {
                 initialValue = "add your text here"
             }
-
             this.setState({
                 textArea: initialValue,
                 alreadyUpdated: true
             })
         }
 
-        let submitTextArea = () => {
 
+        let submitTextArea = () => {
             // post current text from state to company db
             let key = currentQuestionObj.columnName;
             let value = this.state.textArea;
@@ -137,11 +146,26 @@ class ContentBody extends React.Component {
                 [key]: value
             };
             this.props.putCompanyInfo(companyInfo.companyList[0].company_id, companyObj);
+            nextQuestClickHandler();
+            this.setState({textArea: '', alreadyUpdated: false})
+        };
+
+
+        //***************** Need to handle customer not having a company already on file. *********************
+        let submitCopyTextArea = () => {
+            // post current text from state to company db
+            let key = currentQuestionObj.columnName;
+            let value = this.state.copyTextArea;
+            let companyObj = {
+                [key]: value
+            };
+            this.props.putCompanyInfo(companyInfo.companyList[0].company_id, companyObj);
 
             nextQuestClickHandler();
 
-            this.setState({textArea: '', alreadyUpdated: false})
+            this.setState({copyTextArea: '', alreadyUpdated: false})
         };
+
 
         let nextQuestClickHandler = () => {
 
@@ -182,12 +206,14 @@ class ContentBody extends React.Component {
             }
         };
 
+
         let nextLessonModalHandler = () => {
             nextLesson();
             this.setState({
                 openLessonDialog: false
             })
         };
+
 
         let prevQuestClickHandler = () => {
             console.log("prevQuestClickHandler", currentQuestion);
@@ -224,12 +250,19 @@ class ContentBody extends React.Component {
                             /> : ""
                         }
                         {
-                            currentQuestionObj.contentType === "textArea" ? <Textfield
+                            currentQuestionObj.contentType === "textArea" ? <TextInput
                                 onChange={e => this.setState({textArea: e.target.value})}
                                 value={this.state.textArea}
                                 label="Text lines..."
                                 rows={3}
                                 style={{width: '100%'}}
+                            /> : ""
+                        }
+                        {
+                            currentQuestionObj.contentType === "copyTextArea" ? <CopyTextField
+                                onChange={e => this.setState({copyTextArea: e.target.value})}
+                                value={this.state.copyTextArea}
+                                label="Text lines..."
                             /> : ""
                         }
                         {
@@ -331,6 +364,15 @@ class ContentBody extends React.Component {
                             ><span className='lmsBtnText'>{buttonText}</span></Button> : null
                         }
                         {
+                            currentQuestionObj.contentType === "copyTextArea" ? <Button
+                                raised accent ripple
+                                className={nextButtonHidden ? 'hidden' : ""}
+                                onClick={submitCopyTextArea}
+                                value="nextQuestion"
+                                disabled={false}
+                            ><span className='lmsBtnText'>{buttonText}</span></Button> : null
+                        }
+                        {
                             currentQuestionObj.contentType === "multiChoice" ? <Button
                                 raised accent ripple
                                 onClick={nextQuestClickHandler}
@@ -349,12 +391,14 @@ class ContentBody extends React.Component {
     }
 }
 
+
 const mapStateToProps = state => ({
     book: state.lmsContent.book,
     userProgress: state.userProgress,
     currentValues: state.currentValues,
     companyInfo: state.companyInfo,
 });
+
 
 const mapDispatchToProps = dispatch => {
     return {
