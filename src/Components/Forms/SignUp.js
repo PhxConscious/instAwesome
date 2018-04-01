@@ -26,6 +26,7 @@ class SignUpForm extends Component {
         this.handleTimeoutSnackbar = this.handleTimeoutSnackbar.bind(this);
     }
 
+
     onButtonPress = () => {
         const {email, password, verifyPassword, firstName, lastName, userPhone} = this.state;
         this.setState({loading: true, snackbarText: ''});
@@ -60,9 +61,9 @@ class SignUpForm extends Component {
                     })
                 })
                 .then(() => {
+                    firebase.auth().currentUser.sendEmailVerification();
                     setTimeout(() => {
                         this.setState({redirect: true});
-                        firebase.auth().currentUser.sendEmailVerification()
                     }, 2000)
                 })
                 .catch((error) => {
@@ -75,6 +76,7 @@ class SignUpForm extends Component {
         )
     };
 
+
     renderButton = () => {
         if (!this.state.loading) {
             return (
@@ -83,8 +85,7 @@ class SignUpForm extends Component {
                     onClick={(e) => {
                         e.preventDefault();
                         this.onButtonPress()
-                    }
-                    }>
+                    }}>
                     <span className='buttonText'>
                         Submit
                     </span>
@@ -94,6 +95,7 @@ class SignUpForm extends Component {
         return <Spinner/>
     };
 
+
     renderSnackbar = () => {
         return (
             <Snackbar className='snackbar' active={this.state.isSnackbarActive} timeout={2000}
@@ -101,17 +103,21 @@ class SignUpForm extends Component {
         )
     };
 
+
     handleShowSnackbar() {
         this.setState({isSnackbarActive: true});
     }
+
 
     handleTimeoutSnackbar() {
         this.setState({isSnackbarActive: false});
     }
 
+
     handleInputTextChange = e => {
         this.setState({[e.target.name]: e.target.value});
     };
+
 
     render() {
         const {redirect} = this.state;
@@ -119,7 +125,6 @@ class SignUpForm extends Component {
         if (redirect) {
             return <Redirect to='/'/>;
         }
-
         return (
             <form className="formCont" action="#">
                 <div className='inputCont'>
@@ -215,9 +220,11 @@ class SignUpForm extends Component {
     }
 }
 
+
 const mapStateToProps = state => ({
     currentValues: state.currentValues
 });
+
 
 const mapDispatchToProps = dispatch => {
     return {
