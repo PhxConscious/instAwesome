@@ -97,6 +97,44 @@
     height: 35px;
 }
 
+div#inputComponent{
+    height: 200px;
+}
+
+.textFieldCont{
+    text-align: center;
+    height: 100px;
+    margin-bottom: 80px;
+    margin-top: 10px;
+    flex: 1;
+}
+
+.textField{
+    height: 100%;
+    width: 90%;
+    border: 2px solid lightgray;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-family: 'Asap', sans-serif;
+    font-size: 17px;
+}
+
+.textFieldButton{
+    background-color: #9BDD82;
+    min-width: 200px;
+    border-radius: 10px;
+    color: white;
+    font-size: 18px;
+    height: 45px;
+}
+
+span.copiedText{
+    color:red;
+    font-size: 15px;
+    font-weight: bold;
+    font-family: 'Asap', sans-serif;
+}
+
 #loadingText {
     height: 250px;
     width: 250px;

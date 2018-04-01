@@ -1,6 +1,7 @@
 import React from 'react';
-import { Textfield } from 'react-mdl';
-
+import {CopyToClipboard} from 'react-copy-to-clipboard';
+import {Textfield} from 'react-mdl';
+import '../../Styles/FormsStyles.css';
 
 class TextInput extends React.Component {
 
