@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5dcbd94a-9853-46c1-a5fe-46ff5bc17eff" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/Components/LMS/ContentBody.js" afterPath="$PROJECT_DIR$/src/Components/LMS/ContentBody.js" />
       <change beforePath="$PROJECT_DIR$/src/Components/LMS/Dashboard.js" afterPath="$PROJECT_DIR$/src/Components/LMS/Dashboard.js" />
-      <change beforePath="$PROJECT_DIR$/src/Styles/ContentBodyStyles.css" afterPath="$PROJECT_DIR$/src/Styles/ContentBodyStyles.css" />
-      <change beforePath="$PROJECT_DIR$/src/Styles/FormsStyles.css" afterPath="$PROJECT_DIR$/src/Styles/FormsStyles.css" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -57,8 +53,8 @@
       <file leaf-file-name="Dashboard.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Components/LMS/Dashboard.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1044">
-              <caret line="136" column="35" lean-forward="true" selection-start-line="136" selection-start-column="35" selection-end-line="136" selection-end-column="35" />
+            <state relative-caret-position="2278">
+              <caret line="134" column="4" lean-forward="false" selection-start-line="134" selection-start-column="4" selection-end-line="134" selection-end-column="4" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -386,12 +382,12 @@
       <workItem from="1522346959792" duration="18726000" />
       <workItem from="1522524153665" duration="5337000" />
       <workItem from="1522567753603" duration="173000" />
-      <workItem from="1522617726621" duration="8776000" />
+      <workItem from="1522617726621" duration="8943000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="392016000" />
+    <option name="totallyTimeSpent" value="392183000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
@@ -830,8 +826,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Components/LMS/Dashboard.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1044">
-          <caret line="136" column="35" lean-forward="true" selection-start-line="136" selection-start-column="35" selection-end-line="136" selection-end-column="35" />
+        <state relative-caret-position="2278">
+          <caret line="134" column="4" lean-forward="false" selection-start-line="134" selection-start-column="4" selection-end-line="134" selection-end-column="4" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>

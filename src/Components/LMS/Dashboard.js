@@ -132,6 +132,7 @@ class Dashboard extends React.Component {
         // now lets get our active question based on our active lesson output
         this.getActiveQuestion(lastUnlockedLesson.questions);
     }
+    
 
     // cycle through to find first question where id !== true
     getActiveQuestion(optQuestArr) { // uses optional param
@@ -250,6 +251,7 @@ class Dashboard extends React.Component {
         this.props.putNextQuestion(currentFbId, dto)
     }
 
+
     nextLesson() {
         let {currentUnit, currentUnitObj, currentLesson, currentLessonObj, currentFbId} = this.props.currentValues;
         let {userProgress, book} = this.props;
@@ -268,7 +270,6 @@ class Dashboard extends React.Component {
         if (book[currentUnit].lessons.length === parseInt(currentLesson, 10) + 1) {
             console.warn("Should not print this: somthing is broken")
             // this should be handled in the nextQuestion button in CheckTasks
-
             // case 2: it's not the last lesson in the unit
         } else {
             // find next lesson id in book
@@ -282,8 +283,6 @@ class Dashboard extends React.Component {
             this.props.setCurrentValues("currentLesson", targetLesson);
             this.props.setCurrentValues("currentLessonObj", book[currentUnit].lessons[targetLesson]);
         }
-
-
         // POSTs to userProgress on server
         let dto = {};
         dto["userProgress"] = taskObjRedux;
@@ -292,6 +291,7 @@ class Dashboard extends React.Component {
         // finds the first incomplete question and set that to currentQuestion
         this.getActiveQuestion(book[currentUnit].lessons[targetLesson].questions)
     }
+
 
     prevLesson() {
         let {currentUnit, currentLesson} = this.props.currentValues;
