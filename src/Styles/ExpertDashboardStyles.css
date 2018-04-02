@@ -8,8 +8,8 @@
     background-color: white !important;
 }
 
-.panelTitleCont{
-    border-bottom: 2px solid #9BDD82;
+.panelTitleCont {
+    /*border-bottom: 2px solid #48C8D3;*/
 }
 
 .leftPanelSelector {
@@ -19,28 +19,37 @@
     background-color: white !important;
 }
 
-.leftPanelTitle{
+.leftPanelTitle {
     font-size: 25px;
     font-weight: bolder;
     text-align: center;
     color: #48C8D3;
 }
 
-.rightPanelTitle{
+.rightPanelTitle {
     font-size: 25px;
     font-weight: bold;
     text-align: center;
     color: #48C8D3;
 }
 
-.rightPanelSectionTitles{
+.rightPanelSectionTitles {
     text-align: center;
     font-size: large;
     color: #48C8D3;
+    margin: auto;
 }
 
 .rightPanelDetail {
     height: 100vh;
     background-color: white !important;
     margin-top: 3px;
+}
+
+.rightPanelSectionTitlesCont {
+    padding: 10px;
+    max-height: 25px;
+    /*background-color: #9BDD82;*/
+    border-bottom: 2px solid #9BDD82;
+    margin-bottom: 10px;
 }

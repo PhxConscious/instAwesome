@@ -62,8 +62,11 @@ class ExpertDashboard extends React.Component {
                             {userList}
                         </div>
                         <div className="rightPanelDetail">
-                            <div className='panelTitleCont'>
+                            <div className=''>
                                 <p className='rightPanelTitle'>User Details</p>
+                            </div>
+                            <div className='rightPanelSectionTitlesCont'>
+                                <p className='rightPanelSectionTitles'>User Information</p>
                             </div>
                             <p>name: {userObj.first_name} {userObj.last_name}</p>
                             <p>email: {userObj.user_email}</p>
@@ -72,18 +75,22 @@ class ExpertDashboard extends React.Component {
                                 <ul>{getCompletedLessons(userObj.user_progress).map(lesson =>
                                     <li>{lesson}</li>)}</ul> : ''}</p>
                             <p>user's LMS progress: {userCompanyJoin.companyInfo ? getCompletedQuestionStatus(userObj.user_progress) : ''}%</p>
-                            <hr/>
 
-                            <p className='rightPanelSectionTitles'>Company Information</p>
+
+                            <div className='rightPanelSectionTitlesCont'>
+                                 <p className='rightPanelSectionTitles'>Company Information</p>
+                            </div>
                             <p>name: {userCompanyJoin.companyInfo ? userCompanyJoin.companyInfo.company_name : ''}</p>
                             <p>website: {userCompanyJoin.companyInfo ? userCompanyJoin.companyInfo.company_website : ''}</p>
                             <p>content creator: {userCompanyJoin.companyInfo ? userCompanyJoin.companyInfo.company_content_creator : ''}</p>
                             <p>storage locale: {userCompanyJoin.companyInfo ? userCompanyJoin.companyInfo.cloudbased_storage_locale : ''}</p>
                             <p>phone: {userCompanyJoin.companyInfo ? userCompanyJoin.companyInfo.company_phone : ''}</p>
                             <p>primary goals: {userCompanyJoin.companyInfo ? userCompanyJoin.companyInfo.company_primary_goal : ''}</p>
-                            <hr/>
 
-                            <p className='rightPanelSectionTitles'>Instagram</p>
+
+                            <div className='rightPanelSectionTitlesCont'>
+                                <p className='rightPanelSectionTitles'>Instagram</p>
+                            </div>
                             <p>username: {userCompanyJoin.companyInfo ? userCompanyJoin.companyInfo.instagram_username : ''}</p>
                             <p>goal #1: {userCompanyJoin.companyInfo ? userCompanyJoin.companyInfo.insta_goal1 : ''}</p>
                             <p>goal #2: {userCompanyJoin.companyInfo ? userCompanyJoin.companyInfo.insta_goal2 : ''}</p>
@@ -92,46 +99,62 @@ class ExpertDashboard extends React.Component {
                                 bio: {userCompanyJoin.companyInfo ? userCompanyJoin.companyInfo.instagram_bio : ''}</p>
                             {/*<p>goals: {userCompanyJoin.companyInfo ? userCompanyJoin.companyInfo.instagram_goals : ''}*/}
                                 {/*<strong> isnt this redundant?</strong></p>*/}
-                            <hr/>
 
-                            <p className='rightPanelSectionTitles'>Facebook</p>
+
+                            <div className='rightPanelSectionTitlesCont'>
+                               <p className='rightPanelSectionTitles'>Facebook</p>
+                            </div>
                             <p>url: {userCompanyJoin.companyInfo ? userCompanyJoin.companyInfo.facebook_page_url : ''}</p>
                             <p>goals: {userCompanyJoin.companyInfo ? userCompanyJoin.companyInfo.facebook_goals : ''}</p>
-                            <hr/>
 
-                            <p className='rightPanelSectionTitles'>Google Plus</p>
+
+                            <div className='rightPanelSectionTitlesCont'>
+                                <p className='rightPanelSectionTitles'>Google Plus</p>
+                            </div>
                             <p>business profile: {userCompanyJoin.companyInfo ? userCompanyJoin.companyInfo.google_business_profile : ''}</p>
                             <p>goals: {userCompanyJoin.companyInfo ? userCompanyJoin.companyInfo.google_plus_goals : ''}</p>
                             <p>profile: {userCompanyJoin.companyInfo ? userCompanyJoin.companyInfo.google_plus_profile_url : ''}</p>
                             <p>goals: {userCompanyJoin.companyInfo ? userCompanyJoin.companyInfo.google_search_goals : ''}</p>
-                            <hr/>
 
-                            <p className='rightPanelSectionTitles'>LinkedIn</p>
+
+                            <div className='rightPanelSectionTitlesCont'>
+                                <p className='rightPanelSectionTitles'>LinkedIn</p>
+                            </div>
                             <p>goals: {userCompanyJoin.companyInfo ? userCompanyJoin.companyInfo.linkedin_goals : ''}</p>
                             <p>profile: {userCompanyJoin.companyInfo ? userCompanyJoin.companyInfo.linkedin_profile : ''}</p>
-                            <hr/>
 
-                            <p className='rightPanelSectionTitles'>Pinterest</p>
+
+                            <div className='rightPanelSectionTitlesCont'>
+                                <p className='rightPanelSectionTitles'>Pinterest</p>
+                            </div>
                             <p>goals: {userCompanyJoin.companyInfo ? userCompanyJoin.companyInfo.pinterest_goals : ''}</p>
                             <p>profile: {userCompanyJoin.companyInfo ? userCompanyJoin.companyInfo.pinterest_profile : ''}</p>
-                            <hr/>
 
-                            <p className='rightPanelSectionTitles'>Twitter</p>
+
+                            <div className='rightPanelSectionTitlesCont'>
+                                <p className='rightPanelSectionTitles'>Twitter</p>
+                            </div>
                             <p>username: {userCompanyJoin.companyInfo ? userCompanyJoin.companyInfo.twitter_username : ''}</p>
                             <p>goals: {userCompanyJoin.companyInfo ? userCompanyJoin.companyInfo.twitter_goals : ''}</p>
-                            <hr/>
 
-                            <p className='rightPanelSectionTitles'>Yelp</p>
+
+                            <div className='rightPanelSectionTitlesCont'>
+                                <p className='rightPanelSectionTitles'>Yelp</p>
+                            </div>
                             <p>business profile: {userCompanyJoin.companyInfo ? userCompanyJoin.companyInfo.yelp_business_profile : ''}</p>
                             <p>goals: {userCompanyJoin.companyInfo ? userCompanyJoin.companyInfo.yelp_goals : ''}</p>
-                            <hr/>
 
-                            <p className='rightPanelSectionTitles'>BBB</p>
+
+                            <div className='rightPanelSectionTitlesCont'>
+                                <p className='rightPanelSectionTitles'>BBB</p>
+                            </div>
                             <p>profile: {userCompanyJoin.companyInfo ? userCompanyJoin.companyInfo.better_business_bureau_profile : ''}</p>
                             <p>goals: {userCompanyJoin.companyInfo ? userCompanyJoin.companyInfo.better_business_bureau_goals : ''}</p>
-                            <hr/>
 
-                            <p className='rightPanelSectionTitles'>Youtube/Vimeo</p>
+
+                            <div className='rightPanelSectionTitlesCont'>
+                                <p className='rightPanelSectionTitles'>Youtube/Vimeo</p>
+                            </div>
                             <p>youtube profile: {userCompanyJoin.companyInfo ? userCompanyJoin.companyInfo.youtube_url : ''}</p>
                             <p>vimeo profile: {userCompanyJoin.companyInfo ? userCompanyJoin.companyInfo.vimeo_url : ''}</p>
                             <p>youtube & vimeo goals: {userCompanyJoin.companyInfo ? userCompanyJoin.companyInfo.youtube_vimeo_goals : ''}</p>

@@ -33,13 +33,13 @@ class Splash extends React.Component {
         this.handleShowSnackbar();
         setTimeout(() => {
             window.location.reload();
-        }, 3500)
+        }, 3000)
     }
 
 
     renderSnackbar = () => {
         return (
-            <Snackbar className='snackbar' active={this.state.isSnackbarActive} timeout={3000}
+            <Snackbar className='snackbar' active={this.state.isSnackbarActive} timeout={2500}
                       onTimeout={this.handleTimeoutSnackbar}>{this.state.snackbarText}</Snackbar>
         )
     };
