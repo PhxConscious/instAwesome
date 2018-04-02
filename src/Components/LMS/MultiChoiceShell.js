@@ -81,7 +81,7 @@ class MultiChoiceShell extends React.Component {
 
         return (
             <div id="container">
-                <h6>{questObj.title}</h6>
+                {/*<h6>{questObj.title}</h6>*/}
                 <form
                     onSubmit={e => {
                         e.preventDefault();
@@ -89,7 +89,7 @@ class MultiChoiceShell extends React.Component {
                     }}>
                     {theQuestions}
                     <Button
-                        className='attemptButton'
+                        className={this.state.indicesOfChecked.length === 0 ? 'attemptButton' : 'attemptButtonHighlighted' }
                         raised colored ripple
                         type="submit">
                         CHECK

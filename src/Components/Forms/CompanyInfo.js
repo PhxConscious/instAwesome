@@ -160,7 +160,7 @@ class CompanyInfo extends Component {
                         </div>
                         <br/>
                         {this.renderButton()}
-                        {/*{this.renderSnackbar()}*/}
+                        {this.renderSnackbar()}
                     </form>
                 </Cell>
             </Grid>

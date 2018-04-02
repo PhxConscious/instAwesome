@@ -45,8 +45,8 @@ class ContentBody extends React.Component {
 
     isChecked() {
         let userProg = this.props.userProgress.currentUser.user_progress;
-
         let {currentUnitObj, currentLessonObj, currentQuestionObj} = this.props.currentValues;
+
         if (userProg[currentUnitObj.id].lessons[currentLessonObj.id].questions[currentQuestionObj.id]) {
             this.setState({
                 ...this.state,
@@ -64,7 +64,6 @@ class ContentBody extends React.Component {
     isNextQ() {
         let {book} = this.props;
         let {currentUnit, currentLesson, currentQuestion} = this.props.currentValues;
-
         let lengthOfQuestArr = book[currentUnit].lessons[currentLesson].questions.length;
 
         if (lengthOfQuestArr !== parseInt(currentQuestion, 10) + 1) {
@@ -88,24 +87,12 @@ class ContentBody extends React.Component {
 
 
     render() {
-
-        // delete from HERE
-        let lessNum = this.props.currentValues.currentLesson;
-        let questNum = this.props.currentValues.currentQuestion;
-        let unitNum = this.props.currentValues.currentUnit;
-        // console.log('!!!!!!!!!!!!!!!!!!!', lessNum, questNum, unitNum)
-        let buttonText = this.props.book[unitNum].lessons[lessNum].questions[questNum].buttonText;
-        // to HERE
-
         let {isCheckMarked, nextButtonHidden, prevButtonHidden} = this.state;
-
         let {lesson, nextLesson, prevLesson, nextQuestion, prevQuestion, nextUnit, userProgress, book, currentValues, selectLessonOnClick, companyInfo} = this.props;
-
         let {currentUnit, currentUnitObj, currentLesson, currentLessonObj, currentQuestion, currentQuestionObj} = this.props.currentValues;
-
         let userProg = userProgress.currentUser.user_progress;
-
         let lessonIcons = null;
+
         if (currentLessonObj) {
             lessonIcons = currentUnitObj.lessons.map((lesson, i) => (
                 <LessonIcon
@@ -122,7 +109,6 @@ class ContentBody extends React.Component {
 
         // get current text values for companyObj
         if (currentQuestionObj.contentType === "textArea" && this.state.alreadyUpdated === false) {
-
             let initialValue = null;
 
             if (companyInfo.companyList && companyInfo.companyList[0] && companyInfo.companyList[0][currentQuestionObj.columnName]) {
@@ -160,15 +146,12 @@ class ContentBody extends React.Component {
                 [key]: value
             };
             this.props.putCompanyInfo(companyInfo.companyList[0].company_id, companyObj);
-
             nextQuestClickHandler();
-
             this.setState({copyTextArea: '', alreadyUpdated: false})
         };
 
 
         let nextQuestClickHandler = () => {
-
             let lengthOfQuestArr = book[currentUnit].lessons[currentLesson].questions.length;
             let lengthOfLessonArr = book[currentUnit].lessons.length;
             let lengthOfBookArr = book.length;
@@ -176,9 +159,8 @@ class ContentBody extends React.Component {
             this.setState({
                 multiChoiceAttempted: false
             });
-
-            if(lengthOfQuestArr === parseInt(currentQuestion, 10) + 1 && lengthOfLessonArr === parseInt(currentLesson, 10) + 1 && lengthOfBookArr === parseInt(currentUnit, 10) + 1){
-              alert("Congratulations! You're an instagram expert!")
+            if (lengthOfQuestArr === parseInt(currentQuestion, 10) + 1 && lengthOfLessonArr === parseInt(currentLesson, 10) + 1 && lengthOfBookArr === parseInt(currentUnit, 10) + 1) {
+                alert("Congratulations! You're an instagram expert!")
             } else if (lengthOfQuestArr === parseInt(currentQuestion, 10) + 1 && lengthOfLessonArr === parseInt(currentLesson, 10) + 1) {
                 console.log("END OF THE UNIT");
                 this.setState({
@@ -191,7 +173,7 @@ class ContentBody extends React.Component {
                 });
                 nextQuestion();
             } else if (lengthOfQuestArr === parseInt(currentQuestion, 10) + 1) {
-              console.log("END OF THE LESSON")
+                console.log("END OF THE LESSON");
                 this.setState({
                     ...this.state,
                     openLessonDialog: true,
@@ -231,20 +213,20 @@ class ContentBody extends React.Component {
             }
         };
 
-        if (currentLessonObj) {
 
+        if (currentLessonObj) {
             return (
                 <div>
                     <div id="lessonTitleContainer">
                         <h5>{currentQuestionObj.title}</h5>
                     </div>
-
                     <div id="inputComponent">
                         {
                             // contentType: blank    goes here
                         }
                         {
                             currentQuestionObj.contentType === "checkTasks" ? <CheckBox
+                                className='answerCheck'
                                 checkBox={this.checkBox}
                                 isCheckMarked={this.state.isCheckMarked}
                             /> : ""
@@ -262,6 +244,7 @@ class ContentBody extends React.Component {
                             currentQuestionObj.contentType === "copyTextArea" ? <CopyTextField
                                 onChange={e => this.setState({copyTextArea: e.target.value})}
                                 value={this.state.copyTextArea}
+                                rows={3}
                                 label="Text lines..."
                             /> : ""
                         }
@@ -288,18 +271,21 @@ class ContentBody extends React.Component {
                                     raised colored ripple
                                     type='button'
                                     onClick={e => this.setState({openLessonDialog: false})}
-                                >{this.state.lessonDialogButton2}
+                                >
+                                    {this.state.lessonDialogButton2}
                                 </Button>
                                 <Button
                                     className='modalButton'
                                     raised colored ripple
                                     type='button'
                                     onClick={nextLessonModalHandler}
-                                >{this.state.lessonDialogButton1}
+                                >
+                                    {this.state.lessonDialogButton1}
                                 </Button>
                             </div>
                         </div>
                     </ReactModal>
+
 
                     <ReactModal
                         isOpen={this.state.openUnitDialog}
@@ -312,27 +298,31 @@ class ContentBody extends React.Component {
                             <h6 className="modalDescription">{this.state.unitDialogText}</h6>
                             <div className="modalButtonContainer">
                                 <Button
-                                    className= 'modalButton'
+                                    className='modalButton'
                                     raised ripple
                                     type='button'
                                     onClick={nextUnit}
-                                >{this.state.unitDialogButton1}
+                                >
+                                    {this.state.unitDialogButton1}
                                 </Button>
                                 <Button
-                                    className= 'modalButton'
+                                    className='modalButton'
                                     raised ripple
                                     type='button'
                                     onClick={e => this.setState({openUnitDialog: false})}
-                                >{this.state.unitDialogButton2}
+                                >
+                                    {this.state.unitDialogButton2}
                                 </Button>
                             </div>
                         </div>
                     </ReactModal>
 
+
                     {/*<div>Unit: {parseInt(currentUnit, 10) + 1} of {book.length}</div>*/}
                     {/*<div>Lesson: {parseInt(currentLesson, 10) + 1} of {book[currentUnit].lessons.length}</div>*/}
                     {/*<div>Question: {parseInt(currentQuestion, 10) + 1} of {currentLessonObj.questions.length}</div>*/}
                     {currentQuestion === "0" ? "Please begin the lesson" : ''}
+
 
                     <div id="nextPrevButtonContainer">
                         <Button
@@ -352,7 +342,8 @@ class ContentBody extends React.Component {
                                 onClick={nextQuestClickHandler}
                                 value="nextQuestion"
                                 disabled={!isCheckMarked}
-                            ><span className='lmsBtnText'>{buttonText}</span></Button> : null
+                            >
+                                <span className='lmsBtnText'>{currentQuestionObj.buttonText}</span></Button> : null
                         }
                         {
                             currentQuestionObj.contentType === "textArea" ? <Button
@@ -361,7 +352,8 @@ class ContentBody extends React.Component {
                                 onClick={submitTextArea}
                                 value="nextQuestion"
                                 disabled={this.state.textArea.length === 0}
-                            ><span className='lmsBtnText'>{buttonText}</span></Button> : null
+                            >
+                                <span className='lmsBtnText'>{currentQuestionObj.buttonText}</span></Button> : null
                         }
                         {
                             currentQuestionObj.contentType === "copyTextArea" ? <Button
@@ -370,7 +362,8 @@ class ContentBody extends React.Component {
                                 onClick={submitCopyTextArea}
                                 value="nextQuestion"
                                 disabled={false}
-                            ><span className='lmsBtnText'>{buttonText}</span></Button> : null
+                            >
+                                <span className='lmsBtnText'>{currentQuestionObj.buttonText}</span></Button> : null
                         }
                         {
                             currentQuestionObj.contentType === "multiChoice" ? <Button
@@ -378,7 +371,8 @@ class ContentBody extends React.Component {
                                 onClick={nextQuestClickHandler}
                                 value="nextQuestion"
                                 disabled={!this.state.multiChoiceAttempted}
-                            ><span className="lmsBtnText">{buttonText}</span></Button> : null
+                            >
+                                <span className="lmsBtnText">{currentQuestionObj.buttonText}</span></Button> : null
                         }
                         {
                             // contentType: blank    button goes here

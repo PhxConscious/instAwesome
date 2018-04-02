@@ -5,7 +5,7 @@ import LessonContent from './LessonContent';
 import {connect} from 'react-redux';
 import {nextQuestion} from '../../redux/actions/userProgress';
 import {setCurrentValue} from "../../redux/actions/currentValues";
-import {Grid, Cell} from 'react-mdl';
+import {Grid, Cell, Snackbar} from 'react-mdl';
 import {Redirect} from 'react-router-dom';
 
 class Dashboard extends React.Component {
@@ -13,6 +13,8 @@ class Dashboard extends React.Component {
         super(props);
         this.state = {
             readyForRender: false,
+            isSnackbarActive: false,
+            snackbarText: ''
         };
         this.selectCardOnClick = this.selectCardOnClick.bind(this);
         this.selectLessonOnClick = this.selectLessonOnClick.bind(this);
@@ -24,6 +26,8 @@ class Dashboard extends React.Component {
         this.nextQuestion = this.nextQuestion.bind(this);
         this.prevQuestion = this.prevQuestion.bind(this);
         this.nextUnit = this.nextUnit.bind(this);
+        this.handleShowSnackbar = this.handleShowSnackbar.bind(this);
+        this.handleTimeoutSnackbar = this.handleTimeoutSnackbar.bind(this);
     }
 
 
@@ -39,16 +43,34 @@ class Dashboard extends React.Component {
     }
 
 
+    renderSnackbar = () => {
+        return (
+            <Snackbar className='snackbar' active={this.state.isSnackbarActive} timeout={2000}
+                      onTimeout={this.handleTimeoutSnackbar}>{this.state.snackbarText}</Snackbar>
+        )
+    };
+
+
+    handleShowSnackbar() {
+        this.setState({isSnackbarActive: true});
+    }
+
+
+    handleTimeoutSnackbar() {
+        this.setState({isSnackbarActive: false});
+    }
+
+
     // cycle through to find first incomplete unit
     getActiveUnit() {
         console.log("getActiveUnit");
         let {book} = this.props;
         let userProg = this.props.userProgress.currentUser.user_progress;
-
         // set initial value jic
         let lastUnlockedUnit = book[0];
         let finalUnitIndex;
         // 1. iterate through all units - if no value in userProg, post one.
+
         for (let i = 0; i < book.length; i++) {
             let curUnitId = book[i].id;
 
@@ -72,10 +94,10 @@ class Dashboard extends React.Component {
         this.props.setCurrentValues("currentUnitObj", lastUnlockedUnit);
         this.props.setCurrentValues("currentUnit", finalUnitIndex)
         this.props.setCurrentValues("active", lastUnlockedUnit.id);
-
         // now that we have a unit, lets get the lesson
         this.getActiveLesson(lastUnlockedUnit, lastUnlockedUnit.id);
     };
+
 
     // cycle through to find first incomplete lesson
     getActiveLesson(optUnitObj, optUnitId) {
@@ -98,27 +120,23 @@ class Dashboard extends React.Component {
         for (let i = 0; i < optUnitObj.lessons.length; i++) {
             let curLessonId = optUnitObj.lessons[i].id;
             // @TODO if no value, POST  lessonId=false
-
             let curLessonObj = userProg[optUnitId].lessons[curLessonId];
-
             if (curLessonObj.lessonCompleted === false && curLessonObj.lessonLocked === false) {
                 lastUnlockedLesson = optUnitObj.lessons[i];
                 finalLessonIndex = i;
             }
         }
-
         // set the first lesson where isComplete != true to currentActiveLessonObj and currentActiveLesson
         this.props.setCurrentValues("currentLessonObj", lastUnlockedLesson);
         this.props.setCurrentValues("currentLesson", finalLessonIndex);
-
         // now lets get our active question based on our active lesson output
         this.getActiveQuestion(lastUnlockedLesson.questions);
     }
 
+
     // cycle through to find first question where id !== true
     getActiveQuestion(optQuestArr) { // uses optional param
         console.log("getActiveQuestion", optQuestArr);
-
         let {userProgress, currentValues} = this.props;
         let userProg = userProgress.currentUser.user_progress;
         let {currentUnitObj, currentLessonObj} = currentValues;
@@ -130,7 +148,6 @@ class Dashboard extends React.Component {
 
         let questionArrProg = userProg[currentUnitObj.id].lessons[currentLessonObj.id].questions;
         // 1. iterate through questions in the active lesson
-
         let lastTrueQuestion;
         let finalQuestionIndex;
         // add default values if no completed questions
@@ -138,28 +155,24 @@ class Dashboard extends React.Component {
         finalQuestionIndex = 0;
 
         for (let i = 0; i < optQuestArr.length; i++) {
-
             let currentQuestionId = optQuestArr[i].id;
             // @TODO post value to server if not present
-
             // 2. set the first question where id!=true as currentQuestionObj and currentQuestion
             if (questionArrProg[currentQuestionId] === true) {
                 lastTrueQuestion = optQuestArr[i];
                 finalQuestionIndex = i;
             }
         }
-
         // if all questions are true than go to the first question
         if (finalQuestionIndex === optQuestArr.length - 1) {
             lastTrueQuestion = optQuestArr[0];
             finalQuestionIndex = 0;
         }
-
         this.props.setCurrentValues("currentQuestionObj", lastTrueQuestion);
         this.props.setCurrentValues("currentQuestion", finalQuestionIndex);
-
         this.setState({readyForRender: true})
     }
+
 
     // sets current unit in LmsCards
     selectCardOnClick(argId) {
@@ -168,19 +181,18 @@ class Dashboard extends React.Component {
         let index;
 
         book.forEach((unit, i) => {
-
             // don't allow click if it's locked
             if (unit.id === argId && !userProg[unit.id].isLocked) {
                 index = i.toString();
                 this.props.setCurrentValues("active", argId);
                 this.props.setCurrentValues("currentUnit", index);
                 this.props.setCurrentValues("currentUnitObj", unit);
-
                 // call getActiveLesson to set the correct active lesson/question
                 this.getActiveLesson(book[index], unit.id);
             }
         })
     }
+
 
     selectLessonOnClick(lessonIndex) {
         let {book, currentValues} = this.props;
@@ -190,22 +202,19 @@ class Dashboard extends React.Component {
 
         this.props.setCurrentValues("currentLesson", lessonIndex);
         this.props.setCurrentValues("currentLessonObj", targetLesson);
-
         this.getActiveQuestion(targetLesson.questions)
     }
 
-    nextUnit() {
 
+    nextUnit() {
         let {currentUnit, currentUnitObj, currentLessonObj, currentFbId} = this.props.currentValues;
         let {userProgress, book} = this.props;
-
         // the whole task obj in redux
         let taskObjRedux = userProgress.currentUser.user_progress;
 
         // marks the current unit as completed
         taskObjRedux[currentUnitObj.id]["unitCompleted"] = true;
         taskObjRedux[currentUnitObj.id]["unitLocked"] = false;
-
         // marks current lesson as completed
         taskObjRedux[currentUnitObj.id].lessons[currentLessonObj.id]["lessonCompleted"] = true;
         taskObjRedux[currentUnitObj.id].lessons[currentLessonObj.id]["lessonLocked"] = false;
@@ -216,18 +225,19 @@ class Dashboard extends React.Component {
         // check to see if next unit exists
         // case 1: no more units exist
         if (!book[parseInt(currentUnit, 10) + 1]) {
-            alert("CONGRATULATIONS YOU FINISHED THE COURSE!")
+            this.setState({
+                snackbarText: "CONGRATULATIONS YOU FINISHED THE COURSE!"
+            });
+            this.handleShowSnackbar();
 
             // case 2: there is a next unit
         } else {
             // marks the next unit as unlocked
             nextUnit = parseInt(currentUnit, 10) + 1;
             nextUnitObj = book[parseInt(currentUnit, 10) + 1];
-
             // prepares to update server
             taskObjRedux[nextUnitObj.id]["unitCompleted"] = false;
             taskObjRedux[nextUnitObj.id]["unitLocked"] = false;
-
             // sets new current unit, lesson, question in redux.currentValues
             this.props.setCurrentValues("currentUnit", nextUnit);
             this.props.setCurrentValues("currentUnitObj", nextUnitObj);
@@ -241,12 +251,11 @@ class Dashboard extends React.Component {
         this.props.putNextQuestion(currentFbId, dto)
     }
 
-    nextLesson() {
 
+    nextLesson() {
         let {currentUnit, currentUnitObj, currentLesson, currentLessonObj, currentFbId} = this.props.currentValues;
         let {userProgress, book} = this.props;
         let targetLesson = (parseInt(currentLesson, 10) + 1).toString();
-
         // the whole task obj in redux
         let taskObjRedux = userProgress.currentUser.user_progress;
 
@@ -261,7 +270,6 @@ class Dashboard extends React.Component {
         if (book[currentUnit].lessons.length === parseInt(currentLesson, 10) + 1) {
             console.warn("Should not print this: somthing is broken")
             // this should be handled in the nextQuestion button in CheckTasks
-
             // case 2: it's not the last lesson in the unit
         } else {
             // find next lesson id in book
@@ -275,21 +283,19 @@ class Dashboard extends React.Component {
             this.props.setCurrentValues("currentLesson", targetLesson);
             this.props.setCurrentValues("currentLessonObj", book[currentUnit].lessons[targetLesson]);
         }
-
         // POSTs to userProgress on server
         let dto = {};
         dto["userProgress"] = taskObjRedux;
-        console.log("DTO from next lesson", dto)
-        this.props.putNextQuestion(currentFbId, dto)
-
+        console.log("DTO from next lesson", dto);
+        this.props.putNextQuestion(currentFbId, dto);
         // finds the first incomplete question and set that to currentQuestion
         this.getActiveQuestion(book[currentUnit].lessons[targetLesson].questions)
     }
 
+
     prevLesson() {
         let {currentUnit, currentLesson} = this.props.currentValues;
         let {book} = this.props;
-
         // handle if there is no previous lesson in unit
         let targetLesson = currentLesson; // default value
 
@@ -299,39 +305,36 @@ class Dashboard extends React.Component {
 
             // case 2: there is not a previous lesson
         } else {
-            alert("You are at the first lesson - select a different unit")
+            this.setState({
+                snackbarText: "You are at the first lesson - select a different unit"
+            });
+            this.handleShowSnackbar();
+            // alert("You are at the first lesson - select a different unit")
         }
-
         // update currentLessonObj based on targetLesson
         this.props.setCurrentValues("currentLesson", targetLesson);
-
         // update these params
         this.props.setCurrentValues("currentLessonObj", book[currentUnit].lessons[targetLesson]);
-
         // finds the first incomplete question and set that to currentQuestion
         this.getActiveQuestion(book[currentUnit].lessons[targetLesson].questions)
     }
+
 
     nextQuestion() {
         let {currentUnit, currentUnitObj, currentLesson, currentLessonObj, currentQuestion, currentQuestionObj, currentFbId} = this.props.currentValues;
         let {userProgress, book} = this.props;
         let targetQuestion = (parseInt(currentQuestion, 10) + 1).toString()
-
         // the whole task obj in redux
         let taskObjRedux = userProgress.currentUser.user_progress;
-
         // the current task object in redux
         let curUnit = taskObjRedux[currentUnitObj.id];
-
         // the current lesson from redux
         let curLesson = curUnit.lessons[currentLessonObj.id];
-
         // the current questions from redux
         let curQuest = curLesson.questions;
 
         // 1. put new true questionId value in questions obj
         curQuest[currentQuestionObj.id] = true;
-
         // 2. put questions obj in taskObjRedux
         // console.log('questionID', targetQuestion, curQuest, currentQuestionObj)
         taskObjRedux[currentUnitObj.id].lessons[currentLessonObj.id]["questions"] = curQuest;
@@ -346,14 +349,13 @@ class Dashboard extends React.Component {
             // this is being handled because CheckTasks routes this case to nextLesson
             console.log("should not print this: something is broken")
         }
-
-
         // 5. dispatch updated obj - format object for server
         let dto = {};
         dto["userProgress"] = taskObjRedux;
         console.log('next question dto', dto);
         this.props.putNextQuestion(currentFbId, dto)
     }
+
 
     prevQuestion() {
         let {currentUnit, currentUnitObj, currentLesson, currentLessonObj, currentQuestion} = this.props.currentValues;
@@ -363,15 +365,16 @@ class Dashboard extends React.Component {
         if (currentQuestion > 0) {
             targetQuestion = (parseInt(currentQuestion, 10) - 1).toString();
         } else {
-            alert("You are already at the first question in the lesson - select another lesson")
+            this.setState({
+                snackbarText: "You are already at the first question in the lesson - select another lesson"
+            });
+            this.handleShowSnackbar();
         }
-
         this.props.setCurrentValues("currentQuestion", targetQuestion);
         this.props.setCurrentValues("currentQuestionObj", book[currentUnit].lessons[currentLesson].questions[targetQuestion]);
 
         // the whole task obj in redux
         let taskObjRedux = userProgress.currentUser.user_progress;
-
         // the current task object in redux
         let curUnit = taskObjRedux[currentUnitObj.id];
     }
@@ -385,7 +388,6 @@ class Dashboard extends React.Component {
         if (!currentFbId) {
             return <Redirect to={'/'}/>
         }
-
         if (this.state.readyForRender) {
 
             lmsCards = book.map((unit, i) => (
@@ -401,9 +403,7 @@ class Dashboard extends React.Component {
                 />
             ))
         }
-
         if (this.state.readyForRender) {
-
             return (
                 <div className="background">
                     <Grid>
@@ -427,6 +427,7 @@ class Dashboard extends React.Component {
                             </div>
                         </Cell>
                     </Grid>
+                    {this.renderSnackbar()}
                 </div>
             )
         }
@@ -437,11 +438,13 @@ class Dashboard extends React.Component {
     }
 }
 
+
 const mapStateToProps = state => ({
     book: state.lmsContent.book,
     userProgress: state.userProgress,
     currentValues: state.currentValues
 });
+
 
 const mapDispatchToProps = dispatch => {
     return {

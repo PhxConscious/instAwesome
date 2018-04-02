@@ -124,11 +124,11 @@ div#inputComponent{
     min-width: 200px;
     border-radius: 10px;
     color: white;
-    font-size: 18px;
+    font-size: medium;
     height: 45px;
 }
 
-span.copiedText{
+.copiedText{
     color:red;
     font-size: 15px;
     font-weight: bold;
