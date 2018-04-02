@@ -37,7 +37,7 @@ class AppNavbar extends Component {
     };
 
     isUserExpert = () => {
-        if (this.props.userInfo.isExpert) {
+        if (this.props.userInfo && this.props.userInfo.isExpert) {
             return (
                 <Link className='linkTo mdl-navigation__link mdl-menu__item' to='/expert/dashboard'>
                     <div className='expertAdminTabs'>
@@ -50,7 +50,7 @@ class AppNavbar extends Component {
     };
 
     isUserAdmin = () => {
-        if (this.props.userInfo.isAdmin) {
+        if (this.props.userInfo && this.props.userInfo.isAdmin) {
             return (
                 <Link className='linkTo mdl-navigation__link mdl-menu__item' to='/admin/dashboard'>
                     <div className='expertAdminTabs'>
