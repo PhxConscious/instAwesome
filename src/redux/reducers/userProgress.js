@@ -80,6 +80,18 @@ export default (state = initialState, action) => {
       return {...state}
 
 
+
+    case "UPDATE_IS_INSTA_STUD_FULFILLED":
+      return {
+        ...state,
+        currentUser: action.payload.data[0]
+      }
+    case "UPDATE_IS_INSTA_STUD_PENDING":
+      return {...state}
+    case "UPDATE_IS_INSTA_STUD_REJECTED":
+      return {...state}
+
+
     case "GET_ALL_EXPERTS_FULFILLED":
       return {
         ...state,
