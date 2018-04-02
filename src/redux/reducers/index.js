@@ -6,6 +6,7 @@ import companyInfo from "./companyInfo";
 import userCompanyJoin from "./userCompanyJoin";
 import feedback from "./feedback";
 import userExpertJoin from './userExpertJoin';
+import payments from './payments';
 
 const appReducer = combineReducers({
   userProgress: userProgress,
@@ -14,7 +15,8 @@ const appReducer = combineReducers({
   companyInfo: companyInfo,
   userCompanyJoin: userCompanyJoin,
   feedback: feedback,
-  userExpertJoin, userExpertJoin
+  userExpertJoin, userExpertJoin,
+  payments: payments,
 });
 
 const rootReducer = (state, action) => {
