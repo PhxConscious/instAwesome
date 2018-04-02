@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5dcbd94a-9853-46c1-a5fe-46ff5bc17eff" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/Styles/FormsStyles.css" afterPath="$PROJECT_DIR$/src/Styles/FormsStyles.css" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Pages/UserProfile.js" afterPath="$PROJECT_DIR$/src/Components/Pages/UserProfile.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -17,11 +16,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="FormsStyles.css" pinned="false" current-in-tab="true">
+      <file leaf-file-name="FormsStyles.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Styles/FormsStyles.css">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="339">
               <caret line="26" column="17" lean-forward="false" selection-start-line="26" selection-start-column="17" selection-end-line="26" selection-end-column="17" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserProfile.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Components/Pages/UserProfile.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="737">
+              <caret line="57" column="124" lean-forward="false" selection-start-line="57" selection-start-column="124" selection-end-line="57" selection-end-column="124" />
               <folding />
             </state>
           </provider>
@@ -57,16 +66,6 @@
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LandingPage.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Components/Pages/LandingPage.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="1" column="23" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="23" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -172,7 +171,6 @@
         <option value="$PROJECT_DIR$/src/Components/Pages/SignUp.js" />
         <option value="$PROJECT_DIR$/src/Styles/UnderwaterWrapperStyles.css" />
         <option value="$PROJECT_DIR$/src/Components/Forms/SignIn.js" />
-        <option value="$PROJECT_DIR$/src/Components/Pages/UserProfile.js" />
         <option value="$PROJECT_DIR$/src/Components/Forms/PrimaryContact.js" />
         <option value="$PROJECT_DIR$/src/Components/Forms/ChangePassword.js" />
         <option value="$PROJECT_DIR$/src/Components/Forms/RecoverPassword.js" />
@@ -196,6 +194,7 @@
         <option value="$PROJECT_DIR$/src/Components/Reusable/AppNav.js" />
         <option value="$PROJECT_DIR$/src/Components/Pages/Splash.js" />
         <option value="$PROJECT_DIR$/src/Styles/FormsStyles.css" />
+        <option value="$PROJECT_DIR$/src/Components/Pages/UserProfile.js" />
       </list>
     </option>
   </component>
@@ -418,7 +417,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="403659000" />
+    <option name="totallyTimeSpent" value="403738000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1280" y="22" width="1280" height="1418" extended-state="0" />
@@ -472,13 +471,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/Pages/UserProfile.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="833">
-          <caret line="49" column="16" lean-forward="false" selection-start-line="49" selection-start-column="16" selection-end-line="49" selection-end-column="16" />
         </state>
       </provider>
     </entry>
@@ -883,6 +875,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="339">
           <caret line="26" column="17" lean-forward="false" selection-start-line="26" selection-start-column="17" selection-end-line="26" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/Pages/UserProfile.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="737">
+          <caret line="57" column="124" lean-forward="false" selection-start-line="57" selection-start-column="124" selection-end-line="57" selection-end-column="124" />
           <folding />
         </state>
       </provider>
