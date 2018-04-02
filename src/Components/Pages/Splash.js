@@ -33,13 +33,13 @@ class Splash extends React.Component {
         this.handleShowSnackbar();
         setTimeout(() => {
             window.location.reload();
-        }, 3500)
+        }, 3000)
     }
 
 
     renderSnackbar = () => {
         return (
-            <Snackbar className='snackbar' active={this.state.isSnackbarActive} timeout={3000}
+            <Snackbar className='snackbar' active={this.state.isSnackbarActive} timeout={2500}
                       onTimeout={this.handleTimeoutSnackbar}>{this.state.snackbarText}</Snackbar>
         )
     };
@@ -108,7 +108,8 @@ class Splash extends React.Component {
                                     </div>
                                 </Cell>
                                 <Cell col={2} hideTablet={true} hidePhone={true} className='leftArrowText'>
-                                    Start your training
+                                    {/*Start your training*/}
+                                    LMS Coming April 26
                                 </Cell>
                                 <Cell col={4} tablet={12} phone={12}>
                                     <p className='splashText'>

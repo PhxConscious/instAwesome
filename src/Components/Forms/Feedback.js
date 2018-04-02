@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import {Redirect} from 'react-router-dom';
 import { postFeedback } from '../../redux/actions/feedback';
 import { Button } from 'react-mdl';
+import '../../Styles/CommentFeed.css';
 
 class Feedback extends React.Component {
   constructor(props){
@@ -55,7 +56,9 @@ class Feedback extends React.Component {
         </div>
       )
     } else {
-      return <div style={{display:"flex", justifyContent:"center"}}><h4>Please log in to post comments</h4></div>
+      return <div className='pleaseLoginText'>
+          <h4>Please log in to post comments</h4>
+      </div>
     }
   }
 }

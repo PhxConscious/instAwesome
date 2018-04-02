@@ -55,7 +55,7 @@ class UserProfile extends Component {
 
                         <Tab className={userHasCompany ? "" : "hidden"}><span className="consciousBlueColor">Edit Company Info</span></Tab>
                         <Tab className={userHasCompany ? "" : "hidden"}><span className="consciousBlueColor">On The Web</span></Tab>
-                        <Tab className={userHasCompany ? "" : "hidden"}><span className="consciousBlueColor">Primary Contact</span></Tab>
+                        <Tab className={userHasCompany ? "" : "hidden"}><span className="consciousBlueColor">Account Manager</span></Tab>
                         <Tab className={userHasCompany ? "" : "hidden"}><span className="consciousBlueColor">Change Password</span></Tab>
                     </Tabs>
                     <section className="tabSection">

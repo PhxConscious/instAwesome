@@ -1,18 +1,50 @@
 .parentContainer {
   /*background-color: pink;*/
+  font-family: Asap, sans-serif;
   padding: .5em;
   margin: .5em 0 .5em 0;
 }
 
 .childrenContainer {
-  background-color: #f3f3f3;
+  background-color: #f3f3f3f3;
   padding: .5em;
 }
 
+.forumTitle{
+  font-family: Asap, sans-serif;
+  font-weight: bold;
+  color: #48C8D3;
+}
+
 .childComment{
-  marginLeft: 1em;
   background-color: white;
   margin: .5em .5em .5em .25em;
   padding: .5em .5em 0 .5em;
   border-radius: .5em;
+}
+
+.commentCont{
+  width: 80%;
+  max-width: 900px;
+}
+
+.showMoreCommentsBtnCont{
+  margin-top: 20px;
+  text-align: center;
+}
+
+.pleaseLoginText{
+  display: flex;
+  justify-content: center;
+  font-family: Asap, sans-serif;
+  color: #48C8D3;
+}
+
+.showMoreCommentsButton{
+  background-color: #9BDD82 !important;
+  min-width: 200px !important;
+  border-radius: 10px !important;
+  color: white;
+  font-size: 16px !important;
+  height: 45px !important;
 }
