@@ -28,7 +28,7 @@ class Feedback extends React.Component {
 
     if(userInfo.firebase_id){
       return (
-        <div style={{width: "85vw", margin: "0 auto", marginTop: "2em"}}>
+        <div>
           <form
             id="form"
             onSubmit={e => {
@@ -37,15 +37,16 @@ class Feedback extends React.Component {
             }}
           >
             <textarea
+              className='writeUsCommentTextField'
               value={this.state.textArea}
               onChange={e => this.setState({textArea: e.target.value})}
               placeholder="write us a comment"
               rows={4}
-              style={{width: "100%"}}
               autoFocus
             />
-          <div>
+          <div className='submitYourCommentButtonCont'>
             <Button
+                className='submitYourCommentButton'
                 raised colored ripple
                 type="submit"
               >submit your comment
