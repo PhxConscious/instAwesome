@@ -132,7 +132,7 @@ class Dashboard extends React.Component {
         // now lets get our active question based on our active lesson output
         this.getActiveQuestion(lastUnlockedLesson.questions);
     }
-    
+
 
     // cycle through to find first question where id !== true
     getActiveQuestion(optQuestArr) { // uses optional param
