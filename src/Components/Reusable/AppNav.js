@@ -112,10 +112,10 @@ class AppNavbar extends Component {
                             </Link>
                           </span>
                           <span>
-                            <Link to='/payment'
-                                  className="mdl-layout-spacer centerLogoCont">
-                                <img className='centerLogo' src='https://www.mochasoft.dk/images/buynow.jpg' alt="blah"/>
-                            </Link>
+                            {/*<Link to='/payment'*/}
+                                  {/*className="mdl-layout-spacer centerLogoCont">*/}
+                                {/*<img className='centerLogo' src='https://www.mochasoft.dk/images/buynow.jpg' alt="blah"/>*/}
+                            {/*</Link>*/}
                           </span>
 
                         </Cell>

@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5dcbd94a-9853-46c1-a5fe-46ff5bc17eff" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Pages/ExpertDashboard.js" afterPath="$PROJECT_DIR$/src/Components/Pages/ExpertDashboard.js" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Pages/Splash.js" afterPath="$PROJECT_DIR$/src/Components/Pages/Splash.js" />
-      <change beforePath="$PROJECT_DIR$/src/Styles/ExpertDashboardStyles.css" afterPath="$PROJECT_DIR$/src/Styles/ExpertDashboardStyles.css" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Reusable/AppNav.js" afterPath="$PROJECT_DIR$/src/Components/Reusable/AppNav.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -19,11 +16,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="AppNav.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="AppNav.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Components/Reusable/AppNav.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="731">
-              <caret line="52" column="35" lean-forward="false" selection-start-line="52" selection-start-column="35" selection-end-line="52" selection-end-column="35" />
+            <state relative-caret-position="496">
+              <caret line="117" column="38" lean-forward="true" selection-start-line="114" selection-start-column="27" selection-end-line="117" selection-end-column="38" />
               <folding />
             </state>
           </provider>
@@ -73,7 +70,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ExpertDashboardStyles.css" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ExpertDashboardStyles.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Styles/ExpertDashboardStyles.css">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="765">
@@ -196,10 +193,10 @@
         <option value="$PROJECT_DIR$/src/Components/Forms/CompanyInfo.js" />
         <option value="$PROJECT_DIR$/src/Styles/MultiChoiceStyles.css" />
         <option value="$PROJECT_DIR$/src/Components/LMS/MultiChoiceShell.js" />
-        <option value="$PROJECT_DIR$/src/Components/Reusable/AppNav.js" />
         <option value="$PROJECT_DIR$/src/Components/Pages/Splash.js" />
         <option value="$PROJECT_DIR$/src/Components/Pages/ExpertDashboard.js" />
         <option value="$PROJECT_DIR$/src/Styles/ExpertDashboardStyles.css" />
+        <option value="$PROJECT_DIR$/src/Components/Reusable/AppNav.js" />
       </list>
     </option>
   </component>
@@ -422,7 +419,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="402402000" />
+    <option name="totallyTimeSpent" value="402469000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1280" y="22" width="1280" height="1418" extended-state="0" />
@@ -809,14 +806,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/Reusable/AppNav.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="731">
-          <caret line="52" column="35" lean-forward="false" selection-start-line="52" selection-start-column="35" selection-end-line="52" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Components/Reusable/BlueAppBg.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
@@ -885,6 +874,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="765">
           <caret line="45" column="20" lean-forward="false" selection-start-line="45" selection-start-column="20" selection-end-line="45" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/Reusable/AppNav.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="496">
+          <caret line="117" column="38" lean-forward="true" selection-start-line="114" selection-start-column="27" selection-end-line="117" selection-end-column="38" />
           <folding />
         </state>
       </provider>
