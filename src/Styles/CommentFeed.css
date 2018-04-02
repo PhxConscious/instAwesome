@@ -1,50 +1,99 @@
 .parentContainer {
-  /*background-color: pink;*/
-  font-family: Asap, sans-serif;
-  padding: .5em;
-  margin: .5em 0 .5em 0;
+    /*background-color: pink;*/
+    font-family: Asap, sans-serif;
+    padding: .5em;
+    margin: .5em 0 .5em 0;
 }
 
 .childrenContainer {
-  background-color: #f3f3f3f3;
-  padding: .5em;
+    background-color: rgba(249, 249, 249, 0.95);
+    padding: .2em;
+    padding-left: 0;
+    border-radius: 10px;
 }
 
-.forumTitle{
-  font-family: Asap, sans-serif;
-  font-weight: bold;
-  color: #48C8D3;
+#form{
+    margin: auto;
+    width: 80%;
+    max-width: 900px;
+    font-family: Asap, sans-serif;
 }
 
-.childComment{
-  background-color: white;
-  margin: .5em .5em .5em .25em;
-  padding: .5em .5em 0 .5em;
-  border-radius: .5em;
+.forumTitle {
+    font-family: Asap, sans-serif;
+    font-weight: bold;
+    color: #48C8D3;
 }
 
-.commentCont{
-  width: 80%;
-  max-width: 900px;
+.childComment {
+    background-color: white;
+    margin: .5em .5em .5em .25em;
+    padding: .5em .5em 0 .5em;
+    border-radius: .5em;
 }
 
-.showMoreCommentsBtnCont{
-  margin-top: 20px;
-  text-align: center;
+.commentCont {
+    width: 80%;
+    max-width: 900px;
 }
 
-.pleaseLoginText{
-  display: flex;
-  justify-content: center;
-  font-family: Asap, sans-serif;
-  color: #48C8D3;
+.pleaseLoginText {
+    display: flex;
+    justify-content: center;
+    font-family: Asap, sans-serif;
+    color: #48C8D3;
 }
 
-.showMoreCommentsButton{
-  background-color: #9BDD82 !important;
-  min-width: 200px !important;
-  border-radius: 10px !important;
-  color: white;
-  font-size: 16px !important;
-  height: 45px !important;
+.writeUsCommentTextField{
+    width: 100%;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: large;
+    font-family: Asap, sans-serif;
+}
+
+#signedInCommentField{
+    font-size: medium;
+    font-family: Asap, sans-serif;
+}
+
+.commentSubmitButton {
+    background-color: #48C8D3 !important;
+    min-width: 50px !important;
+    border-radius: 10px !important;
+    color: white;
+    font-size: 16px !important;
+    height: 35px !important;
+    float: right;
+    margin-top: 20px !important;
+}
+
+.showMoreCommentsBtnCont {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.showMoreCommentsButton {
+    background-color: #9BDD82 !important;
+    min-width: 200px !important;
+    border-radius: 10px !important;
+    color: white;
+    font-size: 16px !important;
+    height: 45px !important;
+    margin-bottom: 30px !important;
+}
+
+.submitYourCommentButtonCont {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.submitYourCommentButton {
+    background-color: #9BDD82 !important;
+    min-width: 200px !important;
+    border-radius: 10px !important;
+    color: white;
+    font-size: 16px !important;
+    height: 45px !important;
+    margin-bottom: 30px !important;
 }

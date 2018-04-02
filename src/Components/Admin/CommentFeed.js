@@ -112,6 +112,7 @@ class CommentFeed extends React.Component {
                                     }}
                                 >
                                     <Textfield
+                                        id='signedInCommentField'
                                         style={{marginLeft: "1em", width: "80%"}}
                                         className="textField"
                                         label="comment here"
@@ -119,7 +120,7 @@ class CommentFeed extends React.Component {
                                         onChange={e => this.commentHandler(e, comment.feedback_id)}
                                     />
                                     <Button
-                                        style={{margin: "0 1em 0 1em", float: "right"}}
+                                        className='commentSubmitButton'
                                         raised colored ripple mini
                                     >
                                         SUBMIT
