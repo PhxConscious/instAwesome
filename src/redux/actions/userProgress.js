@@ -49,6 +49,15 @@ export const createNewUser = (userObj) => {
   }
 }
 
+export const updateIsInstaStud = (firebase_id, bool) => {
+  return {
+    type: "UPDATE_IS_INSTA_STUD",
+    payload: axios.put(`${config.app.api}/users/updateinstastud/${firebase_id}`, {
+      isInstaStud: bool
+    })
+  }
+}
+
 export const getAllExperts = () => {
   return {
     type: "GET_ALL_EXPERTS",
