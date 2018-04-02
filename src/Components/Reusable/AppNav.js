@@ -72,7 +72,7 @@ class AppNavbar extends Component {
                     {/*<span className="mdl-layout-title">Title</span>*/}
                     <nav className="mdl-navigation ">
                         <Link to='/profile' className="mdl-navigation__link" href="">ACCOUNT</Link>
-                        <Link to={userInfo ? '/learn/dashboard' : '/'} className="mdl-navigation__link">LEARN</Link>
+                        <Link to={userInfo ? '/learn/dashboard' : '/'} className="mdl-navigation__link disabled-link">LEARN</Link>
 
                             {this.isUserExpert()}
                             {this.isUserAdmin()}
@@ -96,7 +96,8 @@ class AppNavbar extends Component {
                                         <div className='learnCont'>
                                             <Link
                                                 to={userInfo ? '/learn/dashboard' : '/'}
-                                                className="learnTextCont linkTo mdl-layout--large-screen-only">
+                                                className="learnTextCont linkTo mdl-layout--large-screen-only disabled-link"
+                                            >
                                                 Learn
                                             </Link>
                                         </div>

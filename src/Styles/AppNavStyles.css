@@ -10,6 +10,10 @@
     margin: 0;
 }
 
+.disabled-link{
+    pointer-events: none;
+}
+
 div.mdl-grid.navContentCont {
     margin: 0;
     padding: 0;

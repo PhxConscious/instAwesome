@@ -108,7 +108,8 @@ class Splash extends React.Component {
                                     </div>
                                 </Cell>
                                 <Cell col={2} hideTablet={true} hidePhone={true} className='leftArrowText'>
-                                    Start your training
+                                    {/*Start your training*/}
+                                    LMS Coming April 26
                                 </Cell>
                                 <Cell col={4} tablet={12} phone={12}>
                                     <p className='splashText'>
