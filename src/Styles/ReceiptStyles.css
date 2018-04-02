@@ -1,0 +1,38 @@
+#page {
+  width: 100vw;
+  height: 100vh;
+  padding-top: 5vh;
+  background-color: #f3f3f3;
+}
+
+#mainContainer {
+  margin: auto;
+  width: 85vw;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 15px 10vh 15px;
+}
+
+#detailContainer {
+  border: 1px solid grey;
+  border-radius: .3em;
+  margin: auto;
+  width: 60vw;
+  background-color: rgba(88,196,214, .1);
+  padding: 10px;
+}
+
+#detailContainer div {
+  height: .5em;
+}
+
+.right {
+  float: right;
+}
+
+.left {
+  display: inline-block;
+}
