@@ -109,7 +109,7 @@ class Splash extends React.Component {
                                 </Cell>
                                 <Cell col={2} hideTablet={true} hidePhone={true} className='leftArrowText'>
                                     {/*Start your training*/}
-                                    LMS Coming April 26
+                                    LMS Coming April 26th
                                 </Cell>
                                 <Cell col={4} tablet={12} phone={12}>
                                     <p className='splashText'>
@@ -126,8 +126,9 @@ class Splash extends React.Component {
                                     </div>
                                 </Cell>
                                 <Cell hideDesktop={true} hideTablet={false} hidePhone={false}>
-                                    <Link className='startTrainingTextMobile' to='/learn/dashboard'>
-                                        Start Your Training
+                                    <Link className='startTrainingTextMobile disabled-link' to='/learn/dashboard'>
+                                        {/*Start Your Training*/}
+                                        LMS Coming April 26th
                                     </Link>
                                 </Cell>
                                 <Cell hideDesktop={true} hideTablet={false} hidePhone={false}>
