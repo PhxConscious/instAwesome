@@ -6,15 +6,13 @@
 }
 
 .childrenContainer {
-    background-color: rgba(249, 249, 249, 0.95);
+    background-color: #e8e8e8;
     padding: .2em;
-    padding-left: 0;
     border-radius: 10px;
 }
 
 #form{
     margin: auto;
-    width: 80%;
     max-width: 900px;
     font-family: Asap, sans-serif;
 }
@@ -32,6 +30,10 @@
     border-radius: .5em;
 }
 
+.textField{
+    width: 80% !important;
+}
+
 .commentCont {
     width: 80%;
     max-width: 900px;
@@ -44,8 +46,13 @@
     color: #48C8D3;
 }
 
+.writeUsCommentTextFieldCont{
+    text-align: center;
+}
+
 .writeUsCommentTextField{
-    width: 100%;
+    width: 90%;
+    margin: auto;
     border-radius: 10px;
     padding: 10px;
     font-size: large;
@@ -57,15 +64,21 @@
     font-family: Asap, sans-serif;
 }
 
+.mdl-textfield.mdl-js-textfield.textField.is-upgraded{
+    width: 100% !important;
+    background-color: white !important;
+}
+
 .commentSubmitButton {
     background-color: #48C8D3 !important;
-    min-width: 50px !important;
+    width: 60%;
+    max-width: 170px;
     border-radius: 10px !important;
     color: white;
     font-size: 16px !important;
     height: 35px !important;
     float: right;
-    margin-top: 20px !important;
+    margin: 20px !important;
 }
 
 .showMoreCommentsBtnCont {

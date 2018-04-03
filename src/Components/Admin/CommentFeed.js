@@ -1,9 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {getAllFeedback, getFeedbackByParentId, postFeedback, resetFeedback} from '../../redux/actions/feedback';
-import {Button, Textfield} from 'react-mdl';
+import {Button, Textfield, Grid, Cell} from 'react-mdl';
 import moment from 'moment';
 import '../../Styles/CommentFeed.css';
+import Gradient from "../Reusable/Gradient";
 
 class CommentFeed extends React.Component {
     constructor(props) {
@@ -111,20 +112,25 @@ class CommentFeed extends React.Component {
                                         this.postComment(comment.feedback_id, this.state.comments[comment.feedback_id]);
                                     }}
                                 >
-                                    <Textfield
-                                        id='signedInCommentField'
-                                        style={{marginLeft: "1em", width: "80%"}}
-                                        className="textField"
-                                        label="comment here"
-                                        value={this.state.comments[comment.feedback_id] || ""}
-                                        onChange={e => this.commentHandler(e, comment.feedback_id)}
-                                    />
-                                    <Button
-                                        className='commentSubmitButton'
-                                        raised colored ripple mini
-                                    >
-                                        SUBMIT
-                                    </Button>
+                                    <Grid>
+                                        <Cell col={8} tablet={12} phone={12}>
+                                            <Textfield
+                                                id='signedInCommentField'
+                                                className="textField"
+                                                label="comment here"
+                                                value={this.state.comments[comment.feedback_id] || ""}
+                                                onChange={e => this.commentHandler(e, comment.feedback_id)}
+                                            />
+                                        </Cell>
+                                        <Cell col={4} tablet={12} phone={12}>
+                                            <Button
+                                                className='commentSubmitButton'
+                                                raised colored ripple mini
+                                            >
+                                                SUBMIT
+                                            </Button>
+                                        </Cell>
+                                    </Grid>
                                 </form>
                         }
                     </div>

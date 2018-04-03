@@ -191,7 +191,7 @@ class OnTheWeb extends Component {
                                         className="formInput"
                                         type="text"
                                         onChange={this.handleInputTextChange}
-                                        placeholder='https://phxconscious.com'
+                                        placeholder='Enter your company website url'
                                         value={this.state.company_website}>
                                     </input>
                                 </div>
@@ -204,7 +204,7 @@ class OnTheWeb extends Component {
                                         className="formInput"
                                         type="text"
                                         onChange={this.handleInputTextChange}
-                                        placeholder="top result for 'conscious creative' and 'creative startup studio'"
+                                        placeholder="Enter your google search goals"
                                         value={this.state.google_search_goals}>
                                     </input>
                                 </div>
@@ -217,7 +217,7 @@ class OnTheWeb extends Component {
                                         className="formInput"
                                         type="text"
                                         onChange={this.handleInputTextChange}
-                                        placeholder='https://google.com/maps/place/...'
+                                        placeholder='Enter your google business profile url'
                                         value={this.state.google_business_profile}>
                                     </input>
                                 </div>
@@ -230,7 +230,7 @@ class OnTheWeb extends Component {
                                         className="formInput"
                                         type="text"
                                         onChange={this.handleInputTextChange}
-                                        placeholder='@phxconscious'
+                                        placeholder='Enter your instagram username'
                                         value={this.state.instagram_username}>
                                     </input>
                                 </div>
@@ -243,7 +243,7 @@ class OnTheWeb extends Component {
                                         className="formInput"
                                         type="text"
                                         onChange={this.handleInputTextChange}
-                                        placeholder='brand awareness, community recruiting'
+                                        placeholder='Enter your instagram goals'
                                         value={this.state.instagram_goals}>
                                     </input>
                                 </div>
@@ -256,7 +256,7 @@ class OnTheWeb extends Component {
                                         className="formInput"
                                         type="text"
                                         onChange={this.handleInputTextChange}
-                                        placeholder='https://facebook.com/phxconscious'
+                                        placeholder='Enter your facebook profile url'
                                         value={this.state.facebook_page_url}>
                                     </input>
                                 </div>
@@ -269,7 +269,7 @@ class OnTheWeb extends Component {
                                         className="formInput"
                                         type="text"
                                         onChange={this.handleInputTextChange}
-                                        placeholder='messenger funnel into website'
+                                        placeholder='Enter your facebook goals'
                                         value={this.state.facebook_goals}>
                                     </input>
                                 </div>
@@ -282,7 +282,7 @@ class OnTheWeb extends Component {
                                         className="formInput"
                                         type="text"
                                         onChange={this.handleInputTextChange}
-                                        placeholder='@phxconscious'
+                                        placeholder='Enter your twitter handle'
                                         value={this.state.twitter_username}>
                                     </input>
                                 </div>
@@ -295,7 +295,7 @@ class OnTheWeb extends Component {
                                         className="formInput"
                                         type="text"
                                         onChange={this.handleInputTextChange}
-                                        placeholder='brand awareness, community recruiting'
+                                        placeholder='Enter your twitter goals'
                                         value={this.state.twitter_goals}>
                                     </input>
                                 </div>
@@ -308,7 +308,7 @@ class OnTheWeb extends Component {
                                         className="formInput"
                                         type="text"
                                         onChange={this.handleInputTextChange}
-                                        placeholder='https://linkedin.com/company/phxconscious/'
+                                        placeholder='Enter your linkedIn profile url'
                                         value={this.state.linkedin_profile_url}>
                                     </input>
                                 </div>
@@ -321,7 +321,7 @@ class OnTheWeb extends Component {
                                         className="formInput"
                                         type="text"
                                         onChange={this.handleInputTextChange}
-                                        placeholder='building credibility, community recruiting, forming partnerships'
+                                        placeholder='Enter your linkedIn goals'
                                         value={this.state.linkedin_goals}>
                                     </input>
                                 </div>
@@ -334,7 +334,7 @@ class OnTheWeb extends Component {
                                         className="formInput"
                                         type="text"
                                         onChange={this.handleInputTextChange}
-                                        placeholder='https://phxconscious.com'
+                                        placeholder='Enter your google+ profile url'
                                         value={this.state.google_plus_url}>
                                     </input>
                                 </div>
@@ -347,7 +347,7 @@ class OnTheWeb extends Component {
                                         className="formInput"
                                         type="text"
                                         onChange={this.handleInputTextChange}
-                                        placeholder='general brand awareness, SEO'
+                                        placeholder='Enter your google+ profile'
                                         value={this.state.google_plus_goals}>
                                     </input>
                                 </div>
@@ -360,7 +360,7 @@ class OnTheWeb extends Component {
                                         className="formInput"
                                         type="text"
                                         onChange={this.handleInputTextChange}
-                                        placeholder='https://www.youtube.com/channel/UCxBENO8Q1MdIgMBqEupL7hQ'
+                                        placeholder='Enter your youtube channel url'
                                         value={this.state.youtube_url}>
                                     </input>
                                 </div>
@@ -373,7 +373,7 @@ class OnTheWeb extends Component {
                                         className="formInput"
                                         type="text"
                                         onChange={this.handleInputTextChange}
-                                        placeholder='https://vimeo.com/phxconsious'
+                                        placeholder='Enter your vimeo profile'
                                         value={this.state.vimeo_url}>
                                     </input>
                                 </div>
@@ -386,7 +386,7 @@ class OnTheWeb extends Component {
                                         className="formInput"
                                         type="text"
                                         onChange={this.handleInputTextChange}
-                                        placeholder='exposing content, building credibility, recruiting talent'
+                                        placeholder='Enter your youtube/vimeo goals'
                                         value={this.state.youtube_vimeo_goals}>
                                     </input>
                                 </div>
@@ -399,7 +399,7 @@ class OnTheWeb extends Component {
                                         className="formInput"
                                         type="text"
                                         onChange={this.handleInputTextChange}
-                                        placeholder=''
+                                        placeholder='Enter your pinterest profile'
                                         value={this.state.pinterest_profile}>
                                     </input>
                                 </div>
@@ -412,7 +412,7 @@ class OnTheWeb extends Component {
                                         className="formInput"
                                         type="text"
                                         onChange={this.handleInputTextChange}
-                                        placeholder=''
+                                        placeholder='Enter your pinterest goals'
                                         value={this.state.pinterest_goals}>
                                     </input>
                                 </div>
@@ -425,7 +425,7 @@ class OnTheWeb extends Component {
                                         className="formInput"
                                         type="text"
                                         onChange={this.handleInputTextChange}
-                                        placeholder=''
+                                        placeholder='Enter your yelp profile'
                                         value={this.state.yelp_business_profile}>
                                     </input>
                                 </div>
@@ -438,7 +438,7 @@ class OnTheWeb extends Component {
                                         className="formInput"
                                         type="text"
                                         onChange={this.handleInputTextChange}
-                                        placeholder=''
+                                        placeholder='Enter your yelp goals'
                                         value={this.state.yelp_goals}>
                                     </input>
                                 </div>
@@ -451,7 +451,7 @@ class OnTheWeb extends Component {
                                         className="formInput"
                                         type="text"
                                         onChange={this.handleInputTextChange}
-                                        placeholder=''
+                                        placeholder='Enter your bbb profile'
                                         value={this.state.better_business_bureau_profile}>
                                     </input>
                                 </div>
@@ -464,7 +464,7 @@ class OnTheWeb extends Component {
                                         className="formInput"
                                         type="text"
                                         onChange={this.handleInputTextChange}
-                                        placeholder=''
+                                        placeholder='Enter your bbb goals'
                                         value={this.state.better_business_bureau_goals}>
                                     </input>
                                 </div>
