@@ -122,7 +122,7 @@ class PrimaryContact extends Component {
                                     className="formInput"
                                     type="text"
                                     onChange={this.handleInputTextChange}
-                                    placeholder='Jeremy Chevallier'
+                                    placeholder="Enter your account manager's full name"
                                     value={this.state.primary_contact_full_name}>
                                 </input>
                             </div>
@@ -135,7 +135,7 @@ class PrimaryContact extends Component {
                                     className="formInput"
                                     type="text"
                                     onChange={this.handleInputTextChange}
-                                    placeholder='480-268-5305'
+                                    placeholder="Enter your account manager's phone number"
                                     value={this.state.primary_contact_phone_number}>
                                 </input>
                             </div>
@@ -148,7 +148,7 @@ class PrimaryContact extends Component {
                                     className="formInput"
                                     type="text"
                                     onChange={this.handleInputTextChange}
-                                    placeholder='Jeremy@phxconscious.com'
+                                    placeholder="Enter your account manager's email"
                                     value={this.state.primary_contact_email}>
                                 </input>
                             </div>
