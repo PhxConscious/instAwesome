@@ -52,11 +52,16 @@ class LoginForm extends Component {
         this.setState({isSnackbarActive: false});
     }
 
-    loginRefresh(){
-      const {cookies} = this.props;
-      cookies.remove('firebase_id');
-      window.location.reload();
-      alert("Sorry you're having technical difficulties! Please bear with us as continue improving as quickly as we can. Clicking this link will ensure your login info is reset - try logging in again.")
+    loginRefresh() {
+        const {cookies} = this.props;
+        cookies.remove('firebase_id');
+        this.setState({
+            isSnackbarActive: true,
+            snackbarText: 'Sorry you\'re having technical difficulties! Please bear with us as continue improving as quickly as we can. Clicking this link will ensure your login info is reset - try logging in again.'
+        });
+        setTimeout(() => {
+            window.location.reload();
+        }, 4000)
     }
 
     onLoginSuccess = (result) => {
