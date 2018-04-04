@@ -14,6 +14,7 @@ import Forum from "./Pages/Forum";
 import Payment from "./Pages/Payment";
 import AppNav from './Reusable/AppNav';
 import Gradient from "./Reusable/Gradient";
+import ChatLayout from "./Chat/ChatLayout";
 
 
 
@@ -39,6 +40,7 @@ class Main extends React.Component {
                                 <Route exact path="/admin/dashboard" render={props => <AdminDashboard {...props}/>}/>
                                 <Route exact path="/forum" render={props => <Forum {...props}/>}/>
                                 <Route exact path="/payment" render={props => <Payment {...props}/>}/>
+                                <Route exact path="/chat" render={props => <ChatLayout {...props}/>}/>
                             </Switch>
                         </main>
                     </div>
