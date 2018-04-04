@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import "../../../Styles/ChatStyles.css";
 
 export default class Messages extends Component {
 	constructor(props) {

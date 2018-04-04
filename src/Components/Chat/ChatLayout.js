@@ -3,6 +3,7 @@ import io from 'socket.io-client';
 import { USER_CONNECTED, LOGOUT } from '../../Events';
 import LoginForm from './LoginForm';
 import ChatContainer from './chats/ChatContainer';
+import '../../Styles/ChatStyles.css'
 
 const socketUrl = "http://localhost:3231";
 
@@ -46,10 +47,9 @@ export default class ChatLayout extends Component {
 
 
   render(){
-    const { title } = this.props;
     const { socket, user } = this.state;
     return (
-      <div>{title}
+      <div className="container">
         {
           !user ?
           <LoginForm socket={socket} setUser={this.setUser}/>
