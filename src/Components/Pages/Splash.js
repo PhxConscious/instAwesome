@@ -4,6 +4,7 @@ import {Redirect, Link} from 'react-router-dom';
 import {withCookies} from 'react-cookie';
 import {Grid, Cell, Snackbar} from 'react-mdl';
 import '../../Styles/SplashPageStyles..css';
+import ChatLayout from '../Chat/ChatLayout';
 
 class Splash extends React.Component {
     constructor(props) {
@@ -80,6 +81,8 @@ class Splash extends React.Component {
                     <button className="splashButton" onClick={this.loginRefresh}>
                         Trouble logging in?
                     </button>
+
+                    <ChatLayout title={"test Title"}/>
                     {this.renderSnackbar()}
                 </div>
             )
