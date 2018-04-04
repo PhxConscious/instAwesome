@@ -1,5 +1,5 @@
 import React from 'react';
-import { VERIFY_USER } from '../Events';
+import { VERIFY_USER } from '../../Events';
 
 export default class LoginForm extends React.Component {
   constructor(props){
@@ -11,11 +11,13 @@ export default class LoginForm extends React.Component {
   }
 
   setUser = ({user, isUser}) => {
+    console.log(user, isUser)
     if(isUser){
       this.setError("user name taken")
     } else {
       // we passed this method from parent
       this.props.setUser(user)
+      this.setError("")
     }
 
   }
@@ -47,6 +49,7 @@ export default class LoginForm extends React.Component {
             value={nickname}
             onChange={e=>this.setState({nickname: e.target.value})}
           />
+          <div>{error ? error : null}</div>
         </form>
       </div>
     )
