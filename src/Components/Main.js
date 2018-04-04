@@ -25,9 +25,11 @@ class Main extends React.Component {
             <div>
                 <main>
                     <Switch>
-                        // You could wrap these all in one <AuthRedirect ifLoggedIn={true} to={"/splash"} />
-                        // if you prefixed the route with 'auth'.  You just need a base route that won't match
-                        // any of the logged-in routes in the app.
+                        {
+                            // You could wrap these all in one <AuthRedirect ifLoggedIn={true} to={"/splash"} />
+                            // if you prefixed the route with 'auth'.  You just need a base route that won't match
+                            // any of the logged-in routes in the app.
+                        }
                         <Route exact path="/" render={props =>
                             <AuthRedirect ifLoggedIn={true} to={"/splash"}>
                                 <LandingPage {...props} />
@@ -39,7 +41,9 @@ class Main extends React.Component {
                             </AuthRedirect>
                         }/>
 
-                        // check for login and redirect if we are on any one of these routes
+                        {
+                            // check for login and redirect if we are on any one of these routes
+                        }
                         <Route render={props =>
                             <AuthRedirect ifLoggedIn={false} to={"/"}>
                                 <DataProvider
