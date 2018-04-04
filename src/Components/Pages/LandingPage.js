@@ -7,8 +7,6 @@ import UnderwaterWrapper from '../Reusable/UnderwaterWrapper';
 import ShadowBox from '../Reusable/ShadowBox';
 import ConsciousCenter from '../Reusable/ConsciousCenter';
 import Gradient from "../Reusable/Gradient";
-import AppNavbar from '../Reusable/AppNav';
-
 
 class LandingPage extends Component {
     render() {

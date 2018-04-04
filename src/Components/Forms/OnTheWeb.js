@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import '../../Styles/FormsStyles.css';
-import {updateCompanyInfo, getCompanyList} from "../../redux/actions/companyInfo";
+import {updateCompanyInfo} from "../../redux/actions/companyInfo";
 import {connect} from "react-redux";
 import {Grid, Cell, Snackbar} from 'react-mdl';
 
@@ -128,7 +128,6 @@ class OnTheWeb extends Component {
         this.setState({[e.target.name]: e.target.value});
     };
 
-
     validateFBUrl = (fb) => {
         let base = "https://facebook.com/"
 
@@ -162,7 +161,6 @@ class OnTheWeb extends Component {
 
         this.setState({errorWarnings: newArr, isError: true})
     }
-
 
     render() {
         return (
@@ -494,9 +492,6 @@ const mapDispatchToProps = dispatch => {
         addCompanyInfo: (companyId, companyObj) => {
             dispatch(updateCompanyInfo(companyId, companyObj))
         },
-        getCompanyList: (fb_id) => {
-            dispatch(getCompanyList(fb_id))
-        }
     }
 };
 

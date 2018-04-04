@@ -2,42 +2,42 @@ import axios from 'axios';
 import config from '../../config'
 
 export const getAllUsers = () => {
-  // console.log("Action: Getting user", fb_id)
+  // console.log("Action: Getting user", firebase_id)
   return {
     type: "GET_ALL_USERS",
     payload: axios.get(`${config.app.api}/users`)
   }
 }
 
-export const getUserProgress = (fb_id) => {
-  // console.log("Action: Getting user", fb_id)
+export const getUserProgress = ({firebase_id}) => {
+  // console.log("Action: Getting user", firebase_id)
   return {
     type: "GET_USER_PROGRESS",
-    payload: axios.get(`${config.app.api}/users/${fb_id}`)
+    payload: axios.get(`${config.app.api}/users/${firebase_id}`)
   }
 }
 
-export const selectAnExpert = (fb_id) => {
-  // console.log("Action: Getting user", fb_id)
+export const selectAnExpert = (firebase_id) => {
+  // console.log("Action: Getting user", firebase_id)
   return {
     type: "SELECT_AN_EXPERT",
-    payload: axios.get(`${config.app.api}/users/${fb_id}`)
+    payload: axios.get(`${config.app.api}/users/${firebase_id}`)
   }
 }
 
-export const nextQuestion = (fb_id, data) => {
-  // console.log("action: nextQuestion", fb_id, data)
+export const nextQuestion = (firebase_id, data) => {
+  // console.log("action: nextQuestion", firebase_id, data)
   return {
     type: "NEXT_QUESTION",
-    payload: axios.put(`${config.app.api}/users/${fb_id}`, data)
+    payload: axios.put(`${config.app.api}/users/${firebase_id}`, data)
   }
 }
 
-export const updateNonCurrentUser = (fb_id, data) => {
-  // console.log("action: nextQuestion", fb_id, data)
+export const updateNonCurrentUser = (firebase_id, data) => {
+  // console.log("action: nextQuestion", firebase_id, data)
   return {
     type: "UPDATE_NON_CURRENT_USER",
-    payload: axios.put(`${config.app.api}/users/${fb_id}`, data)
+    payload: axios.put(`${config.app.api}/users/${firebase_id}`, data)
   }
 }
 
@@ -65,9 +65,9 @@ export const getAllExperts = () => {
   }
 }
 
-export const deleteUser = (fb_id) => {
+export const deleteUser = (firebase_id) => {
   return {
     type: "DELETE_USER",
-    payload: axios.delete(`${config.app.api}/users/${fb_id}`)
+    payload: axios.delete(`${config.app.api}/users/${firebase_id}`)
   }
 }

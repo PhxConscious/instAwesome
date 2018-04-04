@@ -14,7 +14,7 @@ const configs = {
         app: {
             ui: 'https://apps.phxconscious.com',
             api: 'https://api.phxconscious.com',
-        }
+        },
     },
 
     development: {
@@ -29,7 +29,7 @@ const configs = {
         app: {
             ui: 'http://localhost:3000',
             api: 'http://localhost:8080',
-        }
+        },
     },
 };
 

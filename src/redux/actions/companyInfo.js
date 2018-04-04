@@ -25,8 +25,7 @@ export const addCompanyInfo = (companyId, companyObj) => {
     }
 };
 
-export const getCompanyList = (firebase_id) => {
-  console.log("getCompanyList", `${config.app.api}/company/list/${firebase_id}`)
+export const getCompanyList = ({firebase_id}) => {
   return {
     type: "GET_COMPANY_LIST",
     payload: axios.get(`${config.app.api}/company/list/${firebase_id}`)

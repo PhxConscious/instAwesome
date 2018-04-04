@@ -13,7 +13,6 @@ class AppNavbar extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            redirect: false,
             email: ''
         }
     }
@@ -25,9 +24,9 @@ class AppNavbar extends Component {
     userSignOut = () => {
         const {cookies} = this.props;
         if (firebase.auth().currentUser) {
-            console.log(`user: ${firebase.auth().currentUser.email} signed out, cookie: ${cookies.get('hash')} was removed`);
+            console.log(`user: ${firebase.auth().currentUser.email} signed out, cookie: ${cookies.get('firebase_id')} was removed`);
             this.props.userLogout();
-            cookies.remove('hash')
+            cookies.remove('firebase_id')
             firebase.auth().signOut()
             // @TODO clear out current and user values here
             // reset store
@@ -166,7 +165,6 @@ class AppNavbar extends Component {
 }
 
 const mapStateToProps = state => ({
-    currentValues: state.currentValues,
     userInfo: state.userProgress.currentUser
 });
 
