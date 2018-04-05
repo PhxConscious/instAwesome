@@ -130,16 +130,13 @@ class OnTheWeb extends Component {
 
     validateFBUrl = (fb) => {
         let base = "https://facebook.com/"
+        let warning = 'Your facebook url should look like this: https://facebook.com/yourUserName. \n Enter your facebook url or leave this field blank.'
+        let newArr = this.state.errorWarnings;
 
         // validates anything with correct base or empty string
         if ((fb.substring(0, 21) === base || fb.length === 0)) {
             return true;
         }
-
-        let warning = 'Your facebook url should look like this: https://facebook.com/yourUserName. \n Enter your facebook url or leave this field blank.'
-
-        let newArr = this.state.errorWarnings;
-
         if (!this.state.errorWarnings.includes(warning)) {
             newArr = this.state.errorWarnings.concat(warning);
         }
@@ -148,19 +145,18 @@ class OnTheWeb extends Component {
 
 
     validateTwitterUsername(twit) {
-        if ((twit.substring(0, 1) === "@" && twit.length >= 3 && !twit.includes(" ")) || twit.length === 0) {
-            return true;
-        }
-
         let warning = "Your twitter user name should begin with '@' and have no spaces";
         let newArr = this.state.errorWarnings;
 
+        if ((twit.substring(0, 1) === "@" && twit.length >= 3 && !twit.includes(" ")) || twit.length === 0) {
+            return true;
+        }
         if (!this.state.errorWarnings.includes(warning)) {
             newArr = this.state.errorWarnings.concat(warning);
         }
-
         this.setState({errorWarnings: newArr, isError: true})
     }
+    
 
     render() {
         return (

@@ -8,7 +8,6 @@ import {withCookies, Cookies} from 'react-cookie';
 import {Spinner, Snackbar} from 'react-mdl';
 
 class LoginForm extends Component {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -32,9 +31,11 @@ class LoginForm extends Component {
         cookies: instanceOf(Cookies).isRequired
     };
 
+
     handleInputTextChange = e => {
         this.setState({[e.target.name]: e.target.value});
     };
+
 
     renderSnackbar = () => {
         return (
@@ -42,6 +43,7 @@ class LoginForm extends Component {
                       onTimeout={this.handleTimeoutSnackbar}>{this.state.snackbarText}</Snackbar>
         )
     };
+
 
     handleShowSnackbar() {
         this.setState({isSnackbarActive: true});
@@ -51,6 +53,7 @@ class LoginForm extends Component {
     handleTimeoutSnackbar() {
         this.setState({isSnackbarActive: false});
     }
+
 
     loginRefresh() {
         const {cookies} = this.props;
@@ -64,27 +67,29 @@ class LoginForm extends Component {
         }, 4000)
     }
 
+
     onLoginSuccess = (result) => {
+        this.setState({snackbarText: 'Success'});
+        this.handleShowSnackbar()
         // set a cookie upon login with firebase_id
         const {cookies} = this.props;
         cookies.set('firebase_id', result.user.uid, {path: '/', maxAge: 1000000});
         if (result.credential) {
             cookies.set('facebook_token', result.credential.accessToken, {path: '/', maxAge: 1000000});
         }
-
-        this.setState({
-            redirect: '/splash', // trigger a redirect
-        });
+        setTimeout(() => {
+            this.setState({redirect: true})
+        }, 2500)
     };
 
-    onLoginFail= (error) => {
+
+    onLoginFail = (error) => {
         this.setState({
             loading: false,
             snackbarText: error.message,
-            isSnackbarActive: true
         });
         this.handleShowSnackbar();
-    }
+    };
 
 
     renderButton = () => {
@@ -92,7 +97,16 @@ class LoginForm extends Component {
             return (
                 <button
                     className="signInFormButton"
-                    onClick={this.signInWithEmailAndPassword}>
+                    onClick={(e) => {
+                        e.preventDefault();
+                        const {email, password} = this.state;
+                        if (email === '' || password === '') {
+                            this.setState({loading: false, snackbarText: 'Please input username and password'});
+                            this.handleShowSnackbar();
+                            return;
+                        }
+                        this.signInWithEmailAndPassword()
+                    }}>
                 <span className='buttonText'>
                     LOGIN
                 </span>
@@ -104,17 +118,15 @@ class LoginForm extends Component {
         )
     };
 
-    signInWithEmailAndPassword = (e) => {
-        e.preventDefault();
+
+    signInWithEmailAndPassword = () => {
         const {email, password} = this.state;
         console.log("current email and password", email, password);
         this.setState({
-            snackbarText: '',
             loading: true
         });
-        this.handleShowSnackbar();
         firebase.auth().signInWithEmailAndPassword(email, password)
-            // onLoginSuccess is expecting a UserCredential object, so wrap our result
+        // onLoginSuccess is expecting a UserCredential object, so wrap our result
             .then(user => this.onLoginSuccess({user}))
             .catch(this.onLoginFail);
     };
@@ -131,23 +143,10 @@ class LoginForm extends Component {
             .catch(this.onLoginFail);
     };
 
-    signInWithGoogle = (e) => {
-        e.preventDefault();
-        const provider = new firebase.auth.GoogleAuthProvider();
-        firebase.auth().useDeviceLanguage();
-        firebase.auth().signInWithPopup(provider)
-            .then(function (result) {
-                console.log(`${firebase.auth().currentUser.email} has just signed in with Google Auth`)
-            })
-            .then(this.onLoginSuccess)
-            .catch(this.onLoginFail);
-    };
-
     render() {
         if (this.state.redirect) {
             return <Redirect to={this.state.redirect}/>
         }
-
         return (
             <div>
                 <form className='formCont' action="#">
@@ -189,13 +188,13 @@ class LoginForm extends Component {
                 <div className="altSignIn">
                     <p className='or'>OR SIGN IN WITH</p>
                     {/*<button className='socialMediaLoginButton' onClick={this.signInWithGoogle}>*/}
-                        {/*<i className="fab fa-google"> </i>*/}
+                    {/*<i className="fab fa-google"> </i>*/}
                     {/*</button>*/}
                     <button className='socialMediaLoginButton' onClick={this.signInWithFacebook}>
-                        <i className="fab fa-facebook-f"></i>
+                        <i className="fab fa-facebook-f"/>
                     </button>
                     {/*<button className='socialMediaLoginButton'>*/}
-                        {/*<i className="fab fa-linkedin-in"> </i>*/}
+                    {/*<i className="fab fa-linkedin-in"> </i>*/}
                     {/*</button>*/}
                 </div>
                 <div className='forgotLinksCont'>
