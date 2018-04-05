@@ -78,6 +78,7 @@ class Splash extends React.Component {
                     <button className="splashButton" onClick={this.loginRefresh}>
                         Trouble logging in?
                     </button>
+
                     {this.renderSnackbar()}
                 </div>
             )

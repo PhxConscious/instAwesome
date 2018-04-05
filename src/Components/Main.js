@@ -14,8 +14,10 @@ import Forum from "./Pages/Forum";
 import Payment from "./Pages/Payment";
 import AppNav from './Reusable/AppNav';
 import Gradient from "./Reusable/Gradient";
+import ChatLayout from "./Chat/ChatLayout";
 import DataProvider from './Reusable/DataProvider';
 import AuthRedirect from './Reusable/AuthRedirect';
+
 
 
 class Main extends React.Component {
