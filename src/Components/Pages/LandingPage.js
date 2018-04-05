@@ -23,7 +23,6 @@ class LandingPage extends Component {
                         </Grid>
                     </div>
                 </UnderwaterWrapper>
-                <Gradient/>
             </div>
         );
     }
