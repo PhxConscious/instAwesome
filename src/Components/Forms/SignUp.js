@@ -1,11 +1,8 @@
 import React, {Component} from "react";
-import firebase from 'firebase';
-import {Redirect} from 'react-router-dom';
-import {connect} from "react-redux";
 import starterObj from '../../config/starterUserProgressObject';
 import '../../Styles/FormsStyles.css';
-import {nextQuestion, createNewUser} from "../../redux/actions/userProgress";
 import {Spinner, Snackbar} from 'react-mdl';
+import PropTypes from 'prop-types';
 
 class SignUpForm extends Component {
     constructor(props) {
@@ -14,66 +11,68 @@ class SignUpForm extends Component {
             firstName: '',
             lastName: '',
             userPhone: '',
-            email: '',
-            password: '',
-            verifyPassword: '',
-            redirect: false,
             loading: false,
             isSnackbarActive: false,
             snackbarText: ''
         };
+        if (this.isFullSignup()) {
+            this.state.email = '';
+            this.state.password = '';
+            this.state.verifyPassword = '';
+        }
         this.handleShowSnackbar = this.handleShowSnackbar.bind(this);
         this.handleTimeoutSnackbar = this.handleTimeoutSnackbar.bind(this);
     }
 
+    static propTypes = {
+        onSubmit: PropTypes.func.isRequired,
+        signupType: PropTypes.oneOf(['full', 'partial'])
+    }
 
-    onButtonPress = () => {
+    static defaultProps = {
+        signupType: 'full'
+    }
+
+    isFullSignup = () => this.props.signupType === 'full';
+
+    onSubmitSignin = (e) => {
+        e.preventDefault();
         const {email, password, verifyPassword, firstName, lastName, userPhone} = this.state;
         this.setState({loading: true, snackbarText: ''});
-        if (firstName === '' || lastName === '' || email === '' || password === '' || userPhone === '') {
+        if (firstName === '' || lastName === '' || userPhone === '' ||
+            this.isFullSignup() && (email === '' || password === '' || verifyPassword === '')
+        ) {
             this.setState({loading: false, snackbarText: 'Must fill in all fields'});
             this.handleShowSnackbar();
             return;
-        } else if (password !== verifyPassword) {
-            this.setState({loading: false, snackbarText: 'Passwords do not match'});
-            this.handleShowSnackbar();
-            return;
-        } else if (password.length < 6) {
-            this.setState({loading: false, snackbarText: 'Password must be at least 6 characters long'});
-            this.handleShowSnackbar();
-            return;
         }
-        return (
-            firebase.auth().createUserWithEmailAndPassword(email, password)
-                .then(() => {
-                    this.setState({snackbarText: 'Success'});
-                    this.handleShowSnackbar();
-                })
-                // call action with the correct user object
-                .then(user => {
-                    this.props.createNewUser({
-                        user_email: email,
-                        firebase_id: firebase.auth().currentUser.uid,
-                        first_name: firstName,
-                        last_name: lastName,
-                        user_phone: userPhone,
-                        user_progress: starterObj
-                    })
-                })
-                .then(() => {
-                    firebase.auth().currentUser.sendEmailVerification();
-                    setTimeout(() => {
-                        this.setState({redirect: true});
-                    }, 2000)
-                })
-                .catch((error) => {
-                    this.setState({
-                        loading: false,
-                        snackbarText: error.message,
-                    });
-                    this.handleShowSnackbar();
-                })
-        )
+        if (this.isFullSignup()) {
+            if (password !== verifyPassword) {
+                this.setState({loading: false, snackbarText: 'Passwords do not match'});
+                this.handleShowSnackbar();
+                return;
+            } else if (password.length < 6) {
+                this.setState({loading: false, snackbarText: 'Password must be at least 6 characters long'});
+                this.handleShowSnackbar();
+                return;
+            }
+        }
+        this.props.onSubmit({email, password, verifyPassword, firstName, lastName, userPhone, starterObj})
+            .then(this.onSuccess)
+            .catch(this.onFailure);
+    };
+
+    onSuccess = () => {
+        this.setState({snackbarText: 'Success'});
+        this.handleShowSnackbar();
+    };
+
+    onFailure = (error) => {
+        this.setState({
+            loading: false,
+            snackbarText: error.message,
+        });
+        this.handleShowSnackbar();
     };
 
 
@@ -82,10 +81,8 @@ class SignUpForm extends Component {
             return (
                 <button
                     className="signInFormButton"
-                    onClick={(e) => {
-                        e.preventDefault();
-                        this.onButtonPress()
-                    }}>
+                    onClick={this.onSubmitSignin}>
+
                     <span className='buttonText'>
                         Submit
                     </span>
@@ -118,13 +115,53 @@ class SignUpForm extends Component {
         this.setState({[e.target.name]: e.target.value});
     };
 
+    // only render these fields if isFullSignup()
+    renderEmailAndPassword = () => this.isFullSignup() ? (
+        <div>
+            <div className="formInputCont">
+                <div>
+                    <p className='inputLabel'>EMAIL</p>
+                </div>
+                <input
+                    name='email'
+                    className="formInput"
+                    type="text"
+                    onChange={this.handleInputTextChange}
+                    placeholder=''
+                    value={this.state.email}>
+                </input>
+            </div>
+            <div className="formInputCont">
+                <div>
+                    <p className='inputLabel'>PASSWORD</p>
+                </div>
+                <input
+                    name='password'
+                    className="formInput"
+                    type="password"
+                    onChange={this.handleInputTextChange}
+                    placeholder=''
+                    value={this.state.password}>
+                </input>
+            </div>
+            <div className="formInputCont">
+                <div>
+                    <p className='inputLabel'>VERIFY PASSWORD</p>
+                </div>
+                <input
+                    name='verifyPassword'
+                    className="formInput"
+                    type="password"
+                    onChange={this.handleInputTextChange}
+                    placeholder=''
+                    value={this.state.verifyPassword}>
+                </input>
+            </div>
+        </div>
+    ) : null
+
 
     render() {
-        const {redirect} = this.state;
-
-        if (redirect) {
-            return <Redirect to='/'/>;
-        }
         return (
             <form className="formCont" action="#">
                 <div className='inputCont'>
@@ -170,45 +207,7 @@ class SignUpForm extends Component {
                             value={this.state.userPhone}>
                         </input>
                     </div>
-                    <div className="formInputCont">
-                        <div>
-                            <p className='inputLabel'>EMAIL</p>
-                        </div>
-                        <input
-                            name='email'
-                            className="formInput"
-                            type="text"
-                            onChange={this.handleInputTextChange}
-                            placeholder=''
-                            value={this.state.email}>
-                        </input>
-                    </div>
-                    <div className="formInputCont">
-                        <div>
-                            <p className='inputLabel'>PASSWORD</p>
-                        </div>
-                        <input
-                            name='password'
-                            className="formInput"
-                            type="password"
-                            onChange={this.handleInputTextChange}
-                            placeholder=''
-                            value={this.state.password}>
-                        </input>
-                    </div>
-                    <div className="formInputCont">
-                        <div>
-                            <p className='inputLabel'>VERIFY PASSWORD</p>
-                        </div>
-                        <input
-                            name='verifyPassword'
-                            className="formInput"
-                            type="password"
-                            onChange={this.handleInputTextChange}
-                            placeholder=''
-                            value={this.state.verifyPassword}>
-                        </input>
-                    </div>
+                    {this.renderEmailAndPassword()}
                 </div>
                 <br/>
                 <div className='formButtonContainer'>
@@ -220,21 +219,4 @@ class SignUpForm extends Component {
     }
 }
 
-
-const mapStateToProps = state => ({
-    currentValues: state.currentValues
-});
-
-
-const mapDispatchToProps = dispatch => {
-    return {
-        putNextQuestion: (fb_id, data) => {
-            dispatch(nextQuestion(fb_id, data))
-        },
-        createNewUser: (userObj) => {
-            dispatch(createNewUser(userObj))
-        }
-    }
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(SignUpForm);
+export default SignUpForm;

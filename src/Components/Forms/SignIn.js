@@ -1,11 +1,13 @@
 import React, {Component} from "react";
 import firebase from 'firebase';
 import {Redirect, Link} from 'react-router-dom';
-import '../../Styles/FormsStyles.css';
 import {connect} from 'react-redux';
 import {instanceOf} from 'prop-types';
 import {withCookies, Cookies} from 'react-cookie';
 import {Spinner, Snackbar} from 'react-mdl';
+
+import '../../Styles/FormsStyles.css';
+import {setUserCookie} from '../../utils/authHelper';
 
 class LoginForm extends Component {
     constructor(props) {
@@ -24,6 +26,7 @@ class LoginForm extends Component {
         this.loginRefresh = this.loginRefresh.bind(this);
         this.handleShowSnackbar = this.handleShowSnackbar.bind(this);
         this.handleTimeoutSnackbar = this.handleTimeoutSnackbar.bind(this);
+        this.onLoginSuccess = this.onLoginSuccess.bind(this);
     }
 
 
@@ -67,16 +70,12 @@ class LoginForm extends Component {
         }, 4000)
     }
 
-
-    onLoginSuccess = (result) => {
+    onLoginSuccess = (userCredentials) => {
         this.setState({snackbarText: 'Success'});
         this.handleShowSnackbar()
-        // set a cookie upon login with firebase_id
-        const {cookies} = this.props;
-        cookies.set('firebase_id', result.user.uid, {path: '/', maxAge: 1000000});
-        if (result.credential) {
-            cookies.set('facebook_token', result.credential.accessToken, {path: '/', maxAge: 1000000});
-        }
+
+        setUserCookie(this.props.cookies, userCredentials);
+
         setTimeout(() => {
             this.setState({redirect: true})
         }, 2500)
