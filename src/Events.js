@@ -1,3 +1,5 @@
+// for socket.io - there's a matching export on the server side
+
 module.exports = {
 	COMMUNITY_CHAT:"COMMUNITY_CHAT",
 	USER_CONNECTED:"USER_CONNECTED",

@@ -5,7 +5,6 @@ import FASearch from 'react-icons/lib/fa/search'
 import MdEject from 'react-icons/lib/md/eject'
 import SideBarOption from './SideBarOptions'
 import { last, get, differenceBy } from 'lodash'
-import { createChatNameFromUsers } from '../../../Factories'
 export default class SideBar extends Component{
 	static type = {
 		USERS:"users",
@@ -18,6 +17,11 @@ export default class SideBar extends Component{
 			activeSideBar: SideBar.type.CHATS
 		}
 	}
+
+	createChatNameFromUsers = (users, excludedUser = "") => {
+		return users.filter(u => u !== excludedUser).join(' & ') || "Empty Chat"
+	}
+
 	handleSubmit = (e) => {
 		e.preventDefault()
 		const { reciever } = this.state
@@ -79,7 +83,7 @@ export default class SideBar extends Component{
 								<SideBarOption
 									key = {chat.id}
 									lastMessage = { get(last(chat.messages), 'message', '') }
-									name = { chat.isCommunity ? chat.name : createChatNameFromUsers(chat.users, user.name) }
+									name = { chat.isCommunity ? chat.name : this.createChatNameFromUsers(chat.users, user.name) }
 									active = { activeChat.id === chat.id }
 									onClick = { ()=>{ this.props.setActiveChat(chat) } }
 								/>
