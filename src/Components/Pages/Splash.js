@@ -9,9 +9,9 @@ class Splash extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            goBackThruLogin: false,
             isSnackbarActive: false,
-            snackbarText: ''
+            snackbarText: '',
+            redirect: false
         };
         this.handleSubmit = this.handleSubmit.bind(this);
         this.loginRefresh = this.loginRefresh.bind(this);
@@ -21,14 +21,14 @@ class Splash extends React.Component {
 
 
     handleSubmit() {
-        this.setState({goBackThruLogin: true})
+        this.setState({redirect: '/'})
     }
 
 
     loginRefresh() {
         console.log("loginRefresh");
         const {cookies} = this.props;
-        cookies.remove('hash');
+        cookies.remove('firebase_id');
         this.setState({snackbarText: "Sorry you're having technical difficulties! Please bear with us as continue improving as quickly as we can. Clicking this link will ensure your login info is reset - try logging in again."});
         this.handleShowSnackbar();
         setTimeout(() => {
@@ -56,13 +56,11 @@ class Splash extends React.Component {
 
 
     render() {
-        let {userInfo, companyInfo} = this.props;
-        let {goBackThruLogin} = this.state;
-
-        if (goBackThruLogin) {
-            return <Redirect to={'/'}/>
+        if (this.state.redirect) {
+            return <Redirect to={this.state.redirect}/>
         }
 
+        let {userInfo, companyInfo} = this.props;
 
         if (userInfo && !userInfo.user_email) {
             return (
@@ -151,4 +149,5 @@ const mapStateToProps = state => ({
     userInfo: state.userProgress.currentUser,
     companyInfo: state.companyInfo
 });
+
 export default withCookies(connect(mapStateToProps, null)(Splash));
