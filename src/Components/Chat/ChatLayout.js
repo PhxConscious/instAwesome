@@ -4,8 +4,9 @@ import { USER_CONNECTED, LOGOUT } from '../../Events';
 import LoginForm from './LoginForm';
 import ChatContainer from './chats/ChatContainer';
 import '../../Styles/ChatStyles.css'
+import config from '../../config';
 
-const socketUrl = "http://localhost:3231";
+const socketUrl = `${config.app.api}`;
 
 export default class ChatLayout extends Component {
   constructor(props){
