@@ -11,6 +11,9 @@ class CompanyInfo extends Component {
             company_name: '',
             company_email: '',
             company_phone: '',
+            primary_contact_email: '',
+            primary_contact_full_name: '',
+            primary_contact_phone_number: '',
             error: '',
             loading: false,
             isSnackbarActive: false,
@@ -27,7 +30,10 @@ class CompanyInfo extends Component {
             this.setState({
                 company_name: companyInfo.companyList[0].company_name,
                 company_email: companyInfo.companyList[0].company_email,
-                company_phone: companyInfo.companyList[0].company_phone
+                company_phone: companyInfo.companyList[0].company_phone,
+                primary_contact_email: companyInfo.companyList[0].primary_contact_email,
+                primary_contact_full_name: companyInfo.companyList[0].primary_contact_full_name,
+                primary_contact_phone_number: companyInfo.companyList[0].primary_contact_phone_number
             })
         }
     }
@@ -53,8 +59,8 @@ class CompanyInfo extends Component {
 
 
     onButtonPress() {
-        const {company_name, company_email, company_phone} = this.state;
-        if (company_name === '' || company_email === '' || company_phone === '') {
+        const {company_name, company_email, company_phone, primary_contact_full_name, primary_contact_email, primary_contact_phone_number} = this.state;
+        if (company_name === '' || company_email === '' || company_phone === '' || primary_contact_email === '' || primary_contact_full_name === '' || primary_contact_phone_number === '') {
             this.setState({snackbarText: 'Must fill in all fields'});
             this.handleShowSnackbar();
             return;
@@ -120,14 +126,14 @@ class CompanyInfo extends Component {
                             {/*</div>*/}
                             <div className="formInputCont">
                                 <div>
-                                    <p className='inputLabel'>NAME</p>
+                                    <p className='inputLabel'>COMPANY NAME</p>
                                 </div>
                                 <input
                                     name='company_name'
                                     className="formInput"
                                     type="text"
                                     onChange={this.handleInputTextChange}
-                                    placeholder='input company name'
+                                    placeholder="input your company's name"
                                     value={this.state.company_name}>
                                 </input>
                             </div>
@@ -140,7 +146,7 @@ class CompanyInfo extends Component {
                                     className="formInput"
                                     type="text"
                                     onChange={this.handleInputTextChange}
-                                    placeholder='input company email'
+                                    placeholder="input your company's email"
                                     value={this.state.company_email}>
                                 </input>
                             </div>
@@ -153,8 +159,44 @@ class CompanyInfo extends Component {
                                     className="formInput"
                                     type="text"
                                     onChange={this.handleInputTextChange}
-                                    placeholder='input company phone number'
+                                    placeholder="input your company's phone number"
                                     value={this.state.company_phone}>
+                                </input>
+                            </div>
+                            <div className="formInputCont">
+                                <div>
+                                    <p className='inputLabel'>ACCOUNT MANAGER FULL NAME</p>
+                                </div>
+                                <input
+                                    className="formInput"
+                                    type="text"
+                                    onChange={e => this.setState({primary_contact_full_name: e.target.value})}
+                                    placeholder="Enter your account manager's full name"
+                                    value={this.state.primary_contact_full_name}>
+                                </input>
+                            </div>
+                            <div className="formInputCont">
+                                <div>
+                                    <p className='inputLabel'>ACCOUNT MANAGER PHONE NUMBER</p>
+                                </div>
+                                <input
+                                    className="formInput"
+                                    type="text"
+                                    onChange={e => this.setState({primary_contact_phone_number: e.target.value})}
+                                    placeholder="Enter your account manager's phone number"
+                                    value={this.state.primary_contact_phone_number}>
+                                </input>
+                            </div>
+                            <div className="formInputCont">
+                                <div>
+                                    <p className='inputLabel'>ACCOUNT MANAGER EMAIL ADDRESS</p>
+                                </div>
+                                <input
+                                    className="formInput"
+                                    type="text"
+                                    onChange={e => this.setState({primary_contact_email: e.target.value})}
+                                    placeholder="Enter your account manager's email"
+                                    value={this.state.primary_contact_email}>
                                 </input>
                             </div>
                         </div>

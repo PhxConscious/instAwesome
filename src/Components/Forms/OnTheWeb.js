@@ -41,11 +41,14 @@ class OnTheWeb extends Component {
             better_business_bureau_goals: '',
             errorWarnings: [],
             isError: false,
-            snackBarActive: false,
+            isSnackbarActive: false,
+            snackbarText: ''
         };
         // this.pullInUserValues = this.pullInUserValues.bind(this);
         this.validateFBUrl = this.validateFBUrl.bind(this);
         this.validateTwitterUsername = this.validateTwitterUsername.bind(this);
+        this.handleShowSnackbar = this.handleShowSnackbar.bind(this);
+        this.handleTimeoutSnackbar = this.handleTimeoutSnackbar.bind(this);
     }
 
 
@@ -89,21 +92,40 @@ class OnTheWeb extends Component {
     }
 
 
+    renderSnackbar = () => {
+        return (
+            <Snackbar className='snackbar' active={this.state.isSnackbarActive} timeout={2000}
+                      onTimeout={this.handleTimeoutSnackbar}>{this.state.snackbarText}</Snackbar>
+        )
+    };
+
+
+    handleShowSnackbar() {
+        this.setState({isSnackbarActive: true});
+    }
+
+
+    handleTimeoutSnackbar() {
+        this.setState({isSnackbarActive: false});
+    }
+
+
     onButtonPress(e) {
         e.preventDefault();
         this.setState({
-            errorWarnings: [],
+            snackbarText: '',
             snackBarActive: false,
         });
         this.validateFBUrl(this.state.facebook_page_url);
         this.validateTwitterUsername(this.state.twitter_username);
-        let me = this;
-
-        setTimeout(function () {
-            if (me.state.errorWarnings.length === 0) {
-                me.props.addCompanyInfo(me.props.companyInfo.companyList && me.props.companyInfo.companyList[0].company_id, me.state)
+        setTimeout(() => {
+            this.props.addCompanyInfo(this.props.companyInfo.companyList && this.props.companyInfo.companyList[0].company_id, this.state)
+            if (this.props.companyInfo.status !== 200) {
+                this.setState({snackbarText: 'Update Failed'});
+                this.handleShowSnackbar();
             } else {
-                me.setState({snackBarActive: true})
+                this.setState({snackbarText: 'Congrats! You\'ve successfully updated your company!'});
+                this.handleShowSnackbar();
             }
         }, 500)
     }
@@ -113,7 +135,7 @@ class OnTheWeb extends Component {
         if (!this.state.loading) {
             return (
                 <button
-                    className="formButton"
+                    className="onTheWebFormButton"
                     onClick={(e) => this.onButtonPress(e)}>
                 <span className='buttonText'>
                     UPDATE
@@ -156,7 +178,7 @@ class OnTheWeb extends Component {
         }
         this.setState({errorWarnings: newArr, isError: true})
     }
-    
+
 
     render() {
         return (
@@ -464,12 +486,13 @@ class OnTheWeb extends Component {
                                 </div>
                             </div>
                             <br/>
-                            <div className='formBtnCont'>
-                                {this.renderButton()}
-                            </div>
                         </form>
                     </Cell>
                 </Grid>
+                {this.renderSnackbar()}
+                <div className='onTheWebFormBtnCont'>
+                    {this.renderButton()}
+                </div>
             </div>
         );
     }
