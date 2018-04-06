@@ -40,7 +40,7 @@ class AppNavbar extends Component {
             return (
                 <Link className='linkTo mdl-navigation__link mdl-menu__item' to='/expert/dashboard'>
                     <div className='expertAdminTabs'>
-                    EXPERT ONLY
+                        EXPERT ONLY
                     </div>
                 </Link>
             )
@@ -53,7 +53,7 @@ class AppNavbar extends Component {
             return (
                 <Link className='linkTo mdl-navigation__link mdl-menu__item' to='/admin/dashboard'>
                     <div className='expertAdminTabs'>
-                    ADMIN ONLY
+                        ADMIN ONLY
                     </div>
                 </Link>
             )
@@ -71,10 +71,11 @@ class AppNavbar extends Component {
                     {/*<span className="mdl-layout-title">Title</span>*/}
                     <nav className="mdl-navigation ">
                         <Link to='/profile' className="mdl-navigation__link" href="">ACCOUNT</Link>
-                        <Link to={userInfo ? '/learn/dashboard' : '/'} className="mdl-navigation__link disabled-link">LEARN</Link>
+                        <Link to={userInfo ? '/learn/dashboard' : '/'}
+                              className="mdl-navigation__link disabled-link">LEARN</Link>
 
-                            {this.isUserExpert()}
-                            {this.isUserAdmin()}
+                        {this.isUserExpert()}
+                        {this.isUserAdmin()}
 
                         <Link className='mdl-navigation__link' to='/forum'>FORUM</Link>
                         <Link className='mdl-navigation__link' to='/' onClick={this.userSignOut}>
@@ -88,14 +89,15 @@ class AppNavbar extends Component {
                         <Cell className='leftCol' col={4} hideTablet={true} hidePhone={true}>
                             <div className='leftSideLogoCont'>
                                 <Grid>
-                                    <Cell col={2}>
-                                        <i className="bookIcon fab fa-leanpub mdl-layout--large-screen-only"/>
-                                    </Cell>
+                                    <Link className='disabled-link' to={userInfo ? '/learn/dashboard' : '/'}>
+                                        <Cell col={2}>
+                                            <i className="bookIcon fab fa-leanpub mdl-layout--large-screen-only"/>
+                                        </Cell>
+                                    </Link>
                                     <Cell className='learnText' col={6}>
                                         <div className='learnCont'>
-                                            <Link
-                                                to={userInfo ? '/learn/dashboard' : '/'}
-                                                className="learnTextCont linkTo mdl-layout--large-screen-only disabled-link"
+                                            <Link to={userInfo ? '/learn/dashboard' : '/'}
+                                                  className="learnTextCont linkTo mdl-layout--large-screen-only disabled-link"
                                             >
                                                 Learn
                                             </Link>
@@ -111,11 +113,11 @@ class AppNavbar extends Component {
                                 <img className='centerLogo' src='https://i.imgur.com/qYqmu8v.png' alt="blah"/>
                             </Link>
                           </span>
-                          <span>
+                            <span>
                             {/*<Link to='/payment'*/}
-                                  {/*className="mdl-layout-spacer centerLogoCont">*/}
+                                {/*className="mdl-layout-spacer centerLogoCont">*/}
                                 {/*<img className='centerLogo' src='https://www.mochasoft.dk/images/buynow.jpg' alt="blah"/>*/}
-                            {/*</Link>*/}
+                                {/*</Link>*/}
                           </span>
 
                         </Cell>
@@ -138,8 +140,8 @@ class AppNavbar extends Component {
                                             <li className="">ACCOUNT</li>
                                         </Link>
 
-                                            {this.isUserExpert()}
-                                            {this.isUserAdmin()}
+                                        {this.isUserExpert()}
+                                        {this.isUserAdmin()}
 
                                         <Link className='linkTo mdl-menu__item' to='/forum'>FORUM</Link>
                                         <Link className='linkTo mdl-menu__item' onClick={this.userSignOut} to='/'>
@@ -151,12 +153,10 @@ class AppNavbar extends Component {
                         </Cell>
                     </Grid>
                     <Gradient/>
-                    <Gradient/>
                 </div>
                 <main className="mdl-layout__content">
                     {this.props.children}
                 </main>
-                <Gradient/>
                 <Gradient/>
             </div>
         );

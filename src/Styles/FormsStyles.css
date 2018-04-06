@@ -86,8 +86,29 @@
     margin-bottom: 10px;
 }
 
-.formButtonContainer{
+.formButtonContainer {
     height: 50px;
+}
+
+.onTheWebFormBtnCont{
+    height: 50px;
+    /*background-color: #005259;*/
+    position: fixed;
+    bottom: 5px;
+    width: 100%;
+    padding-top: 15px;
+    background-color: #005259;
+    text-align: center;
+}
+
+.onTheWebFormButton {
+    background-color: #9BDD82;
+    min-width: 200px;
+    border-radius: 10px;
+    color: white;
+    font-size: 18px;
+    height: 35px;
+    margin-right: 40px;
 }
 
 .formButton {
@@ -99,11 +120,11 @@
     height: 35px;
 }
 
-div#inputComponent{
+div#inputComponent {
     height: 200px;
 }
 
-.textFieldCont{
+.textFieldCont {
     text-align: center;
     height: 100px;
     margin-bottom: 80px;
@@ -111,7 +132,7 @@ div#inputComponent{
     flex: 1;
 }
 
-.textField{
+.textField {
     height: 100%;
     width: 90%;
     border: 2px solid lightgray;
@@ -121,7 +142,7 @@ div#inputComponent{
     font-size: 17px;
 }
 
-.textFieldButton{
+.textFieldButton {
     background-color: #9BDD82;
     min-width: 200px;
     border-radius: 10px;
@@ -130,8 +151,8 @@ div#inputComponent{
     height: 45px;
 }
 
-.copiedText{
-    color:red;
+.copiedText {
+    color: red;
     font-size: 15px;
     font-weight: bold;
     font-family: 'Asap', sans-serif;
@@ -232,7 +253,7 @@ li {
     height: 18px;
 }
 
-.snackbar{
+.snackbar {
     font-family: Asap, sans-serif !important;
     font-weight: bold !important;
 }
