@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import SideBar from '../sidebar/SideBar'
 import { COMMUNITY_CHAT, MESSAGE_SENT, MESSAGE_RECIEVED,
 				TYPING, PRIVATE_MESSAGE, USER_CONNECTED, USER_DISCONNECTED,
-				NEW_CHAT_USER } from '../../../Events'
+				NEW_CHAT_USER, EXPERT_CHAT } from '../../../Events'
 import ChatHeading from './ChatHeading'
 import Messages from '../messages/Messages'
 import MessageInput from '../messages/MessageInput'
@@ -34,10 +34,10 @@ export default class ChatContainer extends Component {
 	}
 
 	initSocket(socket){
-		socket.emit(COMMUNITY_CHAT, this.resetChat)
+		socket.emit(EXPERT_CHAT, this.resetChat)
 		socket.on(PRIVATE_MESSAGE, this.addChat)
 		socket.on('connect', ()=>{
-			socket.emit(COMMUNITY_CHAT, this.resetChat)
+			socket.emit(EXPERT_CHAT, this.resetChat)
 		})
 		socket.on(USER_CONNECTED, (users)=>{
 			this.setState({ users: values(users) })
@@ -170,6 +170,7 @@ export default class ChatContainer extends Component {
 	}
 
 	setActiveChat = (activeChat)=>{
+		console.log('activeChat', activeChat)
 		this.setState({activeChat})
 	}
 	render() {
