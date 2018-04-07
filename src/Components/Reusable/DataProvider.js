@@ -206,7 +206,7 @@ class DataProvider extends React.Component {
             const renderErrors = this.props.onFailure || this.defaultRenderErrors;
 
             // give the provided error renderer the errors, as well as an action call to dismiss them by ID
-            return this.state.renderErrors(this.state.errors, this.dismissError);
+            return renderErrors(this.state.errors, this.dismissError);
         }
 
         // if we're loaded then render children, otherwise display a loading graphic

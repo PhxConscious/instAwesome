@@ -57,15 +57,21 @@ class Main extends React.Component {
                                                 load={['setFirebaseId', 'getUserProgress', 'getCompanyList', 'getLmsContent']}
                                                 waitFor={['GET_USER_PROGRESS', 'GET_COMPANY_LIST', 'GET_LMS_CONTENT']}
                                                 onFailure={(errors, dismissError) => {
-                                                    //const userNotFound = errors.find(e => )
 
-                                                    // fuck yea, we have the power of JSON
-                                                    return <div><pre>JSON.stringify(errors, null, 4)</pre></div>
+                                                    // is there a 404 on GET /users/:firebase_id?
+                                                    const userNotFound = errors.find(e =>
+                                                        e.type === 'GET_USER_PROGRESS_REJECTED' &&
+                                                        e.payload.response.status === 404
+                                                    )
 
-                                                    // is it a 404 on userProgress?
-                                                    return <Redirect to='/completesignup'/>
+                                                    if (userNotFound) {
+                                                        return <Redirect to='/completesignup'/>
+                                                    }
 
-                                                    // is it a 500 error or a timeout?
+                                                    // useful for debugging, render out the content of the errors
+                                                    //return <div><pre>{JSON.stringify(errors, null, 4)}</pre></div>
+
+                                                    // if it's an unknown error, redirect to signout
                                                     return <Redirect to='/signout'/>
                                                 }}>
 
