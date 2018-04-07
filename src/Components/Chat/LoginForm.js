@@ -1,7 +1,9 @@
 import React from 'react';
 import { VERIFY_USER } from '../../Events';
+import { connect } from 'react-redux';
+import { Button } from 'react-mdl';
 
-export default class LoginForm extends React.Component {
+class LoginForm extends React.Component {
 	constructor(props) {
 	  super(props);
 
@@ -25,7 +27,7 @@ export default class LoginForm extends React.Component {
 		e.preventDefault()
 		const { socket } = this.props
 		const { nickname } = this.state
-		socket.emit(VERIFY_USER, nickname, this.setUser)
+		socket.emit(VERIFY_USER, this.props.userInfo.firebase_id, this.setUser)
 	}
 
 	handleChange = (e)=>{
@@ -37,26 +39,32 @@ export default class LoginForm extends React.Component {
 	}
 
 	render() {
+
 		const { nickname, error } = this.state
 		return (
 			<div className="login">
 				<form onSubmit={this.handleSubmit} className="login-form" >
 
 					<label htmlFor="nickname">
-						<h2>Got a nickname?</h2>
+						<h2>Chat with your InstaExpert</h2>
 					</label>
-					<input
-						ref={(input)=>{ this.textInput = input }}
-						type="text"
-						id="nickname"
-						value={nickname}
-						onChange={this.handleChange}
-						placeholder={'MYCoolUSername'}
-						/>
-						<div className="error">{error ? error:null}</div>
+					<div>
+						<Button
+							raised
+							colored
+							ripple
+						>Connect To Chat</Button>
+					</div>
+
 
 				</form>
 			</div>
 		);
 	}
 }
+
+const mapStateToProps = state => ({
+	userInfo: state.userProgress.currentUser,
+})
+
+export default connect(mapStateToProps, null)(LoginForm);
