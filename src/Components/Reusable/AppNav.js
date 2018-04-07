@@ -25,14 +25,14 @@ class AppNavbar extends Component {
         const {cookies} = this.props;
         if (firebase.auth().currentUser) {
             console.log(`user: ${firebase.auth().currentUser.email} signed out, cookie: ${cookies.get('firebase_id')} was removed`);
-            this.props.userLogout();
-            cookies.remove('firebase_id')
             firebase.auth().signOut()
             // @TODO clear out current and user values here
             // reset store
         } else {
-            alert('no user signed in')
+            console.log("That's weird, we didn't have a firebase user...");
         }
+        this.props.userLogout();
+        cookies.remove('firebase_id')
     };
 
     isUserExpert = () => {

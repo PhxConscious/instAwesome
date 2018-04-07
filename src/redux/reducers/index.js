@@ -7,8 +7,10 @@ import userCompanyJoin from "./userCompanyJoin";
 import feedback from "./feedback";
 import userExpertJoin from './userExpertJoin';
 import payments from './payments';
+import loadStatus from './loadStatus';
 
 const appReducer = combineReducers({
+  loadStatus: loadStatus,
   userProgress: userProgress,
   lmsContent: lmsContent,
   currentValues: currentValues,
