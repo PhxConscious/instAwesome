@@ -12,8 +12,8 @@ const configs = {
             messagingSenderId: '349229241615',
         },
         app: {
-            ui: 'https://apps.phxconscious.com',
-            api: 'https://api.phxconscious.com',
+            ui: 'https://app.phxconscious.com',
+            api: 'https://desolate-scrubland-48971.herokuapp.com/',
         },
     },
 
