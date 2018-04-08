@@ -1,5 +1,5 @@
 import React from 'react';
-import {Switch, Route} from 'react-router-dom';
+import {Switch, Route, Redirect} from 'react-router-dom';
 
 import LandingPage from './Pages/LandingPage';
 import Dashboard from './LMS/Dashboard';
@@ -7,6 +7,7 @@ import RecoverUsernamePage from './Pages/RecoverUsernamePage';
 import RecoverPasswordPage from './Pages/RecoverPasswordPage';
 import UserProfile from "./Pages/UserProfile";
 import SignUp from "./Pages/SignUp";
+import CompleteSignUp from "./Pages/CompleteSignUp";
 import Splash from "./Pages/Splash";
 import ExpertDashboard from "./Pages/ExpertDashboard";
 import AdminDashboard from "./Pages/AdminDashboard";
@@ -48,25 +49,53 @@ class Main extends React.Component {
                             }
                             <Route render={props =>
                                 <AuthRedirect ifLoggedIn={false} to={"/"}>
-                                    <DataProvider
-                                        load={['setFirebaseId', 'getUserProgress', 'getCompanyList', 'getLmsContent']}
-                                        waitFor={['userProgress.currentUser', 'currentValues']}>
-                                        <Route exact path="/splash" render={props => <Splash {...props}/>}/>
-                                        <Route exact path="/learn/dashboard" render={props => <Dashboard {...props}/>}/>
+                                    <Switch>
+                                        <Route exact path="/completesignup" component={CompleteSignUp} />
 
-                                        <Route exact path="/forgotusername"
-                                               render={props => <RecoverUsernamePage {...props}/>}/>
-                                        <Route exact path="/profile" render={props => <UserProfile {...props}/>}/>
-                                        <Route exact path="/expert/dashboard"
-                                               render={props => <ExpertDashboard {...props}/>}/>
-                                        <Route exact path="/admin/dashboard"
-                                               render={props => <AdminDashboard {...props}/>}/>
-                                        <Route exact path="/forum" render={props => <Forum {...props}/>}/>
-                                        <Route exact path="/payment" render={props => <Payment {...props}/>}/>
-                                        <Route exact path="/chat" render={props => <ChatLayout {...props}/>}/>
-                                    </DataProvider>
+                                        <Route render={props =>
+                                            <DataProvider
+                                                load={['setFirebaseId', 'getUserProgress', 'getCompanyList', 'getLmsContent']}
+                                                waitFor={['GET_USER_PROGRESS', 'GET_COMPANY_LIST', 'GET_LMS_CONTENT']}
+                                                onFailure={(errors) => {
+
+                                                    // is there a 404 on GET /users/:firebase_id?
+                                                    const userNotFound = errors.find(e =>
+                                                        e.type === 'GET_USER_PROGRESS_REJECTED' &&
+                                                        e.payload.response &&
+                                                        e.payload.response.status === 404
+                                                    )
+
+                                                    if (userNotFound) {
+                                                        return <Redirect to='/completesignup'/>
+                                                    }
+
+                                                    // useful for debugging, render out the content of the errors
+                                                    //return <div><pre>{JSON.stringify(errors, null, 4)}</pre></div>
+
+                                                    // if it's an unknown error, redirect to signout
+                                                    return <Redirect to='/signout'/>
+                                                }}>
+
+                                                <Route exact path="/splash" render={props => <Splash {...props}/>}/>
+                                                <Route exact path="/learn/dashboard" render={props => <Dashboard {...props}/>}/>
+
+                                                <Route exact path="/forgotusername"
+                                                       render={props => <RecoverUsernamePage {...props}/>}/>
+                                                <Route exact path="/profile" render={props => <UserProfile {...props}/>}/>
+                                                <Route exact path="/expert/dashboard"
+                                                       render={props => <ExpertDashboard {...props}/>}/>
+                                                <Route exact path="/admin/dashboard"
+                                                       render={props => <AdminDashboard {...props}/>}/>
+                                                <Route exact path="/forum" render={props => <Forum {...props}/>}/>
+                                                <Route exact path="/payment" render={props => <Payment {...props}/>}/>
+                                                <Route exact path="/chat" render={props => <ChatLayout {...props}/>}/>
+
+                                            </DataProvider>
+                                        } />
+                                    </Switch>
                                 </AuthRedirect>
                             }/>
+
                         </Switch>
                     </main>
                 </AppNav>
