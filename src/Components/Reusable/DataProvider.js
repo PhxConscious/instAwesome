@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {withCookies, Cookies} from 'react-cookie';
 import firebase from 'firebase';
 import {Spinner} from 'react-mdl';
+import '../../Styles/DataProviderStyles.css';
 
 // This is to import the possible actions we have to select from.
 // They won't actually be activated unless they're requested via the 'load' prop.
@@ -209,7 +210,7 @@ class DataProvider extends React.Component {
         } else {
             console.log('DataProvider rendering loading...')
             // TODO: replace 'loading...' with a spinner gif or other graphic of your choice
-            return <Spinner/>
+            return <div className="spinner"><Spinner/></div>
         }
     }
 }

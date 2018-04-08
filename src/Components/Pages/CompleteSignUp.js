@@ -4,6 +4,7 @@ import {Redirect} from 'react-router-dom';
 import {connect} from "react-redux";
 
 import '../../App.css';
+import '../../Styles/SplashPageStyles..css';
 import BlueAppBg from "../Reusable/BlueAppBg";
 import SignUpForm from "../Forms/SignUp";
 
@@ -49,6 +50,7 @@ class SignUpPage extends Component {
                 <BlueAppBg>
                     <Grid className='pageCont'>
                         <Cell col={8} offsetDesktop={2} tablet={12} phone={12}>
+                            <div className="splashText">{"Thanks for signing in!  Let's get a little more info from you before we continue."}</div>
                             <SignUpForm onSubmit={this.completeSignup} signupType='partial' />
                         </Cell>
                     </Grid>
