@@ -4,8 +4,6 @@ import {withCookies, Cookies} from 'react-cookie';
 import firebase from 'firebase';
 import {Spinner} from 'react-mdl';
 
-import {dismissError} from '../../redux/actions/loadStatus';
-
 // This is to import the possible actions we have to select from.
 // They won't actually be activated unless they're requested via the 'load' prop.
 //
@@ -151,12 +149,8 @@ class DataProvider extends React.Component {
         );
     };
 
-    dismissError = (id) => {
-        this.props.store.dispatch(dismissError(id))
-    }
-
     // default used if we were not passed a `onFailure` prop
-    defaultRenderErrors = (errors, dismissError) => (
+    defaultRenderErrors = (errors) => (
         <div className="errors">
             {errors.map(e => <div>{e.message}</div>)}
         </div>
@@ -206,7 +200,7 @@ class DataProvider extends React.Component {
             const renderErrors = this.props.onFailure || this.defaultRenderErrors;
 
             // give the provided error renderer the errors, as well as an action call to dismiss them by ID
-            return renderErrors(this.state.errors, this.dismissError);
+            return renderErrors(this.state.errors);
         }
 
         // if we're loaded then render children, otherwise display a loading graphic

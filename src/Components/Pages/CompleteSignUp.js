@@ -8,6 +8,7 @@ import BlueAppBg from "../Reusable/BlueAppBg";
 import SignUpForm from "../Forms/SignUp";
 
 import {createNewUser} from "../../redux/actions/userProgress";
+import {dismissErrorType} from "../../redux/actions/loadStatus";
 
 import firebase from 'firebase';
 
@@ -21,7 +22,7 @@ class SignUpPage extends Component {
 
     completeSignup = ({firstName, lastName, userPhone, starterObj}) => {
         const user = firebase.auth().currentUser
-        this.props.createNewUser({
+        return this.props.createNewUser({
             user_email: user.email,
             firebase_id: user.uid,
             first_name: firstName,
@@ -30,7 +31,10 @@ class SignUpPage extends Component {
             user_progress: starterObj
         })
         .then(() => {
-            this.setState({redirect: '/splash'})
+            dismissErrorType('GET_USER_PROGRESS');
+            // This is weird... updating redux should be synchronous but it's not.
+            setTimeout(() =>
+                this.setState({redirect: '/splash'}), 30);
         })
     }
 
@@ -56,8 +60,14 @@ class SignUpPage extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
+        // return the axios promise so that we can call .then
         createNewUser: (userObj) => {
-            dispatch(createNewUser(userObj))
+            const action = createNewUser(userObj);
+            dispatch(action);
+            return action.payload;
+        },
+        dismissErrorType: (type) => {
+            dispatch(dismissErrorType(type));
         }
     }
 };

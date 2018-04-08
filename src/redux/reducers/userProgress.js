@@ -72,7 +72,7 @@ export default (state = initialState, action) => {
     case "CREATE_NEW_USER_FULFILLED":
       return {
         ...state,
-        createdUser: action.payload.data[0]
+        currentUser: action.payload.data[0]
       }
     case "CREATE_NEW_USER_PENDING":
       return {...state}

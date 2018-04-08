@@ -56,11 +56,12 @@ class Main extends React.Component {
                                             <DataProvider
                                                 load={['setFirebaseId', 'getUserProgress', 'getCompanyList', 'getLmsContent']}
                                                 waitFor={['GET_USER_PROGRESS', 'GET_COMPANY_LIST', 'GET_LMS_CONTENT']}
-                                                onFailure={(errors, dismissError) => {
+                                                onFailure={(errors) => {
 
                                                     // is there a 404 on GET /users/:firebase_id?
                                                     const userNotFound = errors.find(e =>
                                                         e.type === 'GET_USER_PROGRESS_REJECTED' &&
+                                                        e.payload.response &&
                                                         e.payload.response.status === 404
                                                     )
 
