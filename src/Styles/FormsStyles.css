@@ -1,6 +1,13 @@
 .formCont {
     margin-bottom: 20px;
     text-align: center;
+    /*margin-top: 40px;*/
+}
+
+.blueFormCont {
+    margin-bottom: 20px;
+    text-align: center;
+    /*margin-top: 40px;*/
 }
 
 .formTitleCont {
@@ -94,7 +101,7 @@
     height: 50px;
     /*background-color: #005259;*/
     position: fixed;
-    bottom: 5px;
+    bottom: 0px;
     width: 100%;
     padding-top: 15px;
     background-color: #005259;
@@ -169,7 +176,6 @@ div#inputComponent {
     height: 50px;
     border-radius: 10px;
     color: white;
-
 }
 
 .buttonText {

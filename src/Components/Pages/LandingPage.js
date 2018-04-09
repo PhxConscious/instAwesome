@@ -11,19 +11,17 @@ import Gradient from "../Reusable/Gradient";
 class LandingPage extends Component {
     render() {
         return (
-            <div className="App">
-                <UnderwaterWrapper>
-                    <div className='pageCont'>
-                        <Grid className='pageCont'>
-                            <Cell col={6} offsetDesktop={3} tablet={12} phone={12}>
-                                <ShadowBox>
-                                    <SignInForm/>
-                                </ShadowBox>
-                            </Cell>
-                        </Grid>
-                    </div>
-                </UnderwaterWrapper>
-            </div>
+            <UnderwaterWrapper>
+                <div className='pageCont'>
+                    <Grid className='pageCont'>
+                        <Cell col={6} offsetDesktop={3} tablet={12} phone={12}>
+                            <ShadowBox>
+                                <SignInForm/>
+                            </ShadowBox>
+                        </Cell>
+                    </Grid>
+                </div>
+            </UnderwaterWrapper>
         );
     }
 }

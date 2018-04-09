@@ -163,7 +163,7 @@ class SignUpForm extends Component {
 
     render() {
         return (
-            <form className="formCont" action="#">
+            <form className="blueFormCont" action="#">
                 <div className='inputCont'>
                     <div className='formTitleCont'>
                         <p className="formTitle">SIGN UP</p>
