@@ -20,7 +20,6 @@ class PrimaryContact extends Component {
         this.handleTimeoutSnackbar = this.handleTimeoutSnackbar.bind(this);
     }
 
-
     componentDidMount() {
         let {companyInfo} = this.props;
         if (companyInfo && companyInfo.companyList && companyInfo.companyList[0]) {
@@ -31,7 +30,6 @@ class PrimaryContact extends Component {
             })
         }
     }
-
 
     onButtonPress() {
         const {primary_contact_full_name, primary_contact_phone_number, primary_contact_email} = this.state;
@@ -56,7 +54,6 @@ class PrimaryContact extends Component {
         }
     }
 
-
     renderButton() {
         return (
             <button
@@ -72,7 +69,6 @@ class PrimaryContact extends Component {
         );
     }
 
-
     renderSnackbar = () => {
         return (
             <Snackbar className='snackbar' active={this.state.isSnackbarActive} timeout={2000}
@@ -80,16 +76,13 @@ class PrimaryContact extends Component {
         )
     };
 
-
     handleShowSnackbar() {
         this.setState({isSnackbarActive: true});
     }
 
-
     handleTimeoutSnackbar() {
         this.setState({isSnackbarActive: false});
     }
-
 
     ValidateEmail = (mail) => {
         if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail)) {
@@ -98,11 +91,9 @@ class PrimaryContact extends Component {
         return (false)
     };
 
-
     handleInputTextChange = e => {
         this.setState({[e.target.name]: e.target.value});
     };
-
 
     render() {
         return (
@@ -163,12 +154,10 @@ class PrimaryContact extends Component {
     }
 }
 
-
 const mapStateToProps = state => ({
     currentValues: state.currentValues,
     companyInfo: state.companyInfo
 });
-
 
 const mapDispatchToProps = dispatch => {
     return {

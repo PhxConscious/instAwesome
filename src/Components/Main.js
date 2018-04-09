@@ -50,38 +50,35 @@ class Main extends React.Component {
                             <Route render={props =>
                                 <AuthRedirect ifLoggedIn={false} to={"/"}>
                                     <Switch>
-                                        <Route exact path="/completesignup" component={CompleteSignUp} />
+                                        <Route exact path="/completesignup" component={CompleteSignUp}/>
 
                                         <Route render={props =>
                                             <DataProvider
                                                 load={['setFirebaseId', 'getUserProgress', 'getCompanyList', 'getLmsContent']}
                                                 waitFor={['GET_USER_PROGRESS', 'GET_COMPANY_LIST', 'GET_LMS_CONTENT']}
                                                 onFailure={(errors) => {
-
                                                     // is there a 404 on GET /users/:firebase_id?
                                                     const userNotFound = errors.find(e =>
                                                         e.type === 'GET_USER_PROGRESS_REJECTED' &&
                                                         e.payload.response &&
                                                         e.payload.response.status === 404
-                                                    )
-
+                                                    );
                                                     if (userNotFound) {
                                                         return <Redirect to='/completesignup'/>
                                                     }
-
                                                     // useful for debugging, render out the content of the errors
                                                     //return <div><pre>{JSON.stringify(errors, null, 4)}</pre></div>
 
                                                     // if it's an unknown error, redirect to signout
                                                     return <Redirect to='/signout'/>
                                                 }}>
-
                                                 <Route exact path="/splash" render={props => <Splash {...props}/>}/>
-                                                <Route exact path="/learn/dashboard" render={props => <Dashboard {...props}/>}/>
-
+                                                <Route exact path="/learn/dashboard"
+                                                       render={props => <Dashboard {...props}/>}/>
                                                 <Route exact path="/forgotusername"
                                                        render={props => <RecoverUsernamePage {...props}/>}/>
-                                                <Route exact path="/profile" render={props => <UserProfile {...props}/>}/>
+                                                <Route exact path="/account"
+                                                       render={props => <UserProfile {...props}/>}/>
                                                 <Route exact path="/expert/dashboard"
                                                        render={props => <ExpertDashboard {...props}/>}/>
                                                 <Route exact path="/admin/dashboard"
@@ -91,11 +88,10 @@ class Main extends React.Component {
                                                 <Route exact path="/chat" render={props => <ChatLayout {...props}/>}/>
 
                                             </DataProvider>
-                                        } />
+                                        }/>
                                     </Switch>
                                 </AuthRedirect>
                             }/>
-
                         </Switch>
                     </main>
                 </AppNav>

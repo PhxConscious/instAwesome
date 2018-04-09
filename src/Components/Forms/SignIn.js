@@ -29,34 +29,29 @@ class LoginForm extends Component {
         this.onLoginSuccess = this.onLoginSuccess.bind(this);
     }
 
-
     static propTypes = {
         cookies: instanceOf(Cookies).isRequired
     };
-
 
     handleInputTextChange = e => {
         this.setState({[e.target.name]: e.target.value});
     };
 
-
     renderSnackbar = () => {
         return (
             <Snackbar className='snackbar' active={this.state.isSnackbarActive} timeout={2000}
-                      onTimeout={this.handleTimeoutSnackbar}>{this.state.snackbarText}</Snackbar>
+                      onTimeout={this.handleTimeoutSnackbar}>{this.state.snackbarText}
+            </Snackbar>
         )
     };
-
 
     handleShowSnackbar() {
         this.setState({isSnackbarActive: true});
     }
 
-
     handleTimeoutSnackbar() {
         this.setState({isSnackbarActive: false});
     }
-
 
     loginRefresh() {
         const {cookies} = this.props;
@@ -81,7 +76,6 @@ class LoginForm extends Component {
         }, 2500)
     };
 
-
     onLoginFail = (error) => {
         this.setState({
             loading: false,
@@ -89,7 +83,6 @@ class LoginForm extends Component {
         });
         this.handleShowSnackbar();
     };
-
 
     renderButton = () => {
         if (!this.state.loading) {
@@ -116,7 +109,6 @@ class LoginForm extends Component {
             <Spinner/>
         )
     };
-
 
     signInWithEmailAndPassword = () => {
         const {email, password} = this.state;

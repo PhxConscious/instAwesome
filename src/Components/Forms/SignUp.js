@@ -27,11 +27,11 @@ class SignUpForm extends Component {
     static propTypes = {
         onSubmit: PropTypes.func.isRequired,
         signupType: PropTypes.oneOf(['full', 'partial'])
-    }
+    };
 
     static defaultProps = {
         signupType: 'full'
-    }
+    };
 
     isFullSignup = () => this.props.signupType === 'full';
 
@@ -75,7 +75,6 @@ class SignUpForm extends Component {
         this.handleShowSnackbar();
     };
 
-
     renderButton = () => {
         if (!this.state.loading) {
             return (
@@ -92,7 +91,6 @@ class SignUpForm extends Component {
         return <Spinner/>
     };
 
-
     renderSnackbar = () => {
         return (
             <Snackbar className='snackbar' active={this.state.isSnackbarActive} timeout={2000}
@@ -100,16 +98,13 @@ class SignUpForm extends Component {
         )
     };
 
-
     handleShowSnackbar() {
         this.setState({isSnackbarActive: true});
     }
 
-
     handleTimeoutSnackbar() {
         this.setState({isSnackbarActive: false});
     }
-
 
     handleInputTextChange = e => {
         this.setState({[e.target.name]: e.target.value});
@@ -159,7 +154,6 @@ class SignUpForm extends Component {
             </div>
         </div>
     ) : null
-
 
     render() {
         return (
