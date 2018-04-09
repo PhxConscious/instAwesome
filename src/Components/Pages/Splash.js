@@ -19,11 +19,9 @@ class Splash extends React.Component {
         this.handleTimeoutSnackbar = this.handleTimeoutSnackbar.bind(this);
     }
 
-
     handleSubmit() {
         this.setState({redirect: '/'})
     }
-
 
     loginRefresh() {
         console.log("loginRefresh");
@@ -36,32 +34,31 @@ class Splash extends React.Component {
         }, 3000)
     }
 
-
     renderSnackbar = () => {
         return (
-            <Snackbar className='snackbar' active={this.state.isSnackbarActive} timeout={2500}
-                      onTimeout={this.handleTimeoutSnackbar}>{this.state.snackbarText}</Snackbar>
+            <Snackbar className='snackbar'
+                      active={this.state.isSnackbarActive}
+                      timeout={2500}
+                      onTimeout={this.handleTimeoutSnackbar}>
+                {this.state.snackbarText}
+            </Snackbar>
         )
     };
-
 
     handleShowSnackbar() {
         this.setState({isSnackbarActive: true});
     }
 
-
     handleTimeoutSnackbar() {
         this.setState({isSnackbarActive: false});
     }
 
-
     render() {
+        let {userInfo, companyInfo} = this.props;
+
         if (this.state.redirect) {
             return <Redirect to={this.state.redirect}/>
         }
-
-        let {userInfo, companyInfo} = this.props;
-
         if (userInfo && !userInfo.user_email) {
             return (
                 <div className='splashPageContent'>
@@ -95,7 +92,7 @@ class Splash extends React.Component {
                                 better help you.
                             </p>
                             <br/>
-                            <Link className='addMyCompanyText' to='/profile'>
+                            <Link className='addMyCompanyText' to='/account'>
                                 Add My Company
                             </Link>
                         </div> : <div>
@@ -143,7 +140,6 @@ class Splash extends React.Component {
         }
     }
 }
-
 
 const mapStateToProps = state => ({
     userInfo: state.userProgress.currentUser,

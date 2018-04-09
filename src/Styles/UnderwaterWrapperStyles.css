@@ -2,6 +2,8 @@
     background-image: url('https://i.imgur.com/OuaQYmj.jpg');
     background-size: cover;
     background-position: center;
+    position: absolute;
+    width: 100%;
 }
 
 .underWaterInnerCont{

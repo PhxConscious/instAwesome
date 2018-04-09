@@ -22,7 +22,7 @@ class SignUpPage extends Component {
     }
 
     completeSignup = ({firstName, lastName, userPhone, starterObj}) => {
-        const user = firebase.auth().currentUser
+        const user = firebase.auth().currentUser;
         return this.props.createNewUser({
             user_email: user.email,
             firebase_id: user.uid,
@@ -37,7 +37,7 @@ class SignUpPage extends Component {
             setTimeout(() =>
                 this.setState({redirect: '/splash'}), 30);
         })
-    }
+    };
 
     render() {
         const {redirect} = this.state;

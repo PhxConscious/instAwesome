@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import '../../App.css';
 import {Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {Tab, Tabs, Grid, Cell} from 'react-mdl';

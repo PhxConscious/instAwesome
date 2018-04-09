@@ -16,7 +16,6 @@ class RecoverPassword extends Component {
         this.handleTimeoutSnackbar = this.handleTimeoutSnackbar.bind(this);
     }
 
-
     renderButton = () => {
         return (
             <button
@@ -32,29 +31,25 @@ class RecoverPassword extends Component {
         );
     };
 
-
     renderSnackbar = () => {
         return (
             <Snackbar className='snackbar' active={this.state.isSnackbarActive} timeout={2000}
-                      onTimeout={this.handleTimeoutSnackbar}>{this.state.snackbarText}</Snackbar>
+                      onTimeout={this.handleTimeoutSnackbar}>{this.state.snackbarText}
+            </Snackbar>
         )
     };
-
 
     handleShowSnackbar() {
         this.setState({isSnackbarActive: true});
     }
 
-
     handleTimeoutSnackbar() {
         this.setState({isSnackbarActive: false});
     }
 
-
     handleInputTextChange = e => {
         this.setState({[e.target.name]: e.target.value});
     };
-
 
     emailPasswordReset = () => {
         let emailAddress = this.state.email;
@@ -75,7 +70,6 @@ class RecoverPassword extends Component {
                 this.handleShowSnackbar();
             });
     };
-
 
     render() {
         return (
@@ -113,6 +107,5 @@ class RecoverPassword extends Component {
         );
     }
 }
-
 
 export default RecoverPassword;

@@ -38,7 +38,7 @@ class Company extends Component {
         }
         return (
             <button
-                className="formButton"
+                className="onTheWebFormButton"
                 onClick={(e) => {
                     e.preventDefault();
                     this.onButtonPress(e)
@@ -111,94 +111,98 @@ class Company extends Component {
 
     render() {
         return (
-            <Grid>
-                <Cell col={8} offsetDesktop={2} tablet={12} phone={12}>
-                    {/*<h5>ADD YOUR COMPANY</h5>*/}
-                    <form className="blueFormCont" action="#">
-                        <div className='inputCont'>
-                            {/*<div className='formTitleCont'>*/}
-                            {/*<p className="formTitle">COMPANY</p>*/}
-                            {/*</div>*/}
+            <div>
+                <Grid>
+                    <Cell col={8} offsetDesktop={2} tablet={12} phone={12}>
+                        {/*<h5>ADD YOUR COMPANY</h5>*/}
+                        <form className="blueFormCont" action="#">
+                            <div className='inputCont'>
+                                {/*<div className='formTitleCont'>*/}
+                                {/*<p className="formTitle">COMPANY</p>*/}
+                                {/*</div>*/}
 
-                            <div className="formInputCont">
-                                <div>
-                                    <p className='inputLabel'>NAME</p>
+                                <div className="formInputCont">
+                                    <div>
+                                        <p className='inputLabel'>COMPANY NAME</p>
+                                    </div>
+                                    <input
+                                        className="formInput"
+                                        type="text"
+                                        onChange={e => this.setState({company_name: e.target.value})}
+                                        placeholder="input your company's name"
+                                        value={this.state.company_name}>
+                                    </input>
                                 </div>
-                                <input
-                                    className="formInput"
-                                    type="text"
-                                    onChange={e => this.setState({company_name: e.target.value})}
-                                    placeholder="input your company's name"
-                                    value={this.state.company_name}>
-                                </input>
-                            </div>
-                            <div className="formInputCont">
-                                <div>
-                                    <p className='inputLabel'>COMPANY EMAIL</p>
+                                <div className="formInputCont">
+                                    <div>
+                                        <p className='inputLabel'>COMPANY EMAIL</p>
+                                    </div>
+                                    <input
+                                        className="formInput"
+                                        type="text"
+                                        onChange={e => this.setState({company_email: e.target.value})}
+                                        placeholder="input your company's email"
+                                        value={this.state.company_email}>
+                                    </input>
                                 </div>
-                                <input
-                                    className="formInput"
-                                    type="text"
-                                    onChange={e => this.setState({company_email: e.target.value})}
-                                    placeholder="input your company's email"
-                                    value={this.state.company_email}>
-                                </input>
-                            </div>
-                            <div className="formInputCont">
-                                <div>
-                                    <p className='inputLabel'>COMPANY PHONE</p>
+                                <div className="formInputCont">
+                                    <div>
+                                        <p className='inputLabel'>COMPANY PHONE</p>
+                                    </div>
+                                    <input
+                                        className="formInput"
+                                        type="text"
+                                        onChange={e => this.setState({company_phone: e.target.value})}
+                                        placeholder="input your company's phone number"
+                                        value={this.state.company_phone}>
+                                    </input>
                                 </div>
-                                <input
-                                    className="formInput"
-                                    type="text"
-                                    onChange={e => this.setState({company_phone: e.target.value})}
-                                    placeholder="input your company's phone number"
-                                    value={this.state.company_phone}>
-                                </input>
-                            </div>
-                            <div className="formInputCont">
-                                <div>
-                                    <p className='inputLabel'>ACCOUNT MANAGER FULL NAME</p>
+                                <div className="formInputCont">
+                                    <div>
+                                        <p className='inputLabel'>ACCOUNT MANAGER FULL NAME</p>
+                                    </div>
+                                    <input
+                                        className="formInput"
+                                        type="text"
+                                        onChange={e => this.setState({primary_contact_full_name: e.target.value})}
+                                        placeholder="Enter your account manager's full name"
+                                        value={this.state.primary_contact_full_name}>
+                                    </input>
                                 </div>
-                                <input
-                                    className="formInput"
-                                    type="text"
-                                    onChange={e => this.setState({primary_contact_full_name: e.target.value})}
-                                    placeholder="Enter your account manager's full name"
-                                    value={this.state.primary_contact_full_name}>
-                                </input>
-                            </div>
-                            <div className="formInputCont">
-                                <div>
-                                    <p className='inputLabel'>ACCOUNT MANAGER PHONE NUMBER</p>
+                                <div className="formInputCont">
+                                    <div>
+                                        <p className='inputLabel'>ACCOUNT MANAGER PHONE NUMBER</p>
+                                    </div>
+                                    <input
+                                        className="formInput"
+                                        type="text"
+                                        onChange={e => this.setState({primary_contact_phone_number: e.target.value})}
+                                        placeholder="Enter your account manager's phone number"
+                                        value={this.state.primary_contact_phone_number}>
+                                    </input>
                                 </div>
-                                <input
-                                    className="formInput"
-                                    type="text"
-                                    onChange={e => this.setState({primary_contact_phone_number: e.target.value})}
-                                    placeholder="Enter your account manager's phone number"
-                                    value={this.state.primary_contact_phone_number}>
-                                </input>
-                            </div>
-                            <div className="formInputCont">
-                                <div>
-                                    <p className='inputLabel'>ACCOUNT MANAGER EMAIL ADDRESS</p>
+                                <div className="formInputCont">
+                                    <div>
+                                        <p className='inputLabel'>ACCOUNT MANAGER EMAIL ADDRESS</p>
+                                    </div>
+                                    <input
+                                        className="formInput"
+                                        type="text"
+                                        onChange={e => this.setState({primary_contact_email: e.target.value})}
+                                        placeholder="Enter your account manager's email"
+                                        value={this.state.primary_contact_email}>
+                                    </input>
                                 </div>
-                                <input
-                                    className="formInput"
-                                    type="text"
-                                    onChange={e => this.setState({primary_contact_email: e.target.value})}
-                                    placeholder="Enter your account manager's email"
-                                    value={this.state.primary_contact_email}>
-                                </input>
                             </div>
-                        </div>
-                        <br/>
-                        {this.renderButton()}
-                        {this.renderSnackbar()}
-                    </form>
-                </Cell>
-            </Grid>
+                            <br/>
+                            {this.renderSnackbar()}
+                        </form>
+                    </Cell>
+                </Grid>
+                <div className='onTheWebFormBtnCont'>
+                    {this.renderButton()}
+                </div>
+            </div>
         );
     }
 }

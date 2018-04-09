@@ -17,7 +17,6 @@ class ChangePassword extends Component {
         this.handleTimeoutSnackbar = this.handleTimeoutSnackbar.bind(this);
     }
 
-
     createNewPassword() {
         const {newPassword, confirmNewPassword} = this.state;
         let user = firebase.auth().currentUser;
@@ -51,7 +50,6 @@ class ChangePassword extends Component {
             })
     }
 
-
     renderButton() {
         return (
             <button
@@ -67,7 +65,6 @@ class ChangePassword extends Component {
         )
     }
 
-
     renderSnackbar = () => {
         return (
             <Snackbar className='snackbar' active={this.state.isSnackbarActive} timeout={2000}
@@ -75,22 +72,18 @@ class ChangePassword extends Component {
         )
     };
 
-
     handleShowSnackbar() {
         this.setState({isSnackbarActive: true});
     }
-
 
     handleTimeoutSnackbar() {
         this.setState({isSnackbarActive: false});
     }
 
-
     handleInputTextChange = e => {
         this.setState({[e.target.name]: e.target.value});
         // console.log(`this is the current state ${this.state}`)
     };
-
 
     render() {
         return (

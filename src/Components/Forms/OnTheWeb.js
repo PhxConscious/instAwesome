@@ -51,7 +51,6 @@ class OnTheWeb extends Component {
         this.handleTimeoutSnackbar = this.handleTimeoutSnackbar.bind(this);
     }
 
-
     componentDidMount() {
         let {companyInfo} = this.props;
         if (companyInfo && companyInfo.companyList && companyInfo.companyList[0]) {
@@ -91,7 +90,6 @@ class OnTheWeb extends Component {
         }
     }
 
-
     renderSnackbar = () => {
         return (
             <Snackbar className='snackbar' active={this.state.isSnackbarActive} timeout={2000}
@@ -99,16 +97,13 @@ class OnTheWeb extends Component {
         )
     };
 
-
     handleShowSnackbar() {
         this.setState({isSnackbarActive: true});
     }
 
-
     handleTimeoutSnackbar() {
         this.setState({isSnackbarActive: false});
     }
-
 
     onButtonPress(e) {
         e.preventDefault();
@@ -130,7 +125,6 @@ class OnTheWeb extends Component {
         }, 500)
     }
 
-
     renderButton() {
         if (!this.state.loading) {
             return (
@@ -144,7 +138,6 @@ class OnTheWeb extends Component {
             );
         }
     }
-
 
     handleInputTextChange = e => {
         this.setState({[e.target.name]: e.target.value});
@@ -165,7 +158,6 @@ class OnTheWeb extends Component {
         this.setState({errorWarnings: newArr, isError: true})
     };
 
-
     validateTwitterUsername(twit) {
         let warning = "Your twitter user name should begin with '@' and have no spaces";
         let newArr = this.state.errorWarnings;
@@ -179,9 +171,9 @@ class OnTheWeb extends Component {
         this.setState({errorWarnings: newArr, isError: true})
     }
 
-
     render() {
         return (
+            <div>
                 <Grid>
                     <Cell col={8} offsetDesktop={2} tablet={12} phone={12}>
                         <Snackbar
@@ -488,21 +480,20 @@ class OnTheWeb extends Component {
                         </form>
                     </Cell>
                     {this.renderSnackbar()}
-                    <div className='onTheWebFormBtnCont'>
-                        {this.renderButton()}
-                    </div>
                 </Grid>
+                <div className='onTheWebFormBtnCont'>
+                    {this.renderButton()}
+                </div>
+            </div>
         );
     }
 }
-
 
 const mapStateToProps = state => ({
     currentValues: state.currentValues,
     userFbId: state.currentValues.currentFbId,
     companyInfo: state.companyInfo,
 });
-
 
 const mapDispatchToProps = dispatch => {
     return {

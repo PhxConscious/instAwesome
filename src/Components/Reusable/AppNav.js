@@ -62,7 +62,6 @@ class AppNavbar extends Component {
     };
 
     render() {
-
         let {userInfo} = this.props;
 
         return (
@@ -70,20 +69,22 @@ class AppNavbar extends Component {
                 <div className="mdl-layout__drawer mdl-layout--small-screen-only drawerIcon">
                     {/*<span className="mdl-layout-title">Title</span>*/}
                     <nav className="mdl-navigation ">
-                        <Link to='/profile' className="mdl-navigation__link" href="">ACCOUNT</Link>
-                        <Link to={userInfo ? '/learn/dashboard' : '/'}
-                              className="mdl-navigation__link disabled-link">LEARN</Link>
-
+                        <Link to='/account' className="mdl-navigation__link" href="">
+                            ACCOUNT
+                        </Link>
+                        <Link to={userInfo ? '/learn/dashboard' : '/'} className="mdl-navigation__link disabled-link">
+                            LEARN
+                        </Link>
                         {this.isUserExpert()}
                         {this.isUserAdmin()}
-
-                        <Link className='mdl-navigation__link' to='/forum'>FORUM</Link>
+                        <Link className='mdl-navigation__link' to='/forum'>
+                            FORUM
+                        </Link>
                         <Link className='mdl-navigation__link' to='/' onClick={this.userSignOut}>
                             SIGN OUT
                         </Link>
                     </nav>
                 </div>
-
                 <div className="page-content">
                     <Grid className="navContentCont">
                         <Cell className='leftCol' col={4} hideTablet={true} hidePhone={true}>
@@ -119,30 +120,29 @@ class AppNavbar extends Component {
                                 {/*<img className='centerLogo' src='https://www.mochasoft.dk/images/buynow.jpg' alt="blah"/>*/}
                                 {/*</Link>*/}
                           </span>
-
                         </Cell>
                         <Cell className='rightCol' col={4} hideTablet={true} hidePhone={true}>
                             <Grid>
                                 <Cell col={10}>
                                     <div className='rightSideLogoCont'>
-                                <span
-                                    className='phxConsciousText phxConsciousTextCont'>{userInfo ? userInfo.user_email : ""}</span>
+                                        <span className='phxConsciousText phxConsciousTextCont'>
+                                            <Link className='linkTo' to='/account'>
+                                            {userInfo ? userInfo.user_email : ""}
+                                            </Link>
+                                        </span>
                                     </div>
                                 </Cell>
                                 <Cell col={2}>
-                                    <button id="demo-menu-lower-right"
-                                            className="mdl-button  mdl-button--icon">
+                                    <button id="demo-menu-lower-right" className="mdl-button  mdl-button--icon">
                                         <i className="profileIcon fas fa-user-circle"/>
                                     </button>
                                     <ul className="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
                                         htmlFor="demo-menu-lower-right">
-                                        <Link className='linkTo mdl-menu__item' to='/profile'>
+                                        <Link className='linkTo mdl-menu__item' to='/account'>
                                             <li className="">ACCOUNT</li>
                                         </Link>
-
                                         {this.isUserExpert()}
                                         {this.isUserAdmin()}
-
                                         <Link className='linkTo mdl-menu__item' to='/forum'>FORUM</Link>
                                         <Link className='linkTo mdl-menu__item' onClick={this.userSignOut} to='/'>
                                             SIGN OUT
