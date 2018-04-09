@@ -182,7 +182,6 @@ class OnTheWeb extends Component {
 
     render() {
         return (
-            <div>
                 <Grid>
                     <Cell col={8} offsetDesktop={2} tablet={12} phone={12}>
                         <Snackbar
@@ -196,7 +195,7 @@ class OnTheWeb extends Component {
                                 return <div key={i}>* {warning}</div>
                             })}
                         </Snackbar>
-                        <form className="formCont" action="#">
+                        <form className="blueFormCont" action="#">
                             <div className='inputCont'>
                                 <div className="formInputCont">
                                     <div>
@@ -488,12 +487,11 @@ class OnTheWeb extends Component {
                             <br/>
                         </form>
                     </Cell>
+                    {this.renderSnackbar()}
+                    <div className='onTheWebFormBtnCont'>
+                        {this.renderButton()}
+                    </div>
                 </Grid>
-                {this.renderSnackbar()}
-                <div className='onTheWebFormBtnCont'>
-                    {this.renderButton()}
-                </div>
-            </div>
         );
     }
 }

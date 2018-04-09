@@ -114,7 +114,7 @@ class Company extends Component {
             <Grid>
                 <Cell col={8} offsetDesktop={2} tablet={12} phone={12}>
                     {/*<h5>ADD YOUR COMPANY</h5>*/}
-                    <form className="formCont" action="#">
+                    <form className="blueFormCont" action="#">
                         <div className='inputCont'>
                             {/*<div className='formTitleCont'>*/}
                             {/*<p className="formTitle">COMPANY</p>*/}

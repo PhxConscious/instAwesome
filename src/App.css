@@ -8,11 +8,11 @@
 }
 
 .tabSection{
-  height:100vh;
-  overflow: auto;
+  overflow: hidden;
+  padding-top: 30px;
 }
 .pageCont{
-  padding-top: 20vh;
+  padding-top: 55px;
 }
 
 .consciousBlueColor{
@@ -20,7 +20,8 @@
   font-family: 'Asap', sans-serif;
 }
 
-.tabsCont{
+.mdl-tabs__tab-bar{
   background-color: #005259;
-  padding-bottom: 20px;
+  position: fixed;
+  width: 100%;
 }

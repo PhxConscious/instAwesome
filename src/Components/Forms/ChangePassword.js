@@ -96,7 +96,7 @@ class ChangePassword extends Component {
         return (
             <Grid>
                 <Cell col={8} offsetDesktop={2} tablet={12} phone={12}>
-                    <form className="formCont" action="#">
+                    <form className="blueFormCont" action="#">
                         <div className='inputCont'>
                             <div className="formInputCont">
                                 <div>
