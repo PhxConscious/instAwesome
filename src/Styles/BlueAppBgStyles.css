@@ -1,5 +1,6 @@
 .blueAppBackground {
-    min-height: 90vh;
+    min-height: 93vh;
     background-color: #075258;
     background-position: center;
+    min-width: 100%;
 }
