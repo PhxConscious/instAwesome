@@ -7,7 +7,7 @@ class ChangePassword extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            verifyPassword: '',
+            currentPassword: '',
             newPassword: '',
             confirmNewPassword: '',
             isSnackbarActive: false,
@@ -18,13 +18,13 @@ class ChangePassword extends Component {
     }
 
     createNewPassword() {
-        const {newPassword, confirmNewPassword} = this.state;
+        const {newPassword, confirmNewPassword, currentPassword} = this.state;
         let user = firebase.auth().currentUser;
         let newerPassword = newPassword;
 
         this.setState({snackbarText: ''});
 
-        if (newPassword === '' || confirmNewPassword === '') {
+        if (newPassword === '' || confirmNewPassword === '' || currentPassword === '') {
             this.setState({snackbarText: 'Must fill in all fields'});
             this.handleShowSnackbar();
             return;
@@ -39,15 +39,8 @@ class ChangePassword extends Component {
             this.handleShowSnackbar();
             return;
         }
-        user.updatePassword(newerPassword)
-            .then(() => {
-                this.setState({snackbarText: 'Your password has been updated'});
-                this.handleShowSnackbar()
-            })
-            .catch((error) => {
-                this.setState({snackbarText: error.message});
-                this.handleShowSnackbar();
-            })
+        this.reauthUser()
+
     }
 
     renderButton() {
@@ -63,6 +56,30 @@ class ChangePassword extends Component {
                 </span>
             </button>
         )
+    }
+
+    reauthUser() {
+        let newerPassword = this.state.newPassword;
+        let user = firebase.auth().currentUser;
+        let credentials = firebase.auth.EmailAuthProvider.credential(
+            user.email,
+            this.state.currentPassword
+        );
+        user.reauthenticateWithCredential(credentials)
+            .then(() => {
+                user.updatePassword(newerPassword)
+                    .then(() => {
+                        this.setState({snackbarText: 'Your password has been updated'});
+                        this.handleShowSnackbar();
+                        this.setState({currentPassword: '', newPassword: '', confirmNewPassword: ''})
+                    })
+
+            })
+            .catch((error) => {
+                this.setState({snackbarText: error.message});
+                this.handleShowSnackbar();
+                return false;
+            });
     }
 
     renderSnackbar = () => {
@@ -91,6 +108,19 @@ class ChangePassword extends Component {
                 <Cell col={8} offsetDesktop={2} tablet={12} phone={12}>
                     <form className="blueFormCont" action="#">
                         <div className='inputCont'>
+                            <div className="formInputCont">
+                                <div>
+                                    <p className='inputLabel'>CURRENT PASSWORD</p>
+                                </div>
+                                <input
+                                    name='currentPassword'
+                                    className="formInput"
+                                    type="password"
+                                    onChange={this.handleInputTextChange}
+                                    placeholder=''
+                                    value={this.state.currentPassword}>
+                                </input>
+                            </div>
                             <div className="formInputCont">
                                 <div>
                                     <p className='inputLabel'>CHOOSE NEW PASSWORD</p>
