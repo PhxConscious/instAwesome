@@ -1,7 +1,7 @@
 import React from 'react';
 import { IconButton, Menu, MenuItem, Dialog, DialogTitle, DialogContent, DialogActions, Button } from 'react-mdl';
 import { connect } from 'react-redux';
-import { getAllExperts, selectAnExpert, updateNonCurrentUser, deleteUser } from '../../redux/actions/userProgress';
+import { getAllExperts, selectAnExpert, updateNonCurrentUser, deleteUser, getAllUsers } from '../../redux/actions/userProgress';
 import { postNewUserExpertJoin, deleteUserExpertJoin, getFreeUsers } from '../../redux/actions/userExpertJoin';
 import { getCompletedQuestionStatus, getCompletedLessonTitles } from '../../utils/helper';
 import '../../Styles/AdminDashboardStyles.css';
@@ -41,7 +41,7 @@ class UserOverview extends React.Component {
 
   deleteUserExpertJoin(){
     this.props.deleteUserExpertJoin(this.props.user.firebase_id)
-    this.props.getFreeUsers()
+    // this.props.getFreeUsers()
     this.props.selectAnExpert('invalidToResetRedux');
   }
 
@@ -105,14 +105,19 @@ class UserOverview extends React.Component {
 
         <p>User's LMS Progress: {getCompletedQuestionStatus(user.user_progress)}%</p>
 
-        {user.expert_id ? <div>Expert: {assignedExpert} <Button
-          raised accent ripple
-         onClick={this.deleteUserExpertJoin}>unpair</Button></div>: <div style={{position: 'relative'}}>
-          <IconButton name="more_vert" id="demo-menu-top-left" /> Pair with expert
-          <Menu target="demo-menu-top-left" valign="bottom" ripple>
-              {theExperts}
-          </Menu>
-        </div>
+        {selectedExpert ? <div>Expert: {assignedExpert}
+            <Button
+              raised accent ripple
+              onClick={this.deleteUserExpertJoin}>unpair
+            </Button>
+          </div>
+          :
+          <div style={{position: 'relative'}}>
+            <IconButton name="more_vert" id="demo-menu-top-left" /> Pair with expert
+              <Menu target="demo-menu-top-left" valign="bottom" ripple>
+                {theExperts}
+              </Menu>
+          </div>
       }
         <Dialog open={this.state.openModal}>
           <DialogTitle>Connect this user with this expert</DialogTitle>
@@ -153,7 +158,8 @@ class UserOverview extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  users: state.userProgress
+  users: state.userProgress,
+  freeUsers: state.userExpertJoin.freeUsers
 })
 
 const mapDispatchToProps = dispatch => {
@@ -163,18 +169,27 @@ const mapDispatchToProps = dispatch => {
     },
     joinUserAndExpert: (obj) => {
       dispatch(postNewUserExpertJoin(obj))
+      .then((data)=>{
+        dispatch(getAllUsers())
+      })
     },
     selectAnExpert: (fb_id) => {
       dispatch(selectAnExpert(fb_id))
+      .then((data)=>{
+        dispatch(getAllUsers())
+      })
     },
     deleteUserExpertJoin: (user_id) => {
       dispatch(deleteUserExpertJoin(user_id))
-    },
-    getFreeUsers: () => {
-      dispatch(getFreeUsers())
+      .then((data)=>{
+        dispatch(getAllUsers())
+      })
     },
     updateUser: (fb_id, userObj) => {
       dispatch(updateNonCurrentUser(fb_id, userObj))
+      .then((data)=>{
+        dispatch(getAllUsers())
+      })
     },
     deleteUser: (fb_id) => {
       dispatch(deleteUser(fb_id))
