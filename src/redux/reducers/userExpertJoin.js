@@ -23,16 +23,16 @@ export default (state = initState, action) => {
         ...state,
         expertOfUser: action.payload.data
       }
-    case "GET_FREE_USERS_FULFILLED":
-      return {
-        ...state,
-        freeUsers: action.payload.data
-      }
+    // case "GET_FREE_USERS_FULFILLED":
+    //   return {
+    //     ...state,
+    //     freeUsers: action.payload.data
+    //   }
     case "POST_NEW_USER_EXPERT_JOIN_FULFILLED":
       return {
         ...state,
         selectedJoin: action.payload.data,
-        freeUsers: removeObj(action.payload.data[0], state.freeUsers)
+        // freeUsers: removeObj(action.payload.data[0], state.freeUsers)
       }
     case "DELETE_USER_EXPERT_JOIN_FULFILLED":
       return {

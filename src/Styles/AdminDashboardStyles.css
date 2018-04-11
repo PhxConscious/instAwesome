@@ -13,6 +13,7 @@
 }
 
 .leftPanelSelector {
+  margin-top: 3em;
   flex-basis:35%;
   width: 20vw;
   background-color: rgba(100,0,0,.1);
@@ -32,6 +33,7 @@
 }
 
 .rightPanelDetail {
+  margin-top: 3em;
   text-align: left;
   flex-basis:65%;
   width: 20vw;
@@ -59,4 +61,3 @@
   border-right: 2px solid black;
   margin-bottom: 10px;
 }
-

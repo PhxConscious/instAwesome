@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
-import {getFreeUsers, postNewUserExpertJoin} from '../../redux/actions/userExpertJoin';
+import {/*getFreeUsers,*/ postNewUserExpertJoin} from '../../redux/actions/userExpertJoin';
 import {getAllUsers, getAllExperts, deleteUser, updateNonCurrentUser} from '../../redux/actions/userProgress';
 import UserListItem from '../Admin/UserListItem';
 import UserOverview from '../Admin/UserOverview';
@@ -14,23 +14,35 @@ import '../../Styles/AdminDashboardStyles.css'
 class AdminDashboard extends React.Component {
     constructor(props) {
         super(props)
-        this.state = {userObj: {}, activeTab: 0};
+        this.state = {selectedUser: null, userObj: {}, activeTab: 0};
         this.selectUser = this.selectUser.bind(this);
-        this.claimUser = this.claimUser.bind(this);
         this.removeExpert = this.removeExpert.bind(this);
         this.deleteUser = this.deleteUser.bind(this);
     }
 
 
     componentWillMount() {
-        this.props.getFreeUsers();
+        // this.props.getFreeUsers();
         this.props.getAllUsers();
         this.props.getAllExperts()
     }
 
+    componentDidUpdate(prevProps, prevState){
+      let allUsers = this.props.allUsers;
+      let selectedUser = this.state.selectedUser;
+      if(allUsers !== prevProps.allUsers && selectedUser){
+        for(let i = 0; i < allUsers.length; i++){
+          if(allUsers[i].firebase_id === selectedUser.firebase_id){
+            this.setState({
+              selectedUser: allUsers[i]
+            })
+          }
+        }
+      }
+    }
+
 
     removeExpert() {
-        console.log('expert', this.state.selectedExpert.firebase_id);
         this.props.updateUser(this.state.selectedExpert.firebase_id, {isExpert: false})
     }
 
@@ -45,39 +57,30 @@ class AdminDashboard extends React.Component {
     }
 
 
-    claimUser(user) {
-        let {userInfo} = this.props;
-        this.props.postNewUserExpertJoin({
-            user_id: user.firebase_id,
-            expert_id: userInfo.firebase_id
-        });
-        this.setState({
-            userObj: {}
-        })
-    }
-
 
     render() {
+      // console.log('rendering AdminDashboard')
         const {userInfo, allUsers, allExperts, userExpertJoin} = this.props;
 
         if (typeof(userInfo.currentUser) === undefined) {
             return <Redirect to='/'/>
         }
-        let freeUsers;
-        // let unhitchedUsers
-        // if(userExpertJoin && userExpertJoin.freeUsers){
-        //   freeUsers = userExpertJoin.freeUsers;
-        //   unhitchedUsers = freeUsers.map((user, i) => {
-        //     return <UserListItem
-        //               key={i}
-        //               user={user}
-        //               selectUser={this.selectUser}
-        //             />
-        //   })
-        // }
+
         let userList;
         if (allUsers) {
-            userList = allUsers.map((user, i) => {
+            let sortedUsers = allUsers.sort((a,b)=>{
+              let letter1 = a.first_name.toUpperCase();
+              let letter2 = b.first_name.toUpperCase();
+              if(letter1 < letter2){
+                return -1;
+              }
+              if(letter1 > letter2){
+                return 1;
+              }
+              return 0;
+            })
+
+            userList = sortedUsers.map((user, i) => {
                 return (
                     <div
                         id={this.state.index === i ? "selectedUserInList" : ''}
@@ -103,7 +106,8 @@ class AdminDashboard extends React.Component {
                 )
             })
         }
-        if (userExpertJoin && userExpertJoin.freeUsers && allUsers) {
+
+        if (userExpertJoin /*&& userExpertJoin.freeUsers */ && allUsers) {
             if (userInfo.isAdmin) {
                 return (
                     <div className='pageContent'>
@@ -195,9 +199,6 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = dispatch => {
     return {
-        getFreeUsers: () => {
-            dispatch(getFreeUsers())
-        },
         postNewUserExpertJoin: (obj) => {
             dispatch(postNewUserExpertJoin(obj))
         },
