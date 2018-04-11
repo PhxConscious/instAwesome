@@ -80,8 +80,10 @@ class SignUpForm extends Component {
             return (
                 <button
                     className="signInFormButton"
-                    onClick={this.onSubmitSignin}>
-
+                    onClick={ e => {
+                        e.preventDefault();
+                        this.onSubmitSignin(e)
+                    }}>
                     <span className='buttonText'>
                         Submit
                     </span>

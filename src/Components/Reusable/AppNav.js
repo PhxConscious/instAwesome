@@ -45,7 +45,6 @@ class AppNavbar extends Component {
                 </Link>
             )
         }
-        return;
     };
 
     isUserAdmin = () => {
@@ -58,7 +57,6 @@ class AppNavbar extends Component {
                 </Link>
             )
         }
-        return;
     };
 
     render() {

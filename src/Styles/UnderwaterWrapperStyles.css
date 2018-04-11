@@ -4,8 +4,11 @@
     background-position: center;
     position: absolute;
     width: 100%;
+    /*padding: 5% 0;*/
+
 }
 
 .underWaterInnerCont{
-    min-height: 91.5vh;
+    min-height: 87vh;
+    padding: 5% 0;
 }

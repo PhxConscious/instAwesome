@@ -3,6 +3,10 @@
     opacity: 0.80;
     border-radius: 20px;
     text-align: center;
+    max-width: 600px;
+    margin-right: auto;
+    margin-left: auto;
+
 }
 
 .shadowBoxInnerCont{

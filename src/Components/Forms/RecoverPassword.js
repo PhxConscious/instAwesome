@@ -56,7 +56,7 @@ class RecoverPassword extends Component {
         this.setState({snackbarText: ''});
 
         if (this.state.email === '') {
-            this.setState({snackbarText: 'Please fill in all fields'});
+            this.setState({snackbarText: 'Please input email address'});
             this.handleShowSnackbar();
             return;
         }
